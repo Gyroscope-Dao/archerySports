@@ -67,21 +67,21 @@
         </a-form-model-item>
 
         <!--租户分配-->
-        <a-form-model-item label="租户分配" :labelCol="labelCol" :wrapperCol="wrapperCol" v-show="!departDisabled">
+        <!-- <a-form-model-item label="租户分配" :labelCol="labelCol" :wrapperCol="wrapperCol" v-show="!departDisabled">
           <j-multi-select-tag
                   :disabled="disableSubmit"
                   v-model="model.relTenantIds"
                   :options="tenantsOptions"
                   placeholder="请选择租户">
           </j-multi-select-tag>
-        </a-form-model-item>
+        </a-form-model-item> -->
 
-        <a-form-model-item label="身份" :labelCol="labelCol" :wrapperCol="wrapperCol">
+        <!-- <a-form-model-item label="身份" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-radio-group  v-model="model.userIdentity"  @change="identityChange">
             <a-radio :value="1">普通用户</a-radio>
             <a-radio :value="2">上级</a-radio>
           </a-radio-group>
-        </a-form-model-item>
+        </a-form-model-item> -->
         <a-form-model-item label="负责部门" :labelCol="labelCol" :wrapperCol="wrapperCol"  v-show="departIdShow==true">
           <j-multi-select-tag
                   :disabled="disableSubmit"

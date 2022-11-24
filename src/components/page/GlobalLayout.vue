@@ -19,7 +19,8 @@
           @updateMenuTitle="handleUpdateMenuTitle"
           :theme="navTheme"
           :collapsed="false"
-          :collapsible="true"></side-menu>
+          :collapsible="true">
+          </side-menu>
       </a-drawer>
 
       <side-menu
@@ -30,7 +31,8 @@
         @updateMenuTitle="handleUpdateMenuTitle"
         :theme="navTheme"
         :collapsed="collapsed"
-        :collapsible="true"></side-menu>
+        :collapsible="true">
+        </side-menu>
     </template>
     <!-- 下次优化这些代码 -->
     <template v-else>
