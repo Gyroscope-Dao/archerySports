@@ -14,13 +14,13 @@
 
         <route-view></route-view>
 
-        <div class="footer">
+        <!-- <div class="footer">
           <div class="links">
             <a href="http://doc.jeecg.com" target="_blank">帮助</a>
             <a href="https://github.com/zhangdaiscott/jeecg-boot" target="_blank">隐私</a>
             <a href="https://github.com/zhangdaiscott/jeecg-boot/blob/master/LICENSE" target="_blank">条款</a>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -71,7 +71,7 @@ export default {
       width: 40%;
       margin: 0 auto;
       padding-top: 20px;
-      padding-bottom: 50px;
+      padding-bottom: 20px;
       background-color: rgba(255, 255, 255, 0.45);
       border-radius: 20px;
       backdrop-filter: blur(5px);
@@ -123,33 +123,33 @@ export default {
       margin: 0 auto;
     }
 
-    .footer {
-      position: absolute;
-      width: 100%;
-      bottom: 0;
-      padding: 0 16px;
-      margin: 0 auto;
-      text-align: center;
+    // .footer {
+    //   position: absolute;
+    //   width: 100%;
+    //   bottom: 0;
+    //   padding: 0 16px;
+    //   margin: 0 auto;
+    //   text-align: center;
 
-      .links {
-        margin-bottom: 8px;
-        font-size: 14px;
+    //   .links {
+    //     margin-bottom: 8px;
+    //     font-size: 14px;
 
-        a {
-          color: rgba(0, 0, 0, 0.45);
-          transition: all 0.3s;
+    //     a {
+    //       color: rgba(0, 0, 0, 0.45);
+    //       transition: all 0.3s;
 
-          &:not(:last-child) {
-            margin-right: 40px;
-          }
-        }
-      }
+    //       &:not(:last-child) {
+    //         margin-right: 40px;
+    //       }
+    //     }
+    //   }
 
-      .copyright {
-        color: rgba(0, 0, 0, 0.45);
-        font-size: 14px;
-      }
-    }
+    //   .copyright {
+    //     color: rgba(0, 0, 0, 0.45);
+    //     font-size: 14px;
+    //   }
+    // }
   }
 }
 </style>

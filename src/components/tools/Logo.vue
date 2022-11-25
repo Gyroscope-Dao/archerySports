@@ -21,7 +21,7 @@
     props: {
       title: {
         type: String,
-        default: '中北大学',
+        default: '联动保供管理系统',
         required: false
       },
       showTitle: {
