@@ -43,7 +43,8 @@
   import { CACHE_INCLUDED_ROUTES } from '@/store/mutation-types'
   import registerApps from "@/qiankun";
 
-  const indexKey = '/dashboard/analysis'
+  // const indexKey = '/dashboard/analysis'
+    const indexKey = '/test'
 
   export default {
     name: 'TabLayout',
@@ -165,7 +166,8 @@
       // 将首页添加到第一位
       addIndexToFirst() {
         this.pageList.splice(0, 0, {
-          name: 'dashboard-analysis',
+          // name: 'dashboard-analysis',
+          name: 'test',
           path: indexKey,
           fullPath: indexKey,
           meta: {
@@ -183,7 +185,7 @@
        * @param title 要修改的新标题
        */
       changeTitle(title) {
-        let projectTitle = "Jeecg-Boot 企业级低代码平台"
+        let projectTitle = "联动保供管理系统"
         // 首页特殊处理
         if (this.$route.path === indexKey) {
           document.title = projectTitle

@@ -290,6 +290,11 @@ export const asyncRouterMap = [
     component: () => import('../views/system/Allmenu.vue')
   },
   {
+    path: '/test',
+    name: 'test',
+    component: () => import('../views/system/Allmenu.vue')
+  },
+  {
     path: '*', redirect: '/404', hidden: true
   }
 ]
