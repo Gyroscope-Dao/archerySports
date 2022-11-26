@@ -5,8 +5,8 @@
         <div class="top">
           <div class="header">
             <a href="/">
-              <img src="~@/assets/logo.svg" class="logo" alt="logo">
-              <span class="title">中北大学</span>
+              <!-- <img src="~@/assets/logo.jpg" class="logo" alt="logo"> -->
+              <span class="title">联动保供平台</span>
             </a>
           </div>
 
