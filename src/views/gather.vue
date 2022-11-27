@@ -2,7 +2,7 @@
   <div class="integration">
     <div class="nav">
       <div class="left">
-        <img src="../assets/logo.jpg" alt="" />
+        <img src="../assets/gather/logo.jpg" alt="" />
         <div class="logotitle">
           <h2>区块链</h2>
           <h3>COMPANYNAME</h3>
@@ -22,27 +22,27 @@
 
     <div class="bootom">
       <div class="item">
-        <img src="../assets/icon/shizhong.png" alt="">
+        <img src="../assets/gather/icon/shizhong.png" alt="">
         <span>区块链数据库</span>
       </div>
       <div class="item">
-        <img src="../assets/icon/aixin.png" alt="">
+        <img src="../assets/gather/icon/aixin.png" alt="">
         <span>区块链仿真</span>
       </div>
       <div class="item">
-        <img src="../assets/icon/qiche.png" alt="">
+        <img src="../assets/gather/icon/qiche.png" alt="">
         <span>智能计划管理</span>
       </div>
       <div class="item">
-        <img src="../assets/icon/shafa.png" alt="">
+        <img src="../assets/gather/icon/shafa.png" alt="">
         <span>智能调度管理</span>
       </div>
       <div class="item">
-        <img src="../assets/icon/bijiben.png" alt="">
+        <img src="../assets/gather/icon/bijiben.png" alt="">
         <span>区块链实时监控</span>
       </div>
       <div class="item">
-        <img src="../assets/icon/xiangbao.png" alt="">
+        <img src="../assets/gather/icon/xiangbao.png" alt="">
         <span>区块链仿真</span>
       </div>
     </div>
@@ -90,7 +90,7 @@ export default {
   .main {
     width: 100%;
     height: 550px;
-    background-image: url(../assets/bgc.jpeg);
+    background-image: url(../assets/gather/bgc.jpeg);
     background-size: contain;
 
     .title {
@@ -110,7 +110,7 @@ export default {
         width: 400px;
         height: 100px;
         line-height: 100px;
-        background: url('../assets/btn1.jpeg') no-repeat;
+        background: url('../assets/gather/btn1.jpeg') no-repeat;
         background-size: 100%;
       }
       
@@ -118,7 +118,7 @@ export default {
         width: 400px;
         height: 100px;
         line-height: 100px;
-        background: url('../assets/btn2.jpeg') no-repeat;
+        background: url('../assets/gather/btn2.jpeg') no-repeat;
         background-size: 100%;
       }
 
@@ -126,7 +126,7 @@ export default {
         width: 400px;
         height: 100px;
         line-height: 100px;
-        background: url('../assets/btn3.jpeg') no-repeat;
+        background: url('../assets/gather/btn3.jpeg') no-repeat;
         background-size: 100%;
       }
     }
