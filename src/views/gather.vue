@@ -4,7 +4,7 @@
       <div class="left">
         <img src="../assets/gather/logo.jpg" alt="" />
         <div class="logotitle">
-          <h2>区块链</h2>
+          <h2>联动保供</h2>
           <h3>COMPANYNAME</h3>
         </div>
       </div>
@@ -12,22 +12,22 @@
     </div>
 
     <div class="main">
-      <div class="title">区块链</div>
+      <div class="title">联动保供平台</div>
       <div class="content">
-        <div class="btn1">区块链</div>
-        <div class="btn2">区块链</div>
-        <div class="btn3">区块链</div>
+        <div class="btn btn1" @click="toIndex">联动保供管理系统</div>
+        <div class="btn btn2">供应商画像系统</div>
+        <div class="btn btn3">联动保供平台</div>
       </div>
     </div>
 
     <div class="bootom">
       <div class="item">
         <img src="../assets/gather/icon/shizhong.png" alt="">
-        <span>区块链数据库</span>
+        <span>供应商保供数据库</span>
       </div>
       <div class="item">
         <img src="../assets/gather/icon/aixin.png" alt="">
-        <span>区块链仿真</span>
+        <span>供应链仿真</span>
       </div>
       <div class="item">
         <img src="../assets/gather/icon/qiche.png" alt="">
@@ -39,11 +39,11 @@
       </div>
       <div class="item">
         <img src="../assets/gather/icon/bijiben.png" alt="">
-        <span>区块链实时监控</span>
+        <span>装线箱实时监控</span>
       </div>
       <div class="item">
         <img src="../assets/gather/icon/xiangbao.png" alt="">
-        <span>区块链仿真</span>
+        <span>装箱计划仿真</span>
       </div>
     </div>
   </div>
@@ -52,6 +52,13 @@
 <script>
 export default {
   name: "integration",
+  methods: {
+    toIndex() {
+      this.$router.push({
+        path: '/dashboard/analysis'
+      })
+    }
+  }
 };
 </script>
 
@@ -80,8 +87,15 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+        h2 {
+          font-size: 28px;
+          font-weight: 800;
+          margin: 0;
+        }
         h3 {
+          font-size: 18px;
           letter-spacing: 3px;
+          margin: 0;
         }
       }
     }
@@ -94,9 +108,10 @@ export default {
     background-size: contain;
 
     .title {
+      text-align: center;
       padding-top: 100px;
       font-size: 50px;
-      color: #fff;
+      color: #20AEE4;
     }
     .content {
       display: flex;
@@ -106,28 +121,22 @@ export default {
       color: #fff;
       align-items: center;
       padding-top: 100px;
+      .btn {
+        cursor: pointer;
+        width: 400px;
+        height: 100px;
+        line-height: 100px;
+        text-align: center;
+        background-size: contain;
+      }
       .btn1 {
-        width: 400px;
-        height: 100px;
-        line-height: 100px;
-        background: url('../assets/gather/btn1.jpeg') no-repeat;
-        background-size: 100%;
-      }
-      
-      .btn2 {
-        width: 400px;
-        height: 100px;
-        line-height: 100px;
-        background: url('../assets/gather/btn2.jpeg') no-repeat;
-        background-size: 100%;
-      }
-
-      .btn3 {
-        width: 400px;
-        height: 100px;
-        line-height: 100px;
         background: url('../assets/gather/btn3.jpeg') no-repeat;
-        background-size: 100%;
+      }
+      .btn2 {
+        background: url('../assets/gather/btn2.jpeg') no-repeat;
+      }
+      .btn3 {
+        background: url('../assets/gather/btn3.jpeg') no-repeat;
       }
     }
   }
@@ -154,6 +163,9 @@ export default {
       }
 
       span {
+        font-weight: 550;
+        font-size: 16px;
+        color: black;
         margin-top: 10px;
       }
     }

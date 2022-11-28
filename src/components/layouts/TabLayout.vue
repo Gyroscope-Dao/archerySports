@@ -185,7 +185,7 @@
        * @param title 要修改的新标题
        */
       changeTitle(title) {
-        let projectTitle = "联动保供管理系统"
+        let projectTitle = "联动保供系统"
         // 首页特殊处理
         if (this.$route.path === indexKey) {
           document.title = projectTitle

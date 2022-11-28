@@ -127,8 +127,9 @@ export default {
       },
       //登录成功
       loginSuccess () {
-        this.$router.push({ path: "/dashboard/analysis" }).catch(()=>{
-          console.log('登录跳转首页出错,这个错误从哪里来的')
+       
+        this.$router.push({ path: "/gather/gather" }).catch((error)=>{
+          console.log(error)
         })
         this.$notification.success({
           message: '欢迎',
