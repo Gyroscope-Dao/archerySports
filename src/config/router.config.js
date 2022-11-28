@@ -1,10 +1,11 @@
-import { UserLayout, TabLayout, RouteView, BlankLayout, PageView } from '@/components/layouts'
+import { UserLayout, TabLayout, RouteView, BlankLayout, PageView,TabGeter } from '@/components/layouts'
 
 /**
  * 走菜单，走权限控制
  * @type {[null,null]}
  */
 export const asyncRouterMap = [
+  
 
   {
     path: '/',
@@ -289,11 +290,7 @@ export const asyncRouterMap = [
     name: 'AllMenu',
     component: () => import('../views/system/Allmenu.vue')
   },
-  {
-    path: '/gather',
-    name: 'gather',
-    component: ()=> import('../views/gather.vue')
-  },
+  
   {
     path: '*', redirect: '/404', hidden: true
   },
@@ -305,6 +302,18 @@ export const asyncRouterMap = [
  * @type { *[] }
  */
 export const constantRouterMap = [
+  {
+    path: '/gather',
+    name: 'gather',
+    component:TabGeter,
+   children:[
+    {
+      path: 'gather',
+        name: 'gatherItem',
+        component: () => import('@/views/gather.vue'),
+    }
+   ]
+  },
   {
     path: '/user',
     component: UserLayout,

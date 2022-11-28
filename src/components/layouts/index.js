@@ -4,5 +4,5 @@ import BasicLayout from '@/components/layouts/BasicLayout'
 import RouteView from '@/components/layouts/RouteView'
 import PageView from '@/components/layouts/PageView'
 import TabLayout from '@/components/layouts/TabLayout'
-
-export { UserLayout, BasicLayout, BlankLayout, RouteView, PageView, TabLayout }
+import   TabGeter   from './TabGeter.vue'
+export { UserLayout, BasicLayout, BlankLayout, RouteView, PageView, TabLayout,TabGeter }
