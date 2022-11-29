@@ -12,7 +12,7 @@
     <!-- 操作按钮区域 -->
     <div class="table-operator">
       <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
-      <a-button type="primary" icon="download" @click="handleExportXls('单位信息')">导出</a-button>
+      <a-button type="primary" icon="download" @click="handleExportXls('到货批次表')">导出</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
         <a-button type="primary" icon="import">导入</a-button>
       </a-upload>
@@ -89,7 +89,7 @@
       </a-table>
     </div>
 
-    <ept-inf-modal ref="modalForm" @ok="modalFormOk"></ept-inf-modal>
+    <batch-inf-modal ref="modalForm" @ok="modalFormOk"></batch-inf-modal>
   </a-card>
 </template>
 
@@ -98,17 +98,17 @@
   import '@/assets/less/TableExpand.less'
   import { mixinDevice } from '@/utils/mixin'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
-  import EptInfModal from './modules/EptInfModal'
+  import BatchInfModal from './modules/BatchInfModal'
 
   export default {
-    name: 'EptInfList',
+    name: 'BatchInfList',
     mixins:[JeecgListMixin, mixinDevice],
     components: {
-      EptInfModal
+      BatchInfModal
     },
     data () {
       return {
-        description: '单位信息管理页面',
+        description: '到货批次表管理页面',
         // 表头
         columns: [
           {
@@ -122,74 +122,52 @@
             }
           },
           {
-            title:'单位编号',
+            title:'订单编号',
             align:"center",
-            dataIndex: 'eptId'
+            dataIndex: 'orderId'
           },
           {
-            title:'单位名称',
+            title:'供应商编号',
             align:"center",
-            dataIndex: 'eptName'
+            dataIndex: 'firstSupplierId'
           },
           {
-            title:'单位简称',
+            title:'产品编号',
             align:"center",
-            dataIndex: 'eptShortname'
+            dataIndex: 'productId'
           },
           {
-            title:'助记码',
+            title:'一级采购编号',
             align:"center",
-            dataIndex: 'mnemonicCode'
+            dataIndex: 'firstPurchaseId'
           },
           {
-            title:'税号',
+            title:'批次编号',
             align:"center",
-            dataIndex: 'dutyParagraph'
+            dataIndex: 'lotId'
           },
           {
-            title:'行政区域',
+            title:'到货数量',
             align:"center",
-            dataIndex: 'adminRegin'
+            dataIndex: 'arrivalQuantity'
           },
           {
-            title:'单位地址',
+            title:'到货时间',
             align:"center",
-            dataIndex: 'address'
+            dataIndex: 'arrivalData',
+            customRender:function (text) {
+              return !text?"":(text.length>10?text.substr(0,10):text)
+            }
           },
           {
-            title:'联系人',
+            title:'批次合格率',
             align:"center",
-            dataIndex: 'contactPerson'
+            dataIndex: 'passRate'
           },
           {
-            title:'联系电话',
+            title:'总批次量',
             align:"center",
-            dataIndex: 'contactNumber'
-          },
-          {
-            title:'法定代表人',
-            align:"center",
-            dataIndex: 'legalRepresent'
-          },
-          {
-            title:'邮编',
-            align:"center",
-            dataIndex: 'postcode'
-          },
-          {
-            title:'开户行名称',
-            align:"center",
-            dataIndex: 'bankName'
-          },
-          {
-            title:'开户行账号',
-            align:"center",
-            dataIndex: 'bankAccount'
-          },
-          {
-            title:'许可证编号',
-            align:"center",
-            dataIndex: 'permitId'
+            dataIndex: 'batchNumber'
           },
           {
             title: '操作',
@@ -201,11 +179,11 @@
           }
         ],
         url: {
-          list: "/eptInf/eptInf/list",
-          delete: "/eptInf/eptInf/delete",
-          deleteBatch: "/eptInf/eptInf/deleteBatch",
-          exportXlsUrl: "/eptInf/eptInf/exportXls",
-          importExcelUrl: "eptInf/eptInf/importExcel",
+          list: "/batchInf/batchInf/list",
+          delete: "/batchInf/batchInf/delete",
+          deleteBatch: "/batchInf/batchInf/deleteBatch",
+          exportXlsUrl: "/batchInf/batchInf/exportXls",
+          importExcelUrl: "batchInf/batchInf/importExcel",
           
         },
         dictOptions:{},
@@ -225,20 +203,15 @@
       },
       getSuperFieldList(){
         let fieldList=[];
-        fieldList.push({type:'string',value:'eptId',text:'单位编号',dictCode:''})
-        fieldList.push({type:'string',value:'eptName',text:'单位名称',dictCode:''})
-        fieldList.push({type:'string',value:'eptShortname',text:'单位简称',dictCode:''})
-        fieldList.push({type:'string',value:'mnemonicCode',text:'助记码',dictCode:''})
-        fieldList.push({type:'string',value:'dutyParagraph',text:'税号',dictCode:''})
-        fieldList.push({type:'string',value:'adminRegin',text:'行政区域',dictCode:''})
-        fieldList.push({type:'string',value:'address',text:'单位地址',dictCode:''})
-        fieldList.push({type:'string',value:'contactPerson',text:'联系人',dictCode:''})
-        fieldList.push({type:'string',value:'contactNumber',text:'联系电话',dictCode:''})
-        fieldList.push({type:'string',value:'legalRepresent',text:'法定代表人',dictCode:''})
-        fieldList.push({type:'string',value:'postcode',text:'邮编',dictCode:''})
-        fieldList.push({type:'string',value:'bankName',text:'开户行名称',dictCode:''})
-        fieldList.push({type:'string',value:'bankAccount',text:'开户行账号',dictCode:''})
-        fieldList.push({type:'string',value:'permitId',text:'许可证编号',dictCode:''})
+        fieldList.push({type:'string',value:'orderId',text:'订单编号',dictCode:''})
+        fieldList.push({type:'string',value:'firstSupplierId',text:'供应商编号',dictCode:''})
+        fieldList.push({type:'string',value:'productId',text:'产品编号',dictCode:''})
+        fieldList.push({type:'string',value:'firstPurchaseId',text:'一级采购编号',dictCode:''})
+        fieldList.push({type:'string',value:'lotId',text:'批次编号',dictCode:''})
+        fieldList.push({type:'int',value:'arrivalQuantity',text:'到货数量',dictCode:''})
+        fieldList.push({type:'date',value:'arrivalData',text:'到货时间'})
+        fieldList.push({type:'double',value:'passRate',text:'批次合格率',dictCode:''})
+        fieldList.push({type:'int',value:'batchNumber',text:'总批次量',dictCode:''})
         this.superFieldList = fieldList
       }
     }

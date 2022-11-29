@@ -99,6 +99,7 @@
   import { mixinDevice } from '@/utils/mixin'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import FirstPurchaseFromSecondModal from './modules/FirstPurchaseFromSecondModal'
+  import {filterMultiDictText} from '@/components/dict/JDictSelectUtil'
 
   export default {
     name: 'FirstPurchaseFromSecondList',
@@ -122,14 +123,9 @@
             }
           },
           {
-            title:'采购单号',
-            align:"center",
-            dataIndex: 'purchase2Id'
-          },
-          {
             title:'一级供应商编号',
             align:"center",
-            dataIndex: 'firstSupplierId'
+            dataIndex: 'firstSupplierId_dictText'
           },
           {
             title:'二级供应商编号',
@@ -137,14 +133,9 @@
             dataIndex: 'secondSupplierId'
           },
           {
-            title:'零件编号',
+            title:'核心部件编号',
             align:"center",
             dataIndex: 'componentId'
-          },
-          {
-            title:'零件名称',
-            align:"center",
-            dataIndex: 'componnetName'
           },
           {
             title:'采购时间',
@@ -214,11 +205,9 @@
       },
       getSuperFieldList(){
         let fieldList=[];
-        fieldList.push({type:'string',value:'purchase2Id',text:'采购单号',dictCode:''})
-        fieldList.push({type:'string',value:'firstSupplierId',text:'一级供应商编号',dictCode:''})
+        fieldList.push({type:'string',value:'firstSupplierId',text:'一级供应商编号',dictCode:"first_supplier_inf,supplier_name,first_supplier_id"})
         fieldList.push({type:'string',value:'secondSupplierId',text:'二级供应商编号',dictCode:''})
-        fieldList.push({type:'string',value:'componentId',text:'零件编号',dictCode:''})
-        fieldList.push({type:'string',value:'componnetName',text:'零件名称',dictCode:''})
+        fieldList.push({type:'string',value:'componentId',text:'核心部件编号',dictCode:''})
         fieldList.push({type:'date',value:'purchaseTime',text:'采购时间'})
         fieldList.push({type:'int',value:'purchaseNum',text:'采购数量',dictCode:''})
         fieldList.push({type:'int',value:'leadTime',text:'采购提前期（/天）',dictCode:''})

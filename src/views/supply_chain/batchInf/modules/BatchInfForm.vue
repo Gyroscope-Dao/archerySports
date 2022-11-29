@@ -19,48 +19,33 @@
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="一级采购编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="firstPurchaseid">
-              <a-input v-model="model.firstPurchaseid" placeholder="请输入一级采购编号"  ></a-input>
+            <a-form-model-item label="一级采购编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="firstPurchaseId">
+              <a-input v-model="model.firstPurchaseId" placeholder="请输入一级采购编号"  ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="采购瓶颈供应商" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="bottleneckSid">
-              <a-input v-model="model.bottleneckSid" placeholder="请输入采购瓶颈供应商"  ></a-input>
+            <a-form-model-item label="批次编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="lotId">
+              <a-input v-model="model.lotId" placeholder="请输入批次编号"  ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="采购时间" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="purchaseTime">
-              <j-date placeholder="请选择采购时间" v-model="model.purchaseTime"  style="width: 100%" />
+            <a-form-model-item label="到货数量" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="arrivalQuantity">
+              <a-input-number v-model="model.arrivalQuantity" placeholder="请输入到货数量" style="width: 100%" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="采购比例" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="purchasePercent">
-              <a-input-number v-model="model.purchasePercent" placeholder="请输入采购比例" style="width: 100%" />
+            <a-form-model-item label="到货时间" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="arrivalData">
+              <j-date placeholder="请选择到货时间" v-model="model.arrivalData"  style="width: 100%" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="采购数量" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="purchaseQuantity">
-              <a-input-number v-model="model.purchaseQuantity" placeholder="请输入采购数量" style="width: 100%" />
+            <a-form-model-item label="批次合格率" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="passRate">
+              <a-input-number v-model="model.passRate" placeholder="请输入批次合格率" style="width: 100%" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="采购提前期" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="purchaseLeadTime">
-              <a-input-number v-model="model.purchaseLeadTime" placeholder="请输入采购提前期" style="width: 100%" />
-            </a-form-model-item>
-          </a-col>
-          <a-col :span="24">
-            <a-form-model-item label="供货周期" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="purchaseCycle">
-              <a-input-number v-model="model.purchaseCycle" placeholder="请输入供货周期" style="width: 100%" />
-            </a-form-model-item>
-          </a-col>
-          <a-col :span="24">
-            <a-form-model-item label="交货期" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="deliveryDate">
-              <j-date placeholder="请选择交货期" v-model="model.deliveryDate"  style="width: 100%" />
-            </a-form-model-item>
-          </a-col>
-          <a-col :span="24">
-            <a-form-model-item label="实际交货期" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="realDeliveryDate">
-              <j-date placeholder="请选择实际交货期" v-model="model.realDeliveryDate"  style="width: 100%" />
+            <a-form-model-item label="总批次量" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="batchNumber">
+              <a-input-number v-model="model.batchNumber" placeholder="请输入总批次量" style="width: 100%" />
             </a-form-model-item>
           </a-col>
         </a-row>
@@ -75,7 +60,7 @@
   import { validateDuplicateValue } from '@/utils/util'
 
   export default {
-    name: 'FirstPurchaseForm',
+    name: 'BatchInfForm',
     components: {
     },
     props: {
@@ -109,38 +94,26 @@
            productId: [
               { required: true, message: '请输入产品编号!'},
            ],
-           firstPurchaseid: [
+           firstPurchaseId: [
               { required: true, message: '请输入一级采购编号!'},
            ],
-           bottleneckSid: [
-              { required: true, message: '请输入采购瓶颈供应商!'},
+           lotId: [
+              { required: true, message: '请输入批次编号!'},
            ],
-           purchaseTime: [
-              { required: true, message: '请输入采购时间!'},
+           arrivalQuantity: [
+              { required: true, message: '请输入到货数量!'},
            ],
-           purchasePercent: [
-              { required: true, message: '请输入采购比例!'},
+           arrivalData: [
+              { required: true, message: '请输入到货时间!'},
            ],
-           purchaseQuantity: [
-              { required: true, message: '请输入采购数量!'},
-           ],
-           purchaseLeadTime: [
-              { required: true, message: '请输入采购提前期!'},
-           ],
-           purchaseCycle: [
-              { required: true, message: '请输入供货周期!'},
-           ],
-           deliveryDate: [
-              { required: true, message: '请输入交货期!'},
-           ],
-           realDeliveryDate: [
-              { required: true, message: '请输入实际交货期!'},
+           passRate: [
+              { required: true, message: '请输入批次合格率!'},
            ],
         },
         url: {
-          add: "/firstPurchase/firstPurchase/add",
-          edit: "/firstPurchase/firstPurchase/edit",
-          queryById: "/firstPurchase/firstPurchase/queryById"
+          add: "/batchInf/batchInf/add",
+          edit: "/batchInf/batchInf/edit",
+          queryById: "/batchInf/batchInf/queryById"
         }
       }
     },

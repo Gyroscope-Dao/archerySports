@@ -122,11 +122,6 @@
             }
           },
           {
-            title:'采购编号',
-            align:"center",
-            dataIndex: 'purchase1Id'
-          },
-          {
             title:'订单编号',
             align:"center",
             dataIndex: 'orderId'
@@ -142,17 +137,22 @@
             dataIndex: 'productId'
           },
           {
+            title:'一级采购编号',
+            align:"center",
+            dataIndex: 'firstPurchaseid'
+          },
+          {
+            title:'采购瓶颈供应商',
+            align:"center",
+            dataIndex: 'bottleneckSid'
+          },
+          {
             title:'采购时间',
             align:"center",
             dataIndex: 'purchaseTime',
             customRender:function (text) {
               return !text?"":(text.length>10?text.substr(0,10):text)
             }
-          },
-          {
-            title:'产品名称',
-            align:"center",
-            dataIndex: 'productName'
           },
           {
             title:'采购比例',
@@ -168,6 +168,11 @@
             title:'采购提前期',
             align:"center",
             dataIndex: 'purchaseLeadTime'
+          },
+          {
+            title:'供货周期',
+            align:"center",
+            dataIndex: 'purchaseCycle'
           },
           {
             title:'交货期',
@@ -219,15 +224,16 @@
       },
       getSuperFieldList(){
         let fieldList=[];
-        fieldList.push({type:'string',value:'purchase1Id',text:'采购编号',dictCode:''})
         fieldList.push({type:'string',value:'orderId',text:'订单编号',dictCode:''})
         fieldList.push({type:'string',value:'firstSupplierId',text:'供应商编号',dictCode:''})
         fieldList.push({type:'string',value:'productId',text:'产品编号',dictCode:''})
+        fieldList.push({type:'string',value:'firstPurchaseid',text:'一级采购编号',dictCode:''})
+        fieldList.push({type:'string',value:'bottleneckSid',text:'采购瓶颈供应商',dictCode:''})
         fieldList.push({type:'date',value:'purchaseTime',text:'采购时间'})
-        fieldList.push({type:'string',value:'productName',text:'产品名称',dictCode:''})
         fieldList.push({type:'double',value:'purchasePercent',text:'采购比例',dictCode:''})
         fieldList.push({type:'int',value:'purchaseQuantity',text:'采购数量',dictCode:''})
         fieldList.push({type:'int',value:'purchaseLeadTime',text:'采购提前期',dictCode:''})
+        fieldList.push({type:'int',value:'purchaseCycle',text:'供货周期',dictCode:''})
         fieldList.push({type:'date',value:'deliveryDate',text:'交货期'})
         fieldList.push({type:'date',value:'realDeliveryDate',text:'实际交货期'})
         this.superFieldList = fieldList

@@ -177,9 +177,12 @@
             dataIndex: 'bankAccount'
           },
           {
-            title:'信息更新时间',
+            title:'录入时间',
             align:"center",
-            dataIndex: 'infUpdateTime'
+            dataIndex: 'infUpdateTime',
+            customRender:function (text) {
+              return !text?"":(text.length>10?text.substr(0,10):text)
+            }
           },
           {
             title:'员工编号',
@@ -231,7 +234,7 @@
         fieldList.push({type:'string',value:'postCode',text:'邮编',dictCode:''})
         fieldList.push({type:'string',value:'bankName',text:'开户行名称',dictCode:''})
         fieldList.push({type:'string',value:'bankAccount',text:'开户账号',dictCode:''})
-        fieldList.push({type:'datetime',value:'infUpdateTime',text:'信息更新时间'})
+        fieldList.push({type:'date',value:'infUpdateTime',text:'录入时间'})
         fieldList.push({type:'string',value:'stuffId',text:'员工编号',dictCode:''})
         this.superFieldList = fieldList
       }

@@ -9,16 +9,6 @@
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="供应产品编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="productId">
-              <a-input v-model="model.productId" placeholder="请输入供应产品编号"  ></a-input>
-            </a-form-model-item>
-          </a-col>
-          <a-col :span="24">
-            <a-form-model-item label="订货数量" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="orderQuantity">
-              <a-input-number v-model="model.orderQuantity" placeholder="请输入订货数量" style="width: 100%" />
-            </a-form-model-item>
-          </a-col>
-          <a-col :span="24">
             <a-form-model-item label="交货期" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="deliveryDate">
               <j-date placeholder="请选择交货期" v-model="model.deliveryDate"  style="width: 100%" />
             </a-form-model-item>
@@ -31,6 +21,11 @@
           <a-col :span="24">
             <a-form-model-item label="员工编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="stuffId">
               <a-input v-model="model.stuffId" placeholder="请输入员工编号"  ></a-input>
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-model-item label="录入时间" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="orderUpdateTime">
+              <j-date placeholder="请选择录入时间" v-model="model.orderUpdateTime"  style="width: 100%" />
             </a-form-model-item>
           </a-col>
         </a-row>
@@ -73,12 +68,6 @@
            orderId: [
               { required: true, message: '请输入订单编号!'},
            ],
-           productId: [
-              { required: true, message: '请输入供应产品编号!'},
-           ],
-           orderQuantity: [
-              { required: true, message: '请输入订货数量!'},
-           ],
            deliveryDate: [
               { required: true, message: '请输入交货期!'},
            ],
@@ -87,6 +76,9 @@
            ],
            stuffId: [
               { required: true, message: '请输入员工编号!'},
+           ],
+           orderUpdateTime: [
+              { required: true, message: '请输入录入时间!'},
            ],
         },
         url: {

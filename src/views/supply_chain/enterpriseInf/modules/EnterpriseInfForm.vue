@@ -4,8 +4,8 @@
       <a-form-model ref="form" :model="model" :rules="validatorRules" slot="detail">
         <a-row>
           <a-col :span="24">
-            <a-form-model-item label="单位编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="eptId">
-              <a-input v-model="model.eptId" placeholder="请输入单位编号"  ></a-input>
+            <a-form-model-item label="单位编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="etpId">
+              <a-input v-model="model.etpId" placeholder="请输入单位编号"  ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -85,7 +85,7 @@
   import { validateDuplicateValue } from '@/utils/util'
 
   export default {
-    name: 'EptInfForm',
+    name: 'EnterpriseInfForm',
     components: {
     },
     props: {
@@ -110,7 +110,7 @@
         },
         confirmLoading: false,
         validatorRules: {
-           eptId: [
+           etpId: [
               { required: true, message: '请输入单位编号!'},
            ],
            eptName: [
@@ -154,9 +154,9 @@
            ],
         },
         url: {
-          add: "/eptInf/eptInf/add",
-          edit: "/eptInf/eptInf/edit",
-          queryById: "/eptInf/eptInf/queryById"
+          add: "/enterpriseInf/enterpriseInf/add",
+          edit: "/enterpriseInf/enterpriseInf/edit",
+          queryById: "/enterpriseInf/enterpriseInf/queryById"
         }
       }
     },

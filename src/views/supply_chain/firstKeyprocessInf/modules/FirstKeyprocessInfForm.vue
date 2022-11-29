@@ -4,8 +4,8 @@
       <a-form-model ref="form" :model="model" :rules="validatorRules" slot="detail">
         <a-row>
           <a-col :span="24">
-            <a-form-model-item label="核心部件编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="com1InfId">
-              <a-input v-model="model.com1InfId" placeholder="请输入核心部件编号"  ></a-input>
+            <a-form-model-item label="产品编码" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="productId">
+              <a-input v-model="model.productId" placeholder="请输入产品编码"  ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -14,13 +14,8 @@
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="库存数量" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="stockQuantity">
-              <a-input-number v-model="model.stockQuantity" placeholder="请输入库存数量" style="width: 100%" />
-            </a-form-model-item>
-          </a-col>
-          <a-col :span="24">
-            <a-form-model-item label="采购周期 （天）" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="purchaseLeadTime">
-              <a-input-number v-model="model.purchaseLeadTime" placeholder="请输入采购周期 （天）" style="width: 100%" />
+            <a-form-model-item label="瓶颈工序名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="keyprocess">
+              <a-input v-model="model.keyprocess" placeholder="请输入瓶颈工序名称"  ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -45,7 +40,7 @@
   import { validateDuplicateValue } from '@/utils/util'
 
   export default {
-    name: 'FirstComponentInventoryForm',
+    name: 'FirstKeyprocessInfForm',
     components: {
     },
     props: {
@@ -70,29 +65,20 @@
         },
         confirmLoading: false,
         validatorRules: {
-           com1InfId: [
-              { required: true, message: '请输入核心部件编号!'},
+           productId: [
+              { required: true, message: '请输入产品编码!'},
            ],
            firstSupplierId: [
               { required: true, message: '请输入一级供应商编号!'},
            ],
-           stockQuantity: [
-              { required: true, message: '请输入库存数量!'},
-           ],
-           purchaseLeadTime: [
-              { required: true, message: '请输入采购周期 （天）!'},
-           ],
-           infUpdateTime: [
-              { required: true, message: '请输入录入时间!'},
-           ],
-           stuffId: [
-              { required: true, message: '请输入人员编号!'},
+           keyprocess: [
+              { required: true, message: '请输入瓶颈工序名称!'},
            ],
         },
         url: {
-          add: "/firstComponentInventory/firstComponentInventory/add",
-          edit: "/firstComponentInventory/firstComponentInventory/edit",
-          queryById: "/firstComponentInventory/firstComponentInventory/queryById"
+          add: "/firstKeyprocessInf/firstKeyprocessInf/add",
+          edit: "/firstKeyprocessInf/firstKeyprocessInf/edit",
+          queryById: "/firstKeyprocessInf/firstKeyprocessInf/queryById"
         }
       }
     },

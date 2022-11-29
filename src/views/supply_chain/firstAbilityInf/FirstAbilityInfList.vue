@@ -12,7 +12,7 @@
     <!-- 操作按钮区域 -->
     <div class="table-operator">
       <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
-      <a-button type="primary" icon="download" @click="handleExportXls('一级供应产品能力信息')">导出</a-button>
+      <a-button type="primary" icon="download" @click="handleExportXls('一级产存检运能力信息')">导出</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
         <a-button type="primary" icon="import">导入</a-button>
       </a-upload>
@@ -108,7 +108,7 @@
     },
     data () {
       return {
-        description: '一级供应产品能力信息管理页面',
+        description: '一级产存检运能力信息管理页面',
         // 表头
         columns: [
           {
@@ -122,27 +122,17 @@
             }
           },
           {
-            title:'生产信息id',
-            align:"center",
-            dataIndex: 'proInfId'
-          },
-          {
-            title:'供应商编号',
+            title:'一级供应商编号',
             align:"center",
             dataIndex: 'firstSupplierId'
           },
           {
-            title:'成品编号',
+            title:'产品编号',
             align:"center",
             dataIndex: 'productId'
           },
           {
-            title:'成品名称',
-            align:"center",
-            dataIndex: 'productName'
-          },
-          {
-            title:'成品库存',
+            title:'产品库存',
             align:"center",
             dataIndex: 'productStock'
           },
@@ -162,9 +152,34 @@
             dataIndex: 'maxDayProLot'
           },
           {
-            title:'检验周期（天）',
+            title:'生产周期（天）',
             align:"center",
-            dataIndex: 'checkTime'
+            dataIndex: 'productionCycle'
+          },
+          {
+            title:'A 组检验周期（天）',
+            align:"center",
+            dataIndex: 'checkTimeA'
+          },
+          {
+            title:'B 组检验周期（天）',
+            align:"center",
+            dataIndex: 'checkTimeB'
+          },
+          {
+            title:'C 组检验周期（天）',
+            align:"center",
+            dataIndex: 'checkTimeC'
+          },
+          {
+            title:'D 组检验周期（天）',
+            align:"center",
+            dataIndex: 'checkTimeD'
+          },
+          {
+            title:'检验周期（天）逻辑 关系',
+            align:"center",
+            dataIndex: 'transportTimeDescription'
           },
           {
             title:'运输周期（天）',
@@ -172,12 +187,12 @@
             dataIndex: 'transportTime'
           },
           {
-            title:'信息更新时间',
+            title:'录入时间',
             align:"center",
-            dataIndex: 'infUpdateTime'
+            dataIndex: 'firstAbilityIntUpdateTime'
           },
           {
-            title:'员工编号',
+            title:'人员编号',
             align:"center",
             dataIndex: 'stuffId'
           },
@@ -215,18 +230,21 @@
       },
       getSuperFieldList(){
         let fieldList=[];
-        fieldList.push({type:'string',value:'proInfId',text:'生产信息id',dictCode:''})
-        fieldList.push({type:'string',value:'firstSupplierId',text:'供应商编号',dictCode:''})
-        fieldList.push({type:'string',value:'productId',text:'成品编号',dictCode:''})
-        fieldList.push({type:'string',value:'productName',text:'成品名称',dictCode:''})
-        fieldList.push({type:'int',value:'productStock',text:'成品库存',dictCode:''})
+        fieldList.push({type:'string',value:'firstSupplierId',text:'一级供应商编号',dictCode:''})
+        fieldList.push({type:'string',value:'productId',text:'产品编号',dictCode:''})
+        fieldList.push({type:'int',value:'productStock',text:'产品库存',dictCode:''})
         fieldList.push({type:'int',value:'productionLot',text:'生产批量',dictCode:''})
         fieldList.push({type:'int',value:'dayProLot',text:'日均产量',dictCode:''})
         fieldList.push({type:'int',value:'maxDayProLot',text:'日最大生产量',dictCode:''})
-        fieldList.push({type:'int',value:'checkTime',text:'检验周期（天）',dictCode:''})
+        fieldList.push({type:'int',value:'productionCycle',text:'生产周期（天）',dictCode:''})
+        fieldList.push({type:'int',value:'checkTimeA',text:'A 组检验周期（天）',dictCode:''})
+        fieldList.push({type:'int',value:'checkTimeB',text:'B 组检验周期（天）',dictCode:''})
+        fieldList.push({type:'int',value:'checkTimeC',text:'C 组检验周期（天）',dictCode:''})
+        fieldList.push({type:'int',value:'checkTimeD',text:'D 组检验周期（天）',dictCode:''})
+        fieldList.push({type:'string',value:'transportTimeDescription',text:'检验周期（天）逻辑 关系',dictCode:''})
         fieldList.push({type:'int',value:'transportTime',text:'运输周期（天）',dictCode:''})
-        fieldList.push({type:'datetime',value:'infUpdateTime',text:'信息更新时间'})
-        fieldList.push({type:'string',value:'stuffId',text:'员工编号',dictCode:''})
+        fieldList.push({type:'string',value:'firstAbilityIntUpdateTime',text:'录入时间',dictCode:''})
+        fieldList.push({type:'string',value:'stuffId',text:'人员编号',dictCode:''})
         this.superFieldList = fieldList
       }
     }

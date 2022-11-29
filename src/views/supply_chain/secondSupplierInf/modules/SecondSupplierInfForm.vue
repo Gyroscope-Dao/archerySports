@@ -59,8 +59,8 @@
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="信息更新时间" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="infUpdateTime">
-              <j-date placeholder="请选择信息更新时间"  v-model="model.infUpdateTime" :show-time="true" date-format="YYYY-MM-DD HH:mm:ss" style="width: 100%" />
+            <a-form-model-item label="录入时间" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="infUpdateTime">
+              <j-date placeholder="请选择录入时间" v-model="model.infUpdateTime"  style="width: 100%" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -122,27 +122,6 @@
            ],
            contactNum: [
               { required: true, message: '请输入联系电话!'},
-           ],
-           taxId: [
-              { required: true, message: '请输入税号!'},
-           ],
-           legalPerson: [
-              { required: true, message: '请输入法定代表人!'},
-           ],
-           postCode: [
-              { required: true, message: '请输入邮编!'},
-           ],
-           bankName: [
-              { required: true, message: '请输入开户行名称!'},
-           ],
-           bankAccount: [
-              { required: true, message: '请输入开户账号!'},
-           ],
-           infUpdateTime: [
-              { required: true, message: '请输入信息更新时间!'},
-           ],
-           stuffId: [
-              { required: true, message: '请输入员工编号!'},
            ],
         },
         url: {

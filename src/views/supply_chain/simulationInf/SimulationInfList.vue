@@ -12,7 +12,7 @@
     <!-- 操作按钮区域 -->
     <div class="table-operator">
       <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
-      <a-button type="primary" icon="download" @click="handleExportXls('一级供应商')">导出</a-button>
+      <a-button type="primary" icon="download" @click="handleExportXls('仿真记录与文件表')">导出</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
         <a-button type="primary" icon="import">导入</a-button>
       </a-upload>
@@ -89,7 +89,7 @@
       </a-table>
     </div>
 
-    <first-supplier-inf-modal ref="modalForm" @ok="modalFormOk"></first-supplier-inf-modal>
+    <simulation-inf-modal ref="modalForm" @ok="modalFormOk"></simulation-inf-modal>
   </a-card>
 </template>
 
@@ -98,18 +98,17 @@
   import '@/assets/less/TableExpand.less'
   import { mixinDevice } from '@/utils/mixin'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
-  import FirstSupplierInfModal from './modules/FirstSupplierInfModal'
-  import {filterMultiDictText} from '@/components/dict/JDictSelectUtil'
+  import SimulationInfModal from './modules/SimulationInfModal'
 
   export default {
-    name: 'FirstSupplierInfList',
+    name: 'SimulationInfList',
     mixins:[JeecgListMixin, mixinDevice],
     components: {
-      FirstSupplierInfModal
+      SimulationInfModal
     },
     data () {
       return {
-        description: '一级供应商管理页面',
+        description: '仿真记录与文件表管理页面',
         // 表头
         columns: [
           {
@@ -123,109 +122,47 @@
             }
           },
           {
-            title:'一级供应商编号',
+            title:'仿真编号',
             align:"center",
-            dataIndex: 'firstSupplierId'
+            dataIndex: 'simulationId'
           },
           {
-            title:'供应商名称',
+            title:'仿真目的',
             align:"center",
-            dataIndex: 'supplierName'
+            dataIndex: 'simulationPurpose'
           },
           {
-            title:'供应商名称简称',
+            title:'JF 订单编号',
             align:"center",
-            dataIndex: 'supplierSimpleName'
+            dataIndex: 'orderId'
           },
           {
-            title:'供应商地址',
+            title:'版本',
             align:"center",
-            dataIndex: 'supplierAddress'
+            dataIndex: 'smulationVersion'
           },
           {
-            title:'联系人',
+            title:'报告文件',
             align:"center",
-            dataIndex: 'contact'
+            dataIndex: 'reportFileString'
           },
           {
-            title:'联系电话',
+            title:'模型文件',
             align:"center",
-            dataIndex: 'contactNum'
+            dataIndex: 'modelFileString'
           },
           {
-            title:'税号',
+            title:'仿真时间',
             align:"center",
-            dataIndex: 'taxId'
+            dataIndex: 'inputTime',
+            customRender:function (text) {
+              return !text?"":(text.length>10?text.substr(0,10):text)
+            }
           },
           {
-            title:'是否民口企业',
-            align:"center",
-            dataIndex: 'privateEnterprise_dictText'
-          },
-          {
-            title:'是否瓶颈供应商',
-            align:"center",
-            dataIndex: 'battleneckSupplier_dictText'
-          },
-          {
-            title:'供应商资质',
-            align:"center",
-            dataIndex: 'certification'
-          },
-          {
-            title:'法定代表人',
-            align:"center",
-            dataIndex: 'legalPerson'
-          },
-          {
-            title:'邮编',
-            align:"center",
-            dataIndex: 'postCode'
-          },
-          {
-            title:'开户行名称',
-            align:"center",
-            dataIndex: 'bankName'
-          },
-          {
-            title:'开户账号',
-            align:"center",
-            dataIndex: 'bankAccount'
-          },
-          {
-            title:'往来单位信息id',
-            align:"center",
-            dataIndex: 'eptId'
-          },
-          {
-            title:'录入时间',
-            align:"center",
-            dataIndex: 'infUpdateTime'
-          },
-          {
-            title:'人员编号',
+            title:'仿真人员编号',
             align:"center",
             dataIndex: 'stuffId'
-          },
-          {
-            title:'是否生产瓶颈供应商',
-            align:"center",
-            dataIndex: 'isProduct_dictText'
-          },
-          {
-            title:'是否采购瓶颈供应商',
-            align:"center",
-            dataIndex: 'isPurchase_dictText'
-          },
-          {
-            title:'成立年份',
-            align:"center",
-            dataIndex: 'estabYear'
-          },
-          {
-            title:'企业征信',
-            align:"center",
-            dataIndex: 'corporateCredit'
           },
           {
             title: '操作',
@@ -237,11 +174,11 @@
           }
         ],
         url: {
-          list: "/firstSupplierInf/firstSupplierInf/list",
-          delete: "/firstSupplierInf/firstSupplierInf/delete",
-          deleteBatch: "/firstSupplierInf/firstSupplierInf/deleteBatch",
-          exportXlsUrl: "/firstSupplierInf/firstSupplierInf/exportXls",
-          importExcelUrl: "firstSupplierInf/firstSupplierInf/importExcel",
+          list: "/simulationInf/simulationInf/list",
+          delete: "/simulationInf/simulationInf/delete",
+          deleteBatch: "/simulationInf/simulationInf/deleteBatch",
+          exportXlsUrl: "/simulationInf/simulationInf/exportXls",
+          importExcelUrl: "simulationInf/simulationInf/importExcel",
           
         },
         dictOptions:{},
@@ -261,27 +198,14 @@
       },
       getSuperFieldList(){
         let fieldList=[];
-        fieldList.push({type:'string',value:'firstSupplierId',text:'一级供应商编号',dictCode:''})
-        fieldList.push({type:'string',value:'supplierName',text:'供应商名称',dictCode:''})
-        fieldList.push({type:'string',value:'supplierSimpleName',text:'供应商名称简称',dictCode:''})
-        fieldList.push({type:'string',value:'supplierAddress',text:'供应商地址',dictCode:''})
-        fieldList.push({type:'string',value:'contact',text:'联系人',dictCode:''})
-        fieldList.push({type:'string',value:'contactNum',text:'联系电话',dictCode:''})
-        fieldList.push({type:'string',value:'taxId',text:'税号',dictCode:''})
-        fieldList.push({type:'int',value:'privateEnterprise',text:'是否民口企业',dictCode:'yn'})
-        fieldList.push({type:'int',value:'battleneckSupplier',text:'是否瓶颈供应商',dictCode:'yn'})
-        fieldList.push({type:'string',value:'certification',text:'供应商资质',dictCode:''})
-        fieldList.push({type:'string',value:'legalPerson',text:'法定代表人',dictCode:''})
-        fieldList.push({type:'string',value:'postCode',text:'邮编',dictCode:''})
-        fieldList.push({type:'string',value:'bankName',text:'开户行名称',dictCode:''})
-        fieldList.push({type:'string',value:'bankAccount',text:'开户账号',dictCode:''})
-        fieldList.push({type:'string',value:'eptId',text:'往来单位信息id',dictCode:''})
-        fieldList.push({type:'datetime',value:'infUpdateTime',text:'录入时间'})
-        fieldList.push({type:'string',value:'stuffId',text:'人员编号',dictCode:''})
-        fieldList.push({type:'int',value:'isProduct',text:'是否生产瓶颈供应商',dictCode:'yn'})
-        fieldList.push({type:'int',value:'isPurchase',text:'是否采购瓶颈供应商',dictCode:'yn'})
-        fieldList.push({type:'int',value:'estabYear',text:'成立年份',dictCode:''})
-        fieldList.push({type:'string',value:'corporateCredit',text:'企业征信',dictCode:''})
+        fieldList.push({type:'string',value:'simulationId',text:'仿真编号',dictCode:''})
+        fieldList.push({type:'string',value:'simulationPurpose',text:'仿真目的',dictCode:''})
+        fieldList.push({type:'string',value:'orderId',text:'JF 订单编号',dictCode:''})
+        fieldList.push({type:'string',value:'smulationVersion',text:'版本',dictCode:''})
+        fieldList.push({type:'Blob',value:'reportFile',text:'报告文件',dictCode:''})
+        fieldList.push({type:'Blob',value:'modelFile',text:'模型文件',dictCode:''})
+        fieldList.push({type:'date',value:'inputTime',text:'仿真时间'})
+        fieldList.push({type:'string',value:'stuffId',text:'仿真人员编号',dictCode:''})
         this.superFieldList = fieldList
       }
     }

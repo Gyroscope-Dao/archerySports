@@ -8,17 +8,17 @@
     :okButtonProps="{ class:{'jee-hidden': disableSubmit} }"
     @cancel="handleCancel"
     cancelText="关闭">
-    <ept-inf-form ref="realForm" @ok="submitCallback" :disabled="disableSubmit"></ept-inf-form>
+    <simulation-inf-form ref="realForm" @ok="submitCallback" :disabled="disableSubmit"></simulation-inf-form>
   </j-modal>
 </template>
 
 <script>
 
-  import EptInfForm from './EptInfForm'
+  import SimulationInfForm from './SimulationInfForm'
   export default {
-    name: 'EptInfModal',
+    name: 'SimulationInfModal',
     components: {
-      EptInfForm
+      SimulationInfForm
     },
     data () {
       return {

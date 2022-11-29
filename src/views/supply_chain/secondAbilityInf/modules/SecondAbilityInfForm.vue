@@ -4,18 +4,13 @@
       <a-form-model ref="form" :model="model" :rules="validatorRules" slot="detail">
         <a-row>
           <a-col :span="24">
-            <a-form-model-item label="零件信息id" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="com2InfId">
-              <a-input v-model="model.com2InfId" placeholder="请输入零件信息id"  ></a-input>
-            </a-form-model-item>
-          </a-col>
-          <a-col :span="24">
             <a-form-model-item label="二级供应商编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="secondSupplierId">
               <a-input v-model="model.secondSupplierId" placeholder="请输入二级供应商编号"  ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="零件编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentId">
-              <a-input v-model="model.componentId" placeholder="请输入零件编号"  ></a-input>
+            <a-form-model-item label="核心部件编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentId">
+              <a-input v-model="model.componentId" placeholder="请输入核心部件编号"  ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -24,13 +19,13 @@
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="日生产能力" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="dailyProductionCapacity">
-              <a-input-number v-model="model.dailyProductionCapacity" placeholder="请输入日生产能力" style="width: 100%" />
+            <a-form-model-item label="日均产量" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="dailyProductionCapacity">
+              <a-input-number v-model="model.dailyProductionCapacity" placeholder="请输入日均产量" style="width: 100%" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="军检周期（天）" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="checkTime">
-              <a-input-number v-model="model.checkTime" placeholder="请输入军检周期（天）" style="width: 100%" />
+            <a-form-model-item label="生产周期（天）" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="checkTime">
+              <a-input-number v-model="model.checkTime" placeholder="请输入生产周期（天）" style="width: 100%" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -39,13 +34,38 @@
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="信息更新时间" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="infUpdateTime">
-              <j-date placeholder="请选择信息更新时间"  v-model="model.infUpdateTime" :show-time="true" date-format="YYYY-MM-DD HH:mm:ss" style="width: 100%" />
+            <a-form-model-item label="A 组检验周期 （天）" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="checkTimeA">
+              <a-input-number v-model="model.checkTimeA" placeholder="请输入A 组检验周期 （天）" style="width: 100%" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="员工编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="stuffId">
-              <a-input v-model="model.stuffId" placeholder="请输入员工编号"  ></a-input>
+            <a-form-model-item label="B 组检验周期 （天）" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="checkTimeB">
+              <a-input-number v-model="model.checkTimeB" placeholder="请输入B 组检验周期 （天）" style="width: 100%" />
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-model-item label="C 组检验周期 （天）" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="checkTimeC">
+              <a-input v-model="model.checkTimeC" placeholder="请输入C 组检验周期 （天）"  ></a-input>
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-model-item label="D 组检验周期 （天）" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="checkTimeD">
+              <a-input v-model="model.checkTimeD" placeholder="请输入D 组检验周期 （天）"  ></a-input>
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-model-item label="检验周期（天） 逻辑关系" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="transportTimeDescription">
+              <a-input v-model="model.transportTimeDescription" placeholder="请输入检验周期（天） 逻辑关系"  ></a-input>
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-model-item label="录入时间" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="infUpdateTime">
+              <j-date placeholder="请选择录入时间" v-model="model.infUpdateTime"  style="width: 100%" />
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-model-item label="人员编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="stuffId">
+              <a-input v-model="model.stuffId" placeholder="请输入人员编号"  ></a-input>
             </a-form-model-item>
           </a-col>
         </a-row>
@@ -85,32 +105,11 @@
         },
         confirmLoading: false,
         validatorRules: {
-           com2InfId: [
-              { required: true, message: '请输入零件信息id!'},
-           ],
            secondSupplierId: [
               { required: true, message: '请输入二级供应商编号!'},
            ],
            componentId: [
-              { required: true, message: '请输入零件编号!'},
-           ],
-           stockQuantity: [
-              { required: true, message: '请输入库存数量!'},
-           ],
-           dailyProductionCapacity: [
-              { required: true, message: '请输入日生产能力!'},
-           ],
-           checkTime: [
-              { required: true, message: '请输入军检周期（天）!'},
-           ],
-           transportTime: [
-              { required: true, message: '请输入物流周期（天）!'},
-           ],
-           infUpdateTime: [
-              { required: true, message: '请输入信息更新时间!'},
-           ],
-           stuffId: [
-              { required: true, message: '请输入员工编号!'},
+              { required: true, message: '请输入核心部件编号!'},
            ],
         },
         url: {

@@ -40,12 +40,12 @@
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="是否民口企业" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="privateEnterprise">
-              <a-input-number v-model="model.privateEnterprise" placeholder="请输入是否民口企业" style="width: 100%" />
+              <j-dict-select-tag type="list" v-model="model.privateEnterprise" dictCode="yn" placeholder="请选择是否民口企业" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="是否瓶颈供应商" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="battleneckSupplier">
-              <a-input-number v-model="model.battleneckSupplier" placeholder="请输入是否瓶颈供应商" style="width: 100%" />
+              <j-dict-select-tag type="list" v-model="model.battleneckSupplier" dictCode="yn" placeholder="请选择是否瓶颈供应商" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -84,18 +84,13 @@
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="人员编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="stuffId">
-              <a-input v-model="model.stuffId" placeholder="请输入人员编号"  ></a-input>
-            </a-form-model-item>
-          </a-col>
-          <a-col :span="24">
             <a-form-model-item label="是否生产瓶颈供应商" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="isProduct">
-              <a-input-number v-model="model.isProduct" placeholder="请输入是否生产瓶颈供应商" style="width: 100%" />
+              <j-dict-select-tag type="list" v-model="model.isProduct" dictCode="yn" placeholder="请选择是否生产瓶颈供应商" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="是否采购瓶颈供应商" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="isPurchase">
-              <a-input-number v-model="model.isPurchase" placeholder="请输入是否采购瓶颈供应商" style="width: 100%" />
+              <j-dict-select-tag type="list" v-model="model.isPurchase" dictCode="yn" placeholder="请选择是否采购瓶颈供应商" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -189,9 +184,6 @@
            ],
            infUpdateTime: [
               { required: true, message: '请输入录入时间!'},
-           ],
-           stuffId: [
-              { required: true, message: '请输入人员编号!'},
            ],
            isProduct: [
               { required: true, message: '请输入是否生产瓶颈供应商!'},

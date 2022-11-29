@@ -122,32 +122,32 @@
             }
           },
           {
-            title:'零件编号',
+            title:'部件编号',
             align:"center",
             dataIndex: 'componentId'
           },
           {
-            title:'零件名称',
+            title:'部件名称',
             align:"center",
             dataIndex: 'componentName'
           },
           {
-            title:'零件类别',
+            title:'部件类别',
             align:"center",
             dataIndex: 'componentType'
           },
           {
-            title:'零件规格',
+            title:'部件规格',
             align:"center",
             dataIndex: 'componentSpecification'
           },
           {
-            title:'零件计量单位',
+            title:'部件计量单位',
             align:"center",
             dataIndex: 'componentUnit'
           },
           {
-            title:'零件性质',
+            title:'部件性质',
             align:"center",
             dataIndex: 'componentNature'
           },
@@ -185,12 +185,12 @@
       },
       getSuperFieldList(){
         let fieldList=[];
-        fieldList.push({type:'string',value:'componentId',text:'零件编号',dictCode:''})
-        fieldList.push({type:'string',value:'componentName',text:'零件名称',dictCode:''})
-        fieldList.push({type:'string',value:'componentType',text:'零件类别',dictCode:''})
-        fieldList.push({type:'string',value:'componentSpecification',text:'零件规格',dictCode:''})
-        fieldList.push({type:'string',value:'componentUnit',text:'零件计量单位',dictCode:''})
-        fieldList.push({type:'string',value:'componentNature',text:'零件性质',dictCode:''})
+        fieldList.push({type:'string',value:'componentId',text:'部件编号',dictCode:''})
+        fieldList.push({type:'string',value:'componentName',text:'部件名称',dictCode:''})
+        fieldList.push({type:'string',value:'componentType',text:'部件类别',dictCode:''})
+        fieldList.push({type:'string',value:'componentSpecification',text:'部件规格',dictCode:''})
+        fieldList.push({type:'string',value:'componentUnit',text:'部件计量单位',dictCode:''})
+        fieldList.push({type:'string',value:'componentNature',text:'部件性质',dictCode:''})
         this.superFieldList = fieldList
       }
     }

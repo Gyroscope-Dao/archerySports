@@ -127,16 +127,6 @@
             dataIndex: 'orderId'
           },
           {
-            title:'供应产品编号',
-            align:"center",
-            dataIndex: 'productId'
-          },
-          {
-            title:'订货数量',
-            align:"center",
-            dataIndex: 'orderQuantity'
-          },
-          {
             title:'交货期',
             align:"center",
             dataIndex: 'deliveryDate',
@@ -156,6 +146,14 @@
             title:'员工编号',
             align:"center",
             dataIndex: 'stuffId'
+          },
+          {
+            title:'录入时间',
+            align:"center",
+            dataIndex: 'orderUpdateTime',
+            customRender:function (text) {
+              return !text?"":(text.length>10?text.substr(0,10):text)
+            }
           },
           {
             title: '操作',
@@ -192,11 +190,10 @@
       getSuperFieldList(){
         let fieldList=[];
         fieldList.push({type:'string',value:'orderId',text:'订单编号',dictCode:''})
-        fieldList.push({type:'string',value:'productId',text:'供应产品编号',dictCode:''})
-        fieldList.push({type:'int',value:'orderQuantity',text:'订货数量',dictCode:''})
         fieldList.push({type:'date',value:'deliveryDate',text:'交货期'})
         fieldList.push({type:'date',value:'realDeliveryDate',text:'实际交货期'})
         fieldList.push({type:'string',value:'stuffId',text:'员工编号',dictCode:''})
+        fieldList.push({type:'date',value:'orderUpdateTime',text:'录入时间'})
         this.superFieldList = fieldList
       }
     }

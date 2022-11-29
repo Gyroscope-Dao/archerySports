@@ -12,7 +12,7 @@
     <!-- 操作按钮区域 -->
     <div class="table-operator">
       <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
-      <a-button type="primary" icon="download" @click="handleExportXls('一级供应商')">导出</a-button>
+      <a-button type="primary" icon="download" @click="handleExportXls('往来单位信息表')">导出</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
         <a-button type="primary" icon="import">导入</a-button>
       </a-upload>
@@ -89,7 +89,7 @@
       </a-table>
     </div>
 
-    <first-supplier-inf-modal ref="modalForm" @ok="modalFormOk"></first-supplier-inf-modal>
+    <enterprise-inf-modal ref="modalForm" @ok="modalFormOk"></enterprise-inf-modal>
   </a-card>
 </template>
 
@@ -98,18 +98,17 @@
   import '@/assets/less/TableExpand.less'
   import { mixinDevice } from '@/utils/mixin'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
-  import FirstSupplierInfModal from './modules/FirstSupplierInfModal'
-  import {filterMultiDictText} from '@/components/dict/JDictSelectUtil'
+  import EnterpriseInfModal from './modules/EnterpriseInfModal'
 
   export default {
-    name: 'FirstSupplierInfList',
+    name: 'EnterpriseInfList',
     mixins:[JeecgListMixin, mixinDevice],
     components: {
-      FirstSupplierInfModal
+      EnterpriseInfModal
     },
     data () {
       return {
-        description: '一级供应商管理页面',
+        description: '往来单位信息表管理页面',
         // 表头
         columns: [
           {
@@ -123,64 +122,59 @@
             }
           },
           {
-            title:'一级供应商编号',
+            title:'单位编号',
             align:"center",
-            dataIndex: 'firstSupplierId'
+            dataIndex: 'etpId'
           },
           {
-            title:'供应商名称',
+            title:'单位名称',
             align:"center",
-            dataIndex: 'supplierName'
+            dataIndex: 'eptName'
           },
           {
-            title:'供应商名称简称',
+            title:'单位简称',
             align:"center",
-            dataIndex: 'supplierSimpleName'
+            dataIndex: 'eptShortname'
           },
           {
-            title:'供应商地址',
+            title:'助记码',
             align:"center",
-            dataIndex: 'supplierAddress'
-          },
-          {
-            title:'联系人',
-            align:"center",
-            dataIndex: 'contact'
-          },
-          {
-            title:'联系电话',
-            align:"center",
-            dataIndex: 'contactNum'
+            dataIndex: 'mnemonicCode'
           },
           {
             title:'税号',
             align:"center",
-            dataIndex: 'taxId'
+            dataIndex: 'dutyParagraph'
           },
           {
-            title:'是否民口企业',
+            title:'行政区域',
             align:"center",
-            dataIndex: 'privateEnterprise_dictText'
+            dataIndex: 'adminRegin'
           },
           {
-            title:'是否瓶颈供应商',
+            title:'单位地址',
             align:"center",
-            dataIndex: 'battleneckSupplier_dictText'
+            dataIndex: 'address'
           },
           {
-            title:'供应商资质',
+            title:'联系人',
             align:"center",
-            dataIndex: 'certification'
+            dataIndex: 'contactPerson'
+          },
+          {
+            title:'联系电话',
+            align:"center",
+            dataIndex: 'contactNumber'
           },
           {
             title:'法定代表人',
             align:"center",
-            dataIndex: 'legalPerson'
+            dataIndex: 'legalRepresent'
           },
           {
             title:'邮编',
             align:"center",
-            dataIndex: 'postCode'
+            dataIndex: 'postcode'
           },
           {
             title:'开户行名称',
@@ -188,44 +182,14 @@
             dataIndex: 'bankName'
           },
           {
-            title:'开户账号',
+            title:'开户行账号',
             align:"center",
             dataIndex: 'bankAccount'
           },
           {
-            title:'往来单位信息id',
+            title:'许可证编号',
             align:"center",
-            dataIndex: 'eptId'
-          },
-          {
-            title:'录入时间',
-            align:"center",
-            dataIndex: 'infUpdateTime'
-          },
-          {
-            title:'人员编号',
-            align:"center",
-            dataIndex: 'stuffId'
-          },
-          {
-            title:'是否生产瓶颈供应商',
-            align:"center",
-            dataIndex: 'isProduct_dictText'
-          },
-          {
-            title:'是否采购瓶颈供应商',
-            align:"center",
-            dataIndex: 'isPurchase_dictText'
-          },
-          {
-            title:'成立年份',
-            align:"center",
-            dataIndex: 'estabYear'
-          },
-          {
-            title:'企业征信',
-            align:"center",
-            dataIndex: 'corporateCredit'
+            dataIndex: 'permitId'
           },
           {
             title: '操作',
@@ -237,11 +201,11 @@
           }
         ],
         url: {
-          list: "/firstSupplierInf/firstSupplierInf/list",
-          delete: "/firstSupplierInf/firstSupplierInf/delete",
-          deleteBatch: "/firstSupplierInf/firstSupplierInf/deleteBatch",
-          exportXlsUrl: "/firstSupplierInf/firstSupplierInf/exportXls",
-          importExcelUrl: "firstSupplierInf/firstSupplierInf/importExcel",
+          list: "/enterpriseInf/enterpriseInf/list",
+          delete: "/enterpriseInf/enterpriseInf/delete",
+          deleteBatch: "/enterpriseInf/enterpriseInf/deleteBatch",
+          exportXlsUrl: "/enterpriseInf/enterpriseInf/exportXls",
+          importExcelUrl: "enterpriseInf/enterpriseInf/importExcel",
           
         },
         dictOptions:{},
@@ -261,27 +225,20 @@
       },
       getSuperFieldList(){
         let fieldList=[];
-        fieldList.push({type:'string',value:'firstSupplierId',text:'一级供应商编号',dictCode:''})
-        fieldList.push({type:'string',value:'supplierName',text:'供应商名称',dictCode:''})
-        fieldList.push({type:'string',value:'supplierSimpleName',text:'供应商名称简称',dictCode:''})
-        fieldList.push({type:'string',value:'supplierAddress',text:'供应商地址',dictCode:''})
-        fieldList.push({type:'string',value:'contact',text:'联系人',dictCode:''})
-        fieldList.push({type:'string',value:'contactNum',text:'联系电话',dictCode:''})
-        fieldList.push({type:'string',value:'taxId',text:'税号',dictCode:''})
-        fieldList.push({type:'int',value:'privateEnterprise',text:'是否民口企业',dictCode:'yn'})
-        fieldList.push({type:'int',value:'battleneckSupplier',text:'是否瓶颈供应商',dictCode:'yn'})
-        fieldList.push({type:'string',value:'certification',text:'供应商资质',dictCode:''})
-        fieldList.push({type:'string',value:'legalPerson',text:'法定代表人',dictCode:''})
-        fieldList.push({type:'string',value:'postCode',text:'邮编',dictCode:''})
+        fieldList.push({type:'string',value:'etpId',text:'单位编号',dictCode:''})
+        fieldList.push({type:'string',value:'eptName',text:'单位名称',dictCode:''})
+        fieldList.push({type:'string',value:'eptShortname',text:'单位简称',dictCode:''})
+        fieldList.push({type:'string',value:'mnemonicCode',text:'助记码',dictCode:''})
+        fieldList.push({type:'string',value:'dutyParagraph',text:'税号',dictCode:''})
+        fieldList.push({type:'string',value:'adminRegin',text:'行政区域',dictCode:''})
+        fieldList.push({type:'string',value:'address',text:'单位地址',dictCode:''})
+        fieldList.push({type:'string',value:'contactPerson',text:'联系人',dictCode:''})
+        fieldList.push({type:'string',value:'contactNumber',text:'联系电话',dictCode:''})
+        fieldList.push({type:'string',value:'legalRepresent',text:'法定代表人',dictCode:''})
+        fieldList.push({type:'string',value:'postcode',text:'邮编',dictCode:''})
         fieldList.push({type:'string',value:'bankName',text:'开户行名称',dictCode:''})
-        fieldList.push({type:'string',value:'bankAccount',text:'开户账号',dictCode:''})
-        fieldList.push({type:'string',value:'eptId',text:'往来单位信息id',dictCode:''})
-        fieldList.push({type:'datetime',value:'infUpdateTime',text:'录入时间'})
-        fieldList.push({type:'string',value:'stuffId',text:'人员编号',dictCode:''})
-        fieldList.push({type:'int',value:'isProduct',text:'是否生产瓶颈供应商',dictCode:'yn'})
-        fieldList.push({type:'int',value:'isPurchase',text:'是否采购瓶颈供应商',dictCode:'yn'})
-        fieldList.push({type:'int',value:'estabYear',text:'成立年份',dictCode:''})
-        fieldList.push({type:'string',value:'corporateCredit',text:'企业征信',dictCode:''})
+        fieldList.push({type:'string',value:'bankAccount',text:'开户行账号',dictCode:''})
+        fieldList.push({type:'string',value:'permitId',text:'许可证编号',dictCode:''})
         this.superFieldList = fieldList
       }
     }

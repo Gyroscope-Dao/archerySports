@@ -12,7 +12,7 @@
     <!-- 操作按钮区域 -->
     <div class="table-operator">
       <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
-      <a-button type="primary" icon="download" @click="handleExportXls('一级供应商零件库存')">导出</a-button>
+      <a-button type="primary" icon="download" @click="handleExportXls('一级核心部件库存与采购能力')">导出</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
         <a-button type="primary" icon="import">导入</a-button>
       </a-upload>
@@ -108,7 +108,7 @@
     },
     data () {
       return {
-        description: '一级供应商零件库存管理页面',
+        description: '一级核心部件库存与采购能力管理页面',
         // 表头
         columns: [
           {
@@ -122,7 +122,7 @@
             }
           },
           {
-            title:'零件信息编号',
+            title:'核心部件编号',
             align:"center",
             dataIndex: 'com1InfId'
           },
@@ -132,27 +132,25 @@
             dataIndex: 'firstSupplierId'
           },
           {
-            title:'零件编号',
-            align:"center",
-            dataIndex: 'componentId'
-          },
-          {
             title:'库存数量',
             align:"center",
             dataIndex: 'stockQuantity'
           },
           {
-            title:'采购提前期（天）',
+            title:'采购周期 （天）',
             align:"center",
             dataIndex: 'purchaseLeadTime'
           },
           {
-            title:'信息更新时间',
+            title:'录入时间',
             align:"center",
-            dataIndex: 'infUpdateTime'
+            dataIndex: 'infUpdateTime',
+            customRender:function (text) {
+              return !text?"":(text.length>10?text.substr(0,10):text)
+            }
           },
           {
-            title:'员工编号',
+            title:'人员编号',
             align:"center",
             dataIndex: 'stuffId'
           },
@@ -190,13 +188,12 @@
       },
       getSuperFieldList(){
         let fieldList=[];
-        fieldList.push({type:'string',value:'com1InfId',text:'零件信息编号',dictCode:''})
+        fieldList.push({type:'string',value:'com1InfId',text:'核心部件编号',dictCode:''})
         fieldList.push({type:'string',value:'firstSupplierId',text:'一级供应商编号',dictCode:''})
-        fieldList.push({type:'string',value:'componentId',text:'零件编号',dictCode:''})
         fieldList.push({type:'int',value:'stockQuantity',text:'库存数量',dictCode:''})
-        fieldList.push({type:'int',value:'purchaseLeadTime',text:'采购提前期（天）',dictCode:''})
-        fieldList.push({type:'datetime',value:'infUpdateTime',text:'信息更新时间'})
-        fieldList.push({type:'string',value:'stuffId',text:'员工编号',dictCode:''})
+        fieldList.push({type:'int',value:'purchaseLeadTime',text:'采购周期 （天）',dictCode:''})
+        fieldList.push({type:'date',value:'infUpdateTime',text:'录入时间'})
+        fieldList.push({type:'string',value:'stuffId',text:'人员编号',dictCode:''})
         this.superFieldList = fieldList
       }
     }

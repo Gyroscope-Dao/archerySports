@@ -4,33 +4,33 @@
       <a-form-model ref="form" :model="model" :rules="validatorRules" slot="detail">
         <a-row>
           <a-col :span="24">
-            <a-form-model-item label="零件编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentId">
-              <a-input v-model="model.componentId" placeholder="请输入零件编号"  ></a-input>
+            <a-form-model-item label="部件编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentId">
+              <a-input v-model="model.componentId" placeholder="请输入部件编号"  ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="零件名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentName">
-              <a-input v-model="model.componentName" placeholder="请输入零件名称"  ></a-input>
+            <a-form-model-item label="部件名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentName">
+              <a-input v-model="model.componentName" placeholder="请输入部件名称"  ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="零件类别" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentType">
-              <a-input v-model="model.componentType" placeholder="请输入零件类别"  ></a-input>
+            <a-form-model-item label="部件类别" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentType">
+              <a-input v-model="model.componentType" placeholder="请输入部件类别"  ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="零件规格" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentSpecification">
-              <a-input v-model="model.componentSpecification" placeholder="请输入零件规格"  ></a-input>
+            <a-form-model-item label="部件规格" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentSpecification">
+              <a-input v-model="model.componentSpecification" placeholder="请输入部件规格"  ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="零件计量单位" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentUnit">
-              <a-input v-model="model.componentUnit" placeholder="请输入零件计量单位"  ></a-input>
+            <a-form-model-item label="部件计量单位" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentUnit">
+              <a-input v-model="model.componentUnit" placeholder="请输入部件计量单位"  ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="零件性质" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentNature">
-              <a-input v-model="model.componentNature" placeholder="请输入零件性质"  ></a-input>
+            <a-form-model-item label="部件性质" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentNature">
+              <a-input v-model="model.componentNature" placeholder="请输入部件性质"  ></a-input>
             </a-form-model-item>
           </a-col>
         </a-row>
@@ -71,22 +71,22 @@
         confirmLoading: false,
         validatorRules: {
            componentId: [
-              { required: true, message: '请输入零件编号!'},
+              { required: true, message: '请输入部件编号!'},
            ],
            componentName: [
-              { required: true, message: '请输入零件名称!'},
+              { required: true, message: '请输入部件名称!'},
            ],
            componentType: [
-              { required: true, message: '请输入零件类别!'},
+              { required: true, message: '请输入部件类别!'},
            ],
            componentSpecification: [
-              { required: true, message: '请输入零件规格!'},
+              { required: true, message: '请输入部件规格!'},
            ],
            componentUnit: [
-              { required: true, message: '请输入零件计量单位!'},
+              { required: true, message: '请输入部件计量单位!'},
            ],
            componentNature: [
-              { required: true, message: '请输入零件性质!'},
+              { required: true, message: '请输入部件性质!'},
            ],
         },
         url: {

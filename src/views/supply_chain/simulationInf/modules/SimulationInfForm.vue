@@ -4,43 +4,43 @@
       <a-form-model ref="form" :model="model" :rules="validatorRules" slot="detail">
         <a-row>
           <a-col :span="24">
-            <a-form-model-item label="一级供应商编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="firstSupplierId">
-              <j-dict-select-tag type="list" v-model="model.firstSupplierId" dictCode="first_supplier_inf,supplier_name,first_supplier_id" placeholder="请选择一级供应商编号" />
+            <a-form-model-item label="仿真编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="simulationId">
+              <a-input v-model="model.simulationId" placeholder="请输入仿真编号"  ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="二级供应商编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="secondSupplierId">
-              <a-input v-model="model.secondSupplierId" placeholder="请输入二级供应商编号"  ></a-input>
+            <a-form-model-item label="仿真目的" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="simulationPurpose">
+              <a-input v-model="model.simulationPurpose" placeholder="请输入仿真目的"  ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="核心部件编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentId">
-              <a-input v-model="model.componentId" placeholder="请输入核心部件编号"  ></a-input>
+            <a-form-model-item label="JF 订单编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="orderId">
+              <a-input v-model="model.orderId" placeholder="请输入JF 订单编号"  ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="采购时间" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="purchaseTime">
-              <j-date placeholder="请选择采购时间" v-model="model.purchaseTime"  style="width: 100%" />
+            <a-form-model-item label="版本" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="smulationVersion">
+              <a-input v-model="model.smulationVersion" placeholder="请输入版本"  ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="采购数量" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="purchaseNum">
-              <a-input-number v-model="model.purchaseNum" placeholder="请输入采购数量" style="width: 100%" />
+            <a-form-model-item label="报告文件" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="reportFileString">
+              <a-input v-model="model.reportFileString" placeholder="请输入报告文件" ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="采购提前期（/天）" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="leadTime">
-              <a-input-number v-model="model.leadTime" placeholder="请输入采购提前期（/天）" style="width: 100%" />
+            <a-form-model-item label="模型文件" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="modelFileString">
+              <a-input v-model="model.modelFileString" placeholder="请输入模型文件" ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="约定交货期限" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="deliveryDate">
-              <j-date placeholder="请选择约定交货期限" v-model="model.deliveryDate"  style="width: 100%" />
+            <a-form-model-item label="仿真时间" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="inputTime">
+              <j-date placeholder="请选择仿真时间" v-model="model.inputTime"  style="width: 100%" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="实际交货日期" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="actualDeliveryTime">
-              <j-date placeholder="请选择实际交货日期" v-model="model.actualDeliveryTime"  style="width: 100%" />
+            <a-form-model-item label="仿真人员编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="stuffId">
+              <a-input v-model="model.stuffId" placeholder="请输入仿真人员编号"  ></a-input>
             </a-form-model-item>
           </a-col>
         </a-row>
@@ -55,7 +55,7 @@
   import { validateDuplicateValue } from '@/utils/util'
 
   export default {
-    name: 'FirstPurchaseFromSecondForm',
+    name: 'SimulationInfForm',
     components: {
     },
     props: {
@@ -80,20 +80,35 @@
         },
         confirmLoading: false,
         validatorRules: {
-           firstSupplierId: [
-              { required: true, message: '请输入一级供应商编号!'},
+           simulationId: [
+              { required: true, message: '请输入仿真编号!'},
            ],
-           secondSupplierId: [
-              { required: true, message: '请输入二级供应商编号!'},
+           simulationPurpose: [
+              { required: true, message: '请输入仿真目的!'},
            ],
-           componentId: [
-              { required: true, message: '请输入核心部件编号!'},
+           orderId: [
+              { required: true, message: '请输入JF 订单编号!'},
+           ],
+           smulationVersion: [
+              { required: true, message: '请输入版本!'},
+           ],
+           reportFile: [
+              { required: true, message: '请输入报告文件!'},
+           ],
+           modelFile: [
+              { required: true, message: '请输入模型文件!'},
+           ],
+           inputTime: [
+              { required: true, message: '请输入仿真时间!'},
+           ],
+           stuffId: [
+              { required: true, message: '请输入仿真人员编号!'},
            ],
         },
         url: {
-          add: "/firstPurchaseFromSecond/firstPurchaseFromSecond/add",
-          edit: "/firstPurchaseFromSecond/firstPurchaseFromSecond/edit",
-          queryById: "/firstPurchaseFromSecond/firstPurchaseFromSecond/queryById"
+          add: "/simulationInf/simulationInf/add",
+          edit: "/simulationInf/simulationInf/edit",
+          queryById: "/simulationInf/simulationInf/queryById"
         }
       }
     },

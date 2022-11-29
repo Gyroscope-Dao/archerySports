@@ -7,7 +7,7 @@
     @close="close"
     destroyOnClose
     :visible="visible">
-    <ept-inf-form ref="realForm" @ok="submitCallback" :disabled="disableSubmit" normal></ept-inf-form>
+    <first-keyprocess-inf-form ref="realForm" @ok="submitCallback" :disabled="disableSubmit" normal></first-keyprocess-inf-form>
     <div class="drawer-footer">
       <a-button @click="handleCancel" style="margin-bottom: 0;">关闭</a-button>
       <a-button v-if="!disableSubmit"  @click="handleOk" type="primary" style="margin-bottom: 0;">提交</a-button>
@@ -17,12 +17,12 @@
 
 <script>
 
-  import EptInfForm from './EptInfForm'
+  import FirstKeyprocessInfForm from './FirstKeyprocessInfForm'
 
   export default {
-    name: 'EptInfModal',
+    name: 'FirstKeyprocessInfModal',
     components: {
-      EptInfForm
+      FirstKeyprocessInfForm
     },
     data () {
       return {
