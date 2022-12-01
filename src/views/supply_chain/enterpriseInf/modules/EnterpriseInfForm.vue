@@ -5,7 +5,7 @@
         <a-row>
           <a-col :span="24">
             <a-form-model-item label="单位编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="etpId">
-              <a-input v-model="model.etpId" placeholder="请输入单位编号"  ></a-input>
+              <a-input v-model="model.etpId" placeholder="请输入单位编号" disabled ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">

@@ -99,6 +99,7 @@
   import { mixinDevice } from '@/utils/mixin'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import OrderdetailModal from './modules/OrderdetailModal'
+  import {filterMultiDictText} from '@/components/dict/JDictSelectUtil'
 
   export default {
     name: 'OrderdetailList',
@@ -124,22 +125,22 @@
           {
             title:'订单编号',
             align:"center",
-            dataIndex: 'orderId'
+            dataIndex: 'orderId_dictText'
           },
           {
-            title:'供应商编号',
+            title:'供应商',
             align:"center",
-            dataIndex: 'firstSupplierId'
+            dataIndex: 'firstSupplierId_dictText'
           },
           {
-            title:'产品编号',
+            title:'产品',
             align:"center",
-            dataIndex: 'productId'
+            dataIndex: 'productId_dictText'
           },
           {
             title:'一级采购编号',
             align:"center",
-            dataIndex: 'firstPurchaseId'
+            dataIndex: 'firstPurchaseId_dictText'
           },
           {
             title:'批次编号',
@@ -200,10 +201,10 @@
       },
       getSuperFieldList(){
         let fieldList=[];
-        fieldList.push({type:'string',value:'orderId',text:'订单编号',dictCode:''})
-        fieldList.push({type:'string',value:'firstSupplierId',text:'供应商编号',dictCode:''})
-        fieldList.push({type:'string',value:'productId',text:'产品编号',dictCode:''})
-        fieldList.push({type:'string',value:'firstPurchaseId',text:'一级采购编号',dictCode:''})
+        fieldList.push({type:'sel_search',value:'orderId',text:'订单编号',dictTable:"order_inf", dictText:'order_id', dictCode:'order_id'})
+        fieldList.push({type:'sel_search',value:'firstSupplierId',text:'供应商',dictTable:"first_supplier_inf", dictText:'supplier_name', dictCode:'first_supplier_id'})
+        fieldList.push({type:'sel_search',value:'productId',text:'产品',dictTable:"product_inf", dictText:'product_name', dictCode:'product_id'})
+        fieldList.push({type:'sel_search',value:'firstPurchaseId',text:'一级采购编号',dictTable:"first_purchase", dictText:'first_supplier_id', dictCode:'first_supplier_id'})
         fieldList.push({type:'string',value:'lotId',text:'批次编号',dictCode:''})
         fieldList.push({type:'int',value:'arrivalQuantity',text:'到货数量',dictCode:''})
         fieldList.push({type:'datetime',value:'arrivalData',text:'到货时间'})

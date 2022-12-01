@@ -99,6 +99,7 @@
   import { mixinDevice } from '@/utils/mixin'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import SecondAbilityInfModal from './modules/SecondAbilityInfModal'
+  import {filterMultiDictText} from '@/components/dict/JDictSelectUtil'
 
   export default {
     name: 'SecondAbilityInfList',
@@ -122,14 +123,14 @@
             }
           },
           {
-            title:'二级供应商编号',
+            title:'二级供应商名称',
             align:"center",
-            dataIndex: 'secondSupplierId'
+            dataIndex: 'secondSupplierId_dictText'
           },
           {
-            title:'核心部件编号',
+            title:'核心部件名称',
             align:"center",
-            dataIndex: 'componentId'
+            dataIndex: 'componentId_dictText'
           },
           {
             title:'库存数量',
@@ -223,8 +224,8 @@
       },
       getSuperFieldList(){
         let fieldList=[];
-        fieldList.push({type:'string',value:'secondSupplierId',text:'二级供应商编号',dictCode:''})
-        fieldList.push({type:'string',value:'componentId',text:'核心部件编号',dictCode:''})
+        fieldList.push({type:'sel_search',value:'secondSupplierId',text:'二级供应商名称',dictTable:"second_supplier_inf", dictText:'supplier_name', dictCode:'second_supplier_id'})
+        fieldList.push({type:'sel_search',value:'componentId',text:'核心部件名称',dictTable:"component_inf", dictText:'component_name', dictCode:'component_id'})
         fieldList.push({type:'int',value:'stockQuantity',text:'库存数量',dictCode:''})
         fieldList.push({type:'int',value:'dailyProductionCapacity',text:'日均产量',dictCode:''})
         fieldList.push({type:'int',value:'checkTime',text:'生产周期（天）',dictCode:''})

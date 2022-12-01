@@ -99,6 +99,7 @@
   import { mixinDevice } from '@/utils/mixin'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import FirstComponentInventoryModal from './modules/FirstComponentInventoryModal'
+  import {filterMultiDictText} from '@/components/dict/JDictSelectUtil'
 
   export default {
     name: 'FirstComponentInventoryList',
@@ -122,14 +123,14 @@
             }
           },
           {
-            title:'核心部件编号',
+            title:'核心部件名称',
             align:"center",
-            dataIndex: 'com1InfId'
+            dataIndex: 'com1InfId_dictText'
           },
           {
-            title:'一级供应商编号',
+            title:'一级供应商名称',
             align:"center",
-            dataIndex: 'firstSupplierId'
+            dataIndex: 'firstSupplierId_dictText'
           },
           {
             title:'库存数量',
@@ -188,8 +189,8 @@
       },
       getSuperFieldList(){
         let fieldList=[];
-        fieldList.push({type:'string',value:'com1InfId',text:'核心部件编号',dictCode:''})
-        fieldList.push({type:'string',value:'firstSupplierId',text:'一级供应商编号',dictCode:''})
+        fieldList.push({type:'sel_search',value:'com1InfId',text:'核心部件名称',dictTable:"component_inf", dictText:'component_name', dictCode:'component_id'})
+        fieldList.push({type:'sel_search',value:'firstSupplierId',text:'一级供应商名称',dictTable:"first_supplier_inf", dictText:'supplier_name', dictCode:'first_supplier_id'})
         fieldList.push({type:'int',value:'stockQuantity',text:'库存数量',dictCode:''})
         fieldList.push({type:'int',value:'purchaseLeadTime',text:'采购周期 （天）',dictCode:''})
         fieldList.push({type:'date',value:'infUpdateTime',text:'录入时间'})

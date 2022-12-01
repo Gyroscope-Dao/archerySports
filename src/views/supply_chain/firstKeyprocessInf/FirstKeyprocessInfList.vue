@@ -99,6 +99,7 @@
   import { mixinDevice } from '@/utils/mixin'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import FirstKeyprocessInfModal from './modules/FirstKeyprocessInfModal'
+  import {filterMultiDictText} from '@/components/dict/JDictSelectUtil'
 
   export default {
     name: 'FirstKeyprocessInfList',
@@ -124,12 +125,12 @@
           {
             title:'产品编码',
             align:"center",
-            dataIndex: 'productId'
+            dataIndex: 'productId_dictText'
           },
           {
-            title:'一级供应商编号',
+            title:'一级供应商',
             align:"center",
-            dataIndex: 'firstSupplierId'
+            dataIndex: 'firstSupplierId_dictText'
           },
           {
             title:'瓶颈工序名称',
@@ -183,8 +184,8 @@
       },
       getSuperFieldList(){
         let fieldList=[];
-        fieldList.push({type:'string',value:'productId',text:'产品编码',dictCode:''})
-        fieldList.push({type:'string',value:'firstSupplierId',text:'一级供应商编号',dictCode:''})
+        fieldList.push({type:'sel_search',value:'productId',text:'产品编码',dictTable:"product_inf", dictText:'product_name', dictCode:'product_id'})
+        fieldList.push({type:'sel_search',value:'firstSupplierId',text:'一级供应商',dictTable:"first_supplier_inf", dictText:'supplier_name', dictCode:'first_supplier_id'})
         fieldList.push({type:'string',value:'keyprocess',text:'瓶颈工序名称',dictCode:''})
         fieldList.push({type:'date',value:'infUpdateTime',text:'录入时间'})
         fieldList.push({type:'string',value:'stuffId',text:'人员编号',dictCode:''})

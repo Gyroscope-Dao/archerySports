@@ -4,13 +4,13 @@
       <a-form-model ref="form" :model="model" :rules="validatorRules" slot="detail">
         <a-row>
           <a-col :span="24">
-            <a-form-model-item label="二级供应商编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="secondSupplierId">
-              <a-input v-model="model.secondSupplierId" placeholder="请输入二级供应商编号"  ></a-input>
+            <a-form-model-item label="二级供应商名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="secondSupplierId">
+              <j-search-select-tag v-model="model.secondSupplierId" dict="second_supplier_inf,supplier_name,second_supplier_id"  />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="核心部件编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentId">
-              <a-input v-model="model.componentId" placeholder="请输入核心部件编号"  ></a-input>
+            <a-form-model-item label="核心部件名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentId">
+              <j-search-select-tag v-model="model.componentId" dict="component_inf,component_name,component_id"  />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -60,12 +60,12 @@
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="录入时间" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="infUpdateTime">
-              <j-date placeholder="请选择录入时间" v-model="model.infUpdateTime"  style="width: 100%" />
+              <j-date placeholder="请选择录入时间" v-model="model.infUpdateTime"  style="width: 100%" disabled/>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="人员编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="stuffId">
-              <a-input v-model="model.stuffId" placeholder="请输入人员编号"  ></a-input>
+              <a-input v-model="model.stuffId" placeholder="请输入人员编号" disabled ></a-input>
             </a-form-model-item>
           </a-col>
         </a-row>
@@ -106,10 +106,10 @@
         confirmLoading: false,
         validatorRules: {
            secondSupplierId: [
-              { required: true, message: '请输入二级供应商编号!'},
+              { required: true, message: '请输入二级供应商名称!'},
            ],
            componentId: [
-              { required: true, message: '请输入核心部件编号!'},
+              { required: true, message: '请输入核心部件名称!'},
            ],
         },
         url: {

@@ -12,7 +12,7 @@
     <!-- 操作按钮区域 -->
     <div class="table-operator">
       <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
-      <a-button type="primary" icon="download" @click="handleExportXls('零件信息')">导出</a-button>
+      <a-button type="primary" icon="download" @click="handleExportXls('核心部件')">导出</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
         <a-button type="primary" icon="import">导入</a-button>
       </a-upload>
@@ -108,7 +108,7 @@
     },
     data () {
       return {
-        description: '零件信息管理页面',
+        description: '核心部件管理页面',
         // 表头
         columns: [
           {

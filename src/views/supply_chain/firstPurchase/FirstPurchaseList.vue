@@ -99,6 +99,7 @@
   import { mixinDevice } from '@/utils/mixin'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import FirstPurchaseModal from './modules/FirstPurchaseModal'
+  import {filterMultiDictText} from '@/components/dict/JDictSelectUtil'
 
   export default {
     name: 'FirstPurchaseList',
@@ -127,14 +128,14 @@
             dataIndex: 'orderId'
           },
           {
-            title:'供应商编号',
+            title:'供应商名称',
             align:"center",
-            dataIndex: 'firstSupplierId'
+            dataIndex: 'firstSupplierId_dictText'
           },
           {
-            title:'产品编号',
+            title:'产品名称',
             align:"center",
-            dataIndex: 'productId'
+            dataIndex: 'productId_dictText'
           },
           {
             title:'一级采购编号',
@@ -144,7 +145,7 @@
           {
             title:'采购瓶颈供应商',
             align:"center",
-            dataIndex: 'bottleneckSid'
+            dataIndex: 'bottleneckSid_dictText'
           },
           {
             title:'采购时间',
@@ -225,10 +226,10 @@
       getSuperFieldList(){
         let fieldList=[];
         fieldList.push({type:'string',value:'orderId',text:'订单编号',dictCode:''})
-        fieldList.push({type:'string',value:'firstSupplierId',text:'供应商编号',dictCode:''})
-        fieldList.push({type:'string',value:'productId',text:'产品编号',dictCode:''})
+        fieldList.push({type:'sel_search',value:'firstSupplierId',text:'供应商名称',dictTable:"first_supplier_inf", dictText:'supplier_name', dictCode:'first_supplier_id'})
+        fieldList.push({type:'sel_search',value:'productId',text:'产品名称',dictTable:"product_inf", dictText:'product_name', dictCode:'product_id'})
         fieldList.push({type:'string',value:'firstPurchaseid',text:'一级采购编号',dictCode:''})
-        fieldList.push({type:'string',value:'bottleneckSid',text:'采购瓶颈供应商',dictCode:''})
+        fieldList.push({type:'sel_search',value:'bottleneckSid',text:'采购瓶颈供应商',dictTable:"first_supplier_inf", dictText:'supplier_name', dictCode:'first_supplier_id'})
         fieldList.push({type:'date',value:'purchaseTime',text:'采购时间'})
         fieldList.push({type:'double',value:'purchasePercent',text:'采购比例',dictCode:''})
         fieldList.push({type:'int',value:'purchaseQuantity',text:'采购数量',dictCode:''})

@@ -5,17 +5,17 @@
         <a-row>
           <a-col :span="24">
             <a-form-model-item label="订单编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="orderId">
-              <a-input v-model="model.orderId" placeholder="请输入订单编号"  ></a-input>
+              <a-input v-model="model.orderId" placeholder="请输入订单编号" disabled ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="供应商编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="firstSupplierId">
-              <a-input v-model="model.firstSupplierId" placeholder="请输入供应商编号"  ></a-input>
+            <a-form-model-item label="供应商名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="firstSupplierId">
+              <j-search-select-tag v-model="model.firstSupplierId" dict="first_supplier_inf,supplier_name,first_supplier_id"  />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="产品编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="productId">
-              <a-input v-model="model.productId" placeholder="请输入产品编号"  ></a-input>
+            <a-form-model-item label="产品名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="productId">
+              <j-search-select-tag v-model="model.productId" dict="product_inf,product_name,product_id"  />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -89,10 +89,10 @@
               { required: true, message: '请输入订单编号!'},
            ],
            firstSupplierId: [
-              { required: true, message: '请输入供应商编号!'},
+              { required: true, message: '请输入供应商名称!'},
            ],
            productId: [
-              { required: true, message: '请输入产品编号!'},
+              { required: true, message: '请输入产品名称!'},
            ],
            firstPurchaseId: [
               { required: true, message: '请输入一级采购编号!'},

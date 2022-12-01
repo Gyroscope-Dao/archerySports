@@ -5,7 +5,7 @@
         <a-row>
           <a-col :span="24">
             <a-form-model-item label="二级供应商编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="secondSupplierId">
-              <a-input v-model="model.secondSupplierId" placeholder="请输入二级供应商编号"  ></a-input>
+              <a-input v-model="model.secondSupplierId" placeholder="请输入二级供应商编号" disabled ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -60,12 +60,12 @@
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="录入时间" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="infUpdateTime">
-              <j-date placeholder="请选择录入时间" v-model="model.infUpdateTime"  style="width: 100%" />
+              <j-date placeholder="请选择录入时间" v-model="model.infUpdateTime"  style="width: 100%" disabled/>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="员工编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="stuffId">
-              <a-input v-model="model.stuffId" placeholder="请输入员工编号"  ></a-input>
+              <a-input v-model="model.stuffId" placeholder="请输入员工编号" disabled ></a-input>
             </a-form-model-item>
           </a-col>
         </a-row>

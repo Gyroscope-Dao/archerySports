@@ -193,19 +193,17 @@
             dataIndex: 'bankAccount'
           },
           {
-            title:'往来单位信息id',
+            title:'往来单位信息名称',
             align:"center",
-            dataIndex: 'eptId'
+            dataIndex: 'eptId_dictText'
           },
           {
             title:'录入时间',
             align:"center",
-            dataIndex: 'infUpdateTime'
-          },
-          {
-            title:'人员编号',
-            align:"center",
-            dataIndex: 'stuffId'
+            dataIndex: 'infUpdateTime',
+            customRender:function (text) {
+              return !text?"":(text.length>10?text.substr(0,10):text)
+            }
           },
           {
             title:'是否生产瓶颈供应商',
@@ -226,6 +224,11 @@
             title:'企业征信',
             align:"center",
             dataIndex: 'corporateCredit'
+          },
+          {
+            title:'人员编号',
+            align:"center",
+            dataIndex: 'stuffId'
           },
           {
             title: '操作',
@@ -275,13 +278,13 @@
         fieldList.push({type:'string',value:'postCode',text:'邮编',dictCode:''})
         fieldList.push({type:'string',value:'bankName',text:'开户行名称',dictCode:''})
         fieldList.push({type:'string',value:'bankAccount',text:'开户账号',dictCode:''})
-        fieldList.push({type:'string',value:'eptId',text:'往来单位信息id',dictCode:''})
-        fieldList.push({type:'datetime',value:'infUpdateTime',text:'录入时间'})
-        fieldList.push({type:'string',value:'stuffId',text:'人员编号',dictCode:''})
+        fieldList.push({type:'sel_search',value:'eptId',text:'往来单位信息名称',dictTable:"enterprise_inf", dictText:'ept_name', dictCode:'etp_id'})
+        fieldList.push({type:'date',value:'infUpdateTime',text:'录入时间'})
         fieldList.push({type:'int',value:'isProduct',text:'是否生产瓶颈供应商',dictCode:'yn'})
         fieldList.push({type:'int',value:'isPurchase',text:'是否采购瓶颈供应商',dictCode:'yn'})
         fieldList.push({type:'int',value:'estabYear',text:'成立年份',dictCode:''})
         fieldList.push({type:'string',value:'corporateCredit',text:'企业征信',dictCode:''})
+        fieldList.push({type:'string',value:'stuffId',text:'人员编号',dictCode:''})
         this.superFieldList = fieldList
       }
     }

@@ -5,7 +5,7 @@
         <a-row>
           <a-col :span="24">
             <a-form-model-item label="部件编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentId">
-              <a-input v-model="model.componentId" placeholder="请输入部件编号"  ></a-input>
+              <a-input v-model="model.componentId" placeholder="请输入部件编号" disabled ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">

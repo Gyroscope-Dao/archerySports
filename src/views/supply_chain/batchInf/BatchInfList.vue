@@ -99,6 +99,7 @@
   import { mixinDevice } from '@/utils/mixin'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import BatchInfModal from './modules/BatchInfModal'
+  import {filterMultiDictText} from '@/components/dict/JDictSelectUtil'
 
   export default {
     name: 'BatchInfList',
@@ -127,14 +128,14 @@
             dataIndex: 'orderId'
           },
           {
-            title:'供应商编号',
+            title:'供应商名称',
             align:"center",
-            dataIndex: 'firstSupplierId'
+            dataIndex: 'firstSupplierId_dictText'
           },
           {
-            title:'产品编号',
+            title:'产品名称',
             align:"center",
-            dataIndex: 'productId'
+            dataIndex: 'productId_dictText'
           },
           {
             title:'一级采购编号',
@@ -204,8 +205,8 @@
       getSuperFieldList(){
         let fieldList=[];
         fieldList.push({type:'string',value:'orderId',text:'订单编号',dictCode:''})
-        fieldList.push({type:'string',value:'firstSupplierId',text:'供应商编号',dictCode:''})
-        fieldList.push({type:'string',value:'productId',text:'产品编号',dictCode:''})
+        fieldList.push({type:'sel_search',value:'firstSupplierId',text:'供应商名称',dictTable:"first_supplier_inf", dictText:'supplier_name', dictCode:'first_supplier_id'})
+        fieldList.push({type:'sel_search',value:'productId',text:'产品名称',dictTable:"product_inf", dictText:'product_name', dictCode:'product_id'})
         fieldList.push({type:'string',value:'firstPurchaseId',text:'一级采购编号',dictCode:''})
         fieldList.push({type:'string',value:'lotId',text:'批次编号',dictCode:''})
         fieldList.push({type:'int',value:'arrivalQuantity',text:'到货数量',dictCode:''})

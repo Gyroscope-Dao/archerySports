@@ -99,6 +99,7 @@
   import { mixinDevice } from '@/utils/mixin'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import FirstAbilityInfModal from './modules/FirstAbilityInfModal'
+  import {filterMultiDictText} from '@/components/dict/JDictSelectUtil'
 
   export default {
     name: 'FirstAbilityInfList',
@@ -122,14 +123,14 @@
             }
           },
           {
-            title:'一级供应商编号',
+            title:'一级供应商名称',
             align:"center",
-            dataIndex: 'firstSupplierId'
+            dataIndex: 'firstSupplierId_dictText'
           },
           {
-            title:'产品编号',
+            title:'产品名称',
             align:"center",
-            dataIndex: 'productId'
+            dataIndex: 'productId_dictText'
           },
           {
             title:'产品库存',
@@ -230,8 +231,8 @@
       },
       getSuperFieldList(){
         let fieldList=[];
-        fieldList.push({type:'string',value:'firstSupplierId',text:'一级供应商编号',dictCode:''})
-        fieldList.push({type:'string',value:'productId',text:'产品编号',dictCode:''})
+        fieldList.push({type:'sel_search',value:'firstSupplierId',text:'一级供应商名称',dictTable:"first_supplier_inf", dictText:'supplier_name', dictCode:'first_supplier_id'})
+        fieldList.push({type:'sel_search',value:'productId',text:'产品名称',dictTable:"product_inf", dictText:'product_name', dictCode:'product_id'})
         fieldList.push({type:'int',value:'productStock',text:'产品库存',dictCode:''})
         fieldList.push({type:'int',value:'productionLot',text:'生产批量',dictCode:''})
         fieldList.push({type:'int',value:'dayProLot',text:'日均产量',dictCode:''})

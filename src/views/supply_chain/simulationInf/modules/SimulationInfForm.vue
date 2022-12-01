@@ -5,7 +5,7 @@
         <a-row>
           <a-col :span="24">
             <a-form-model-item label="仿真编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="simulationId">
-              <a-input v-model="model.simulationId" placeholder="请输入仿真编号"  ></a-input>
+              <a-input v-model="model.simulationId" placeholder="请输入仿真编号" disabled ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -40,7 +40,7 @@
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="仿真人员编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="stuffId">
-              <a-input v-model="model.stuffId" placeholder="请输入仿真人员编号"  ></a-input>
+              <a-input v-model="model.stuffId" placeholder="请输入仿真人员编号" disabled ></a-input>
             </a-form-model-item>
           </a-col>
         </a-row>

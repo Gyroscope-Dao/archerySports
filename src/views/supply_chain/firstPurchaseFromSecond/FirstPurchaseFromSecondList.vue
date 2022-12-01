@@ -130,7 +130,7 @@
           {
             title:'二级供应商编号',
             align:"center",
-            dataIndex: 'secondSupplierId'
+            dataIndex: 'secondSupplierId_dictText'
           },
           {
             title:'核心部件编号',
@@ -205,8 +205,8 @@
       },
       getSuperFieldList(){
         let fieldList=[];
-        fieldList.push({type:'string',value:'firstSupplierId',text:'一级供应商编号',dictCode:"first_supplier_inf,supplier_name,first_supplier_id"})
-        fieldList.push({type:'string',value:'secondSupplierId',text:'二级供应商编号',dictCode:''})
+        fieldList.push({type:'sel_search',value:'firstSupplierId',text:'一级供应商编号',dictTable:"first_supplier_inf", dictText:'supplier_name', dictCode:'first_supplier_id'})
+        fieldList.push({type:'sel_search',value:'secondSupplierId',text:'二级供应商编号',dictTable:"second_supplier_inf", dictText:'supplier_name', dictCode:'second_supplier_id'})
         fieldList.push({type:'string',value:'componentId',text:'核心部件编号',dictCode:''})
         fieldList.push({type:'date',value:'purchaseTime',text:'采购时间'})
         fieldList.push({type:'int',value:'purchaseNum',text:'采购数量',dictCode:''})

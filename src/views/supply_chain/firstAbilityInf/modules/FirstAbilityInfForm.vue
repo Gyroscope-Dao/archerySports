@@ -4,13 +4,13 @@
       <a-form-model ref="form" :model="model" :rules="validatorRules" slot="detail">
         <a-row>
           <a-col :span="24">
-            <a-form-model-item label="一级供应商编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="firstSupplierId">
-              <a-input v-model="model.firstSupplierId" placeholder="请输入一级供应商编号"  ></a-input>
+            <a-form-model-item label="一级供应商名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="firstSupplierId">
+              <j-search-select-tag v-model="model.firstSupplierId" dict="first_supplier_inf,supplier_name,first_supplier_id"  />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="产品编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="productId">
-              <a-input v-model="model.productId" placeholder="请输入产品编号"  ></a-input>
+            <a-form-model-item label="产品名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="productId">
+              <j-search-select-tag v-model="model.productId" dict="product_inf,product_name,product_id"  />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -70,12 +70,12 @@
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="录入时间" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="firstAbilityIntUpdateTime">
-              <a-input v-model="model.firstAbilityIntUpdateTime" placeholder="请输入录入时间"  ></a-input>
+              <a-input v-model="model.firstAbilityIntUpdateTime" placeholder="请输入录入时间" disabled ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="人员编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="stuffId">
-              <a-input v-model="model.stuffId" placeholder="请输入人员编号"  ></a-input>
+              <a-input v-model="model.stuffId" placeholder="请输入人员编号" disabled ></a-input>
             </a-form-model-item>
           </a-col>
         </a-row>
@@ -116,10 +116,10 @@
         confirmLoading: false,
         validatorRules: {
            firstSupplierId: [
-              { required: true, message: '请输入一级供应商编号!'},
+              { required: true, message: '请输入一级供应商名称!'},
            ],
            productId: [
-              { required: true, message: '请输入产品编号!'},
+              { required: true, message: '请输入产品名称!'},
            ],
            productStock: [
               { required: true, message: '请输入产品库存!'},

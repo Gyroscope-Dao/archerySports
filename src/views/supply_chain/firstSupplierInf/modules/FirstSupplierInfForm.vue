@@ -5,7 +5,7 @@
         <a-row>
           <a-col :span="24">
             <a-form-model-item label="一级供应商编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="firstSupplierId">
-              <a-input v-model="model.firstSupplierId" placeholder="请输入一级供应商编号"  ></a-input>
+              <a-input v-model="model.firstSupplierId" placeholder="请输入一级供应商编号" disabled ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -74,13 +74,13 @@
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="往来单位信息id" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="eptId">
-              <a-input v-model="model.eptId" placeholder="请输入往来单位信息id"  ></a-input>
+            <a-form-model-item label="往来单位信息名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="eptId">
+              <j-search-select-tag v-model="model.eptId" dict="enterprise_inf,ept_name,etp_id"  />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="录入时间" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="infUpdateTime">
-              <j-date placeholder="请选择录入时间"  v-model="model.infUpdateTime" :show-time="true" date-format="YYYY-MM-DD HH:mm:ss" style="width: 100%" />
+              <j-date placeholder="请选择录入时间" v-model="model.infUpdateTime"  style="width: 100%" disabled/>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -101,6 +101,11 @@
           <a-col :span="24">
             <a-form-model-item label="企业征信" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="corporateCredit">
               <a-input v-model="model.corporateCredit" placeholder="请输入企业征信"  ></a-input>
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-model-item label="人员编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="stuffId">
+              <a-input v-model="model.stuffId" placeholder="请输入人员编号" disabled ></a-input>
             </a-form-model-item>
           </a-col>
         </a-row>
@@ -180,7 +185,7 @@
               { required: true, message: '请输入开户账号!'},
            ],
            eptId: [
-              { required: true, message: '请输入往来单位信息id!'},
+              { required: true, message: '请输入往来单位信息名称!'},
            ],
            infUpdateTime: [
               { required: true, message: '请输入录入时间!'},
@@ -196,6 +201,9 @@
            ],
            corporateCredit: [
               { required: true, message: '请输入企业征信!'},
+           ],
+           stuffId: [
+              { required: true, message: '请输入人员编号!'},
            ],
         },
         url: {
