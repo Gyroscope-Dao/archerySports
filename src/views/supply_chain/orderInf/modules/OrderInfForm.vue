@@ -24,8 +24,8 @@
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="录入时间" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="orderUpdateTime">
-              <j-date placeholder="请选择录入时间" v-model="model.orderUpdateTime"  style="width: 100%" disabled/>
+            <a-form-model-item label="录入时间" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="infUpdateTime">
+              <j-date placeholder="请选择录入时间" v-model="model.infUpdateTime"  style="width: 100%" disabled/>
             </a-form-model-item>
           </a-col>
         </a-row>
@@ -38,6 +38,7 @@
 
   import { httpAction, getAction } from '@/api/manage'
   import { validateDuplicateValue } from '@/utils/util'
+  import { getFirstSupplierId,getTime,getStuffId,getSimulationId,getEtpId,getOrderId,getLotId,getProductId,getComponentId,getSecondSupplierId } from '@/utils/generateRule'
 
   export default {
     name: 'OrderInfForm',
@@ -54,6 +55,10 @@
     data () {
       return {
         model:{
+          orderId: '',
+          stuffId: '',
+          infUpdateTime: '',
+          
          },
         labelCol: {
           xs: { span: 24 },
@@ -77,7 +82,7 @@
            stuffId: [
               { required: true, message: '请输入员工编号!'},
            ],
-           orderUpdateTime: [
+           infUpdateTime: [
               { required: true, message: '请输入录入时间!'},
            ],
         },
@@ -96,6 +101,10 @@
     created () {
        //备份model原始值
       this.modelDefault = JSON.parse(JSON.stringify(this.model));
+      getOrderId(this);
+      getStuffId(this);
+      getTime(this);
+      
     },
     methods: {
       add () {

@@ -78,6 +78,7 @@
 
   import { httpAction, getAction } from '@/api/manage'
   import { validateDuplicateValue } from '@/utils/util'
+  import { getFirstSupplierId,getTime,getStuffId,getSimulationId,getEtpId,getOrderId,getLotId,getProductId,getComponentId,getSecondSupplierId } from '@/utils/generateRule'
 
   export default {
     name: 'SecondAbilityInfForm',
@@ -94,6 +95,8 @@
     data () {
       return {
         model:{
+          infUpdateTime: '',
+          stuffId: '',
          },
         labelCol: {
           xs: { span: 24 },
@@ -131,6 +134,8 @@
     methods: {
       add () {
         this.edit(this.modelDefault);
+        getTime(this);
+        getStuffId(this);
       },
       edit (record) {
         this.model = Object.assign({}, record);

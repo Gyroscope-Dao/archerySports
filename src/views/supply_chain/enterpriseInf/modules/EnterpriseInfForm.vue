@@ -83,6 +83,7 @@
 
   import { httpAction, getAction } from '@/api/manage'
   import { validateDuplicateValue } from '@/utils/util'
+  import { getFirstSupplierId,getTime,getStuffId,getSimulationId,getEtpId,getOrderId,getLotId,getProductId,getComponentId,getSecondSupplierId } from '@/utils/generateRule'
 
   export default {
     name: 'EnterpriseInfForm',
@@ -99,6 +100,7 @@
     data () {
       return {
         model:{
+          etpId: '',
          },
         labelCol: {
           xs: { span: 24 },
@@ -168,6 +170,7 @@
     created () {
        //备份model原始值
       this.modelDefault = JSON.parse(JSON.stringify(this.model));
+      getEtpId(this);
     },
     methods: {
       add () {
