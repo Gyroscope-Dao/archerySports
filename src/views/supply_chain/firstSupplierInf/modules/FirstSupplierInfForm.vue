@@ -121,7 +121,7 @@ import { httpAction, getAction } from '@/api/manage'
 import { validateDuplicateValue } from '@/utils/util'
 import { putAction } from '@api/manage'
 import { thru } from 'lodash'
-import { getFirstSupplierId, getTime, getStuffId} from '@/utils/generateRule.js'
+import { getFirstSupplierId,getTime,getStuffId,getSimulationId,getEtpId,getOrderId,getLotId,getProductId,getComponentId,getSecondSupplierId } from '@/utils/generateRule'
 
 
 export default {
