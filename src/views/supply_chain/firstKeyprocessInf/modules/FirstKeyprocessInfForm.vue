@@ -38,6 +38,7 @@
 
   import { httpAction, getAction } from '@/api/manage'
   import { validateDuplicateValue } from '@/utils/util'
+  import { getFirstSupplierId,getTime,getStuffId,getSimulationId,getEtpId,getOrderId,getLotId,getProductId,getComponentId,getSecondSupplierId } from '@/utils/generateRule'
 
   export default {
     name: 'FirstKeyprocessInfForm',
@@ -54,6 +55,7 @@
     data () {
       return {
         model:{
+          stuffId: '',
          },
         labelCol: {
           xs: { span: 24 },
@@ -90,6 +92,7 @@
     created () {
        //备份model原始值
       this.modelDefault = JSON.parse(JSON.stringify(this.model));
+      getStuffId(this);
     },
     methods: {
       add () {

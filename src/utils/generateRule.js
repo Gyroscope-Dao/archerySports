@@ -44,7 +44,7 @@ export function getStuffId(obj) {
 export function getSimulationId(obj) {
   putAction(url.rule.first_supplierId_rule, obj.model).then(res => {
     if (res.success) {
-      obj.model.firstSupplierId = res.result
+      obj.model.simulationId = res.result
     }
   })
 }

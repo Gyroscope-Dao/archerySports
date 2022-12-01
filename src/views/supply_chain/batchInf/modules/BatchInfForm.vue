@@ -58,6 +58,7 @@
 
   import { httpAction, getAction } from '@/api/manage'
   import { validateDuplicateValue } from '@/utils/util'
+  import { getFirstSupplierId,getTime,getStuffId,getSimulationId,getEtpId,getOrderId,getLotId,getProductId,getComponentId,getSecondSupplierId } from '@/utils/generateRule'
 
   export default {
     name: 'BatchInfForm',
@@ -74,6 +75,8 @@
     data () {
       return {
         model:{
+          orderId: '',
+
          },
         labelCol: {
           xs: { span: 24 },
@@ -125,6 +128,7 @@
     created () {
        //备份model原始值
       this.modelDefault = JSON.parse(JSON.stringify(this.model));
+      getOrderId(this);
     },
     methods: {
       add () {

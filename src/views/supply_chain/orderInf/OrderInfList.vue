@@ -150,7 +150,7 @@
           {
             title:'录入时间',
             align:"center",
-            dataIndex: 'orderUpdateTime',
+            dataIndex: 'infUpdateTime',
             customRender:function (text) {
               return !text?"":(text.length>10?text.substr(0,10):text)
             }
@@ -193,7 +193,7 @@
         fieldList.push({type:'date',value:'deliveryDate',text:'交货期'})
         fieldList.push({type:'date',value:'realDeliveryDate',text:'实际交货期'})
         fieldList.push({type:'string',value:'stuffId',text:'员工编号',dictCode:''})
-        fieldList.push({type:'date',value:'orderUpdateTime',text:'录入时间'})
+        fieldList.push({type:'date',value:'infUpdateTime',text:'录入时间'})
         this.superFieldList = fieldList
       }
     }
