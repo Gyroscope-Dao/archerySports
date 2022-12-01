@@ -121,7 +121,7 @@ Docker镜像启动前端（单体模式）
   docker run --name jeecgboot-ui-vue2 -p 80:80 -d jeecgboot-ui2
 
 # 6.访问前台项目
-  http://localhost
+  http://123.57.0.23
 ``` 
 
 
