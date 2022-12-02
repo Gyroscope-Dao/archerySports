@@ -1,6 +1,6 @@
 <template>
   <div class="page-header-index-wide">
-    <a-row :gutter="24">
+    <!-- <a-row :gutter="24">
       <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
         <chart-card :loading="loading" title="总销售额" total="￥126,560">
           <a-tooltip title="指标说明" slot="action">
@@ -131,7 +131,7 @@
           <line-chart-multid :fields="visitFields" :dataSource="visitInfo"></line-chart-multid>
         </a-card>
       </a-col>
-    </a-row>
+    </a-row> -->
   </div>
 </template>
 
@@ -218,6 +218,11 @@
 </script>
 
 <style lang="less" scoped>
+.page-header-index-wide {
+  height: 700px;
+  background: url("../../assets/bgc.jpeg") no-repeat;
+  background-size: contain;
+}
   .circle-cust{
     position: relative;
     top: 28px;

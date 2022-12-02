@@ -63,7 +63,7 @@ export default {
     width: 100%;
     min-height: 100%;
     // background: url(~@/assets/login-box-bg.jpg) no-repeat;
-    background: url('../../assets/gather/bgc.jpeg')  no-repeat;
+    background: url('../../assets/bgc1.jpeg')  no-repeat;
     background-size: 100%;
     padding-top: 110px;
     position: relative;
