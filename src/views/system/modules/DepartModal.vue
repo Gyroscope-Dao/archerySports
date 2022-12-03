@@ -15,7 +15,7 @@
         <a-form-model-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="机构名称"
+          label="机构/部门名称"
           prop="departName"
           :hidden="false"
           hasFeedback >

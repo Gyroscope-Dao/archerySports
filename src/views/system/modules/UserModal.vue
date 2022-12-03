@@ -119,9 +119,9 @@
           <a-input placeholder="请输入座机" v-model="model.telephone" />
         </a-form-model-item>
 
-        <a-form-model-item label="工作流引擎" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <j-dict-select-tag  v-model="model.activitiSync"  placeholder="请选择是否同步工作流引擎" :type="'radio'" dictCode="activiti_sync"/>
-        </a-form-model-item>
+<!--        <a-form-model-item label="工作流引擎" :labelCol="labelCol" :wrapperCol="wrapperCol">-->
+<!--          <j-dict-select-tag  v-model="model.activitiSync"  placeholder="请选择是否同步工作流引擎" :type="'radio'" dictCode="activiti_sync"/>-->
+<!--        </a-form-model-item>-->
 
       </a-form-model>
     </a-spin>

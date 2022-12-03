@@ -69,8 +69,8 @@
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="录入时间" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="firstAbilityIntUpdateTime">
-              <a-input v-model="model.firstAbilityIntUpdateTime" placeholder="请输入录入时间" disabled ></a-input>
+            <a-form-model-item label="录入时间" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="infUpdateTime">
+              <a-input v-model="model.infUpdateTime" placeholder="请输入录入时间" disabled ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -105,7 +105,7 @@
     data () {
       return {
         model:{
-          firstAbilityIntUpdateTime: '',
+          infUpdateTime: '',
           stuffId: '',
          },
         labelCol: {
@@ -210,7 +210,7 @@
               that.confirmLoading = false;
             })
           }
-         
+
         })
       },
     }
