@@ -40,8 +40,8 @@
           <a-input placeholder="请输入用户姓名" v-model="model.realname" />
         </a-form-model-item>
 
-        <a-form-model-item label="工号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="workNo">
-          <a-input placeholder="请输入工号" v-model="model.workNo" />
+        <a-form-model-item label="工号"  :labelCol="labelCol" :wrapperCol="wrapperCol" prop="workNo">
+          <a-input placeholder="请输入工号" v-model="model.username" disabled="disabled" />
         </a-form-model-item>
 
         <a-form-model-item label="手机号码" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="phone">
@@ -178,7 +178,10 @@
         departIdShow:false,
         title:"操作",
         visible: false,
-        model: {},
+        model: {
+          username: "",
+          workNo: ""
+        },
         labelCol: {
           xs: { span: 24 },
           sm: { span: 5 },
@@ -214,6 +217,9 @@
       }
     },
     methods: {
+      workNo () {
+        this.model.workNo = this.model.username
+      },
       add () {
         this.refresh();
         this.edit({activitiSync:'1',userIdentity:1});
@@ -334,6 +340,7 @@
       moment,
       handleSubmit () {
         const that = this;
+        that.workNo();
         // 触发表单验证
         this.$refs.form.validate(valid => {
           if (valid) {
