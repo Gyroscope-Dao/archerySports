@@ -137,9 +137,9 @@
             </a-empty>
           </a-card>
         </a-tab-pane>
-        <a-tab-pane tab="部门权限" key="2" forceRender>
-          <depart-auth-modal ref="departAuth"/>
-        </a-tab-pane>
+<!--        <a-tab-pane tab="部门权限" key="2" forceRender>-->
+<!--          <depart-auth-modal ref="departAuth"/>-->
+<!--        </a-tab-pane>-->
       </a-tabs>
 
     </a-col>
@@ -445,7 +445,7 @@
             //update-begin---author:wangshuai ---date:20200308  for：[JTC-119]在部门管理菜单下设置部门负责人
             this.currSelected.oldDirectorUserIds = this.oldDirectorUserIds
             //update-end---author:wangshuai ---date:20200308  for：[JTC-119]在部门管理菜单下设置部门负责人
-            
+
             httpAction(this.url.edit, this.currSelected, 'put').then((res) => {
               if (res.success) {
                 this.$message.success('保存成功!')
@@ -565,7 +565,7 @@
         }
       }
       //---- author:os_chengtgen -- date:20190827 --  for:切换父子勾选模式 =======------
-      
+
     },
     created() {
       this.currFlowId = this.$route.params.id
