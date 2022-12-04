@@ -4,7 +4,7 @@
       <a-form-model ref="form" :model="model" :rules="validatorRules" slot="detail">
         <a-row>
           <a-col :span="24">
-            <a-form-model-item label="产品编码" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="productId">
+            <a-form-model-item label="产品名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="productId">
               <j-search-select-tag v-model="model.productId" dict="product_inf,product_name,product_id"  />
             </a-form-model-item>
           </a-col>
@@ -128,7 +128,7 @@
               that.confirmLoading = false;
             })
           }
-         
+
         })
       },
     }

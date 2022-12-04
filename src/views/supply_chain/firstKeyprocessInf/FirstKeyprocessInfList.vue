@@ -123,7 +123,7 @@
             }
           },
           {
-            title:'产品编码',
+            title:'产品名称',
             align:"center",
             dataIndex: 'productId_dictText'
           },
@@ -165,7 +165,7 @@
           deleteBatch: "/firstKeyprocessInf/firstKeyprocessInf/deleteBatch",
           exportXlsUrl: "/firstKeyprocessInf/firstKeyprocessInf/exportXls",
           importExcelUrl: "firstKeyprocessInf/firstKeyprocessInf/importExcel",
-          
+
         },
         dictOptions:{},
         superFieldList:[],

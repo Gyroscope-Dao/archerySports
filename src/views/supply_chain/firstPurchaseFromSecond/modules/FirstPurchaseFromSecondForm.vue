@@ -4,12 +4,12 @@
       <a-form-model ref="form" :model="model" :rules="validatorRules" slot="detail">
         <a-row>
           <a-col :span="24">
-            <a-form-model-item label="一级供应商编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="firstSupplierId">
+            <a-form-model-item label="一级供应商名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="firstSupplierId">
               <j-search-select-tag v-model="model.firstSupplierId" dict="first_supplier_inf,supplier_name,first_supplier_id"  />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="二级供应商编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="secondSupplierId">
+            <a-form-model-item label="二级供应商名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="secondSupplierId">
               <j-search-select-tag v-model="model.secondSupplierId" dict="second_supplier_inf,supplier_name,second_supplier_id"  />
             </a-form-model-item>
           </a-col>
@@ -140,7 +140,7 @@
               that.confirmLoading = false;
             })
           }
-         
+
         })
       },
     }
