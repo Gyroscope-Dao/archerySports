@@ -112,7 +112,7 @@
         // 表头
         columns: [
           {
-            title: '#',
+            title: '序号',
             dataIndex: '',
             key:'rowIndex',
             width:60,
@@ -166,7 +166,7 @@
           deleteBatch: "/productInf/productInf/deleteBatch",
           exportXlsUrl: "/productInf/productInf/exportXls",
           importExcelUrl: "productInf/productInf/importExcel",
-          
+
         },
         dictOptions:{},
         superFieldList:[],

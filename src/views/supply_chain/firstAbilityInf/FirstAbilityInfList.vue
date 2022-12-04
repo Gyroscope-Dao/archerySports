@@ -178,7 +178,7 @@
             dataIndex: 'checkTimeD'
           },
           {
-            title:'检验周期（天）逻辑 关系',
+            title:'检验周期（天）逻辑关系',
             align:"center",
             dataIndex: 'transportTimeDescription'
           },
@@ -212,7 +212,7 @@
           deleteBatch: "/firstAbilityInf/firstAbilityInf/deleteBatch",
           exportXlsUrl: "/firstAbilityInf/firstAbilityInf/exportXls",
           importExcelUrl: "firstAbilityInf/firstAbilityInf/importExcel",
-          
+
         },
         dictOptions:{},
         superFieldList:[],

@@ -123,12 +123,12 @@
             }
           },
           {
-            title:'一级供应商编号',
+            title:'一级供应商名称',
             align:"center",
             dataIndex: 'firstSupplierId_dictText'
           },
           {
-            title:'二级供应商编号',
+            title:'二级供应商名称',
             align:"center",
             dataIndex: 'secondSupplierId_dictText'
           },
@@ -186,7 +186,7 @@
           deleteBatch: "/firstPurchaseFromSecond/firstPurchaseFromSecond/deleteBatch",
           exportXlsUrl: "/firstPurchaseFromSecond/firstPurchaseFromSecond/exportXls",
           importExcelUrl: "firstPurchaseFromSecond/firstPurchaseFromSecond/importExcel",
-          
+
         },
         dictOptions:{},
         superFieldList:[],

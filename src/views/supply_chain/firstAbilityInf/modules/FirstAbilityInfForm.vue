@@ -59,8 +59,8 @@
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="检验周期（天）逻辑 关系" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="transportTimeDescription">
-              <a-input v-model="model.transportTimeDescription" placeholder="请输入检验周期（天）逻辑 关系"  ></a-input>
+            <a-form-model-item label="检验周期（天）逻辑关系" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="transportTimeDescription">
+              <a-input v-model="model.transportTimeDescription" placeholder="请输入检验周期（天）逻辑关系"  ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
