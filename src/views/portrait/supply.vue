@@ -97,7 +97,7 @@
           <a-button @click="back" type="primary" :loading="confirmLoading">确定</a-button>
         </div>
       </div>
-    </div>  
+    </div>
   </div>
 </template>
 
@@ -135,7 +135,7 @@ export default {
   methods: {
     // 获取基本信息
     getBasis() {
-      var url = '/portrayal/queryById'
+      var url = '/portrayal/baseInf'
       getAction(url, { id: this.query.id, FirstSupplier: this.query.FirstSupplier }).then((res) => {
         this.basisData = res.result
         this.productData = this.basisData.productList[0]
