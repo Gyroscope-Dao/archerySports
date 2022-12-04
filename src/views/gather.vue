@@ -15,34 +15,34 @@
       <div class="title">联动保供平台</div>
       <div class="content">
         <div class="btn btn1" @click="toIndex">联动保供管理系统</div>
-        <div class="btn btn2">供应商画像系统</div>
-        <div class="btn btn3">联动保供平台</div>
+        <div class="btn btn2" @click="toImage">供应商画像系统</div>
+        <div class="btn btn3" @click="toImage1">联动保供平台</div>
       </div>
     </div>
 
     <div class="bootom">
       <div class="item">
-        <img src="../assets/gather/icon/shizhong.png" alt="">
+        <img src="../assets/gather/icon/shizhong.png" alt="" />
         <span>供应商保供数据库</span>
       </div>
       <div class="item">
-        <img src="../assets/gather/icon/aixin.png" alt="">
+        <img src="../assets/gather/icon/aixin.png" alt="" />
         <span>供应链仿真</span>
       </div>
       <div class="item">
-        <img src="../assets/gather/icon/qiche.png" alt="">
+        <img src="../assets/gather/icon/qiche.png" alt="" />
         <span>智能计划管理</span>
       </div>
       <div class="item">
-        <img src="../assets/gather/icon/shafa.png" alt="">
+        <img src="../assets/gather/icon/shafa.png" alt="" />
         <span>智能调度管理</span>
       </div>
       <div class="item">
-        <img src="../assets/gather/icon/bijiben.png" alt="">
+        <img src="../assets/gather/icon/bijiben.png" alt="" />
         <span>装线箱实时监控</span>
       </div>
       <div class="item">
-        <img src="../assets/gather/icon/xiangbao.png" alt="">
+        <img src="../assets/gather/icon/xiangbao.png" alt="" />
         <span>装箱计划仿真</span>
       </div>
     </div>
@@ -51,15 +51,27 @@
 
 <script>
 export default {
-  name: "integration",
+  name: 'integration',
   methods: {
     toIndex() {
       this.$router.push({
-        path: '/dashboard/analysis'
+        path: '/dashboard/analysis',
       })
-    }
-  }
-};
+    },
+    toImage() {
+      let routeData = this.$router.resolve({
+        path: '/portrait/index',
+      })
+      window.open(routeData.href, '_blank')
+    },
+    toImage1() {
+      let routeData = this.$router.resolve({
+        path: '/portrait/supply',
+      })
+      window.open(routeData.href, '_blank')
+    },
+  },
+}
 </script>
 
 <style lang="less" scoped>
@@ -75,7 +87,6 @@ export default {
     align-items: center;
     background-color: #fff;
 
-
     .left {
       display: flex;
       align-items: center;
@@ -83,7 +94,7 @@ export default {
         width: 60px;
         height: 60px;
       }
-      .logotitle { 
+      .logotitle {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -111,7 +122,7 @@ export default {
       text-align: center;
       padding-top: 100px;
       font-size: 50px;
-      color: #20AEE4;
+      color: #20aee4;
     }
     .content {
       display: flex;
@@ -151,12 +162,12 @@ export default {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    
-    .item { 
+
+    .item {
       display: flex;
       flex-direction: column;
       align-items: center;
-      color:  #553BB1;
+      color: #553bb1;
 
       img {
         width: 45px;

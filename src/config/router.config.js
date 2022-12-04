@@ -303,6 +303,23 @@ export const asyncRouterMap = [
  */
 export const constantRouterMap = [
   {
+    path: '/portrait',
+    name: 'portrait',
+    component: TabGeter,
+    children: [
+      {
+        path: 'index',
+        name: 'portraitIndex',
+        component: () => import('@/views/portrait/index.vue'),
+      },
+      {
+        path: 'supply',
+        name: 'portraitSupply',
+        component: () => import('@/views/portrait/supply.vue'),
+      }
+    ]
+  },
+  {
     path: '/gather',
     name: 'gather',
     component:TabGeter,
