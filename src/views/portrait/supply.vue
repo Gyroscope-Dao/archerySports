@@ -11,7 +11,7 @@
             <div class="tip"><span>供应商名称：</span>{{ basisData.supplierName }}</div>
             <div class="tip"><span>联系人：</span>{{ basisData.contact }}</div>
             <div class="tip"><span>联系电话：</span>{{ basisData.contactNum }}</div>
-            <!-- <div class="tip"><span>供应商简称：</span>{{ basisData.supplierSimpleName }}</div> -->
+            <div class="tip"><span>税号：</span>{{ basisData.taxId }}</div>
             <div class="tip"><span>法定代表人：</span>{{ basisData.legalPerson }}</div>
             <div class="tip"><span>开户银行名称：</span>{{ basisData.bankName }}</div>
             <div class="tip"><span>开户账号：</span>{{ basisData.bankAccount }}</div>
@@ -88,16 +88,31 @@
           <div class="panel_footer"></div>
         </div>
       </div>
+      <!-- 右边透明 -->
       <div class="tab" @click="popMenu"></div>
+      <!-- 选择菜单 -->
       <div class="menu" v-if="showMenu">
         <div class="drawer-bootom-button" v-show="!disableSubmit">
+          <div class="basis">
+            <ul>
+              <li><input type="checkbox" />供应商名称</li>
+              <li><input type="checkbox" />联系人</li>
+              <li><input type="checkbox" />联系电话</li>
+              <li><input type="checkbox" />税号</li>
+              <li><input type="checkbox" />法定代表人</li>
+              <li><input type="checkbox" />开户银行名称</li>
+              <li><input type="checkbox" />开户账号 </li>
+              <li><input type="checkbox" />往来单位信息id</li>
+            </ul>
+          </div>
+          <div class="date"></div>
           <a-popconfirm title="确定放弃编辑？" @confirm="back" okText="确定" cancelText="取消">
             <a-button style="margin-right: 0.8rem">取消</a-button>
           </a-popconfirm>
           <a-button @click="back" type="primary" :loading="confirmLoading">确定</a-button>
         </div>
       </div>
-    </div>  
+    </div>
   </div>
 </template>
 
@@ -139,6 +154,7 @@ export default {
       getAction(url, { id: this.query.id, FirstSupplier: this.query.FirstSupplier }).then((res) => {
         this.basisData = res.result
         this.productData = this.basisData.productList[0]
+        console.log(res.result);
       })
     },
     // 获取供货周期
@@ -146,8 +162,6 @@ export default {
       var url = '/supplycycle/getDataOfSupplyCycle'
       getAction(url, { id: this.query.id, FirstSupplier: this.query.FirstSupplier }).then((res) => {
         this.dateData = res.result[0]
-        // console.log(this.dateData);
-        // console.log(res);
       })
     },
     // 获取供货周期详情
@@ -584,11 +598,15 @@ header {
   }
   .menu {
     position: absolute;
-    width: 300px;
+    width: 360px;
     height: 100%;
-    left: 0;
+    right: 0;
     bottom: 0;
     background-color: #fff;
+    padding: 30px;
+    ul {
+      list-style: none;
+    }
   }
 }
 // 旋转动画
