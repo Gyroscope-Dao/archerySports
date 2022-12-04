@@ -135,7 +135,7 @@ export default {
   methods: {
     // 获取基本信息
     getBasis() {
-      var url = '/portrayal/baseInf'
+      var url = '/portrayal/queryById'
       getAction(url, { id: this.query.id, FirstSupplier: this.query.FirstSupplier }).then((res) => {
         this.basisData = res.result
         this.productData = this.basisData.productList[0]
