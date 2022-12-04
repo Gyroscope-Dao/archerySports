@@ -89,7 +89,8 @@ export function generateIndexRouter(data) {
     //component: () => import('@/components/layouts/BasicLayout'),
     component: resolve => require(['@/components/layouts/TabLayout'], resolve),
     meta: { title: '首页' },
-    redirect: '/dashboard/analysis',
+    // redirect: '/dashboard/analysis',
+    redirect: '/gather/gather',
     children: [
       ...generateChildRouters(data)
     ]
