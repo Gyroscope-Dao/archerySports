@@ -215,7 +215,8 @@ export default {
         supplierSimpleName: [{ required: true, message: '请输入供应商名称简称!' }],
         supplierAddress: [{ required: true, message: '请输入供应商地址!' }],
         contact: [{ required: true, message: '请输入联系人!' }],
-        contactNum: [{ required: true, message: '请输入联系电话!' }, { validator: this.validatePhone }],
+        // contactNum: [{ required: true, message: '请输入联系电话!' }, { validator: this.validatePhone }],
+        contactNum: [{ required: true, message: '请输入联系电话!' }, { pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/, message: '请输入正确的手机号！'}],
         privateEnterprise: [{ required: true, message: '请输入是否民口企业!' }],
         battleneckSupplier: [{ required: true, message: '请输入是否瓶颈供应商!' }],
         certification: [{ required: true, message: '请输入供应商资质!' }],
@@ -288,29 +289,6 @@ export default {
             })
         }
       })
-    },
-    validatePhone(rule, value, callback) {
-      if (!value) {
-        callback()
-      } else {
-        if (new RegExp(/^1[3|4|5|6|7|8|9][0-9]\d{8}$/).test(value)) {
-          var params = {
-            tableName: 'sys_user',
-            fieldName: 'phone',
-            fieldVal: value,
-            dataId: this.userId,
-          }
-          duplicateCheck(params).then((res) => {
-            if (res.success) {
-              callback()
-            } else {
-              callback('手机号已存在!')
-            }
-          })
-        } else {
-          callback('请输入正确格式的手机号码!')
-        }
-      }
     },
   },
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="allPage">
+  <div class="allPage" :class="{ mainOpacity: mainOpacity }">
     <header>
       <h1>供应商画像详细信息</h1>
     </header>
@@ -14,7 +14,7 @@
             <!-- <div class="tip"><span>供应商简称：</span>{{ basisData.supplierSimpleName }}</div> -->
             <div class="tip"><span>法定代表人：</span>{{ basisData.legalPerson }}</div>
             <div class="tip"><span>开户银行名称：</span>{{ basisData.bankName }}</div>
-            <div class="tip"><span>开户账号：</span>{{ basisData.bankAccount}}</div>
+            <div class="tip"><span>开户账号：</span>{{ basisData.bankAccount }}</div>
             <div class="tip"><span>往来单位信息id：</span>{{ basisData.eptId }}</div>
             <!-- <div class="tip"><span>位置信息：</span>{{ basisData.bankName }}</div> -->
           </div>
@@ -29,15 +29,15 @@
         <div class="panel basisDesc1">
           <div class="details">
             <div class="tip"><span>是否民营企业：</span>是</div>
-            <!-- <div class="tip"><span>供应商的资质：</span>{{basisData}}</div> -->
-            <div class="tip"><span>供应商地址：</span>{{basisData.supplierAddress}}</div>
-            <div class="tip"><span>供应的产品：</span>{{productData.productId}}</div>
-            <div class="tip"><span>是否一级供应商：</span>{{query.FirstSupplier? '是' : '否'}}</div>
+            <div class="tip"><span>供应商的资质：</span>{{ basisData.certification }}</div>
+            <div class="tip"><span>供应商地址：</span>{{ basisData.supplierAddress }}</div>
+            <div class="tip"><span>供应的产品：</span>{{ productData.productId }}</div>
+            <div class="tip"><span>是否一级供应商：</span>{{ query.FirstSupplier ? '是' : '否' }}</div>
             <!-- <div class="tip"><span>供货比例：</span>{{basisData}}</div> -->
-            <div class="tip"><span>成品库存：</span>{{productData.productStock}}</div>
-            <div class="tip"><span>生成批量：</span>{{productData.productionLot}}</div>
-            <div class="tip"><span>日均产量：</span>{{productData.dayProLot}}</div>
-            <div class="tip"><span>日最大生成量：</span>{{productData.maxDayProLot}}</div>
+            <div class="tip"><span>成品库存：</span>{{ productData.productStock }}</div>
+            <div class="tip"><span>生成批量：</span>{{ productData.productionLot }}</div>
+            <div class="tip"><span>日均产量：</span>{{ productData.dayProLot }}</div>
+            <div class="tip"><span>日最大生成量：</span>{{ productData.maxDayProLot }}</div>
           </div>
           <div class="panel_footer"></div>
         </div>
@@ -46,11 +46,21 @@
         <h2>供货周期</h2>
         <div class="panel actDesc">
           <div class="details">
-            <div class="tip"><span>是否一般供应商：</span></div>
-            <div class="tip"><span>生产瓶颈供应商：</span>XX</div>
-            <div class="tip"><span>采购瓶颈供应商：</span>XX</div>
-            <div class="tip"><span>重点部件名称：</span>XX</div>
-            <div class="tip"><span>重点部件现有量：</span>XX</div>
+            <div class="tip"><span>是否一般供应商：</span>{{ dateData.battleneckSupplier == 1 ? '是' : '否' }}</div>
+            <div class="tip"><span>是否生产瓶颈供应商：</span>{{ dateData.isProduct == 1 ? '是' : '否' }}</div>
+            <div class="tip"><span>是否采购瓶颈供应商：</span>{{ dateData.isPurchase == 1 ? '是' : '否' }}</div>
+            <div class="tip">
+              <span>重点部件名称：</span>
+              <span class="component" v-for="item in dateData.components" :key="item.componentName">{{
+                item.componentName
+              }}</span>
+            </div>
+            <div class="tip">
+              <span>重点部件现有量：</span>
+              <span class="component" v-for="item in dateData.components" :key="item.componentName">{{
+                item.stockQuantity
+              }}</span>
+            </div>
           </div>
           <div class="panel_footer"></div>
         </div>
@@ -78,7 +88,16 @@
           <div class="panel_footer"></div>
         </div>
       </div>
-    </div>
+      <div class="tab" @click="popMenu"></div>
+      <div class="menu" v-if="showMenu">
+        <div class="drawer-bootom-button" v-show="!disableSubmit">
+          <a-popconfirm title="确定放弃编辑？" @confirm="back" okText="确定" cancelText="取消">
+            <a-button style="margin-right: 0.8rem">取消</a-button>
+          </a-popconfirm>
+          <a-button @click="back" type="primary" :loading="confirmLoading">确定</a-button>
+        </div>
+      </div>
+    </div>  
   </div>
 </template>
 
@@ -89,7 +108,12 @@ import { getAction } from '@/api/manage'
 export default {
   data() {
     return {
+      // 控制是否显示menu
+      showMenu: false,
+      // 控制是否全部透明
+      mainOpacity: false,
       query: null,
+      // 基本信息上边
       basisData: {
         bankName: '',
         supplierSimpleName: '',
@@ -100,18 +124,16 @@ export default {
         contactNum: '',
         taxId: '',
       },
-      productData: {
-
-      },
-      dateDate: {
-
-      },
-      dateImg: {
-
-      }
+      // 下边基本信息
+      productData: {},
+      // 供货周期
+      dateData: {},
+      dateImgY: [],
+      // 柱状图周期y轴的值
     }
   },
   methods: {
+    // 获取基本信息
     getBasis() {
       var url = '/portrayal/queryById'
       getAction(url, { id: this.query.id, FirstSupplier: this.query.FirstSupplier }).then((res) => {
@@ -119,134 +141,41 @@ export default {
         this.productData = this.basisData.productList[0]
       })
     },
-    getDate() {
+    // 获取供货周期
+    getDateData() {
       var url = '/supplycycle/getDataOfSupplyCycle'
       getAction(url, { id: this.query.id, FirstSupplier: this.query.FirstSupplier }).then((res) => {
-        // this.basisData = res.result
-        // this.productData = this.basisData.productList[0]
-        console.log(res)
+        this.dateData = res.result[0]
+        // console.log(this.dateData);
+        // console.log(res);
       })
     },
+    // 获取供货周期详情
     getDateImg() {
       var url = '/supplycycle/getDataOfSupplyCycleBarChart'
       getAction(url, { id: this.query.id, FirstSupplier: this.query.FirstSupplier }).then((res) => {
-        // this.basisData = res.result
-        // this.productData = this.basisData.productList[0]
-        console.log(res)
+        this.dateImgY.push(res.result[0].productionCycle)
+        this.dateImgY.push(res.result[0].purchaseLeadTime)
+        this.dateImgY.push(res.result[0].transportTime)
+        this.dateImgY.push(res.result[0].transportTimeDescription)
       })
-    }
+    },
+    // 弹出菜单
+    popMenu() {
+      this.showMenu = true
+      this.mainOpacity = true
+    },
+    back() {
+      this.showMenu = false
+      this.mainOpacity = false
+    },
   },
   computed: {
-    // 雷达图
-    // option1() {
-    //   return {
-    //     legend: {
-    //       data: ['供应商1'],
-    //       textStyle: {
-    //         color: '#fff',
-    //       },
-    //     },
-    //     radar: {
-    //       center: ['50%', '60%'],
-    //       //   shape: 'circle',
-    //       indicator: [
-    //         { name: '生成周期', max: 6500 },
-    //         { name: '物流周期', max: 16000 },
-    //         { name: '合格率', max: 30000 },
-    //         { name: '军检时间', max: 38000 },
-    //         { name: '供货周期', max: 52000 },
-    //         { name: '采购提前期/天', max: 25000 },
-    //       ],
-    //     },
-    //     color: {
-    //       type: 'linear',
-    //       x: 0,
-    //       y: 0,
-    //       x2: 0,
-    //       y2: 1,
-    //       colorStops: [
-    //         {
-    //           offset: 0,
-    //           color: '#9EE081', // 0% 处的颜色
-    //         },
-    //         {
-    //           offset: 1,
-    //           color: '#9EE081', // 100% 处的颜色
-    //         },
-    //       ],
-    //       global: false, // 缺省为 false
-    //     },
-    //     series: [
-    //       {
-    //         type: 'radar',
-    //         data: [
-    //           {
-    //             value: [4200, 3000, 20000, 35000, 50000, 18000],
-    //             name: '供应商1',
-    //           },
-    //         ],
-    //         itemStyle: {
-    //           // 折线拐点标志的样式。
-    //           emphasis: {
-    //             // 高亮时的样式
-    //             focus: 'self',
-    //           },
-    //         },
-    //         label: {
-    //           // 单个拐点文本的样式设置
-    //           normal: {
-    //             show: true,
-    //             // 单个拐点文本的样式设置。[ default: false ]
-    //             position: 'top',
-    //             // 标签的位置。[ default: top ]
-    //             distance: 5,
-    //             // 距离图形元素的距离。当 position 为字符描述值（如 'top'、'insideRight'）时候有效。[ default: 5 ]
-    //             color: '#aaa',
-    //             // 文字的颜色。如果设置为 'auto'，则为视觉映射得到的颜色，如系列色。[ default: "#fff" ]
-    //             fontSize: 10,
-    //             // 文字的字体大小
-    //           },
-    //         },
-    //       },
-    //     ],
-    //   }
-    // },
-    // // 饼图
-    // option2() {
-    //   return {
-    //     legend: {
-    //       top: 'bottom',
-    //       textStyle: {
-    //         color: '#fff',
-    //       },
-    //     },
-    //     // 提示框
-    //     tooltip: {
-    //       show: true,
-    //     },
-    //     series: [
-    //       {
-    //         type: 'pie',
-    //         data: [
-    //           { value: 1048, name: '好评' },
-    //           { value: 735, name: '中评' },
-    //           { value: 580, name: '差评' },
-    //         ],
-    //         radius: [10, 100],
-    //         center: ['50%', '45%'],
-    //         // roseType: "area",
-    //         itemStyle: {
-    //           borderRadius: 10,
-    //         },
-    //       },
-    //     ],
-    //   }
-    // },
     optionOne() {
       return {
         xAxis: {
           type: 'category',
-          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          data: ['采购周期', '检验周期', '运输周期', '生产周期'],
           axisLine: {
             lineStyle: {
               color: '#fff',
@@ -284,7 +213,7 @@ export default {
         },
         series: [
           {
-            data: [120, 200, 150, 80, 70, 110, 130],
+            data: this.dateImgY,
             type: 'bar',
             showBackground: true,
             backgroundStyle: {
@@ -429,13 +358,12 @@ export default {
     },
   },
   mounted() {
-    this.getBasis();
-    this.getDate();
-    this.getDateImg();
+    this.getBasis()
+    this.getDateData()
+    this.getDateImg()
   },
   created() {
     this.query = this.$route.query
-    // console.log(this.query)
   },
 }
 </script>
@@ -469,13 +397,29 @@ header {
     color: #fff;
   }
 }
+.mainOpacity {
+  opacity: 0.5;
+}
 
 .container {
+  position: relative;
   min-width: 1200px;
   max-width: 2048px;
   margin: 0 auto;
   padding: 10px 10px 0;
   display: flex;
+  .tab {
+    width: 30px;
+    height: 100%;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    opacity: 0.01;
+  }
+  .tab:hover {
+    opacity: 0.6;
+    background-color: #aaa;
+  }
   .left {
     flex: 3;
     color: #fff;
@@ -518,7 +462,6 @@ header {
       }
     }
   }
-
   .mid {
     position: relative;
     margin: 0 10px;
@@ -533,11 +476,15 @@ header {
       margin-left: 20px;
       margin-bottom: 5px;
       .tip {
+        margin: 10px 0 0 10px;
+        font-size: 16px;
         span {
           color: #02a6b5;
         }
-        margin: 10px 0 0 10px;
-        font-size: 16px;
+        .component {
+          color: #fff;
+          margin-right: 10px;
+        }
       }
     }
     .chartOne {
@@ -634,6 +581,14 @@ header {
         content: '';
       }
     }
+  }
+  .menu {
+    position: absolute;
+    width: 300px;
+    height: 100%;
+    left: 0;
+    bottom: 0;
+    background-color: #fff;
   }
 }
 // 旋转动画
