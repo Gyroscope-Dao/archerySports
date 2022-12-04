@@ -4,7 +4,12 @@
       <a-form-model ref="form" :model="model" :rules="validatorRules" slot="detail">
         <a-row>
           <a-col :span="24">
-            <a-form-model-item label="一级供应商编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="firstSupplierId">
+            <a-form-model-item
+              label="一级供应商编号"
+              :labelCol="labelCol"
+              :wrapperCol="wrapperCol"
+              prop="firstSupplierId"
+            >
               <a-input v-model="model.firstSupplierId" placeholder="请输入一级供应商编号" disabled></a-input>
             </a-form-model-item>
           </a-col>
@@ -14,7 +19,12 @@
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="供应商名称简称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="supplierSimpleName">
+            <a-form-model-item
+              label="供应商名称简称"
+              :labelCol="labelCol"
+              :wrapperCol="wrapperCol"
+              prop="supplierSimpleName"
+            >
               <a-input v-model="model.supplierSimpleName" placeholder="请输入供应商名称简称"></a-input>
             </a-form-model-item>
           </a-col>
@@ -39,14 +49,33 @@
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="是否民口企业" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="privateEnterprise">
-              <j-dict-select-tag type="list" v-model="model.privateEnterprise" dictCode="yn" placeholder="请选择是否民口企业" />
+            <a-form-model-item
+              label="是否民口企业"
+              :labelCol="labelCol"
+              :wrapperCol="wrapperCol"
+              prop="privateEnterprise"
+            >
+              <j-dict-select-tag
+                type="list"
+                v-model="model.privateEnterprise"
+                dictCode="yn"
+                placeholder="请选择是否民口企业"
+              />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="是否瓶颈供应商" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="battleneckSupplier">
-              <j-dict-select-tag type="list" v-model="model.battleneckSupplier" dictCode="yn"
-                placeholder="请选择是否瓶颈供应商" />
+            <a-form-model-item
+              label="是否瓶颈供应商"
+              :labelCol="labelCol"
+              :wrapperCol="wrapperCol"
+              prop="battleneckSupplier"
+            >
+              <j-dict-select-tag
+                type="list"
+                v-model="model.battleneckSupplier"
+                dictCode="yn"
+                placeholder="请选择是否瓶颈供应商"
+              />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -85,13 +114,33 @@
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="是否生产瓶颈供应商" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="isProduct">
-              <j-dict-select-tag type="list" v-model="model.isProduct" dictCode="yn" placeholder="请选择是否生产瓶颈供应商" />
+            <a-form-model-item
+              label="是否生产瓶颈供应商"
+              :labelCol="labelCol"
+              :wrapperCol="wrapperCol"
+              prop="isProduct"
+            >
+              <j-dict-select-tag
+                type="list"
+                v-model="model.isProduct"
+                dictCode="yn"
+                placeholder="请选择是否生产瓶颈供应商"
+              />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="是否采购瓶颈供应商" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="isPurchase">
-              <j-dict-select-tag type="list" v-model="model.isPurchase" dictCode="yn" placeholder="请选择是否采购瓶颈供应商" />
+            <a-form-model-item
+              label="是否采购瓶颈供应商"
+              :labelCol="labelCol"
+              :wrapperCol="wrapperCol"
+              prop="isPurchase"
+            >
+              <j-dict-select-tag
+                type="list"
+                v-model="model.isPurchase"
+                dictCode="yn"
+                placeholder="请选择是否采购瓶颈供应商"
+              />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -116,32 +165,40 @@
 </template>
 
 <script>
-
 import { httpAction, getAction } from '@/api/manage'
 import { validateDuplicateValue } from '@/utils/util'
 import { putAction } from '@api/manage'
 import { thru } from 'lodash'
-import { getFirstSupplierId,getTime,getStuffId,getSimulationId,getEtpId,getOrderId,getLotId,getProductId,getComponentId,getSecondSupplierId } from '@/utils/generateRule'
-
+import {
+  getFirstSupplierId,
+  getTime,
+  getStuffId,
+  getSimulationId,
+  getEtpId,
+  getOrderId,
+  getLotId,
+  getProductId,
+  getComponentId,
+  getSecondSupplierId,
+} from '@/utils/generateRule'
 
 export default {
   name: 'FirstSupplierInfForm',
-  components: {
-  },
+  components: {},
   props: {
     //表单禁用
     disabled: {
       type: Boolean,
       default: false,
-      required: false
-    }
+      required: false,
+    },
   },
   data() {
     return {
       model: {
         firstSupplierId: '',
         infUpdateTime: '',
-        stuffId: ''
+        stuffId: '',
       },
       labelCol: {
         xs: { span: 24 },
@@ -153,74 +210,33 @@ export default {
       },
       confirmLoading: false,
       validatorRules: {
-        firstSupplierId: [
-          { required: true, message: '请输入一级供应商编号!' },
-        ],
-        supplierName: [
-          { required: true, message: '请输入供应商名称!' },
-        ],
-        supplierSimpleName: [
-          { required: true, message: '请输入供应商名称简称!' },
-        ],
-        supplierAddress: [
-          { required: true, message: '请输入供应商地址!' },
-        ],
-        contact: [
-          { required: true, message: '请输入联系人!' },
-        ],
-        contactNum: [
-          { required: true, message: '请输入联系电话!' },
-        ],
-        privateEnterprise: [
-          { required: true, message: '请输入是否民口企业!' },
-        ],
-        battleneckSupplier: [
-          { required: true, message: '请输入是否瓶颈供应商!' },
-        ],
-        certification: [
-          { required: true, message: '请输入供应商资质!' },
-        ],
-        legalPerson: [
-          { required: true, message: '请输入法定代表人!' },
-        ],
-        postCode: [
-          { required: true, message: '请输入邮编!' },
-        ],
-        bankName: [
-          { required: true, message: '请输入开户行名称!' },
-        ],
-        bankAccount: [
-          { required: true, message: '请输入开户账号!' },
-        ],
-        eptId: [
-          { required: true, message: '请输入往来单位信息名称!' },
-        ],
-        infUpdateTime: [
-          { required: true, message: '请输入录入时间!' },
-        ],
-        isProduct: [
-          { required: true, message: '请输入是否生产瓶颈供应商!' },
-        ],
-        isPurchase: [
-          { required: true, message: '请输入是否采购瓶颈供应商!' },
-        ],
-        estabYear: [
-          { required: true, message: '请输入成立年份!' },
-        ],
-        corporateCredit: [
-          { required: true, message: '请输入企业征信!' },
-        ],
-        stuffId: [
-          { required: true, message: '请输入人员编号!' },
-        ],
+        firstSupplierId: [{ required: true, message: '请输入一级供应商编号!' }],
+        supplierName: [{ required: true, message: '请输入供应商名称!' }],
+        supplierSimpleName: [{ required: true, message: '请输入供应商名称简称!' }],
+        supplierAddress: [{ required: true, message: '请输入供应商地址!' }],
+        contact: [{ required: true, message: '请输入联系人!' }],
+        contactNum: [{ required: true, message: '请输入联系电话!' }, { validator: this.validatePhone }],
+        privateEnterprise: [{ required: true, message: '请输入是否民口企业!' }],
+        battleneckSupplier: [{ required: true, message: '请输入是否瓶颈供应商!' }],
+        certification: [{ required: true, message: '请输入供应商资质!' }],
+        legalPerson: [{ required: true, message: '请输入法定代表人!' }],
+        postCode: [{ required: true, message: '请输入邮编!' }],
+        bankName: [{ required: true, message: '请输入开户行名称!' }],
+        bankAccount: [{ required: true, message: '请输入开户账号!' }],
+        eptId: [{ required: true, message: '请输入往来单位信息名称!' }],
+        infUpdateTime: [{ required: true, message: '请输入录入时间!' }],
+        isProduct: [{ required: true, message: '请输入是否生产瓶颈供应商!' }],
+        isPurchase: [{ required: true, message: '请输入是否采购瓶颈供应商!' }],
+        estabYear: [{ required: true, message: '请输入成立年份!' }],
+        corporateCredit: [{ required: true, message: '请输入企业征信!' }],
+        stuffId: [{ required: true, message: '请输入人员编号!' }],
       },
       url: {
-        add: "/firstSupplierInf/firstSupplierInf/add",
-        edit: "/firstSupplierInf/firstSupplierInf/edit",
-        queryById: "/firstSupplierInf/firstSupplierInf/queryById",
-        rule: {
-        },
-      }
+        add: '/firstSupplierInf/firstSupplierInf/add',
+        edit: '/firstSupplierInf/firstSupplierInf/edit',
+        queryById: '/firstSupplierInf/firstSupplierInf/queryById',
+        rule: {},
+      },
     }
   },
   computed: {
@@ -230,50 +246,72 @@ export default {
   },
   created() {
     //备份model原始值
-    this.modelDefault = JSON.parse(JSON.stringify(this.model));
+    this.modelDefault = JSON.parse(JSON.stringify(this.model))
     getFirstSupplierId(this)
-    getTime(this);
-    getStuffId(this);
+    getTime(this)
+    getStuffId(this)
   },
   methods: {
     add() {
-      this.edit(this.modelDefault);
+      this.edit(this.modelDefault)
     },
     edit(record) {
-      this.model = Object.assign({}, record);
-      this.visible = true;
+      this.model = Object.assign({}, record)
+      this.visible = true
     },
     submitForm() {
-      const that = this;
+      const that = this
       // 触发表单验证
-      this.$refs.form.validate(valid => {
+      this.$refs.form.validate((valid) => {
         if (valid) {
-          that.confirmLoading = true;
-          let httpurl = '';
-          let method = '';
+          that.confirmLoading = true
+          let httpurl = ''
+          let method = ''
           if (!this.model.id) {
-            httpurl += this.url.add;
-            method = 'post';
+            httpurl += this.url.add
+            method = 'post'
           } else {
-            httpurl += this.url.edit;
-            method = 'put';
+            httpurl += this.url.edit
+            method = 'put'
           }
-          httpAction(httpurl, this.model, method).then((res) => {
-            if (res.success) {
-              that.$message.success(res.message);
-              that.$emit('ok');
-            } else {
-              that.$message.warning(res.message);
-            }
-          }).finally(() => {
-            that.confirmLoading = false;
-          })
+          httpAction(httpurl, this.model, method)
+            .then((res) => {
+              if (res.success) {
+                that.$message.success(res.message)
+                that.$emit('ok')
+              } else {
+                that.$message.warning(res.message)
+              }
+            })
+            .finally(() => {
+              that.confirmLoading = false
+            })
         }
-
       })
-    }
-
-
-  }
+    },
+    validatePhone(rule, value, callback) {
+      if (!value) {
+        callback()
+      } else {
+        if (new RegExp(/^1[3|4|5|6|7|8|9][0-9]\d{8}$/).test(value)) {
+          var params = {
+            tableName: 'sys_user',
+            fieldName: 'phone',
+            fieldVal: value,
+            dataId: this.userId,
+          }
+          duplicateCheck(params).then((res) => {
+            if (res.success) {
+              callback()
+            } else {
+              callback('手机号已存在!')
+            }
+          })
+        } else {
+          callback('请输入正确格式的手机号码!')
+        }
+      }
+    },
+  },
 }
 </script>

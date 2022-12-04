@@ -12,8 +12,8 @@ export default {
   data() {
     return {
       data: [
-        { name: '北京', value: [116.46, 39.92, 4367], id: '123456789', isFrist: true },
-        { name: '上海', value: [121.48, 31.22, 8675], id: '456789' },
+        { name: '北京', value: [116.46, 39.92, 4367], id: '1597538842468958209', FirstSupplier: true },
+        { name: '上海', value: [121.48, 31.22, 8675], id: '1593837632480722946', FirstSupplier: true},
         { name: '深圳', value: [114.07, 22.62, 2461], id: '789123456' },
         { name: '西安', value: [108.45, 34, 3421], id: '23456789' },
         { name: '广州', value: [113.23, 23.16, 187], id: '3456789' },
@@ -85,7 +85,7 @@ export default {
             path: '/portrait/supply',
             query: {
               id: res.data.id,
-              isFrist: res.data.isFrist,
+              FirstSupplier: res.data.FirstSupplier,
             },
           })
           window.open(routeData.href, '_blank')
