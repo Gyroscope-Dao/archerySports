@@ -8,14 +8,14 @@
         <h2>基本信息</h2>
         <div class="panel basisDesc">
           <div class="details">
-            <div class="tip"><span>供应商名称：</span>{{ basisData.bankName }}</div>
-            <!-- <div class="tip"><span>供应商简称：</span>{{ basisData.supplierSimpleName }}</div> -->
-            <div class="tip"><span>法定代表人：</span>{{ basisData.legalPerson }}</div>
-            <div class="tip"><span>邮编：</span>{{ basisData.bankName }}</div>
-            <div class="tip"><span>成立年份：</span>{{ basisData.postCode }}</div>
+            <div class="tip"><span>供应商名称：</span>{{ basisData.supplierName }}</div>
             <div class="tip"><span>联系人：</span>{{ basisData.contact }}</div>
             <div class="tip"><span>联系电话：</span>{{ basisData.contactNum }}</div>
-            <!-- <div class="tip"><span>税号：</span>{{ basisData.taxId }}</div> -->
+            <!-- <div class="tip"><span>供应商简称：</span>{{ basisData.supplierSimpleName }}</div> -->
+            <div class="tip"><span>法定代表人：</span>{{ basisData.legalPerson }}</div>
+            <div class="tip"><span>开户银行名称：</span>{{ basisData.bankName }}</div>
+            <div class="tip"><span>开户账号：</span>{{ basisData.bankAccount}}</div>
+            <div class="tip"><span>往来单位信息id：</span>{{ basisData.eptId }}</div>
             <!-- <div class="tip"><span>位置信息：</span>{{ basisData.bankName }}</div> -->
           </div>
 
@@ -29,15 +29,15 @@
         <div class="panel basisDesc1">
           <div class="details">
             <div class="tip"><span>是否民营企业：</span>是</div>
-            <div class="tip"><span>供应商的资质：</span>xxxxxx</div>
-            <div class="tip"><span>供应商地址：</span>xxxxxx</div>
-            <div class="tip"><span>供应的产品：</span>xxxxxx</div>
-            <div class="tip"><span>是否一级供应商：</span>xxxxxx</div>
-            <div class="tip"><span>供货比例：</span>xxxxxx</div>
-            <div class="tip"><span>成品库存：</span>xxxxxx</div>
-            <div class="tip"><span>生成批量：</span>xxxxxx</div>
-            <div class="tip"><span>日均产量：</span>xxxxxx</div>
-            <div class="tip"><span>日最大生成量：</span>xxxxxx</div>
+            <!-- <div class="tip"><span>供应商的资质：</span>{{basisData}}</div> -->
+            <div class="tip"><span>供应商地址：</span>{{basisData.supplierAddress}}</div>
+            <div class="tip"><span>供应的产品：</span>{{productData.productId}}</div>
+            <div class="tip"><span>是否一级供应商：</span>{{query.FirstSupplier? '是' : '否'}}</div>
+            <!-- <div class="tip"><span>供货比例：</span>{{basisData}}</div> -->
+            <div class="tip"><span>成品库存：</span>{{productData.productStock}}</div>
+            <div class="tip"><span>生成批量：</span>{{productData.productionLot}}</div>
+            <div class="tip"><span>日均产量：</span>{{productData.dayProLot}}</div>
+            <div class="tip"><span>日最大生成量：</span>{{productData.maxDayProLot}}</div>
           </div>
           <div class="panel_footer"></div>
         </div>
@@ -46,7 +46,7 @@
         <h2>供货周期</h2>
         <div class="panel actDesc">
           <div class="details">
-            <div class="tip"><span>是否一般供应商：</span>{{query.isFrist? '是':'否'}}</div>
+            <div class="tip"><span>是否一般供应商：</span></div>
             <div class="tip"><span>生产瓶颈供应商：</span>XX</div>
             <div class="tip"><span>采购瓶颈供应商：</span>XX</div>
             <div class="tip"><span>重点部件名称：</span>XX</div>
@@ -84,7 +84,7 @@
 
 <script>
 import { getAction } from '@/api/manage'
-import { color } from 'echarts'
+// import { color } from 'echarts'
 
 export default {
   data() {
@@ -100,16 +100,41 @@ export default {
         contactNum: '',
         taxId: '',
       },
+      productData: {
+
+      },
+      dateDate: {
+
+      },
+      dateImg: {
+
+      }
     }
   },
   methods: {
-    hello() {
-      var url = '/firstSupplierInf/firstSupplierInf/queryById'
-      getAction(url, { id: '1597538842468958209' }).then((res) => {
+    getBasis() {
+      var url = '/portrayal/queryById'
+      getAction(url, { id: this.query.id, FirstSupplier: this.query.FirstSupplier }).then((res) => {
         this.basisData = res.result
-        // console.log(this.basisData)
+        this.productData = this.basisData.productList[0]
       })
     },
+    getDate() {
+      var url = '/supplycycle/getDataOfSupplyCycle'
+      getAction(url, { id: this.query.id, FirstSupplier: this.query.FirstSupplier }).then((res) => {
+        // this.basisData = res.result
+        // this.productData = this.basisData.productList[0]
+        console.log(res)
+      })
+    },
+    getDateImg() {
+      var url = '/supplycycle/getDataOfSupplyCycleBarChart'
+      getAction(url, { id: this.query.id, FirstSupplier: this.query.FirstSupplier }).then((res) => {
+        // this.basisData = res.result
+        // this.productData = this.basisData.productList[0]
+        console.log(res)
+      })
+    }
   },
   computed: {
     // 雷达图
@@ -404,9 +429,13 @@ export default {
     },
   },
   mounted() {
-    this.hello()
+    this.getBasis();
+    this.getDate();
+    this.getDateImg();
+  },
+  created() {
     this.query = this.$route.query
-    console.log(this.query);
+    // console.log(this.query)
   },
 }
 </script>

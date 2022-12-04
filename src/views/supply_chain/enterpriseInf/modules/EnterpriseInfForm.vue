@@ -137,7 +137,7 @@
               { required: true, message: '请输入联系人!'},
            ],
            contactNumber: [
-              { required: true, message: '请输入联系电话!'},
+              { required: true, message: '请输入联系电话!'},{ validator: this.validatePhone }
            ],
            legalRepresent: [
               { required: true, message: '请输入法定代表人!'},
@@ -209,6 +209,29 @@
          
         })
       },
+          validatePhone(rule, value, callback) {
+      if (!value) {
+        callback()
+      } else {
+        if (new RegExp(/^1[3|4|5|6|7|8|9][0-9]\d{8}$/).test(value)) {
+          var params = {
+            tableName: 'sys_user',
+            fieldName: 'phone',
+            fieldVal: value,
+            dataId: this.userId,
+          }
+          duplicateCheck(params).then((res) => {
+            if (res.success) {
+              callback()
+            } else {
+              callback('手机号已存在!')
+            }
+          })
+        } else {
+          callback('请输入正确格式的手机号码!')
+        }
+      }
+    },
     }
   }
 </script>

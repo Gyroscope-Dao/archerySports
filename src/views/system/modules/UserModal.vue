@@ -178,7 +178,10 @@
         departIdShow:false,
         title:"操作",
         visible: false,
-        model: {},
+        model: {
+          username: "",
+          workNo: ""
+        },
         labelCol: {
           xs: { span: 24 },
           sm: { span: 5 },
@@ -214,6 +217,9 @@
       }
     },
     methods: {
+      workNo () {
+        this.model.workNo = this.model.username
+      },
       add () {
         this.refresh();
         this.edit({activitiSync:'1',userIdentity:1});
@@ -334,6 +340,7 @@
       moment,
       handleSubmit () {
         const that = this;
+        that.workNo();
         // 触发表单验证
         this.$refs.form.validate(valid => {
           if (valid) {
