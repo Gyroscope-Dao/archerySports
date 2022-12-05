@@ -75,8 +75,6 @@
     data () {
       return {
         model:{
-          orderId: '',
-
          },
         labelCol: {
           xs: { span: 24 },
@@ -128,7 +126,6 @@
     created () {
        //备份model原始值
       this.modelDefault = JSON.parse(JSON.stringify(this.model));
-      getOrderId(this);
     },
     methods: {
       add () {
@@ -164,7 +161,7 @@
               that.confirmLoading = false;
             })
           }
-         
+
         })
       },
     }
