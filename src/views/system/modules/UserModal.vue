@@ -41,7 +41,7 @@
         </a-form-model-item>
 
         <a-form-model-item label="工号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="workNo">
-          <a-input placeholder="请输入工号" v-model="model.workNo" />
+          <a-input placeholder="请输入工号" v-model="model.username" disabled="disabled"/>
         </a-form-model-item>
 
         <a-form-model-item label="手机号码" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="phone">
