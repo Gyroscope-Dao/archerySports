@@ -5,7 +5,7 @@
         <a-row>
           <a-col :span="24">
             <a-form-model-item label="订单编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="orderId">
-              <a-input v-model="model.orderId" placeholder="请输入订单编号" disabled ></a-input>
+              <a-input v-model="model.orderId" placeholder="请输入订单编号"  ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -25,7 +25,7 @@
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="批次编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="lotId">
-              <a-input v-model="model.lotId" placeholder="请输入批次编号"  ></a-input>
+              <a-input v-model="model.lotId" placeholder="请输入批次编号"  disabled="disabled"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -63,6 +63,7 @@
   export default {
     name: 'BatchInfForm',
     components: {
+      
     },
     props: {
       //表单禁用
@@ -75,6 +76,7 @@
     data () {
       return {
         model:{
+          lotId: '',
          },
         labelCol: {
           xs: { span: 24 },
@@ -125,6 +127,7 @@
     },
     created () {
        //备份model原始值
+       getLotId(this)
       this.modelDefault = JSON.parse(JSON.stringify(this.model));
     },
     methods: {
