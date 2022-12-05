@@ -137,9 +137,9 @@
             </a-empty>
           </a-card>
         </a-tab-pane>
-        <a-tab-pane tab="部门权限" key="2" forceRender>
+        <!-- <a-tab-pane tab="部门权限" key="2" forceRender>
           <depart-auth-modal ref="departAuth"/>
-        </a-tab-pane>
+        </a-tab-pane> -->
       </a-tabs>
 
     </a-col>
