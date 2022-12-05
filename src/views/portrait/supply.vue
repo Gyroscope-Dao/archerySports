@@ -1,23 +1,23 @@
 <template>
   <div class="allPage" :class="{ mainOpacity: mainOpacity }">
     <header>
-      <h1>供应商画像详细信息</h1>
+      <h1>供应商画像系统</h1>
     </header>
     <div class="container">
       <div class="left">
         <h2>基本信息</h2>
         <div class="panel basisDesc">
-          <div class="details">
-            <div class="tip"><span>供应商名称：</span>{{ basisData.supplierName }}</div>
-            <div class="tip"><span>联系人：</span>{{ basisData.contact }}</div>
-            <div class="tip"><span>联系电话：</span>{{ basisData.contactNum }}</div>
-            <div class="tip"><span>税号：</span>{{ basisData.taxId }}</div>
-            <div class="tip"><span>法定代表人：</span>{{ basisData.legalPerson }}</div>
-            <div class="tip"><span>开户银行名称：</span>{{ basisData.bankName }}</div>
-            <div class="tip"><span>开户账号：</span>{{ basisData.bankAccount }}</div>
-            <div class="tip"><span>往来单位信息id：</span>{{ basisData.eptId }}</div>
+          <ul class="details">
+            <li class="tip"><span>供应商名称：</span>{{ basisData.supplierName }}</li>
+            <li class="tip"><span>联系人：</span>{{ basisData.contact }}</li>
+            <li class="tip"><span>联系电话：</span>{{ basisData.contactNum }}</li>
+            <li class="tip"><span>税号：</span>{{ basisData.taxId }}</li>
+            <li class="tip"><span>法定代表人：</span>{{ basisData.legalPerson }}</li>
+            <li class="tip"><span>开户银行名称：</span>{{ basisData.bankName }}</li>
+            <li class="tip"><span>开户账号：</span>{{ basisData.bankAccount }}</li>
+            <li class="tip"><span>往来单位信息id：</span>{{ basisData.eptId }}</li>
             <!-- <div class="tip"><span>位置信息：</span>{{ basisData.bankName }}</div> -->
-          </div>
+          </ul>
 
           <div class="panel_footer"></div>
         </div>
@@ -27,41 +27,41 @@
           <div class="panel_footer"></div>
         </div> -->
         <div class="panel basisDesc1">
-          <div class="details">
-            <div class="tip"><span>是否民营企业：</span>是</div>
-            <div class="tip"><span>供应商的资质：</span>{{ basisData.certification }}</div>
-            <div class="tip"><span>供应商地址：</span>{{ basisData.supplierAddress }}</div>
-            <div class="tip"><span>供应的产品：</span>{{ productData.productId }}</div>
-            <div class="tip"><span>是否一级供应商：</span>{{ query.FirstSupplier ? '是' : '否' }}</div>
-            <!-- <div class="tip"><span>供货比例：</span>{{basisData}}</div> -->
-            <div class="tip"><span>成品库存：</span>{{ productData.productStock }}</div>
-            <div class="tip"><span>生成批量：</span>{{ productData.productionLot }}</div>
-            <div class="tip"><span>日均产量：</span>{{ productData.dayProLot }}</div>
-            <div class="tip"><span>日最大生成量：</span>{{ productData.maxDayProLot }}</div>
-          </div>
+          <ul class="details">
+            <li class="tip"><span>是否民营企业：</span>是</li>
+            <li class="tip"><span>供应商的资质：</span>{{ basisData.certification }}</li>
+            <li class="tip"><span>供应商地址：</span>{{ basisData.supplierAddress }}</li>
+            <li class="tip"><span>供应的产品：</span>{{ productData.productId }}</li>
+            <li class="tip"><span>是否一级供应商：</span>{{ query.FirstSupplier ? '是' : '否' }}</li>
+            <!-- <li class="tip"><span>供货比例：</span>{{basisData}}</li> -->
+            <li class="tip"><span>成品库存：</span>{{ productData.productStock }}</li>
+            <li class="tip"><span>生成批量：</span>{{ productData.productionLot }}</li>
+            <li class="tip"><span>日均产量：</span>{{ productData.dayProLot }}</li>
+            <li class="tip"><span>日最大生成量：</span>{{ productData.maxDayProLot }}</li>
+          </ul>
           <div class="panel_footer"></div>
         </div>
       </div>
       <div class="mid">
         <h2>供货周期</h2>
         <div class="panel actDesc">
-          <div class="details">
-            <div class="tip"><span>是否一般供应商：</span>{{ dateData.battleneckSupplier == 1 ? '是' : '否' }}</div>
-            <div class="tip"><span>是否生产瓶颈供应商：</span>{{ dateData.isProduct == 1 ? '是' : '否' }}</div>
-            <div class="tip"><span>是否采购瓶颈供应商：</span>{{ dateData.isPurchase == 1 ? '是' : '否' }}</div>
-            <div class="tip">
+          <ul class="details">
+            <li class="tip"><span>是否一般供应商：</span>{{ dateData.battleneckSupplier == 1 ? '是' : '否' }}</li>
+            <li class="tip"><span>是否生产瓶颈供应商：</span>{{ dateData.isProduct == 1 ? '是' : '否' }}</li>
+            <li class="tip"><span>是否采购瓶颈供应商：</span>{{ dateData.isPurchase == 1 ? '是' : '否' }}</li>
+            <li class="tip">
               <span>重点部件名称：</span>
               <span class="component" v-for="item in dateData.components" :key="item.componentName">{{
                 item.componentName
               }}</span>
-            </div>
-            <div class="tip">
+            </li>
+            <li class="tip">
               <span>重点部件现有量：</span>
               <span class="component" v-for="item in dateData.components" :key="item.componentName">{{
                 item.stockQuantity
               }}</span>
-            </div>
-          </div>
+            </li>
+          </ul>
           <div class="panel_footer"></div>
         </div>
         <div class="panel panel_chart3">
@@ -75,19 +75,36 @@
           <div class="map3"></div>
         </div>
       </div>
-      <div class="right">
-        <h2>供货质量</h2>
-        <div class="panel panel_chart2">
-          <h2>供货产品质量</h2>
-          <ECharts class="chartTwo" :option="optionTwo"></ECharts>
-          <div class="panel_footer"></div>
-        </div>
-        <div class="panel panel_chart3">
-          <h2>供货产品趋势分析</h2>
-          <ECharts class="chartThree" :option="optionThree"></ECharts>
-          <div class="panel_footer"></div>
+      <div class="end">
+        <h2 class="quality">供货质量</h2>
+        <div class="rightbox">
+          <div class="right1 right">
+            <div class="panel panel_chart2">
+              <h2>检验周期趋势</h2>
+              <ECharts class="chartTwo" :option="periodCycle"></ECharts>
+              <div class="panel_footer"></div>
+            </div>
+            <div class="panel panel_chart3">
+              <h2>采购周期趋势</h2>
+              <ECharts class="chartThree" :option="buyCycle"></ECharts>
+              <div class="panel_footer"></div>
+            </div>
+          </div>
+          <div class="right2 right">
+            <div class="panel panel_chart2">
+              <h2>运输周期趋势</h2>
+              <ECharts class="chartTwo" :option="transCycle"></ECharts>
+              <div class="panel_footer"></div>
+            </div>
+            <div class="panel panel_chart3">
+              <h2>生产周期趋势</h2>
+              <ECharts class="chartThree" :option="productCycle"></ECharts>
+              <div class="panel_footer"></div>
+            </div>
+          </div>
         </div>
       </div>
+
       <!-- 右边透明 -->
       <div class="tab" @click="popMenu"></div>
       <!-- 选择菜单 -->
@@ -101,7 +118,7 @@
               <li><input type="checkbox" />税号</li>
               <li><input type="checkbox" />法定代表人</li>
               <li><input type="checkbox" />开户银行名称</li>
-              <li><input type="checkbox" />开户账号 </li>
+              <li><input type="checkbox" />开户账号</li>
               <li><input type="checkbox" />往来单位信息id</li>
             </ul>
           </div>
@@ -154,7 +171,7 @@ export default {
       getAction(url, { id: this.query.id, FirstSupplier: this.query.FirstSupplier }).then((res) => {
         this.basisData = res.result
         this.productData = this.basisData.productList[0]
-        console.log(res.result);
+        // console.log(res.result)
       })
     },
     // 获取供货周期
@@ -227,6 +244,7 @@ export default {
         },
         series: [
           {
+            barWidth: 39,
             data: this.dateImgY,
             type: 'bar',
             showBackground: true,
@@ -370,6 +388,174 @@ export default {
         ],
       }
     },
+    // 检验周期 periodCycle
+    periodCycle() {
+      return {
+        xAxis: {
+          type: 'category',
+          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          axisLine: {
+            lineStyle: {
+              color: '#fff',
+              width: 1,
+            },
+          },
+        },
+        yAxis: {
+          type: 'value',
+          axisLine: {
+            lineStyle: {
+              color: '#fff',
+              width: 1,
+            },
+          },
+        },
+        series: [
+          {
+            data: [150, 230, 224, 218, 135, 147, 260],
+            type: 'line',
+            lineStyle: {
+              // 设置线条的style等
+              normal: {
+                color: '#BB2649', // 折线线条颜色:红色
+              },
+            },
+            itemStyle: {
+              // 设置线条上点的颜色（和图例的颜色）
+              normal: {
+                color: '#BB2649',
+              },
+            },
+          },
+        ],
+      }
+    },
+    // 采购周期 buyCycle
+    buyCycle() {
+      return {
+        xAxis: {
+          type: 'category',
+          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          axisLine: {
+            lineStyle: {
+              color: '#fff',
+              width: 1,
+            },
+          },
+        },
+        yAxis: {
+          type: 'value',
+          axisLine: {
+            lineStyle: {
+              color: '#fff',
+              width: 1,
+            },
+          },
+        },
+        series: [
+          {
+            data: [150, 230, 224, 218, 135, 147, 260],
+            type: 'line',
+            lineStyle: {
+              // 设置线条的style等
+              normal: {
+                color: '#cd911e', // 折线线条颜色:红色
+              },
+            },
+            itemStyle: {
+              // 设置线条上点的颜色（和图例的颜色）
+              normal: {
+                color: '#cd911e',
+              },
+            },
+          },
+        ],
+      }
+    },
+    // 运输周期 transCycle
+    transCycle() {
+      return {
+        xAxis: {
+          type: 'category',
+          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          axisLine: {
+            lineStyle: {
+              color: '#fff',
+              width: 1,
+            },
+          },
+        },
+        yAxis: {
+          type: 'value',
+          axisLine: {
+            lineStyle: {
+              color: '#fff',
+              width: 1,
+            },
+          },
+        },
+        series: [
+          {
+            data: [150, 230, 224, 218, 135, 147, 260],
+            type: 'line',
+            lineStyle: {
+              // 设置线条的style等
+              normal: {
+                color: 'green', // 折线线条颜色:红色
+              },
+            },
+            itemStyle: {
+              // 设置线条上点的颜色（和图例的颜色）
+              normal: {
+                color: 'green',
+              },
+            },
+          },
+        ],
+      }
+    },
+    // 生产周期 productCycle
+    productCycle() {
+      return {
+        xAxis: {
+          type: 'category',
+          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          axisLine: {
+            lineStyle: {
+              color: '#fff',
+              width: 1,
+            },
+          },
+        },
+        yAxis: {
+          type: 'value',
+          axisLine: {
+            lineStyle: {
+              color: '#fff',
+              width: 1,
+            },
+          },
+        },
+        series: [
+          {
+            data: [150, 230, 224, 218, 135, 147, 260],
+            type: 'line',
+            lineStyle: {
+              // 设置线条的style等
+              normal: {
+                color: '#1684b9', // 折线线条颜色:红色
+              },
+            },
+            itemStyle: {
+              // 设置线条上点的颜色（和图例的颜色）
+              normal: {
+                color: '#1684b9',
+              },
+            },
+          },
+        ],
+      }
+    },
   },
   mounted() {
     this.getBasis()
@@ -458,28 +644,43 @@ header {
       }
     }
   }
-  .right {
-    flex: 3;
-    color: #fff;
-    h2 {
+  .end {
+    flex: 6;
+    .quality {
       color: #fff;
       text-align: center;
     }
-    .panel_chart2 {
-      .chartTwo {
-        height: 280px;
+    .rightbox {
+      display: flex;
+      .right1 {
+        flex: 1;
       }
-    }
-    .panel_chart3 {
-      .chartThree {
-        height: 280px;
+      .right2 {
+        flex: 1;
+      }
+      .right {
+        color: #fff;
+        h2 {
+          color: #fff;
+          text-align: center;
+        }
+        .panel_chart2 {
+          .chartTwo {
+            height: 280px;
+          }
+        }
+        .panel_chart3 {
+          .chartThree {
+            height: 280px;
+          }
+        }
       }
     }
   }
+
   .mid {
     position: relative;
     margin: 0 10px;
-    flex: 3;
     flex: 3;
     color: #fff;
     h2 {
@@ -487,7 +688,7 @@ header {
       text-align: center;
     }
     .details {
-      margin-left: 20px;
+      margin-left: 10px;
       margin-bottom: 5px;
       .tip {
         margin: 10px 0 0 10px;
@@ -547,8 +748,8 @@ header {
     position: relative;
     // height: 100px;
     border: 1px solid rgba(25, 186, 139, 0.17);
-    padding: 0.25rem;
-    margin: 0.25rem;
+    padding: 4px;
+    margin: 4px;
     &::before {
       position: absolute;
       top: 0;
