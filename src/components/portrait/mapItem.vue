@@ -7,13 +7,15 @@
 <script>
 import '@/assets/portrait/china.js'
 import * as echarts from 'echarts'
+import { getAction } from '@/api/manage'
 
 export default {
+  props:['getSupply'],
   data() {
     return {
       data: [
         { name: '北京', value: [116.46, 39.92, 4367], id: '1597538842468958209', FirstSupplier: true },
-        { name: '上海', value: [121.48, 31.22, 8675], id: '1593837632480722946', FirstSupplier: true},
+        { name: '上海', value: [121.48, 31.22, 8675], id: '1593837632480722946', FirstSupplier: true },
         { name: '深圳', value: [114.07, 22.62, 2461], id: '789123456' },
         { name: '西安', value: [108.45, 34, 3421], id: '23456789' },
         { name: '广州', value: [113.23, 23.16, 187], id: '3456789' },
@@ -75,21 +77,35 @@ export default {
     this.bindClick()
   },
   methods: {
+    // 获取供应商
+    getFirstSupply(name) {
+      var url = '/supply/getFirstSupply'
+      getAction(url, { supplierAddress: name }).then((res) => {
+        this.getSupply(res)
+      })
+    },
+    getSecondSupply() {
+      var url = '/supply/getSecondSupply'
+      getAction(url, { supplierAddress: '山西省' }).then((res) => {
+        console.log(res)
+      })
+    },
     bindClick() {
       const _this = this
       // this.myChart.off('click')
       this.myChart.on('click', function (res) {
-        // console.log(res);
-        if (res.componentSubType === 'scatter') {
-          let routeData = _this.$router.resolve({
-            path: '/portrait/supply',
-            query: {
-              id: res.data.id,
-              FirstSupplier: res.data.FirstSupplier,
-            },
-          })
-          window.open(routeData.href, '_blank')
-        }
+        console.log(res.name)
+        _this.getFirstSupply(res.name);
+        // if (res.componentSubType === 'scatter') {
+        //   let routeData = _this.$router.resolve({
+        //     path: '/portrait/supply',
+        //     query: {
+        //       id: res.data.id,
+        //       FirstSupplier: res.data.FirstSupplier,
+        //     },
+        //   })
+        //   window.open(routeData.href, '_blank')
+        // }
       })
     },
   },

@@ -1,23 +1,23 @@
 <template>
   <div class="allPage" :class="{ mainOpacity: mainOpacity }">
     <header>
-      <h1>供应商画像详细信息</h1>
+      <h1>供应商画像系统</h1>
     </header>
     <div class="container">
       <div class="left">
         <h2>基本信息</h2>
         <div class="panel basisDesc">
-          <div class="details">
-            <div class="tip"><span>供应商名称：</span>{{ basisData.supplierName }}</div>
-            <div class="tip"><span>联系人：</span>{{ basisData.contact }}</div>
-            <div class="tip"><span>联系电话：</span>{{ basisData.contactNum }}</div>
-            <div class="tip"><span>税号：</span>{{ basisData.taxId }}</div>
-            <div class="tip"><span>法定代表人：</span>{{ basisData.legalPerson }}</div>
-            <div class="tip"><span>开户银行名称：</span>{{ basisData.bankName }}</div>
-            <div class="tip"><span>开户账号：</span>{{ basisData.bankAccount }}</div>
-            <div class="tip"><span>往来单位信息id：</span>{{ basisData.eptId }}</div>
+          <ul class="details">
+            <li class="tip"><span>供应商名称：</span>{{ basisData.supplierName }}</li>
+            <li class="tip"><span>联系人：</span>{{ basisData.contact }}</li>
+            <li class="tip"><span>联系电话：</span>{{ basisData.contactNum }}</li>
+            <li class="tip"><span>税号：</span>{{ basisData.taxId }}</li>
+            <li class="tip"><span>法定代表人：</span>{{ basisData.legalPerson }}</li>
+            <li class="tip"><span>开户银行名称：</span>{{ basisData.bankName }}</li>
+            <li class="tip"><span>开户账号：</span>{{ basisData.bankAccount }}</li>
+            <li class="tip"><span>往来单位信息id：</span>{{ basisData.eptId }}</li>
             <!-- <div class="tip"><span>位置信息：</span>{{ basisData.bankName }}</div> -->
-          </div>
+          </ul>
 
           <div class="panel_footer"></div>
         </div>
@@ -27,41 +27,41 @@
           <div class="panel_footer"></div>
         </div> -->
         <div class="panel basisDesc1">
-          <div class="details">
-            <div class="tip"><span>是否民营企业：</span>是</div>
-            <div class="tip"><span>供应商的资质：</span>{{ basisData.certification }}</div>
-            <div class="tip"><span>供应商地址：</span>{{ basisData.supplierAddress }}</div>
-            <div class="tip"><span>供应的产品：</span>{{ productData.productId }}</div>
-            <div class="tip"><span>是否一级供应商：</span>{{ query.FirstSupplier ? '是' : '否' }}</div>
-            <!-- <div class="tip"><span>供货比例：</span>{{basisData}}</div> -->
-            <div class="tip"><span>成品库存：</span>{{ productData.productStock }}</div>
-            <div class="tip"><span>生成批量：</span>{{ productData.productionLot }}</div>
-            <div class="tip"><span>日均产量：</span>{{ productData.dayProLot }}</div>
-            <div class="tip"><span>日最大生成量：</span>{{ productData.maxDayProLot }}</div>
-          </div>
+          <ul class="details">
+            <li class="tip"><span>是否民营企业：</span>是</li>
+            <li class="tip"><span>供应商的资质：</span>{{ basisData.certification }}</li>
+            <li class="tip"><span>供应商地址：</span>{{ basisData.supplierAddress }}</li>
+            <li class="tip"><span>供应的产品：</span>{{ productData.productId }}</li>
+            <li class="tip"><span>是否一级供应商：</span>{{ query.FirstSupplier ? '是' : '否' }}</li>
+            <!-- <li class="tip"><span>供货比例：</span>{{basisData}}</li> -->
+            <li class="tip"><span>成品库存：</span>{{ productData.productStock }}</li>
+            <li class="tip"><span>生成批量：</span>{{ productData.productionLot }}</li>
+            <li class="tip"><span>日均产量：</span>{{ productData.dayProLot }}</li>
+            <li class="tip"><span>日最大生成量：</span>{{ productData.maxDayProLot }}</li>
+          </ul>
           <div class="panel_footer"></div>
         </div>
       </div>
       <div class="mid">
         <h2>供货周期</h2>
         <div class="panel actDesc">
-          <div class="details">
-            <div class="tip"><span>是否一般供应商：</span>{{ dateData.battleneckSupplier == 1 ? '是' : '否' }}</div>
-            <div class="tip"><span>是否生产瓶颈供应商：</span>{{ dateData.isProduct == 1 ? '是' : '否' }}</div>
-            <div class="tip"><span>是否采购瓶颈供应商：</span>{{ dateData.isPurchase == 1 ? '是' : '否' }}</div>
-            <div class="tip">
+          <ul class="details">
+            <li class="tip"><span>是否一般供应商：</span>{{ dateData.battleneckSupplier == 1 ? '是' : '否' }}</li>
+            <li class="tip"><span>是否生产瓶颈供应商：</span>{{ dateData.isProduct == 1 ? '是' : '否' }}</li>
+            <li class="tip"><span>是否采购瓶颈供应商：</span>{{ dateData.isPurchase == 1 ? '是' : '否' }}</li>
+            <li class="tip">
               <span>重点部件名称：</span>
               <span class="component" v-for="item in dateData.components" :key="item.componentName">{{
                 item.componentName
               }}</span>
-            </div>
-            <div class="tip">
+            </li>
+            <li class="tip">
               <span>重点部件现有量：</span>
               <span class="component" v-for="item in dateData.components" :key="item.componentName">{{
                 item.stockQuantity
               }}</span>
-            </div>
-          </div>
+            </li>
+          </ul>
           <div class="panel_footer"></div>
         </div>
         <div class="panel panel_chart3">
@@ -75,19 +75,36 @@
           <div class="map3"></div>
         </div>
       </div>
-      <div class="right">
-        <h2>供货质量</h2>
-        <div class="panel panel_chart2">
-          <h2>供货产品质量</h2>
-          <ECharts class="chartTwo" :option="optionTwo"></ECharts>
-          <div class="panel_footer"></div>
-        </div>
-        <div class="panel panel_chart3">
-          <h2>供货产品趋势分析</h2>
-          <ECharts class="chartThree" :option="optionThree"></ECharts>
-          <div class="panel_footer"></div>
+      <div class="end">
+        <h2 class="quality">供货质量</h2>
+        <div class="rightbox">
+          <div class="right1 right">
+            <div class="panel panel_chart2">
+              <h2>检验周期趋势</h2>
+              <ECharts class="chartTwo" :option="InspectionCycle"></ECharts>
+              <div class="panel_footer"></div>
+            </div>
+            <div class="panel panel_chart3">
+              <h2>采购周期趋势</h2>
+              <ECharts class="chartThree" :option="buyCycle"></ECharts>
+              <div class="panel_footer"></div>
+            </div>
+          </div>
+          <div class="right2 right">
+            <div class="panel panel_chart2">
+              <h2>运输周期趋势</h2>
+              <ECharts class="chartTwo" :option="transCycle"></ECharts>
+              <div class="panel_footer"></div>
+            </div>
+            <div class="panel panel_chart3">
+              <h2>生产周期趋势</h2>
+              <ECharts class="chartThree" :option="productCycle"></ECharts>
+              <div class="panel_footer"></div>
+            </div>
+          </div>
         </div>
       </div>
+
       <!-- 右边透明 -->
       <div class="tab" @click="popMenu"></div>
       <!-- 选择菜单 -->
@@ -101,7 +118,7 @@
               <li><input type="checkbox" />税号</li>
               <li><input type="checkbox" />法定代表人</li>
               <li><input type="checkbox" />开户银行名称</li>
-              <li><input type="checkbox" />开户账号 </li>
+              <li><input type="checkbox" />开户账号</li>
               <li><input type="checkbox" />往来单位信息id</li>
             </ul>
           </div>
@@ -143,8 +160,11 @@ export default {
       productData: {},
       // 供货周期
       dateData: {},
-      dateImgY: [],
       // 柱状图周期y轴的值
+      dateImgY: [],
+      // 折线图
+      dataInspectionCycle: [],
+      dataDateBarChart: [],
     }
   },
   methods: {
@@ -154,14 +174,19 @@ export default {
       getAction(url, { id: this.query.id, FirstSupplier: this.query.FirstSupplier }).then((res) => {
         this.basisData = res.result
         this.productData = this.basisData.productList[0]
-        console.log(res.result);
+        // console.log(res.result)
       })
     },
     // 获取供货周期
     getDateData() {
       var url = '/supplycycle/getDataOfSupplyCycle'
       getAction(url, { id: this.query.id, FirstSupplier: this.query.FirstSupplier }).then((res) => {
-        this.dateData = res.result[0]
+        if (res.result.length != 0) {
+          this.dateData = res.result[0]
+        } else {
+          this.dateData = []
+        }
+        // console.log(res);
       })
     },
     // 获取供货周期详情
@@ -172,6 +197,28 @@ export default {
         this.dateImgY.push(res.result[0].purchaseLeadTime)
         this.dateImgY.push(res.result[0].transportTime)
         this.dateImgY.push(res.result[0].transportTimeDescription)
+      })
+    },
+    // 检验周期--折线图
+    getInspectionCycle() {
+      var url = '/supplycycle/inspectionCycle'
+      getAction(url, { id: this.query.id, FirstSupplier: this.query.FirstSupplier }).then((res) => {
+        // console.log(res.result[0])
+        this.dataInspectionCycle.push(res.result[0].checkTimeA)
+        this.dataInspectionCycle.push(res.result[0].checkTimeB)
+        this.dataInspectionCycle.push(res.result[0].checkTimeC)
+        this.dataInspectionCycle.push(res.result[0].checkTimeD)
+      })
+    },
+    // 供货质量--采购，运输，生成--柱状图
+    getDateBarChart() {
+      var url = '/supplycycle/getThreeCycle'
+      getAction(url, { id: this.query.id, FirstSupplier: this.query.FirstSupplier }).then((res) => {
+        console.log(res.result[0])
+        const obj = res.result[0]
+        for (let key in obj) {
+          this.dataDateBarChart.push(obj[key])
+        }
       })
     },
     // 弹出菜单
@@ -227,6 +274,7 @@ export default {
         },
         series: [
           {
+            barWidth: 39,
             data: this.dateImgY,
             type: 'bar',
             showBackground: true,
@@ -242,11 +290,192 @@ export default {
         ],
       }
     },
-    optionTwo() {
+    // optionTwo() {
+    //   return {
+    //     xAxis: {
+    //       type: 'category',
+    //       data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    //       axisLine: {
+    //         lineStyle: {
+    //           color: '#fff',
+    //           width: 1,
+    //         },
+    //       },
+    //     },
+    //     yAxis: {
+    //       type: 'value',
+    //       axisLine: {
+    //         lineStyle: {
+    //           color: '#fff',
+    //           width: 1,
+    //         },
+    //       },
+    //     },
+    //     tooltip: {
+    //       // 鼠标悬浮提示框显示数据
+    //       trigger: 'axis',
+    //       backgroundColor: 'rgba(32, 33, 36,.7)',
+    //       borderColor: 'rgba(32, 33, 36,0.20)',
+    //       borderWidth: 1,
+    //       textStyle: {
+    //         // 文字提示样式
+    //         color: '#fff',
+    //         fontSize: '12',
+    //       },
+    //       axisPointer: {
+    //         // 坐标轴虚线
+    //         type: 'none',
+    //         label: {
+    //           backgroundColor: '#6a7985',
+    //         },
+    //       },
+    //     },
+    //     series: [
+    //       {
+    //         data: [120, 200, 150, 80, 70, 110, 130],
+    //         type: 'bar',
+    //         showBackground: true,
+    //         backgroundStyle: {
+    //           color: 'rgba(180, 180, 180, 0.2)',
+    //         },
+    //       },
+    //     ],
+    //   }
+    // },
+    // optionThree() {
+    //   return {
+    //     tooltip: {
+    //       trigger: 'axis',
+    //     },
+    //     legend: {
+    //       data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine'],
+    //       textStyle: {
+    //         color: '#fff',
+    //       },
+    //     },
+    //     grid: {
+    //       left: '3%',
+    //       right: '4%',
+    //       bottom: '3%',
+    //       containLabel: true,
+    //     },
+    //     toolbox: {
+    //       feature: {
+    //         saveAsImage: {},
+    //       },
+    //     },
+    //     xAxis: {
+    //       type: 'category',
+    //       boundaryGap: false,
+    //       data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    //       axisLine: {
+    //         lineStyle: {
+    //           color: '#fff',
+    //           width: 1,
+    //         },
+    //       },
+    //     },
+    //     yAxis: {
+    //       type: 'value',
+    //       axisLine: {
+    //         lineStyle: {
+    //           color: '#fff',
+    //           width: 1,
+    //         },
+    //       },
+    //     },
+    //     series: [
+    //       {
+    //         name: 'Email',
+    //         type: 'line',
+    //         stack: 'Total',
+    //         data: [120, 132, 101, 134, 90, 230, 210],
+    //       },
+    //       {
+    //         name: 'Union Ads',
+    //         type: 'line',
+    //         stack: 'Total',
+    //         data: [220, 182, 191, 234, 290, 330, 310],
+    //       },
+    //       {
+    //         name: 'Video Ads',
+    //         type: 'line',
+    //         stack: 'Total',
+    //         data: [150, 232, 201, 154, 190, 330, 410],
+    //       },
+    //       {
+    //         name: 'Direct',
+    //         type: 'line',
+    //         stack: 'Total',
+    //         data: [320, 332, 301, 334, 390, 330, 320],
+    //       },
+    //       {
+    //         name: 'Search Engine',
+    //         type: 'line',
+    //         stack: 'Total',
+    //         data: [820, 932, 901, 934, 1290, 1330, 1320],
+    //       },
+    //     ],
+    //   }
+    // },
+
+    // 检验周期 InspectionCycle
+    InspectionCycle() {
       return {
         xAxis: {
           type: 'category',
-          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          data: ['A组', 'B组', 'C组', 'D组'],
+          axisLine: {
+            lineStyle: {
+              color: '#fff',
+              width: 1,
+            },
+          },
+        },
+        yAxis: {
+          type: 'value',
+          axisLine: {
+            lineStyle: {
+              color: '#fff',
+              width: 1,
+            },
+          },
+        },
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'none',
+            label: {
+              backgroundColor: '#6a7985',
+            },
+          },
+        },
+        series: [
+          {
+            data: this.dataInspectionCycle,
+            type: 'line',
+            lineStyle: {
+              // 设置线条的style等
+              normal: {
+                color: '#BB2649', // 折线线条颜色:红色
+              },
+            },
+            itemStyle: {
+              // 设置线条上点的颜色（和图例的颜色）
+              normal: {
+                color: '#BB2649',
+              },
+            },
+          },
+        ],
+      }
+    },
+    // 采购周期 buyCycle
+    buyCycle() {
+      return {
+        xAxis: {
+          type: 'category',
+          data: ['采购周期', '生产周期', '运输周期'],
           axisLine: {
             lineStyle: {
               color: '#fff',
@@ -284,41 +513,27 @@ export default {
         },
         series: [
           {
-            data: [120, 200, 150, 80, 70, 110, 130],
+            barWidth: 39,
+            data: this.dataDateBarChart,
             type: 'bar',
             showBackground: true,
             backgroundStyle: {
               color: 'rgba(180, 180, 180, 0.2)',
             },
+            itemStyle: {
+              normal: {
+                color: 'blue',
+              },
+            },
           },
         ],
       }
     },
-    optionThree() {
+    // 运输周期 transCycle
+    transCycle() {
       return {
-        tooltip: {
-          trigger: 'axis',
-        },
-        legend: {
-          data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine'],
-          textStyle: {
-            color: '#fff',
-          },
-        },
-        grid: {
-          left: '3%',
-          right: '4%',
-          bottom: '3%',
-          containLabel: true,
-        },
-        toolbox: {
-          feature: {
-            saveAsImage: {},
-          },
-        },
         xAxis: {
           type: 'category',
-          boundaryGap: false,
           data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
           axisLine: {
             lineStyle: {
@@ -338,34 +553,62 @@ export default {
         },
         series: [
           {
-            name: 'Email',
+            data: [150, 230, 224, 218, 135, 147, 260],
             type: 'line',
-            stack: 'Total',
-            data: [120, 132, 101, 134, 90, 230, 210],
+            lineStyle: {
+              // 设置线条的style等
+              normal: {
+                color: 'green', // 折线线条颜色:红色
+              },
+            },
+            itemStyle: {
+              // 设置线条上点的颜色（和图例的颜色）
+              normal: {
+                color: 'green',
+              },
+            },
           },
-          {
-            name: 'Union Ads',
-            type: 'line',
-            stack: 'Total',
-            data: [220, 182, 191, 234, 290, 330, 310],
+        ],
+      }
+    },
+    // 生产周期 productCycle
+    productCycle() {
+      return {
+        xAxis: {
+          type: 'category',
+          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          axisLine: {
+            lineStyle: {
+              color: '#fff',
+              width: 1,
+            },
           },
-          {
-            name: 'Video Ads',
-            type: 'line',
-            stack: 'Total',
-            data: [150, 232, 201, 154, 190, 330, 410],
+        },
+        yAxis: {
+          type: 'value',
+          axisLine: {
+            lineStyle: {
+              color: '#fff',
+              width: 1,
+            },
           },
+        },
+        series: [
           {
-            name: 'Direct',
+            data: [150, 230, 224, 218, 135, 147, 260],
             type: 'line',
-            stack: 'Total',
-            data: [320, 332, 301, 334, 390, 330, 320],
-          },
-          {
-            name: 'Search Engine',
-            type: 'line',
-            stack: 'Total',
-            data: [820, 932, 901, 934, 1290, 1330, 1320],
+            lineStyle: {
+              // 设置线条的style等
+              normal: {
+                color: '#1684b9', // 折线线条颜色:红色
+              },
+            },
+            itemStyle: {
+              // 设置线条上点的颜色（和图例的颜色）
+              normal: {
+                color: '#1684b9',
+              },
+            },
           },
         ],
       }
@@ -375,6 +618,8 @@ export default {
     this.getBasis()
     this.getDateData()
     this.getDateImg()
+    this.getInspectionCycle()
+    this.getDateBarChart()
   },
   created() {
     this.query = this.$route.query
@@ -458,28 +703,43 @@ header {
       }
     }
   }
-  .right {
-    flex: 3;
-    color: #fff;
-    h2 {
+  .end {
+    flex: 6;
+    .quality {
       color: #fff;
       text-align: center;
     }
-    .panel_chart2 {
-      .chartTwo {
-        height: 280px;
+    .rightbox {
+      display: flex;
+      .right1 {
+        flex: 1;
       }
-    }
-    .panel_chart3 {
-      .chartThree {
-        height: 280px;
+      .right2 {
+        flex: 1;
+      }
+      .right {
+        color: #fff;
+        h2 {
+          color: #fff;
+          text-align: center;
+        }
+        .panel_chart2 {
+          .chartTwo {
+            height: 280px;
+          }
+        }
+        .panel_chart3 {
+          .chartThree {
+            height: 280px;
+          }
+        }
       }
     }
   }
+
   .mid {
     position: relative;
     margin: 0 10px;
-    flex: 3;
     flex: 3;
     color: #fff;
     h2 {
@@ -487,7 +747,7 @@ header {
       text-align: center;
     }
     .details {
-      margin-left: 20px;
+      margin-left: 10px;
       margin-bottom: 5px;
       .tip {
         margin: 10px 0 0 10px;
@@ -547,8 +807,8 @@ header {
     position: relative;
     // height: 100px;
     border: 1px solid rgba(25, 186, 139, 0.17);
-    padding: 0.25rem;
-    margin: 0.25rem;
+    padding: 4px;
+    margin: 4px;
     &::before {
       position: absolute;
       top: 0;
