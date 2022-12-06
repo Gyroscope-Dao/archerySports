@@ -40,25 +40,8 @@
             <li v-for="item in firstList" :key="item.id">
               <div class="top">
                 <span>{{ item.supplierName }}</span>
-                <button class="btn" @click="look(item.id, item.isFirstSupply)">点击查看</button>
-              </div>
-              <div class="bottom">{{ item.supplierAddress }}</div>
-            </li>
-          </ul>
-          <ul class="supplyList" v-if="haveFirstList">
-            <li v-for="item in firstList" :key="item.id">
-              <div class="top">
-                <span>{{ item.supplierName }}</span>
-                <button class="btn" @click="look(item.id, item.isFirstSupply)">点击查看</button>
-              </div>
-              <div class="bottom">{{ item.supplierAddress }}</div>
-            </li>
-          </ul>
-          <ul class="supplyList" v-if="haveFirstList">
-            <li v-for="item in firstList" :key="item.id">
-              <div class="top">
-                <span>{{ item.supplierName }}</span>
-                <button class="btn" @click="look(item.id, item.isFirstSupply)">点击查看</button>
+                <button class="btn" @click="look(item.id, item.isFirstSupply)"><span>供应商画像</span></button>
+                <button class="btn" @click="lookScore(item.id, item.isFirstSupply)"><span>评价</span></button>
               </div>
               <div class="bottom">{{ item.supplierAddress }}</div>
             </li>
@@ -69,7 +52,8 @@
             <li v-for="item in secondList" :key="item.id">
               <div class="top">
                 <span>{{ item.supplierName }}</span>
-                <button class="btn" @click="look(item.id, item.isFirstSupply)">点击查看</button>
+                <button class="btn" @click="look(item.id, item.isFirstSupply)"><span>供应商画像</span></button>
+                <button class="btn" @click="lookScore(item.id, item.isFirstSupply)"><span>评价</span></button>
               </div>
               <div class="bottom">{{ item.supplierAddress }}</div>
             </li>
@@ -168,12 +152,22 @@ export default {
     },
   },
   methods: {
+    lookScore(id, isFirstSupply) {
+      let routeData = this.$router.resolve({
+        path: '/portrait/score',
+        query: {
+          id: id,
+          FirstSupplier: isFirstSupply,
+        },
+      })
+      window.open(routeData.href, '_blank')
+    },
     look(id, isFirstSupply) {
       let routeData = this.$router.resolve({
         path: '/portrait/supply',
         query: {
           id: id,
-          FirstSupplier: isFirstSupply == 1 ? true : false,
+          FirstSupplier: isFirstSupply,
         },
       })
       window.open(routeData.href, '_blank')
@@ -298,7 +292,7 @@ header {
     flex: 2;
     .supplyShow {
       color: #fff;
-      margin-left: 20px;
+      text-align: center;
     }
     h3 {
       color: #fff;
@@ -315,9 +309,14 @@ header {
         }
         .btn {
           padding: 0 10px;
-          color: #fff;
-          background-color: #0289b2;
+          margin-right: 10px;
+          background-color: orange;
+          // opacity: 0.6;
           border-radius: 5px;
+          span {
+            margin: 0;
+            color: #fff;
+          }
         }
       }
     }
