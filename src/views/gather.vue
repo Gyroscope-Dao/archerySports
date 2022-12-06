@@ -157,7 +157,7 @@ export default {
     background-color: rgb(250, 250, 250);
     height: 130px;
     width: 86%;
-    bottom: -50px;
+    bottom: 50px;
     left: 110px;
     display: flex;
     justify-content: space-around;
