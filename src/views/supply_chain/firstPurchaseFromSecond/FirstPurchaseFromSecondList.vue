@@ -133,9 +133,9 @@
             dataIndex: 'secondSupplierId_dictText'
           },
           {
-            title:'核心部件编号',
+            title:'核心部件名称',
             align:"center",
-            dataIndex: 'componentId'
+            dataIndex: 'componentId_dictText'
           },
           {
             title:'采购时间',
@@ -207,7 +207,7 @@
         let fieldList=[];
         fieldList.push({type:'sel_search',value:'firstSupplierId',text:'一级供应商编号',dictTable:"first_supplier_inf", dictText:'supplier_name', dictCode:'first_supplier_id'})
         fieldList.push({type:'sel_search',value:'secondSupplierId',text:'二级供应商编号',dictTable:"second_supplier_inf", dictText:'supplier_name', dictCode:'second_supplier_id'})
-        fieldList.push({type:'string',value:'componentId',text:'核心部件编号',dictCode:''})
+        fieldList.push({type:'sel_search',value:'componentId',text:'核心部件名称',dictTable:"component_inf", dictText:'component_name', dictCode:'component_id'})
         fieldList.push({type:'date',value:'purchaseTime',text:'采购时间'})
         fieldList.push({type:'int',value:'purchaseNum',text:'采购数量',dictCode:''})
         fieldList.push({type:'int',value:'leadTime',text:'采购提前期（/天）',dictCode:''})
