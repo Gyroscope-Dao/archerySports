@@ -32,7 +32,7 @@
             <li class="tip"><span>供应商的资质：</span>{{ basisData.certification }}</li>
             <li class="tip"><span>供应商地址：</span>{{ basisData.supplierAddress }}</li>
             <li class="tip"><span>供应的产品：</span>{{ productData.productId }}</li>
-            <li class="tip"><span>是否一级供应商：</span>{{ query.FirstSupplier ? '是' : '否' }}</li>
+            <li class="tip"><span>是否一级供应商：</span>{{ query.FirstSupplier === 'true' ? '是' : '否' }}</li>
             <!-- <li class="tip"><span>供货比例：</span>{{basisData}}</li> -->
             <li class="tip"><span>成品库存：</span>{{ productData.productStock }}</li>
             <li class="tip"><span>生成批量：</span>{{ productData.productionLot }}</li>
@@ -160,7 +160,7 @@ export default {
       productData: {},
       // 供货周期
       dateData: {
-        battleneckSupplier: 0
+        battleneckSupplier: 0,
       },
       // 柱状图周期y轴的值
       dateImgY: [],
@@ -183,21 +183,33 @@ export default {
     getDateData() {
       var url = '/supplycycle/getDataOfSupplyCycle'
       getAction(url, { id: this.query.id, FirstSupplier: this.query.FirstSupplier }).then((res) => {
-        if (res.result.length != 0) {
+        // console.log(res)
+        // console.log( typeof(this.query.FirstSupplier));
+        if (this.query.FirstSupplier == 'true') {
           this.dateData = res.result[0]
-        } 
+        } else  {
+          this.dateData = res.result
+        }
+        // if (res.result.length != 0) {
+        //   this.dateData = res.result
+        // }
       })
     },
     // 获取供货周期详情-柱状图
     getDateImg() {
       var url = '/supplycycle/getDataOfSupplyCycleBarChart'
       getAction(url, { id: this.query.id, FirstSupplier: this.query.FirstSupplier }).then((res) => {
-        console.log(res);
-        if (res.result.length != 0) {
+        console.log(res)
+        if (this.query.FirstSupplier == 'true') {
           this.dateImgY.push(res.result[0].productionCycle)
           this.dateImgY.push(res.result[0].purchaseLeadTime)
           this.dateImgY.push(res.result[0].transportTime)
           this.dateImgY.push(res.result[0].transportTimeDescription)
+        } else {
+          this.dateImgY.push(res.result.productionCycle)
+          this.dateImgY.push(res.result.purchaseLeadTime)
+          this.dateImgY.push(res.result.transportTime)
+          this.dateImgY.push(res.result.transportTimeDescription)
         }
       })
     },
@@ -620,9 +632,9 @@ export default {
   },
   mounted() {
     this.getBasis()
-    // if(this.query.FirstSupplier) {
-    //   this.getDateData()
-    // }
+    if (this.query.FirstSupplier) {
+      this.getDateData()
+    }
     // console.log(this.query.FirstSupplier);
     this.getDateImg()
     this.getInspectionCycle()
@@ -694,6 +706,7 @@ header {
       text-align: center;
     }
     .details {
+      overflow: hidden;
       margin-left: 20px;
       margin-bottom: 5px;
       .tip {
@@ -702,11 +715,6 @@ header {
         }
         margin: 10px 0 0 10px;
         font-size: 16px;
-      }
-    }
-    .panel_chart1 {
-      .chart1 {
-        height: 270px;
       }
     }
   }
@@ -769,7 +777,7 @@ header {
       }
     }
     .chartOne {
-      height: 400px;
+      height: 415px;
       z-index: 999;
     }
     .map {

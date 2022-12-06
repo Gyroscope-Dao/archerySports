@@ -5,14 +5,14 @@
     </header>
     <div class="container">
       <!-- 主体左边 -->
-      <div class="left">
+      <!-- <div class="left">
         <echartsItem>
           <item1></item1>
         </echartsItem>
         <echartsItem>
           <item2></item2>
         </echartsItem>
-      </div>
+      </div> -->
       <!-- 主体中间 -->
       <div class="mid">
         <ECharts class="china" :option="option" ref="myEchart"></ECharts>
@@ -36,6 +36,24 @@
         <div class="panel">
           <h2 class="supplyShow">供应商列表展示</h2>
           <h3>一级</h3>
+          <ul class="supplyList" v-if="haveFirstList">
+            <li v-for="item in firstList" :key="item.id">
+              <div class="top">
+                <span>{{ item.supplierName }}</span>
+                <button class="btn" @click="look(item.id, item.isFirstSupply)">点击查看</button>
+              </div>
+              <div class="bottom">{{ item.supplierAddress }}</div>
+            </li>
+          </ul>
+          <ul class="supplyList" v-if="haveFirstList">
+            <li v-for="item in firstList" :key="item.id">
+              <div class="top">
+                <span>{{ item.supplierName }}</span>
+                <button class="btn" @click="look(item.id, item.isFirstSupply)">点击查看</button>
+              </div>
+              <div class="bottom">{{ item.supplierAddress }}</div>
+            </li>
+          </ul>
           <ul class="supplyList" v-if="haveFirstList">
             <li v-for="item in firstList" :key="item.id">
               <div class="top">
@@ -112,7 +130,7 @@ export default {
           },
         },
         title: {
-          text: '地图展示',
+          text: '供应商地图分布',
           left: '45%',
           textStyle: {
             color: '#fff',
@@ -273,7 +291,11 @@ header {
   display: flex;
   .left,
   .right {
-    flex: 3;
+    height: 600px;
+
+    // 左边两图时候的flex
+    // flex: 3;
+    flex: 2;
     .supplyShow {
       color: #fff;
       margin-left: 20px;
@@ -307,7 +329,7 @@ header {
   .mid {
     // background-color: aquamarine;
     position: relative;
-    flex: 5;
+    flex: 6;
     height: 650px;
     padding: 10px;
     margin: 20px;
@@ -355,7 +377,9 @@ header {
     }
   }
   .panel {
-    height: 90%;
+    overflow: auto;
+    overflow-x: hidden;
+    height: 99%;
     position: relative;
     border: 1px solid rgba(25, 186, 139, 0.17);
     padding: 4px;
