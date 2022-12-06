@@ -1,73 +1,25 @@
 <template>
   <div class="allPage" :class="{ mainOpacity: mainOpacity }">
     <header>
-      <h1>供应商画像系统</h1>
+      <h1>供应商评分系统</h1>
     </header>
     <div class="container">
       <div class="left">
-        <h2>基本信息</h2>
-        <div class="panel basisDesc">
-          <ul class="details">
-            <li class="tip"><span>供应商名称：</span>{{ basisData.supplierName }}</li>
-            <li class="tip"><span>联系人：</span>{{ basisData.contact }}</li>
-            <li class="tip"><span>联系电话：</span>{{ basisData.contactNum }}</li>
-            <li class="tip"><span>税号：</span>{{ basisData.taxId }}</li>
-            <li class="tip"><span>法定代表人：</span>{{ basisData.legalPerson }}</li>
-            <li class="tip"><span>开户银行名称：</span>{{ basisData.bankName }}</li>
-            <li class="tip"><span>开户账号：</span>{{ basisData.bankAccount }}</li>
-            <li class="tip"><span>往来单位信息id：</span>{{ basisData.eptId }}</li>
-            <!-- <div class="tip"><span>位置信息：</span>{{ basisData.bankName }}</div> -->
-          </ul>
-
+        <div class="panel panel_chart1">
+          <h2>检验周期趋势</h2>
+          <ECharts class="chart" :option="option1"></ECharts>
           <div class="panel_footer"></div>
         </div>
-        <!-- <div class="panel panel_chart1">
-          <h2>供应商产品响应时长分析</h2>
-          <ECharts class="chart1" :option="option1"></ECharts>
-          <div class="panel_footer"></div>
-        </div> -->
-        <div class="panel basisDesc1">
-          <ul class="details">
-            <li class="tip"><span>是否民营企业：</span>是</li>
-            <li class="tip"><span>供应商的资质：</span>{{ basisData.certification }}</li>
-            <li class="tip"><span>供应商地址：</span>{{ basisData.supplierAddress }}</li>
-            <li class="tip"><span>供应的产品：</span>{{ productData.productId }}</li>
-            <li class="tip"><span>是否一级供应商：</span>{{ query.FirstSupplier === 1 ? '是' : '否' }}</li>
-            <!-- <li class="tip"><span>供货比例：</span>{{basisData}}</li> -->
-            <li class="tip"><span>成品库存：</span>{{ productData.productStock }}</li>
-            <li class="tip"><span>生成批量：</span>{{ productData.productionLot }}</li>
-            <li class="tip"><span>日均产量：</span>{{ productData.dayProLot }}</li>
-            <li class="tip"><span>日最大生成量：</span>{{ productData.maxDayProLot }}</li>
-          </ul>
+        <div class="panel panel_chart2">
+          <h2>检验周期趋势</h2>
+          <ECharts class="chart" :option="option1"></ECharts>
           <div class="panel_footer"></div>
         </div>
       </div>
       <div class="mid">
-        <h2>供货周期</h2>
-        <div class="panel actDesc">
-          <ul class="details">
-            <li class="tip"><span>是否一般供应商：</span>{{ dateData.battleneckSupplier === 1 ? '是' : '否' }}</li>
-            <li class="tip"><span>是否生产瓶颈供应商：</span>{{ dateData.isProduct === 1 ? '是' : '否' }}</li>
-            <li class="tip"><span>是否采购瓶颈供应商：</span>{{ dateData.isPurchase === 1 ? '是' : '否' }}</li>
-            <li class="tip">
-              <span>重点部件名称：</span>
-              <span class="component" v-for="item in dateData.components" :key="item.componentName">{{
-                item.componentName
-              }}</span>
-            </li>
-            <li class="tip">
-              <span>重点部件现有量：</span>
-              <span class="component" v-for="item in dateData.components" :key="item.componentName">{{
-                item.stockQuantity
-              }}</span>
-            </li>
-          </ul>
-          <div class="panel_footer"></div>
-        </div>
-        <div class="panel panel_chart3">
-          <h2>供货周期详情</h2>
-          <ECharts class="chartOne" :option="optionOne"></ECharts>
-          <div class="panel_footer"></div>
+        <div class="score">
+          <h2 class="score_title">供应商评价指标</h2>
+          <h1 class="score_num">{{score}}</h1>
         </div>
         <div class="map">
           <div class="map1"></div>
@@ -76,32 +28,15 @@
         </div>
       </div>
       <div class="end">
-        <h2 class="quality">供货质量</h2>
-        <div class="rightbox">
-          <div class="right1 right">
-            <div class="panel panel_chart2">
-              <h2>检验周期趋势</h2>
-              <ECharts class="chartTwo" :option="InspectionCycle"></ECharts>
-              <div class="panel_footer"></div>
-            </div>
-            <div class="panel panel_chart3">
-              <h2>采购周期趋势</h2>
-              <ECharts class="chartThree" :option="buyCycle"></ECharts>
-              <div class="panel_footer"></div>
-            </div>
-          </div>
-          <div class="right2 right">
-            <div class="panel panel_chart2">
-              <h2>运输周期趋势</h2>
-              <ECharts class="chartTwo" :option="transCycle"></ECharts>
-              <div class="panel_footer"></div>
-            </div>
-            <div class="panel panel_chart3">
-              <h2>生产周期趋势</h2>
-              <ECharts class="chartThree" :option="productCycle"></ECharts>
-              <div class="panel_footer"></div>
-            </div>
-          </div>
+        <div class="panel panel_chart3">
+          <h2>检验周期趋势</h2>
+          <ECharts class="chart" :option="option2"></ECharts>
+          <div class="panel_footer"></div>
+        </div>
+        <div class="panel panel_chart4">
+          <h2>检验周期趋势</h2>
+          <ECharts class="chart" :option="option2"></ECharts>
+          <div class="panel_footer"></div>
         </div>
       </div>
 
@@ -140,104 +75,28 @@ import { getAction } from '@/api/manage'
 export default {
   data() {
     return {
+        // 评价分数
+        score: 98,
       // 控制是否显示menu
       showMenu: false,
       // 控制是否全部透明
       mainOpacity: false,
       query: null,
-      // 基本信息上边
-      basisData: {
-        bankName: '',
-        supplierSimpleName: '',
-        legalPerson: '',
-        postCode: '',
-        estabYear: '',
-        contact: '',
-        contactNum: '',
-        taxId: '',
-      },
-      // 下边基本信息
-      productData: {},
-      // 供货周期
-      dateData: {
-        battleneckSupplier: 0,
-        isProduct: 0,
-        isPurchase: 0
-      },
-      // 柱状图周期y轴的值
-      dateImgY: [],
-      // 折线图
-      dataInspectionCycle: [],
-      dataDateBarChart: [],
+      data1: null,
+      data2: null,
+      data3: null,
+      data4: null,
     }
   },
   methods: {
-    // 获取基本信息
-    getBasis() {
-      var url = '/portrayal/queryById'
-      getAction(url, { id: this.query.id, FirstSupplier: this.query.FirstSupplier }).then((res) => {
-        this.basisData = res.result
-        this.productData = this.basisData.productList[0]
-        // console.log(res.result)
-      })
+    send() {
+      console.log(this.data1, this.data2, this.data3, this.data4)
     },
-    // 获取供货周期
-    getDateData() {
-      var url = '/supplycycle/getDataOfSupplyCycle'
-      getAction(url, { id: this.query.id, FirstSupplier: this.query.FirstSupplier }).then((res) => {
-        // console.log(res)
-        // console.log( typeof(this.query.FirstSupplier));
-        if (this.query.FirstSupplier == 1 && res.result.length != 0) {
-            this.dateData = res.result[0]
-            // console.log(this.dateData);
-        } else  {
-          this.dateData = res.result
-        }
-        // if (res.result.length != 0) {
-        //   this.dateData = res.result
-        // }
-      })
-    },
-    // 获取供货周期详情-柱状图
-    getDateImg() {
-      var url = '/supplycycle/getDataOfSupplyCycleBarChart'
-      getAction(url, { id: this.query.id, FirstSupplier: this.query.FirstSupplier }).then((res) => {
-        if (this.query.FirstSupplier == 1) {
-          this.dateImgY.push(res.result[0].productionCycle)
-          this.dateImgY.push(res.result[0].purchaseLeadTime)
-          this.dateImgY.push(res.result[0].transportTime)
-          this.dateImgY.push(res.result[0].transportTimeDescription)
-        } else {
-          this.dateImgY.push(res.result.productionCycle)
-          this.dateImgY.push(res.result.purchaseLeadTime)
-          this.dateImgY.push(res.result.transportTime)
-          this.dateImgY.push(res.result.transportTimeDescription)
-        }
-      })
-    },
-    // 检验周期--折线图
-    getInspectionCycle() {
-      var url = '/supplycycle/inspectionCycle'
-      getAction(url, { id: this.query.id, FirstSupplier: this.query.FirstSupplier }).then((res) => {
-        if (res.result.length != 0) {
-          this.dataInspectionCycle.push(res.result[0].checkTimeA)
-          this.dataInspectionCycle.push(res.result[0].checkTimeB)
-          this.dataInspectionCycle.push(res.result[0].checkTimeC)
-          this.dataInspectionCycle.push(res.result[0].checkTimeD)
-        }
-      })
-    },
-    // 供货质量--采购，运输，生成--柱状图
-    getDateBarChart() {
-      var url = '/supplycycle/getThreeCycle'
-      getAction(url, { id: this.query.id, FirstSupplier: this.query.FirstSupplier }).then((res) => {
-        const obj = res.result[0]
-        if (res.result.length != 0) {
-          for (let key in obj) {
-            this.dataDateBarChart.push(obj[key])
-          }
-        }
-      })
+    clear() {
+      this.data1 = null
+      this.data2 = null
+      this.data3 = null
+      this.data4 = null
     },
     // 弹出菜单
     popMenu() {
@@ -308,7 +167,6 @@ export default {
         ],
       }
     },
-    // optionTwo() {
     //   return {
     //     xAxis: {
     //       type: 'category',
@@ -488,12 +346,12 @@ export default {
         ],
       }
     },
-    // 采购周期 buyCycle
-    buyCycle() {
+    // 柱状
+    option1() {
       return {
         xAxis: {
           type: 'category',
-          data: ['采购周期', '生产周期', '运输周期'],
+          data: ['数据', '数据', '数据', '数据', '数据'],
           axisLine: {
             lineStyle: {
               color: '#fff',
@@ -532,7 +390,7 @@ export default {
         series: [
           {
             barWidth: 39,
-            data: this.dataDateBarChart,
+            data: [10, 30, 20, 25, 35],
             type: 'bar',
             showBackground: true,
             backgroundStyle: {
@@ -547,8 +405,8 @@ export default {
         ],
       }
     },
-    // 运输周期 transCycle
-    transCycle() {
+    // 折线
+    option2() {
       return {
         xAxis: {
           type: 'category',
@@ -589,63 +447,11 @@ export default {
         ],
       }
     },
-    // 生产周期 productCycle
-    productCycle() {
-      return {
-        xAxis: {
-          type: 'category',
-          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-          axisLine: {
-            lineStyle: {
-              color: '#fff',
-              width: 1,
-            },
-          },
-        },
-        yAxis: {
-          type: 'value',
-          axisLine: {
-            lineStyle: {
-              color: '#fff',
-              width: 1,
-            },
-          },
-        },
-        series: [
-          {
-            data: [150, 230, 224, 218, 135, 147, 260],
-            type: 'line',
-            lineStyle: {
-              // 设置线条的style等
-              normal: {
-                color: '#1684b9', // 折线线条颜色:红色
-              },
-            },
-            itemStyle: {
-              // 设置线条上点的颜色（和图例的颜色）
-              normal: {
-                color: '#1684b9',
-              },
-            },
-          },
-        ],
-      }
-    },
   },
-  mounted() {
-    this.getDateData()
-    
-    if (this.query.FirstSupplier === 1) {
-      this.getDateData()
-    }
-    // console.log(this.query.FirstSupplier);
-    this.getBasis()
-    this.getDateImg()
-    this.getInspectionCycle()
-    this.getDateBarChart()
-  },
+  mounted() {},
   created() {
     this.query = this.$route.query
+    console.log(this.query)
   },
 }
 </script>
@@ -687,6 +493,7 @@ header {
   position: relative;
   min-width: 1200px;
   max-width: 2048px;
+  height: 100%;
   margin: 0 auto;
   padding: 10px 10px 0;
   display: flex;
@@ -704,86 +511,55 @@ header {
   }
   .left {
     flex: 3;
-    color: #fff;
     h2 {
       color: #fff;
       text-align: center;
     }
-    .details {
-      overflow: hidden;
-      margin-left: 20px;
-      margin-bottom: 22px;
-      .tip {
-        span {
-          color: #02a6b5;
-        }
-        margin: 10px 0 0 10px;
-        font-size: 16px;
-      }
+    .chart {
+      height: 280px;
     }
   }
   .end {
-    flex: 6;
-    .quality {
-      color: #fff;
-      text-align: center;
-    }
-    .rightbox {
-      display: flex;
-      .right1 {
-        flex: 1;
-      }
-      .right2 {
-        flex: 1;
-      }
-      .right {
-        color: #fff;
-        h2 {
-          color: #fff;
-          text-align: center;
-        }
-        .panel_chart2 {
-          .chartTwo {
-            height: 279px;
-          }
-        }
-        .panel_chart3 {
-          .chartThree {
-            height: 279px;
-          }
-        }
-      }
-    }
-  }
-
-  .mid {
-    position: relative;
-    margin: 0 10px;
     flex: 3;
-    color: #fff;
     h2 {
       color: #fff;
       text-align: center;
     }
-    .details {
-      margin-left: 10px;
-      margin-bottom: 5px;
-      .tip {
-        margin: 10px 0 0 10px;
-        font-size: 16px;
-        span {
-          color: #02a6b5;
-        }
-        .component {
-          color: #fff;
-          margin-right: 10px;
-        }
+    .chart {
+      height: 280px;
+    }
+  }
+  .mid {
+    margin: 0 10px;
+    flex: 3;
+    .score {
+      width: 430px;
+      height: 430px;
+      //   border: 1px solid red;
+      border-radius: 50%;
+
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 99;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      .score_title {
+        text-align: center;
+        color: #09f8e0;
+        font-size: 26px;
+      }
+      .score_num {
+        text-align: center;
+        color: #09f8e0;
+        font-size: 100px;
+        font-family: 'shuai';
       }
     }
-    .chartOne {
-      height: 415px;
-      z-index: 999;
-    }
+
     .map {
       .map1 {
         position: absolute;
@@ -827,7 +603,7 @@ header {
     // height: 100px;
     border: 1px solid rgba(25, 186, 139, 0.17);
     padding: 4px;
-    margin: 4px;
+    margin: 15px 0;
     &::before {
       position: absolute;
       top: 0;
@@ -873,18 +649,6 @@ header {
         border-right: 2px solid #02a6b5;
         content: '';
       }
-    }
-  }
-  .menu {
-    position: absolute;
-    width: 360px;
-    height: 100%;
-    right: 0;
-    bottom: 0;
-    background-color: #fff;
-    padding: 30px;
-    ul {
-      list-style: none;
     }
   }
 }
