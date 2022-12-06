@@ -32,7 +32,7 @@
             <li class="tip"><span>供应商的资质：</span>{{ basisData.certification }}</li>
             <li class="tip"><span>供应商地址：</span>{{ basisData.supplierAddress }}</li>
             <li class="tip"><span>供应的产品：</span>{{ productData.productId }}</li>
-            <li class="tip"><span>是否一级供应商：</span>{{ query.FirstSupplier === 'true' ? '是' : '否' }}</li>
+            <li class="tip"><span>是否一级供应商：</span>{{ query.FirstSupplier === 1 ? '是' : '否' }}</li>
             <!-- <li class="tip"><span>供货比例：</span>{{basisData}}</li> -->
             <li class="tip"><span>成品库存：</span>{{ productData.productStock }}</li>
             <li class="tip"><span>生成批量：</span>{{ productData.productionLot }}</li>
@@ -161,6 +161,8 @@ export default {
       // 供货周期
       dateData: {
         battleneckSupplier: 0,
+        isProduct: 0,
+        isPurchase: 0
       },
       // 柱状图周期y轴的值
       dateImgY: [],
@@ -185,8 +187,9 @@ export default {
       getAction(url, { id: this.query.id, FirstSupplier: this.query.FirstSupplier }).then((res) => {
         // console.log(res)
         // console.log( typeof(this.query.FirstSupplier));
-        if (this.query.FirstSupplier == 'true') {
-          this.dateData = res.result[0]
+        if (this.query.FirstSupplier == 1 && res.result.length != 0) {
+            this.dateData = res.result[0]
+            // console.log(this.dateData);
         } else  {
           this.dateData = res.result
         }
@@ -199,8 +202,7 @@ export default {
     getDateImg() {
       var url = '/supplycycle/getDataOfSupplyCycleBarChart'
       getAction(url, { id: this.query.id, FirstSupplier: this.query.FirstSupplier }).then((res) => {
-        console.log(res)
-        if (this.query.FirstSupplier == 'true') {
+        if (this.query.FirstSupplier == 1) {
           this.dateImgY.push(res.result[0].productionCycle)
           this.dateImgY.push(res.result[0].purchaseLeadTime)
           this.dateImgY.push(res.result[0].transportTime)
@@ -631,11 +633,13 @@ export default {
     },
   },
   mounted() {
-    this.getBasis()
-    if (this.query.FirstSupplier) {
+    this.getDateData()
+    
+    if (this.query.FirstSupplier === 1) {
       this.getDateData()
     }
     // console.log(this.query.FirstSupplier);
+    this.getBasis()
     this.getDateImg()
     this.getInspectionCycle()
     this.getDateBarChart()
@@ -708,7 +712,7 @@ header {
     .details {
       overflow: hidden;
       margin-left: 20px;
-      margin-bottom: 5px;
+      margin-bottom: 22px;
       .tip {
         span {
           color: #02a6b5;
@@ -740,12 +744,12 @@ header {
         }
         .panel_chart2 {
           .chartTwo {
-            height: 280px;
+            height: 279px;
           }
         }
         .panel_chart3 {
           .chartThree {
-            height: 280px;
+            height: 279px;
           }
         }
       }
