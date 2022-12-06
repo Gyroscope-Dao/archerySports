@@ -46,9 +46,9 @@
         <h2>供货周期</h2>
         <div class="panel actDesc">
           <ul class="details">
-            <li class="tip"><span>是否一般供应商：</span>{{ dateData.battleneckSupplier == 1 ? '是' : '否' }}</li>
-            <li class="tip"><span>是否生产瓶颈供应商：</span>{{ dateData.isProduct == 1 ? '是' : '否' }}</li>
-            <li class="tip"><span>是否采购瓶颈供应商：</span>{{ dateData.isPurchase == 1 ? '是' : '否' }}</li>
+            <li class="tip"><span>是否一般供应商：</span>{{ dateData.battleneckSupplier === 1 ? '是' : '否' }}</li>
+            <li class="tip"><span>是否生产瓶颈供应商：</span>{{ dateData.isProduct === 1 ? '是' : '否' }}</li>
+            <li class="tip"><span>是否采购瓶颈供应商：</span>{{ dateData.isPurchase === 1 ? '是' : '否' }}</li>
             <li class="tip">
               <span>重点部件名称：</span>
               <span class="component" v-for="item in dateData.components" :key="item.componentName">{{
@@ -105,9 +105,9 @@
         </div>
       </div>
 
-      <!-- 右边透明 -->
+      <!-- 右边透明
       <div class="tab" @click="popMenu"></div>
-      <!-- 选择菜单 -->
+      选择菜单
       <div class="menu" v-if="showMenu">
         <div class="drawer-bootom-button" v-show="!disableSubmit">
           <div class="basis">
@@ -128,7 +128,7 @@
           </a-popconfirm>
           <a-button @click="back" type="primary" :loading="confirmLoading">确定</a-button>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -159,7 +159,9 @@ export default {
       // 下边基本信息
       productData: {},
       // 供货周期
-      dateData: {},
+      dateData: {
+        battleneckSupplier: 0
+      },
       // 柱状图周期y轴的值
       dateImgY: [],
       // 折线图
@@ -183,41 +185,43 @@ export default {
       getAction(url, { id: this.query.id, FirstSupplier: this.query.FirstSupplier }).then((res) => {
         if (res.result.length != 0) {
           this.dateData = res.result[0]
-        } else {
-          this.dateData = []
-        }
-        // console.log(res);
+        } 
       })
     },
-    // 获取供货周期详情
+    // 获取供货周期详情-柱状图
     getDateImg() {
       var url = '/supplycycle/getDataOfSupplyCycleBarChart'
       getAction(url, { id: this.query.id, FirstSupplier: this.query.FirstSupplier }).then((res) => {
-        this.dateImgY.push(res.result[0].productionCycle)
-        this.dateImgY.push(res.result[0].purchaseLeadTime)
-        this.dateImgY.push(res.result[0].transportTime)
-        this.dateImgY.push(res.result[0].transportTimeDescription)
+        console.log(res);
+        if (res.result.length != 0) {
+          this.dateImgY.push(res.result[0].productionCycle)
+          this.dateImgY.push(res.result[0].purchaseLeadTime)
+          this.dateImgY.push(res.result[0].transportTime)
+          this.dateImgY.push(res.result[0].transportTimeDescription)
+        }
       })
     },
     // 检验周期--折线图
     getInspectionCycle() {
       var url = '/supplycycle/inspectionCycle'
       getAction(url, { id: this.query.id, FirstSupplier: this.query.FirstSupplier }).then((res) => {
-        // console.log(res.result[0])
-        this.dataInspectionCycle.push(res.result[0].checkTimeA)
-        this.dataInspectionCycle.push(res.result[0].checkTimeB)
-        this.dataInspectionCycle.push(res.result[0].checkTimeC)
-        this.dataInspectionCycle.push(res.result[0].checkTimeD)
+        if (res.result.length != 0) {
+          this.dataInspectionCycle.push(res.result[0].checkTimeA)
+          this.dataInspectionCycle.push(res.result[0].checkTimeB)
+          this.dataInspectionCycle.push(res.result[0].checkTimeC)
+          this.dataInspectionCycle.push(res.result[0].checkTimeD)
+        }
       })
     },
     // 供货质量--采购，运输，生成--柱状图
     getDateBarChart() {
       var url = '/supplycycle/getThreeCycle'
       getAction(url, { id: this.query.id, FirstSupplier: this.query.FirstSupplier }).then((res) => {
-        console.log(res.result[0])
         const obj = res.result[0]
-        for (let key in obj) {
-          this.dataDateBarChart.push(obj[key])
+        if (res.result.length != 0) {
+          for (let key in obj) {
+            this.dataDateBarChart.push(obj[key])
+          }
         }
       })
     },
@@ -616,7 +620,10 @@ export default {
   },
   mounted() {
     this.getBasis()
-    this.getDateData()
+    // if(this.query.FirstSupplier) {
+    //   this.getDateData()
+    // }
+    // console.log(this.query.FirstSupplier);
     this.getDateImg()
     this.getInspectionCycle()
     this.getDateBarChart()
