@@ -14,8 +14,8 @@
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="核心部件编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentId">
-              <a-input v-model="model.componentId" placeholder="请输入核心部件编号"  ></a-input>
+            <a-form-model-item label="核心部件名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentId">
+              <j-search-select-tag v-model="model.componentId" dict="component_inf,component_name,component_id"  />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -87,7 +87,7 @@
               { required: true, message: '请输入二级供应商编号!'},
            ],
            componentId: [
-              { required: true, message: '请输入核心部件编号!'},
+              { required: true, message: '请输入核心部件名称!'},
            ],
         },
         url: {
