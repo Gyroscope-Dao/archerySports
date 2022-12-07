@@ -43,7 +43,7 @@ export default {
       data: [],
       pagination: {},
       loading: false,
-      pageSize: 5,
+      pageSize: 10,
     }
   },
   mounted() {
