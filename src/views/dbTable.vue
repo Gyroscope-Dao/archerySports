@@ -4,7 +4,7 @@
     <div class="main">
       <div class='left'>
         <div v-for="item in tableList" 
-        :ket="item" 
+        :key="item" 
         class="table-name-button" 
         :class="{'active': activeTableListName === item}"
         @click="handleTableNameButton(item)"
