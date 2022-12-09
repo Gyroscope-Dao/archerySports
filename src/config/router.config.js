@@ -321,6 +321,21 @@ export const constantRouterMap = [
         path: 'score',
         name: 'portraitScore',
         component: () => import('@/views/portrait/score.vue'),
+      },
+      {
+        path: 'supplyBasis',
+        name: 'supplyBasis',
+        component: () => import('@/views/portrait/supplyBasis.vue'),
+      },
+      {
+        path: 'supplyCycle',
+        name: 'supplyCycle',
+        component: () => import('@/views/portrait/supplyCycle.vue'),
+      },
+      {
+        path: 'supplyQuality',
+        name: 'supplyQuality',
+        component: () => import('@/views/portrait/supplyQuality.vue'),
       }
     ]
   },
