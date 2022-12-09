@@ -5,7 +5,7 @@
     </header>
     <div class="container">
       <div class="left">
-        <h2>基本信息</h2>
+        <h2 @click="toBasis">基本信息</h2>
         <div class="panel basisDesc">
           <ul class="details">
             <li class="tip"><span>供应商名称：</span>{{ basisData.supplierName }}</li>
@@ -43,7 +43,7 @@
         </div>
       </div>
       <div class="mid">
-        <h2>供货周期</h2>
+        <h2 @click="toCycle">供货周期</h2>
         <div class="panel actDesc">
           <ul class="details">
             <li class="tip"><span>是否一般供应商：</span>{{ dateData.battleneckSupplier === 1 ? '是' : '否' }}</li>
@@ -76,7 +76,7 @@
         </div>
       </div>
       <div class="end">
-        <h2 class="quality">供货质量</h2>
+        <h2 class="quality" @click="toQuality">供货质量</h2>
         <div class="rightbox">
           <div class="right1 right">
             <div class="panel panel_chart2">
@@ -162,7 +162,7 @@ export default {
       dateData: {
         battleneckSupplier: 0,
         isProduct: 0,
-        isPurchase: 0
+        isPurchase: 0,
       },
       // 柱状图周期y轴的值
       dateImgY: [],
@@ -172,6 +172,39 @@ export default {
     }
   },
   methods: {
+    // 跳转到显示质量的页面
+    toQuality() {
+      let routeData = this.$router.resolve({
+        path: '/portrait/supplyQuality',
+        query: {
+          id: this.query.id,
+          FirstSupplier: this.query.FirstSupplier,
+        },
+      })
+      window.open(routeData.href, '_blank')
+    },
+    // 跳转到显示周期的页面
+    toCycle() {
+      let routeData = this.$router.resolve({
+        path: '/portrait/supplyCycle',
+        query: {
+          id: this.query.id,
+          FirstSupplier: this.query.FirstSupplier,
+        },
+      })
+      window.open(routeData.href, '_blank')
+    },
+    // 跳转到显示基础信息的页面
+    toBasis() {
+      let routeData = this.$router.resolve({
+        path: '/portrait/supplyBasis',
+        query: {
+          id: this.query.id,
+          FirstSupplier: this.query.FirstSupplier,
+        },
+      })
+      window.open(routeData.href, '_blank')
+    },
     // 获取基本信息
     getBasis() {
       var url = '/portrayal/queryById'
@@ -188,9 +221,9 @@ export default {
         // console.log(res)
         // console.log( typeof(this.query.FirstSupplier));
         if (this.query.FirstSupplier == 1 && res.result.length != 0) {
-            this.dateData = res.result[0]
-            // console.log(this.dateData);
-        } else  {
+          this.dateData = res.result[0]
+          // console.log(this.dateData);
+        } else {
           this.dateData = res.result
         }
         // if (res.result.length != 0) {
@@ -634,7 +667,7 @@ export default {
   },
   mounted() {
     this.getDateData()
-    
+
     if (this.query.FirstSupplier === 1) {
       this.getDateData()
     }
@@ -646,6 +679,7 @@ export default {
   },
   created() {
     this.query = this.$route.query
+    console.log(this.$route.query)
   },
 }
 </script>
@@ -706,6 +740,7 @@ header {
     flex: 3;
     color: #fff;
     h2 {
+      cursor: pointer;
       color: #fff;
       text-align: center;
     }
@@ -725,6 +760,7 @@ header {
   .end {
     flex: 6;
     .quality {
+      cursor: pointer;
       color: #fff;
       text-align: center;
     }
@@ -762,6 +798,7 @@ header {
     flex: 3;
     color: #fff;
     h2 {
+      cursor: pointer;
       color: #fff;
       text-align: center;
     }
@@ -888,22 +925,22 @@ header {
     }
   }
 }
-// 旋转动画
-@keyframes rotate1 {
-  from {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-}
-// 箭头旋转动画
-@keyframes rotate2 {
-  from {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  to {
-    transform: translate(-50%, -50%) rotate(-360deg);
-  }
-}
+// // 旋转动画
+// @keyframes rotate1 {
+//   from {
+//     transform: translate(-50%, -50%) rotate(0deg);
+//   }
+//   to {
+//     transform: translate(-50%, -50%) rotate(360deg);
+//   }
+// }
+// // 箭头旋转动画
+// @keyframes rotate2 {
+//   from {
+//     transform: translate(-50%, -50%) rotate(0deg);
+//   }
+//   to {
+//     transform: translate(-50%, -50%) rotate(-360deg);
+//   }
+// }
 </style>

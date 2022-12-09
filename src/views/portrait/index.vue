@@ -308,6 +308,7 @@ header {
           margin-right: 20px;
         }
         .btn {
+          cursor: pointer;
           padding: 0 10px;
           margin-right: 10px;
           background-color: orange;
