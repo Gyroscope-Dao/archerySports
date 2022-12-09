@@ -7,9 +7,9 @@
         <a-row :gutter="24">
 
           <a-col :md="6" :sm="12">
-            <a-form-item label="账号">
+            <a-form-item label="用户账号">
               <!--<a-input placeholder="请输入账号查询" v-model="queryParam.username"></a-input>-->
-              <j-input placeholder="输入账号模糊查询" v-model="queryParam.username"></j-input>
+              <j-input placeholder="输入用户账号模糊查询" v-model="queryParam.username"></j-input>
             </a-form-item>
           </a-col>
 
@@ -26,8 +26,8 @@
 
           <template v-if="toggleSearchStatus">
             <a-col :md="6" :sm="8">
-              <a-form-item label="真实名字">
-                <a-input placeholder="请输入真实名字" v-model="queryParam.realname"></a-input>
+              <a-form-item label="用户名字">
+                <a-input placeholder="请输入用户名字" v-model="queryParam.realname"></a-input>
               </a-form-item>
             </a-col>
 

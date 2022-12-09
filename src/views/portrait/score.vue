@@ -18,7 +18,7 @@
       </div>
       <div class="mid">
         <div class="score">
-          <h2 class="score_title">供应商评价指标</h2>
+          <h2 class="score_title">供应商评价指数</h2>
           <h1 class="score_num">{{score}}</h1>
         </div>
         <div class="map">
