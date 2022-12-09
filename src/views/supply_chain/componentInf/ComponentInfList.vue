@@ -121,11 +121,11 @@
               return parseInt(index)+1;
             }
           },
-          {
-            title:'部件编号',
-            align:"center",
-            dataIndex: 'componentId'
-          },
+          // {
+          //   title:'部件编号',
+          //   align:"center",
+          //   dataIndex: 'componentId'
+          // },
           {
             title:'部件名称',
             align:"center",
@@ -150,6 +150,11 @@
             title:'部件性质',
             align:"center",
             dataIndex: 'componentNature'
+          },
+          {
+            title:'部件编号',
+            align:"center",
+            dataIndex: 'componentId'
           },
           {
             title: '操作',
