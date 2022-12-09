@@ -220,8 +220,10 @@
 <style lang="less" scoped>
 .page-header-index-wide {
   height: 700px;
+  padding: 0;
+  margin: 0;
   background: url("../../assets/bgc.jpeg") no-repeat;
-  background-size: contain;
+  background-size: 100% 100%;
 }
   .circle-cust{
     position: relative;
