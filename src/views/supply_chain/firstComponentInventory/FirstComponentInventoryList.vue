@@ -133,7 +133,7 @@
             dataIndex: 'firstSupplierId_dictText'
           },
           {
-            title:'库存数量',
+            title:'库存数量（件）',
             align:"center",
             dataIndex: 'stockQuantity'
           },
@@ -170,7 +170,7 @@
           deleteBatch: "/firstComponentInventory/firstComponentInventory/deleteBatch",
           exportXlsUrl: "/firstComponentInventory/firstComponentInventory/exportXls",
           importExcelUrl: "firstComponentInventory/firstComponentInventory/importExcel",
-          
+
         },
         dictOptions:{},
         superFieldList:[],
