@@ -198,7 +198,6 @@ export default {
   font-size: 15px;
   padding-left: 5px;
   position: relative;
-  text-align: center;
   line-height: 40px;
   border-right: 1px solid #e8e8e8;
   cursor: pointer;
@@ -224,4 +223,6 @@ export default {
   width: 100%;
   overflow-x: scroll;
 }
+
+
 </style>
