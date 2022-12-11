@@ -12,7 +12,8 @@ const url = {
     local_date_rule: ruleBaseURL + 'local_date_rule',
     stuffId_rule: ruleBaseURL + 'stuffId_rule',
     second_supplierId_rule: ruleBaseURL + 'second_supplierId_rule',
-    first_supplierId_rule: ruleBaseURL + 'first_supplierId_rule'
+    first_supplierId_rule: ruleBaseURL + 'first_supplierId_rule',
+    purchase_orderId_rule: ruleBaseURL+ 'purchase_orderId_rule'
   }
 }
 
@@ -88,13 +89,20 @@ export function getComponentId(obj) {
     }
   })
 }
-
+export function getPurchaseOrderId(obj) {
+  putAction(url.rule.purchase_orderId_rule, obj.model).then(res => {
+    if (res.success) {
+      obj.model.orderId = res.result
+    }
+  })
+}
 export function getSecondSupplierId(obj) {
   putAction(url.rule.second_supplierId_rule, obj.model).then(res => {
     if (res.success) {
       obj.model.secondSupplierId = res.result
     }
   })
+
 }
 
 

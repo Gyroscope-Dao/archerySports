@@ -5,7 +5,7 @@
         <a-row>
           <a-col :span="24">
             <a-form-model-item label="订单编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="orderId">
-              <a-input v-model="model.orderId" placeholder="请输入订单编号"  ></a-input>
+              <a-input v-model="model.orderId" placeholder="请输入订单编号"  disabled=""></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -73,6 +73,7 @@
 
   import { httpAction, getAction } from '@/api/manage'
   import { validateDuplicateValue } from '@/utils/util'
+  import { getFirstSupplierId,getTime,getStuffId,getSimulationId,getEtpId,getOrderId,getLotId,getProductId,getComponentId,getSecondSupplierId,getPurchaseOrderId } from '@/utils/generateRule'
 
   export default {
     name: 'FirstPurchaseForm',
@@ -89,6 +90,7 @@
     data () {
       return {
         model:{
+          orderId:'',
          },
         labelCol: {
           xs: { span: 24 },
@@ -152,6 +154,7 @@
     created () {
        //备份model原始值
       this.modelDefault = JSON.parse(JSON.stringify(this.model));
+      getPurchaseOrderId(this);
     },
     methods: {
       add () {
