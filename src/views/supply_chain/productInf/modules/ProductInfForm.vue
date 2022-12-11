@@ -5,32 +5,38 @@
         <a-row>
           <a-col :span="24">
             <a-form-model-item label="产品编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="productId">
-              <a-input v-model="model.productId" placeholder="请输入产品编号" disabled ></a-input>
+              <a-input v-model="model.productId" placeholder="请输入产品编号" disabled></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="产品名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="productName">
-              <a-input v-model="model.productName" placeholder="请输入产品名称"  ></a-input>
+              <a-input v-model="model.productName" placeholder="请输入产品名称"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="产品类别" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="productType">
-              <a-input v-model="model.productType" placeholder="请输入产品类别"  ></a-input>
+              <!-- <a-input v-model="model.productType" placeholder="请输入产品类别"  ></a-input> -->
+              <j-search-select-tag v-model="model.productType" :dictOptions="dictOptions" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="产品规格" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="productSpecification">
-              <a-input v-model="model.productSpecification" placeholder="请输入产品规格"  ></a-input>
+            <a-form-model-item
+              label="产品规格"
+              :labelCol="labelCol"
+              :wrapperCol="wrapperCol"
+              prop="productSpecification"
+            >
+              <a-input v-model="model.productSpecification" placeholder="请输入产品规格"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="产品计量单位" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="productUnit">
-              <a-input v-model="model.productUnit" placeholder="请输入产品计量单位"  ></a-input>
+              <a-input v-model="model.productUnit" placeholder="请输入产品计量单位"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="产品性质" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="productNature">
-              <a-input v-model="model.productNature" placeholder="请输入产品性质"  ></a-input>
+              <a-input v-model="model.productNature" placeholder="请输入产品性质"></a-input>
             </a-form-model-item>
           </a-col>
         </a-row>
@@ -40,111 +46,127 @@
 </template>
 
 <script>
+import { httpAction, getAction } from '@/api/manage'
+import { validateDuplicateValue } from '@/utils/util'
+import {
+  getFirstSupplierId,
+  getTime,
+  getStuffId,
+  getSimulationId,
+  getEtpId,
+  getOrderId,
+  getLotId,
+  getProductId,
+  getComponentId,
+  getSecondSupplierId,
+} from '@/utils/generateRule'
 
-  import { httpAction, getAction } from '@/api/manage'
-  import { validateDuplicateValue } from '@/utils/util'
-  import { getFirstSupplierId,getTime,getStuffId,getSimulationId,getEtpId,getOrderId,getLotId,getProductId,getComponentId,getSecondSupplierId } from '@/utils/generateRule'
-
-  export default {
-    name: 'ProductInfForm',
-    components: {
+export default {
+  name: 'ProductInfForm',
+  components: {},
+  props: {
+    //表单禁用
+    disabled: {
+      type: Boolean,
+      default: false,
+      required: false,
     },
-    props: {
-      //表单禁用
-      disabled: {
-        type: Boolean,
-        default: false,
-        required: false
-      }
-    },
-    data () {
-      return {
-        model:{
-          productId: '',
-         },
-        labelCol: {
-          xs: { span: 24 },
-          sm: { span: 5 },
-        },
-        wrapperCol: {
-          xs: { span: 24 },
-          sm: { span: 16 },
-        },
-        confirmLoading: false,
-        validatorRules: {
-           productId: [
-              { required: true, message: '请输入产品编号!'},
-           ],
-           productName: [
-              { required: true, message: '请输入产品名称!'},
-           ],
-           productType: [
-              { required: true, message: '请输入产品类别!'},
-           ],
-           productSpecification: [
-              { required: true, message: '请输入产品规格!'},
-           ],
-           productUnit: [
-              { required: true, message: '请输入产品计量单位!'},
-           ],
-           productNature: [
-              { required: true, message: '请输入产品性质!'},
-           ],
-        },
-        url: {
-          add: "/productInf/productInf/add",
-          edit: "/productInf/productInf/edit",
-          queryById: "/productInf/productInf/queryById"
-        }
-      }
-    },
-    computed: {
-      formDisabled(){
-        return this.disabled
+  },
+  data() {
+    return {
+      model: {
+        productId: '',
       },
-    },
-    created () {
-       //备份model原始值
-      this.modelDefault = JSON.parse(JSON.stringify(this.model));
-      getProductId(this);
-    },
-    methods: {
-      add () {
-        this.edit(this.modelDefault);
+      dictOptions: [
+        {
+          text: '特等重要',
+          value: '特等重要',
+        },
+        {
+          text: '一级重要',
+          value: '一级重要',
+        },
+        {
+          text: '二级重要',
+          value: '二级重要',
+        },
+        {
+          text: '三级重要',
+          value: '三级重要',
+        },
+      ],
+      labelCol: {
+        xs: { span: 24 },
+        sm: { span: 5 },
       },
-      edit (record) {
-        this.model = Object.assign({}, record);
-        this.visible = true;
+      wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 16 },
       },
-      submitForm () {
-        const that = this;
-        // 触发表单验证
-        this.$refs.form.validate(valid => {
-          if (valid) {
-            that.confirmLoading = true;
-            let httpurl = '';
-            let method = '';
-            if(!this.model.id){
-              httpurl+=this.url.add;
-              method = 'post';
-            }else{
-              httpurl+=this.url.edit;
-               method = 'put';
-            }
-            httpAction(httpurl,this.model,method).then((res)=>{
-              if(res.success){
-                that.$message.success(res.message);
-                that.$emit('ok');
-              }else{
-                that.$message.warning(res.message);
-              }
-            }).finally(() => {
-              that.confirmLoading = false;
-            })
-          }
-         
-        })
+      confirmLoading: false,
+      validatorRules: {
+        productId: [{ required: true, message: '请输入产品编号!' }],
+        productName: [{ required: true, message: '请输入产品名称!' }],
+        productType: [{ required: true, message: '请输入产品类别!' }],
+        productSpecification: [{ required: true, message: '请输入产品规格!' }],
+        productUnit: [{ required: true, message: '请输入产品计量单位!' }],
+        productNature: [{ required: true, message: '请输入产品性质!' }],
+      },
+      url: {
+        add: '/productInf/productInf/add',
+        edit: '/productInf/productInf/edit',
+        queryById: '/productInf/productInf/queryById',
       },
     }
-  }
+  },
+  computed: {
+    formDisabled() {
+      return this.disabled
+    },
+  },
+  created() {
+    //备份model原始值
+    this.modelDefault = JSON.parse(JSON.stringify(this.model))
+    getProductId(this)
+  },
+  methods: {
+    add() {
+      this.edit(this.modelDefault)
+    },
+    edit(record) {
+      this.model = Object.assign({}, record)
+      this.visible = true
+    },
+    submitForm() {
+      const that = this
+      // 触发表单验证
+      this.$refs.form.validate((valid) => {
+        if (valid) {
+          that.confirmLoading = true
+          let httpurl = ''
+          let method = ''
+          if (!this.model.id) {
+            httpurl += this.url.add
+            method = 'post'
+          } else {
+            httpurl += this.url.edit
+            method = 'put'
+          }
+          httpAction(httpurl, this.model, method)
+            .then((res) => {
+              if (res.success) {
+                that.$message.success(res.message)
+                that.$emit('ok')
+              } else {
+                that.$message.warning(res.message)
+              }
+            })
+            .finally(() => {
+              that.confirmLoading = false
+            })
+        }
+      })
+    },
+  },
+}
 </script>

@@ -190,7 +190,7 @@
           {
             title:'录入时间',
             align:"center",
-            dataIndex: 'firstAbilityIntUpdateTime'
+            dataIndex: 'infUpdateTime'
           },
           {
             title:'人员编号',
