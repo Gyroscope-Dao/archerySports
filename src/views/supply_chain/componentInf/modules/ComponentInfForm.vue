@@ -5,32 +5,37 @@
         <a-row>
           <a-col :span="24">
             <a-form-model-item label="部件编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentId">
-              <a-input v-model="model.componentId" placeholder="请输入部件编号" disabled ></a-input>
+              <a-input v-model="model.componentId" placeholder="请输入部件编号" disabled></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="部件名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentName">
-              <a-input v-model="model.componentName" placeholder="请输入部件名称"  ></a-input>
+              <a-input v-model="model.componentName" placeholder="请输入部件名称"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="部件类别" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentType">
-              <a-input v-model="model.componentType" placeholder="请输入部件类别"  ></a-input>
+              <a-input v-model="model.componentType" placeholder="请输入部件类别"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="部件规格" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentSpecification">
-              <a-input v-model="model.componentSpecification" placeholder="请输入部件规格"  ></a-input>
+            <a-form-model-item
+              label="部件规格"
+              :labelCol="labelCol"
+              :wrapperCol="wrapperCol"
+              prop="componentSpecification"
+            >
+              <a-input v-model="model.componentSpecification" placeholder="请输入部件规格"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="部件计量单位" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentUnit">
-              <a-input v-model="model.componentUnit" placeholder="请输入部件计量单位"  ></a-input>
+              <a-input v-model="model.componentUnit" placeholder="请输入部件计量单位"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="部件性质" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentNature">
-              <a-input v-model="model.componentNature" placeholder="请输入部件性质"  ></a-input>
+              <a-input v-model="model.componentNature" placeholder="请输入部件性质"></a-input>
             </a-form-model-item>
           </a-col>
         </a-row>
@@ -40,112 +45,110 @@
 </template>
 
 <script>
+import { httpAction, getAction } from '@/api/manage'
+import { validateDuplicateValue } from '@/utils/util'
+import {
+  getFirstSupplierId,
+  getTime,
+  getStuffId,
+  getSimulationId,
+  getEtpId,
+  getOrderId,
+  getLotId,
+  getProductId,
+  getComponentId,
+  getSecondSupplierId
+} from '@/utils/generateRule'
 
-  import { httpAction, getAction } from '@/api/manage'
-  import { validateDuplicateValue } from '@/utils/util'
-  import { getFirstSupplierId,getTime,getStuffId,getSimulationId,getEtpId,getOrderId,getLotId,getProductId,getComponentId,getSecondSupplierId } from '@/utils/generateRule'
+export default {
+  name: 'ComponentInfForm',
+  components: {},
+  props: {
+    //表单禁用
+    disabled: {
+      type: Boolean,
+      default: false,
+      required: false
+    }
+  },
+  data() {
+    return {
+      model: {
+        componentId: ''
+      },
 
-  export default {
-    name: 'ComponentInfForm',
-    components: {
-    },
-    props: {
-      //表单禁用
-      disabled: {
-        type: Boolean,
-        default: false,
-        required: false
+      labelCol: {
+        xs: { span: 24 },
+        sm: { span: 5 }
+      },
+      wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 16 }
+      },
+      confirmLoading: false,
+      validatorRules: {
+        componentId: [{ required: true, message: '请输入部件编号!' }],
+        componentName: [{ required: true, message: '请输入部件名称!' }],
+        componentType: [{ required: true, message: '请输入部件类别!' }],
+        componentSpecification: [{ required: true, message: '请输入部件规格!' }],
+        componentUnit: [{ required: true, message: '请输入部件计量单位!' }],
+        componentNature: [{ required: true, message: '请输入部件性质!' }]
+      },
+      url: {
+        add: '/componentInf/componentInf/add',
+        edit: '/componentInf/componentInf/edit',
+        queryById: '/componentInf/componentInf/queryById'
       }
+    }
+  },
+  computed: {
+    formDisabled() {
+      return this.disabled
+    }
+  },
+  created() {
+    //备份model原始值
+    this.modelDefault = JSON.parse(JSON.stringify(this.model))
+  },
+  methods: {
+    add() {
+      this.edit(this.modelDefault)
+      getComponentId(this)
     },
-    data () {
-      return {
-        model:{
-          componentId: '',
-         },
-
-        labelCol: {
-          xs: { span: 24 },
-          sm: { span: 5 },
-        },
-        wrapperCol: {
-          xs: { span: 24 },
-          sm: { span: 16 },
-        },
-        confirmLoading: false,
-        validatorRules: {
-           componentId: [
-              { required: true, message: '请输入部件编号!'},
-           ],
-           componentName: [
-              { required: true, message: '请输入部件名称!'},
-           ],
-           componentType: [
-              { required: true, message: '请输入部件类别!'},
-           ],
-           componentSpecification: [
-              { required: true, message: '请输入部件规格!'},
-           ],
-           componentUnit: [
-              { required: true, message: '请输入部件计量单位!'},
-           ],
-           componentNature: [
-              { required: true, message: '请输入部件性质!'},
-           ],
-        },
-        url: {
-          add: "/componentInf/componentInf/add",
-          edit: "/componentInf/componentInf/edit",
-          queryById: "/componentInf/componentInf/queryById"
-        }
-      }
+    edit(record) {
+      this.model = Object.assign({}, record)
+      this.visible = true
     },
-    computed: {
-      formDisabled(){
-        return this.disabled
-      },
-    },
-    created () {
-       //备份model原始值
-      this.modelDefault = JSON.parse(JSON.stringify(this.model));
-      getComponentId(this);
-    },
-    methods: {
-      add () {
-        this.edit(this.modelDefault);
-      },
-      edit (record) {
-        this.model = Object.assign({}, record);
-        this.visible = true;
-      },
-      submitForm () {
-        const that = this;
-        // 触发表单验证
-        this.$refs.form.validate(valid => {
-          if (valid) {
-            that.confirmLoading = true;
-            let httpurl = '';
-            let method = '';
-            if(!this.model.id){
-              httpurl+=this.url.add;
-              method = 'post';
-            }else{
-              httpurl+=this.url.edit;
-               method = 'put';
-            }
-            httpAction(httpurl,this.model,method).then((res)=>{
-              if(res.success){
-                that.$message.success(res.message);
-                that.$emit('ok');
-              }else{
-                that.$message.warning(res.message);
-              }
-            }).finally(() => {
-              that.confirmLoading = false;
-            })
+    submitForm() {
+      const that = this
+      // 触发表单验证
+      this.$refs.form.validate(valid => {
+        if (valid) {
+          that.confirmLoading = true
+          let httpurl = ''
+          let method = ''
+          if (!this.model.id) {
+            httpurl += this.url.add
+            method = 'post'
+          } else {
+            httpurl += this.url.edit
+            method = 'put'
           }
-         
-        })
-      },
+          httpAction(httpurl, this.model, method)
+            .then(res => {
+              if (res.success) {
+                that.$message.success(res.message)
+                that.$emit('ok')
+              } else {
+                that.$message.warning(res.message)
+              }
+            })
+            .finally(() => {
+              that.confirmLoading = false
+            })
+        }
+      })
     }
   }
+}
 </script>

@@ -5,42 +5,42 @@
         <a-row>
           <a-col :span="24">
             <a-form-model-item label="仿真编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="simulationId">
-              <a-input v-model="model.simulationId" placeholder="请输入仿真编号" disabled ></a-input>
+              <a-input v-model="model.simulationId" placeholder="请输入仿真编号" disabled></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="仿真目的" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="simulationPurpose">
-              <a-input v-model="model.simulationPurpose" placeholder="请输入仿真目的"  ></a-input>
+              <a-input v-model="model.simulationPurpose" placeholder="请输入仿真目的"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="JF 订单编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="orderId">
-              <a-input v-model="model.orderId" placeholder="请输入JF 订单编号"  ></a-input>
+              <a-input v-model="model.orderId" placeholder="请输入JF 订单编号"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="版本" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="smulationVersion">
-              <a-input v-model="model.smulationVersion" placeholder="请输入版本"  ></a-input>
+              <a-input v-model="model.smulationVersion" placeholder="请输入版本"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="报告文件" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="reportFileString">
-              <a-input v-model="model.reportFileString" placeholder="请输入报告文件" ></a-input>
+              <a-input v-model="model.reportFileString" placeholder="请输入报告文件"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="模型文件" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="modelFileString">
-              <a-input v-model="model.modelFileString" placeholder="请输入模型文件" ></a-input>
+              <a-input v-model="model.modelFileString" placeholder="请输入模型文件"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="仿真时间" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="inputTime">
-              <j-date placeholder="请选择仿真时间" v-model="model.inputTime"  style="width: 100%" />
+              <j-date placeholder="请选择仿真时间" v-model="model.inputTime" style="width: 100%" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="仿真人员编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="stuffId">
-              <a-input v-model="model.stuffId" placeholder="请输入仿真人员编号" disabled ></a-input>
+              <a-input v-model="model.stuffId" placeholder="请输入仿真人员编号" disabled></a-input>
             </a-form-model-item>
           </a-col>
         </a-row>
@@ -50,120 +50,113 @@
 </template>
 
 <script>
+import { httpAction, getAction } from '@/api/manage'
+import { validateDuplicateValue } from '@/utils/util'
+import {
+  getFirstSupplierId,
+  getTime,
+  getStuffId,
+  getSimulationId,
+  getEtpId,
+  getOrderId,
+  getLotId,
+  getProductId,
+  getComponentId,
+  getSecondSupplierId
+} from '@/utils/generateRule'
 
-  import { httpAction, getAction } from '@/api/manage'
-  import { validateDuplicateValue } from '@/utils/util'
-  import { getFirstSupplierId,getTime,getStuffId,getSimulationId,getEtpId,getOrderId,getLotId,getProductId,getComponentId,getSecondSupplierId } from '@/utils/generateRule'
-
-  export default {
-    name: 'SimulationInfForm',
-    components: {
-    },
-    props: {
-      //表单禁用
-      disabled: {
-        type: Boolean,
-        default: false,
-        required: false
+export default {
+  name: 'SimulationInfForm',
+  components: {},
+  props: {
+    //表单禁用
+    disabled: {
+      type: Boolean,
+      default: false,
+      required: false
+    }
+  },
+  data() {
+    return {
+      model: {
+        simulationId: '',
+        stuffId: ''
+      },
+      labelCol: {
+        xs: { span: 24 },
+        sm: { span: 5 }
+      },
+      wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 16 }
+      },
+      confirmLoading: false,
+      validatorRules: {
+        simulationId: [{ required: true, message: '请输入仿真编号!' }],
+        simulationPurpose: [{ required: true, message: '请输入仿真目的!' }],
+        orderId: [{ required: true, message: '请输入JF 订单编号!' }],
+        smulationVersion: [{ required: true, message: '请输入版本!' }],
+        reportFile: [{ required: true, message: '请输入报告文件!' }],
+        modelFile: [{ required: true, message: '请输入模型文件!' }],
+        inputTime: [{ required: true, message: '请输入仿真时间!' }],
+        stuffId: [{ required: true, message: '请输入仿真人员编号!' }]
+      },
+      url: {
+        add: '/simulationInf/simulationInf/add',
+        edit: '/simulationInf/simulationInf/edit',
+        queryById: '/simulationInf/simulationInf/queryById'
       }
+    }
+  },
+  computed: {
+    formDisabled() {
+      return this.disabled
+    }
+  },
+  created() {
+    //备份model原始值
+    this.modelDefault = JSON.parse(JSON.stringify(this.model))
+    getStuffId(this)
+  },
+  methods: {
+    add() {
+      this.edit(this.modelDefault)
+      getSimulationId(this)
     },
-    data () {
-      return {
-        model:{
-          simulationId: '',
-          stuffId: '',
-
-         },
-        labelCol: {
-          xs: { span: 24 },
-          sm: { span: 5 },
-        },
-        wrapperCol: {
-          xs: { span: 24 },
-          sm: { span: 16 },
-        },
-        confirmLoading: false,
-        validatorRules: {
-           simulationId: [
-              { required: true, message: '请输入仿真编号!'},
-           ],
-           simulationPurpose: [
-              { required: true, message: '请输入仿真目的!'},
-           ],
-           orderId: [
-              { required: true, message: '请输入JF 订单编号!'},
-           ],
-           smulationVersion: [
-              { required: true, message: '请输入版本!'},
-           ],
-           reportFile: [
-              { required: true, message: '请输入报告文件!'},
-           ],
-           modelFile: [
-              { required: true, message: '请输入模型文件!'},
-           ],
-           inputTime: [
-              { required: true, message: '请输入仿真时间!'},
-           ],
-           stuffId: [
-              { required: true, message: '请输入仿真人员编号!'},
-           ],
-        },
-        url: {
-          add: "/simulationInf/simulationInf/add",
-          edit: "/simulationInf/simulationInf/edit",
-          queryById: "/simulationInf/simulationInf/queryById"
-        }
-      }
+    edit(record) {
+      this.model = Object.assign({}, record)
+      this.visible = true
     },
-    computed: {
-      formDisabled(){
-        return this.disabled
-      },
-    },
-    created () {
-       //备份model原始值
-      this.modelDefault = JSON.parse(JSON.stringify(this.model));
-      getSimulationId(this);
-      getStuffId(this);
-    },
-    methods: {
-      add () {
-        this.edit(this.modelDefault);
-      },
-      edit (record) {
-        this.model = Object.assign({}, record);
-        this.visible = true;
-      },
-      submitForm () {
-        const that = this;
-        // 触发表单验证
-        this.$refs.form.validate(valid => {
-          if (valid) {
-            that.confirmLoading = true;
-            let httpurl = '';
-            let method = '';
-            if(!this.model.id){
-              httpurl+=this.url.add;
-              method = 'post';
-            }else{
-              httpurl+=this.url.edit;
-               method = 'put';
-            }
-            httpAction(httpurl,this.model,method).then((res)=>{
-              if(res.success){
-                that.$message.success(res.message);
-                that.$emit('ok');
-              }else{
-                that.$message.warning(res.message);
-              }
-            }).finally(() => {
-              that.confirmLoading = false;
-            })
+    submitForm() {
+      const that = this
+      // 触发表单验证
+      this.$refs.form.validate(valid => {
+        if (valid) {
+          that.confirmLoading = true
+          let httpurl = ''
+          let method = ''
+          if (!this.model.id) {
+            httpurl += this.url.add
+            method = 'post'
+          } else {
+            httpurl += this.url.edit
+            method = 'put'
           }
-         
-        })
-      },
+          httpAction(httpurl, this.model, method)
+            .then(res => {
+              if (res.success) {
+                that.$message.success(res.message)
+                that.$emit('ok')
+              } else {
+                that.$message.warning(res.message)
+              }
+            })
+            .finally(() => {
+              that.confirmLoading = false
+            })
+        }
+      })
     }
   }
+}
 </script>

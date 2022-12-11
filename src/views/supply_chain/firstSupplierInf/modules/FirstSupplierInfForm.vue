@@ -179,7 +179,7 @@ import {
   getLotId,
   getProductId,
   getComponentId,
-  getSecondSupplierId,
+  getSecondSupplierId
 } from '@/utils/generateRule'
 
 export default {
@@ -190,23 +190,23 @@ export default {
     disabled: {
       type: Boolean,
       default: false,
-      required: false,
-    },
+      required: false
+    }
   },
   data() {
     return {
       model: {
         firstSupplierId: '',
         infUpdateTime: '',
-        stuffId: '',
+        stuffId: ''
       },
       labelCol: {
         xs: { span: 24 },
-        sm: { span: 5 },
+        sm: { span: 5 }
       },
       wrapperCol: {
         xs: { span: 24 },
-        sm: { span: 16 },
+        sm: { span: 16 }
       },
       confirmLoading: false,
       validatorRules: {
@@ -216,14 +216,23 @@ export default {
         supplierAddress: [{ required: true, message: '请输入供应商地址!' }],
         contact: [{ required: true, message: '请输入联系人!' }],
         // contactNum: [{ required: true, message: '请输入联系电话!' }, { validator: this.validatePhone }],
-        contactNum: [{ required: true, message: '请输入联系电话!' }, { pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/, message: '请输入正确的手机号！'}],
+        contactNum: [
+          { required: true, message: '请输入联系电话!' },
+          { pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/, message: '请输入正确的手机号！' }
+        ],
         // /^[A-Z0-9]{15}$|^[A-Z0-9]{18}$|^[A-Z0-9]{20}$/
-        taxId: [{ required: true, message: '请输入税号!' }, { pattern: /^[A-Z0-9]{15}$|^[A-Z0-9]{18}$|^[A-Z0-9]{20}$/, message: '请输入正确的税号！'}],
+        taxId: [
+          { required: true, message: '请输入税号!' },
+          { pattern: /^[A-Z0-9]{15}$|^[A-Z0-9]{18}$|^[A-Z0-9]{20}$/, message: '请输入正确的税号！' }
+        ],
         privateEnterprise: [{ required: true, message: '请输入是否民口企业!' }],
         battleneckSupplier: [{ required: true, message: '请输入是否瓶颈供应商!' }],
         certification: [{ required: true, message: '请输入供应商资质!' }],
         legalPerson: [{ required: true, message: '请输入法定代表人!' }],
-        postCode: [{ required: true, message: '请输入邮编!' },{pattern: /^\d{6}$/, message: '请输入正确邮编！'} ],
+        postCode: [
+          { required: true, message: '请输入邮编!' },
+          { pattern: /^\d{6}$/, message: '请输入正确邮编！' }
+        ],
         bankName: [{ required: true, message: '请输入开户行名称!' }],
         bankAccount: [{ required: true, message: '请输入开户账号!' }],
         eptId: [{ required: true, message: '请输入往来单位信息名称!' }],
@@ -232,31 +241,31 @@ export default {
         isPurchase: [{ required: true, message: '请输入是否采购瓶颈供应商!' }],
         estabYear: [{ required: true, message: '请输入成立年份!' }],
         corporateCredit: [{ required: true, message: '请输入企业征信!' }],
-        stuffId: [{ required: true, message: '请输入人员编号!' }],
+        stuffId: [{ required: true, message: '请输入人员编号!' }]
       },
       url: {
         add: '/firstSupplierInf/firstSupplierInf/add',
         edit: '/firstSupplierInf/firstSupplierInf/edit',
         queryById: '/firstSupplierInf/firstSupplierInf/queryById',
-        rule: {},
-      },
+        rule: {}
+      }
     }
   },
   computed: {
     formDisabled() {
       return this.disabled
-    },
+    }
   },
   created() {
     //备份model原始值
     this.modelDefault = JSON.parse(JSON.stringify(this.model))
-    getFirstSupplierId(this)
     getTime(this)
     getStuffId(this)
   },
   methods: {
     add() {
       this.edit(this.modelDefault)
+      getFirstSupplierId(this)
     },
     edit(record) {
       this.model = Object.assign({}, record)
@@ -265,7 +274,7 @@ export default {
     submitForm() {
       const that = this
       // 触发表单验证
-      this.$refs.form.validate((valid) => {
+      this.$refs.form.validate(valid => {
         if (valid) {
           that.confirmLoading = true
           let httpurl = ''
@@ -278,7 +287,7 @@ export default {
             method = 'put'
           }
           httpAction(httpurl, this.model, method)
-            .then((res) => {
+            .then(res => {
               if (res.success) {
                 that.$message.success(res.message)
                 that.$emit('ok')
@@ -291,7 +300,7 @@ export default {
             })
         }
       })
-    },
-  },
+    }
+  }
 }
 </script>
