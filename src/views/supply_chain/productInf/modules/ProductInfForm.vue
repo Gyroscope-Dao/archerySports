@@ -15,7 +15,24 @@
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="产品类别" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="productType">
-              <a-input v-model="model.productType" placeholder="请输入产品类别"></a-input>
+              <!-- <a-input v-model="model.productType" placeholder="请输入产品类别"></a-input> -->
+
+              <a-select
+                default-value="二级重要"
+                @change="handleChange"
+                v-model="model.productType"
+                placeholder="请选择"
+              >
+                <a-select-option value="特等重要">
+                  特等重要
+                </a-select-option>
+                <a-select-option value="二级重要">
+                  二级重要
+                </a-select-option>
+                <a-select-option value="三级重要">
+                  三级重要
+                </a-select-option>
+              </a-select>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
