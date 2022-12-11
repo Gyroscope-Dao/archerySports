@@ -182,10 +182,11 @@
           deleteBatch: "/orderdetail/orderdetail/deleteBatch",
           exportXlsUrl: "/orderdetail/orderdetail/exportXls",
           importExcelUrl: "orderdetail/orderdetail/importExcel",
-          
+
         },
         dictOptions:{},
         superFieldList:[],
+        my_isorter: {}
       }
     },
     created() {

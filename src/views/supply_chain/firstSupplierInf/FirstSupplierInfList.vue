@@ -249,6 +249,7 @@
         },
         dictOptions:{},
         superFieldList:[],
+        my_isorter: {}
       }
     },
     created() {

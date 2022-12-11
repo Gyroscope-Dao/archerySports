@@ -170,10 +170,11 @@
           deleteBatch: "/orderInf/orderInf/deleteBatch",
           exportXlsUrl: "/orderInf/orderInf/exportXls",
           importExcelUrl: "orderInf/orderInf/importExcel",
-          
+
         },
         dictOptions:{},
         superFieldList:[],
+        my_isorter: {}
       }
     },
     created() {

@@ -206,10 +206,11 @@
           deleteBatch: "/firstPurchase/firstPurchase/deleteBatch",
           exportXlsUrl: "/firstPurchase/firstPurchase/exportXls",
           importExcelUrl: "firstPurchase/firstPurchase/importExcel",
-          
+
         },
         dictOptions:{},
         superFieldList:[],
+        my_isorter: {}
       }
     },
     created() {
