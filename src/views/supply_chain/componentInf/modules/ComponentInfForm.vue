@@ -17,7 +17,6 @@
             <a-form-model-item label="部件类别" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentType">
               <!-- <a-input v-model="model.componentType" placeholder="请输入部件类别"  ></a-input> -->
               <j-search-select-tag v-model="model.componentType" :dictOptions="dictOptions" />
-
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
