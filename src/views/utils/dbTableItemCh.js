@@ -5,7 +5,7 @@ const data1 = {
   first_keyprocess_inf: '一级供应商瓶颈工序',
   first_purchase_from_second: '二级采购表',
   first_supplier_inf: '一级供应商表',
-  orderdetail: '订单追踪信息',
+  orderdetail: '订单跟踪信息表',
   second_ability_inf: '二级产存检运能力表',
   second_supplier_inf: '二级供应商表',
   sys_depart: '部门表',
@@ -67,6 +67,10 @@ const data2 = {
   check_time_B: 'B 组检验周期（天）',
   check_time_C: 'C 组检验周期（天）',
   check_time_D: 'D 组检验周期（天）',
+  check_time_a: 'A 组检验周期（天）',
+  check_time_b: 'B 组检验周期（天）',
+  check_time_c: 'C 组检验周期（天）',
+  check_time_d: 'D 组检验周期（天）',
   transport_time_description: '检验周期（天）逻辑关系',
   transport_time: '运输周期（天）',
   com1_inf_id: '核心部件编号',
@@ -99,7 +103,13 @@ const data2 = {
   input_time: '仿真时间',
   purchase1_id: '采购订单号',
   supply_cycle: '供应周期',
-  first_purchase_id: '一级采购编号'
+  first_purchase_id: '一级采购编号',
+  sys_org_code: '部门编号',
+  create_by: '创建人',
+  ept_id: '往来单位编号',
+  inf_update_time: '信息更新时间',
+  update_by: '更新人',
+  component_type: '部件类别'
 }
 
 export const CHTableName = new Map(Object.entries(data1))
