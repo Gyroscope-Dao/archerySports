@@ -8,7 +8,14 @@
           <h3>COMPANYNAME</h3>
         </div>
       </div>
-      <div class="right">Home</div>
+      <div class="right">
+        <span class="action">
+          <a class="logout_title" href="javascript:;" @click="handleLogout">
+            <a-icon type="logout" />
+            <span v-if="isDesktop()">&nbsp;退出登录</span>
+          </a>
+        </span>
+      </div>
     </div>
 
     <div class="main">
@@ -50,8 +57,12 @@
 </template>
 
 <script>
+import { mixinDevice } from '@/utils/mixin.js'
+import { mapActions, mapGetters, mapState } from 'vuex'
+
 export default {
   name: 'integration',
+  mixins: [mixinDevice],
   methods: {
     toIndex() {
       this.$router.push({
@@ -66,9 +77,36 @@ export default {
     },
     toImage1() {
       let routeData = this.$router.resolve({
-        path: '/portrait/supply',
+        path: '/evaluation',
       })
       window.open(routeData.href, '_blank')
+    },
+    ...mapActions(['Logout']),
+    ...mapGetters(['nickname', 'avatar', 'userInfo']),
+    handleLogout() {
+      const that = this
+
+      this.$confirm({
+        title: '提示',
+        content: '真的要注销登录吗 ?',
+        onOk() {
+          return that
+            .Logout({})
+            .then(() => {
+              // update-begin author:scott date:20211223 for:【JTC-198】退出登录体验不好
+              that.$router.push({ path: '/user/login' })
+              window.location.reload()
+              // update-end author:scott date:20211223 for:【JTC-198】退出登录体验不好
+            })
+            .catch((err) => {
+              that.$message.error({
+                title: '错误',
+                description: err.message,
+              })
+            })
+        },
+        onCancel() {},
+      })
     },
   },
 }
@@ -109,6 +147,9 @@ export default {
           margin: 0;
         }
       }
+    }
+    .right {
+      color: #1890ff;
     }
   }
 

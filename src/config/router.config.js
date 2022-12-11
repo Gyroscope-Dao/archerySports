@@ -1,4 +1,4 @@
-import { UserLayout, TabLayout, RouteView, BlankLayout, PageView,TabGeter } from '@/components/layouts'
+import {evaluation ,BasicLayout, UserLayout, TabLayout, RouteView, BlankLayout, PageView,TabGeter } from '@/components/layouts'
 
 /**
  * 走菜单，走权限控制
@@ -302,6 +302,39 @@ export const asyncRouterMap = [
  * @type { *[] }
  */
 export const constantRouterMap = [
+  // 评价系统路由
+  {
+    path: '/evaluation',
+    name: 'evaluation',
+    component: evaluation,
+    children: [
+      {
+        path: '/',
+        redirect: '/index'
+      },
+      {
+        path: '/index',
+        name: 'index',
+        component: () => import('@/views/evaluation/index.vue'),
+      },
+      {
+        path: '/order',
+        name: 'order',
+        component: () => import('@/views/evaluation/order.vue'),
+      },
+      {
+        path: '/firstCycle',
+        name: 'firstCycle',
+        component: () => import('@/views/evaluation/firstCycle.vue'),
+      },
+      {
+        path: '/secondCycle',
+        name: 'secondCycle',
+        component: () => import('@/views/evaluation/secondCycle.vue'),
+      },
+    ]
+  },
+  // 画像路由
   {
     path: '/portrait',
     name: 'portrait',
@@ -339,6 +372,7 @@ export const constantRouterMap = [
       }
     ]
   },
+  // 页面集合路由
   {
     path: '/gather',
     name: 'gather',

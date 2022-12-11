@@ -15,7 +15,10 @@
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="产品类别" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="productType">
-              <a-input v-model="model.productType" placeholder="请输入产品类别"></a-input>
+
+              <!-- <a-input v-model="model.productType" placeholder="请输入产品类别"  ></a-input> -->
+              <j-search-select-tag v-model="model.productType" :dictOptions="dictOptions" />
+
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -57,7 +60,9 @@ import {
   getLotId,
   getProductId,
   getComponentId,
-  getSecondSupplierId
+
+  getSecondSupplierId,
+
 } from '@/utils/generateRule'
 
 export default {
@@ -68,21 +73,43 @@ export default {
     disabled: {
       type: Boolean,
       default: false,
-      required: false
-    }
+
+      required: false,
+    },
+
   },
   data() {
     return {
       model: {
-        productId: ''
+
+        productId: '',
       },
+      dictOptions: [
+        {
+          text: '特等重要',
+          value: '特等重要',
+        },
+        {
+          text: '一级重要',
+          value: '一级重要',
+        },
+        {
+          text: '二级重要',
+          value: '二级重要',
+        },
+        {
+          text: '三级重要',
+          value: '三级重要',
+        },
+      ],
       labelCol: {
         xs: { span: 24 },
-        sm: { span: 5 }
+        sm: { span: 5 },
       },
       wrapperCol: {
         xs: { span: 24 },
-        sm: { span: 16 }
+        sm: { span: 16 },
+
       },
       confirmLoading: false,
       validatorRules: {
@@ -91,28 +118,31 @@ export default {
         productType: [{ required: true, message: '请输入产品类别!' }],
         productSpecification: [{ required: true, message: '请输入产品规格!' }],
         productUnit: [{ required: true, message: '请输入产品计量单位!' }],
-        productNature: [{ required: true, message: '请输入产品性质!' }]
+
+        productNature: [{ required: true, message: '请输入产品性质!' }],
+
       },
       url: {
         add: '/productInf/productInf/add',
         edit: '/productInf/productInf/edit',
-        queryById: '/productInf/productInf/queryById'
-      }
+
+        queryById: '/productInf/productInf/queryById',
+      },
     }
   },
   computed: {
     formDisabled() {
       return this.disabled
-    }
+    },
   },
   created() {
     //备份model原始值
     this.modelDefault = JSON.parse(JSON.stringify(this.model))
+    getProductId(this)
   },
   methods: {
     add() {
       this.edit(this.modelDefault)
-      getProductId(this)
     },
     edit(record) {
       this.model = Object.assign({}, record)
@@ -121,7 +151,7 @@ export default {
     submitForm() {
       const that = this
       // 触发表单验证
-      this.$refs.form.validate(valid => {
+      this.$refs.form.validate((valid) => {
         if (valid) {
           that.confirmLoading = true
           let httpurl = ''
@@ -134,7 +164,7 @@ export default {
             method = 'put'
           }
           httpAction(httpurl, this.model, method)
-            .then(res => {
+            .then((res) => {
               if (res.success) {
                 that.$message.success(res.message)
                 that.$emit('ok')
@@ -147,7 +177,8 @@ export default {
             })
         }
       })
-    }
-  }
+    },
+  },
 }
 </script>
+

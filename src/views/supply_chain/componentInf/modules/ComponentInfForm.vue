@@ -15,7 +15,9 @@
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="部件类别" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentType">
-              <a-input v-model="model.componentType" placeholder="请输入部件类别"></a-input>
+              <!-- <a-input v-model="model.componentType" placeholder="请输入部件类别"  ></a-input> -->
+              <j-search-select-tag v-model="model.componentType" :dictOptions="dictOptions" />
+
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -57,7 +59,8 @@ import {
   getLotId,
   getProductId,
   getComponentId,
-  getSecondSupplierId
+  getSecondSupplierId,
+
 } from '@/utils/generateRule'
 
 export default {
@@ -68,22 +71,42 @@ export default {
     disabled: {
       type: Boolean,
       default: false,
-      required: false
-    }
+
+      required: false,
+    },
+
   },
   data() {
     return {
       model: {
-        componentId: ''
+        componentId: '',
       },
+      dictOptions: [
+        {
+          text: '特等重要',
+          value: '特等重要',
+        },
+        {
+          text: '一级重要',
+          value: '一级重要',
+        },
+        {
+          text: '二级重要',
+          value: '二级重要',
+        },
+        {
+          text: '三级重要',
+          value: '三级重要',
+        },
+      ],
 
       labelCol: {
         xs: { span: 24 },
-        sm: { span: 5 }
+        sm: { span: 5 },
       },
       wrapperCol: {
         xs: { span: 24 },
-        sm: { span: 16 }
+        sm: { span: 16 },
       },
       confirmLoading: false,
       validatorRules: {
@@ -92,28 +115,28 @@ export default {
         componentType: [{ required: true, message: '请输入部件类别!' }],
         componentSpecification: [{ required: true, message: '请输入部件规格!' }],
         componentUnit: [{ required: true, message: '请输入部件计量单位!' }],
-        componentNature: [{ required: true, message: '请输入部件性质!' }]
+        componentNature: [{ required: true, message: '请输入部件性质!' }],
       },
       url: {
         add: '/componentInf/componentInf/add',
         edit: '/componentInf/componentInf/edit',
-        queryById: '/componentInf/componentInf/queryById'
-      }
+        queryById: '/componentInf/componentInf/queryById',
+      },
     }
   },
   computed: {
     formDisabled() {
       return this.disabled
-    }
+    },
   },
   created() {
     //备份model原始值
     this.modelDefault = JSON.parse(JSON.stringify(this.model))
+    getComponentId(this)
   },
   methods: {
     add() {
       this.edit(this.modelDefault)
-      getComponentId(this)
     },
     edit(record) {
       this.model = Object.assign({}, record)
@@ -122,7 +145,7 @@ export default {
     submitForm() {
       const that = this
       // 触发表单验证
-      this.$refs.form.validate(valid => {
+      this.$refs.form.validate((valid) => {
         if (valid) {
           that.confirmLoading = true
           let httpurl = ''
@@ -135,7 +158,7 @@ export default {
             method = 'put'
           }
           httpAction(httpurl, this.model, method)
-            .then(res => {
+            .then((res) => {
               if (res.success) {
                 that.$message.success(res.message)
                 that.$emit('ok')
@@ -148,7 +171,8 @@ export default {
             })
         }
       })
-    }
-  }
+    },
+  },
 }
 </script>
+
