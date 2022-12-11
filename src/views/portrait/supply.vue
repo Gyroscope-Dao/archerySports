@@ -211,7 +211,7 @@ export default {
       getAction(url, { id: this.query.id, FirstSupplier: this.query.FirstSupplier }).then((res) => {
         this.basisData = res.result
         this.productData = this.basisData.productList[0]
-        // console.log(res.result)
+        // console.log(res)
       })
     },
     // 获取供货周期
