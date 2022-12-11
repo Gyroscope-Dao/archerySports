@@ -15,8 +15,10 @@
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="产品类别" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="productType">
+
               <!-- <a-input v-model="model.productType" placeholder="请输入产品类别"  ></a-input> -->
               <j-search-select-tag v-model="model.productType" :dictOptions="dictOptions" />
+
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -58,7 +60,9 @@ import {
   getLotId,
   getProductId,
   getComponentId,
+
   getSecondSupplierId,
+
 } from '@/utils/generateRule'
 
 export default {
@@ -69,12 +73,15 @@ export default {
     disabled: {
       type: Boolean,
       default: false,
+
       required: false,
     },
+
   },
   data() {
     return {
       model: {
+
         productId: '',
       },
       dictOptions: [
@@ -102,6 +109,7 @@ export default {
       wrapperCol: {
         xs: { span: 24 },
         sm: { span: 16 },
+
       },
       confirmLoading: false,
       validatorRules: {
@@ -110,11 +118,14 @@ export default {
         productType: [{ required: true, message: '请输入产品类别!' }],
         productSpecification: [{ required: true, message: '请输入产品规格!' }],
         productUnit: [{ required: true, message: '请输入产品计量单位!' }],
+
         productNature: [{ required: true, message: '请输入产品性质!' }],
+
       },
       url: {
         add: '/productInf/productInf/add',
         edit: '/productInf/productInf/edit',
+
         queryById: '/productInf/productInf/queryById',
       },
     }
@@ -170,3 +181,4 @@ export default {
   },
 }
 </script>
+

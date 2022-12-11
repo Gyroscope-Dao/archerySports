@@ -97,7 +97,7 @@ import {
   getLotId,
   getProductId,
   getComponentId,
-  getSecondSupplierId,
+  getSecondSupplierId
 } from '@/utils/generateRule'
 
 export default {
@@ -108,23 +108,23 @@ export default {
     disabled: {
       type: Boolean,
       default: false,
-      required: false,
-    },
+      required: false
+    }
   },
   data() {
     return {
       model: {
         secondSupplierId: '',
         stuffId: '',
-        infUpdateTime: '',
+        infUpdateTime: ''
       },
       labelCol: {
         xs: { span: 24 },
-        sm: { span: 5 },
+        sm: { span: 5 }
       },
       wrapperCol: {
         xs: { span: 24 },
-        sm: { span: 16 },
+        sm: { span: 16 }
       },
       confirmLoading: false,
       validatorRules: {
@@ -133,30 +133,33 @@ export default {
         supplierSimpleName: [{ required: true, message: '请输入供应商名称简称!' }],
         supplierAddress: [{ required: true, message: '请输入供应商地址!' }],
         contact: [{ required: true, message: '请输入联系人!' }],
-        contactNum: [{ required: true, message: '请输入联系电话!' }, { pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/, message: '请输入正确的手机号！'}],
+        contactNum: [
+          { required: true, message: '请输入联系电话!' },
+          { pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/, message: '请输入正确的手机号！' }
+        ]
       },
       url: {
         add: '/secondSupplierInf/secondSupplierInf/add',
         edit: '/secondSupplierInf/secondSupplierInf/edit',
-        queryById: '/secondSupplierInf/secondSupplierInf/queryById',
-      },
+        queryById: '/secondSupplierInf/secondSupplierInf/queryById'
+      }
     }
   },
   computed: {
     formDisabled() {
       return this.disabled
-    },
+    }
   },
   created() {
     //备份model原始值
     this.modelDefault = JSON.parse(JSON.stringify(this.model))
-    getSecondSupplierId(this)
     getStuffId(this)
     getTime(this)
   },
   methods: {
     add() {
       this.edit(this.modelDefault)
+      getSecondSupplierId(this)
     },
     edit(record) {
       this.model = Object.assign({}, record)
@@ -165,7 +168,7 @@ export default {
     submitForm() {
       const that = this
       // 触发表单验证
-      this.$refs.form.validate((valid) => {
+      this.$refs.form.validate(valid => {
         if (valid) {
           that.confirmLoading = true
           let httpurl = ''
@@ -178,7 +181,7 @@ export default {
             method = 'put'
           }
           httpAction(httpurl, this.model, method)
-            .then((res) => {
+            .then(res => {
               if (res.success) {
                 that.$message.success(res.message)
                 that.$emit('ok')
@@ -191,7 +194,7 @@ export default {
             })
         }
       })
-    },
-  },
+    }
+  }
 }
 </script>

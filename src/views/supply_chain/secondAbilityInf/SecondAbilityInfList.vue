@@ -205,10 +205,11 @@
           deleteBatch: "/secondAbilityInf/secondAbilityInf/deleteBatch",
           exportXlsUrl: "/secondAbilityInf/secondAbilityInf/exportXls",
           importExcelUrl: "secondAbilityInf/secondAbilityInf/importExcel",
-          
+
         },
         dictOptions:{},
         superFieldList:[],
+        my_isorter: {}
       }
     },
     created() {

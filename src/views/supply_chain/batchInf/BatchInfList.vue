@@ -185,10 +185,11 @@
           deleteBatch: "/batchInf/batchInf/deleteBatch",
           exportXlsUrl: "/batchInf/batchInf/exportXls",
           importExcelUrl: "batchInf/batchInf/importExcel",
-          
+
         },
         dictOptions:{},
         superFieldList:[],
+        my_isorter: {}
       }
     },
     created() {
