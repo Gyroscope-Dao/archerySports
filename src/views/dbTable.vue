@@ -52,6 +52,7 @@
           </div> -->
         </div>
         <div class="right">
+          <div style="font-size: 14px; height: 25px;">数据库数据数目： {{ activeTableCount }}</div>
           <a-table
             :columns="columns"
             :row-key="record => record.id"
@@ -181,7 +182,6 @@ export default {
 </script>
 
 <style scoped>
-
 .main {
   position: relative;
   display: flex;
