@@ -5,32 +5,48 @@
         <a-row>
           <a-col :span="24">
             <a-form-model-item label="订单编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="orderId">
-              <a-input v-model="model.orderId" placeholder="请输入订单编号"  disabled=""></a-input>
+              <a-input v-model="model.orderId" placeholder="请输入订单编号" disabled=""></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="供应商名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="firstSupplierId">
-              <j-search-select-tag v-model="model.firstSupplierId" dict="first_supplier_inf,supplier_name,first_supplier_id"  />
+              <j-search-select-tag
+                v-model="model.firstSupplierId"
+                dict="first_supplier_inf,supplier_name,first_supplier_id"
+              />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="产品名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="productId">
-              <j-search-select-tag v-model="model.productId" dict="product_inf,product_name,product_id"  />
+              <j-search-select-tag v-model="model.productId" dict="product_inf,product_name,product_id" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="一级采购编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="firstPurchaseid">
-              <a-input v-model="model.firstPurchaseid" placeholder="请输入一级采购编号"  ></a-input>
+            <a-form-model-item
+              label="一级采购编号"
+              :labelCol="labelCol"
+              :wrapperCol="wrapperCol"
+              prop="firstPurchaseid"
+            >
+              <a-input v-model="model.firstPurchaseid" placeholder="请输入一级采购编号"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="采购瓶颈供应商" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="bottleneckSid">
-              <j-search-select-tag v-model="model.bottleneckSid" dict="first_supplier_inf,supplier_name,first_supplier_id"  />
+            <a-form-model-item
+              label="采购瓶颈供应商"
+              :labelCol="labelCol"
+              :wrapperCol="wrapperCol"
+              prop="bottleneckSid"
+            >
+              <j-search-select-tag
+                v-model="model.bottleneckSid"
+                dict="first_supplier_inf,supplier_name,first_supplier_id"
+              />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="采购时间" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="purchaseTime">
-              <j-date placeholder="请选择采购时间" v-model="model.purchaseTime"  style="width: 100%" />
+              <j-date placeholder="请选择采购时间" v-model="model.purchaseTime" style="width: 100%" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -55,12 +71,12 @@
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="交货期" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="deliveryDate">
-              <j-date placeholder="请选择交货期" v-model="model.deliveryDate"  style="width: 100%" />
+              <j-date placeholder="请选择交货期" v-model="model.deliveryDate" style="width: 100%" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="实际交货期" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="realDeliveryDate">
-              <j-date placeholder="请选择实际交货期" v-model="model.realDeliveryDate"  style="width: 100%" />
+              <j-date placeholder="请选择实际交货期" v-model="model.realDeliveryDate" style="width: 100%" />
             </a-form-model-item>
           </a-col>
         </a-row>
@@ -70,129 +86,116 @@
 </template>
 
 <script>
+import { httpAction, getAction } from '@/api/manage'
+import { validateDuplicateValue } from '@/utils/util'
+import {
+  getFirstSupplierId,
+  getTime,
+  getStuffId,
+  getSimulationId,
+  getEtpId,
+  getOrderId,
+  getLotId,
+  getProductId,
+  getComponentId,
+  getSecondSupplierId,
+  getPurchaseOrderId
+} from '@/utils/generateRule'
 
-  import { httpAction, getAction } from '@/api/manage'
-  import { validateDuplicateValue } from '@/utils/util'
-  import { getFirstSupplierId,getTime,getStuffId,getSimulationId,getEtpId,getOrderId,getLotId,getProductId,getComponentId,getSecondSupplierId,getPurchaseOrderId } from '@/utils/generateRule'
-
-  export default {
-    name: 'FirstPurchaseForm',
-    components: {
-    },
-    props: {
-      //表单禁用
-      disabled: {
-        type: Boolean,
-        default: false,
-        required: false
+export default {
+  name: 'FirstPurchaseForm',
+  components: {},
+  props: {
+    //表单禁用
+    disabled: {
+      type: Boolean,
+      default: false,
+      required: false
+    }
+  },
+  data() {
+    return {
+      model: {
+        orderId: ''
+      },
+      labelCol: {
+        xs: { span: 24 },
+        sm: { span: 5 }
+      },
+      wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 16 }
+      },
+      confirmLoading: false,
+      validatorRules: {
+        orderId: [{ required: true, message: '请输入订单编号!' }],
+        firstSupplierId: [{ required: true, message: '请输入供应商名称!' }],
+        productId: [{ required: true, message: '请输入产品名称!' }],
+        firstPurchaseid: [{ required: true, message: '请输入一级采购编号!' }],
+        bottleneckSid: [{ required: true, message: '请输入采购瓶颈供应商!' }],
+        purchaseTime: [{ required: true, message: '请输入采购时间!' }],
+        purchasePercent: [{ required: true, message: '请输入采购比例!' }],
+        purchaseQuantity: [{ required: true, message: '请输入采购数量!' }],
+        purchaseLeadTime: [{ required: true, message: '请输入采购提前期!' }],
+        purchaseCycle: [{ required: true, message: '请输入供货周期!' }],
+        deliveryDate: [{ required: true, message: '请输入交货期!' }],
+        realDeliveryDate: [{ required: true, message: '请输入实际交货期!' }]
+      },
+      url: {
+        add: '/firstPurchase/firstPurchase/add',
+        edit: '/firstPurchase/firstPurchase/edit',
+        queryById: '/firstPurchase/firstPurchase/queryById'
       }
+    }
+  },
+  computed: {
+    formDisabled() {
+      return this.disabled
+    }
+  },
+  created() {
+    //备份model原始值
+    this.modelDefault = JSON.parse(JSON.stringify(this.model))
+  },
+  methods: {
+    add() {
+      this.edit(this.modelDefault)
+      getPurchaseOrderId(this)
     },
-    data () {
-      return {
-        model:{
-          orderId:'',
-         },
-        labelCol: {
-          xs: { span: 24 },
-          sm: { span: 5 },
-        },
-        wrapperCol: {
-          xs: { span: 24 },
-          sm: { span: 16 },
-        },
-        confirmLoading: false,
-        validatorRules: {
-           orderId: [
-              { required: true, message: '请输入订单编号!'},
-           ],
-           firstSupplierId: [
-              { required: true, message: '请输入供应商名称!'},
-           ],
-           productId: [
-              { required: true, message: '请输入产品名称!'},
-           ],
-           firstPurchaseid: [
-              { required: true, message: '请输入一级采购编号!'},
-           ],
-           bottleneckSid: [
-              { required: true, message: '请输入采购瓶颈供应商!'},
-           ],
-           purchaseTime: [
-              { required: true, message: '请输入采购时间!'},
-           ],
-           purchasePercent: [
-              { required: true, message: '请输入采购比例!'},
-           ],
-           purchaseQuantity: [
-              { required: true, message: '请输入采购数量!'},
-           ],
-           purchaseLeadTime: [
-              { required: true, message: '请输入采购提前期!'},
-           ],
-           purchaseCycle: [
-              { required: true, message: '请输入供货周期!'},
-           ],
-           deliveryDate: [
-              { required: true, message: '请输入交货期!'},
-           ],
-           realDeliveryDate: [
-              { required: true, message: '请输入实际交货期!'},
-           ],
-        },
-        url: {
-          add: "/firstPurchase/firstPurchase/add",
-          edit: "/firstPurchase/firstPurchase/edit",
-          queryById: "/firstPurchase/firstPurchase/queryById"
-        }
-      }
+    edit(record) {
+      this.model = Object.assign({}, record)
+      this.visible = true
     },
-    computed: {
-      formDisabled(){
-        return this.disabled
-      },
-    },
-    created () {
-       //备份model原始值
-      this.modelDefault = JSON.parse(JSON.stringify(this.model));
-      getPurchaseOrderId(this);
-    },
-    methods: {
-      add () {
-        this.edit(this.modelDefault);
-      },
-      edit (record) {
-        this.model = Object.assign({}, record);
-        this.visible = true;
-      },
-      submitForm () {
-        const that = this;
-        // 触发表单验证
-        this.$refs.form.validate(valid => {
-          if (valid) {
-            that.confirmLoading = true;
-            let httpurl = '';
-            let method = '';
-            if(!this.model.id){
-              httpurl+=this.url.add;
-              method = 'post';
-            }else{
-              httpurl+=this.url.edit;
-               method = 'put';
-            }
-            httpAction(httpurl,this.model,method).then((res)=>{
-              if(res.success){
-                that.$message.success(res.message);
-                that.$emit('ok');
-              }else{
-                that.$message.warning(res.message);
-              }
-            }).finally(() => {
-              that.confirmLoading = false;
-            })
+    submitForm() {
+      const that = this
+      // 触发表单验证
+      this.$refs.form.validate(valid => {
+        if (valid) {
+          that.confirmLoading = true
+          let httpurl = ''
+          let method = ''
+          if (!this.model.id) {
+            httpurl += this.url.add
+            method = 'post'
+          } else {
+            httpurl += this.url.edit
+            method = 'put'
           }
-         
-        })
-      },
+          httpAction(httpurl, this.model, method)
+            .then(res => {
+              if (res.success) {
+                that.$message.success(res.message)
+                that.$emit('ok')
+              } else {
+                that.$message.warning(res.message)
+              }
+            })
+            .finally(() => {
+              that.confirmLoading = false
+            })
+        }
+      })
     }
   }
+}
 </script>
