@@ -4,9 +4,10 @@
     <div class="main">
       <div class="leftNav">
         <div class="navItem" :class="{ currentItem: currentIndex == 1 }" @click="toNav1">供应商评价</div>
-        <div class="navItem" :class="{ currentItem: currentIndex == 2 }" @click="toNav2">供应商订单评价</div>
+        <div class="navItem" :class="{ currentItem: currentIndex == 2 }" @click="toNav2">供应商订单响应时长分析</div>
         <div class="navItem" :class="{ currentItem: currentIndex == 3 }" @click="toNav3">一级供应商周期评价</div>
         <div class="navItem" :class="{ currentItem: currentIndex == 4 }" @click="toNav4">二级供应商周期评价</div>
+        <div class="navItem" :class="{ currentItem: currentIndex == 5 }" @click="toNav5">根据采购订单评价分析</div>
       </div>
       <div class="content">
         <router-view />
@@ -25,24 +26,23 @@ export default {
   methods: {
     toNav1() {
       this.currentIndex = 1
-      this.$router.push({ path: 'index' })
-      console.log('1')
+      this.$router.push({ path: '/index' })
     },
     toNav2() {
       this.currentIndex = 2
-      console.log('2')
-      this.$router.push({ path: 'order' })
+      this.$router.push({ path: '/order' })
     },
     toNav3() {
       this.currentIndex = 3
-      this.$router.push({ path: 'firstCycle' })
-      console.log('3')
+      this.$router.push({ path: '/firstCycle' })
     },
     toNav4() {
       this.currentIndex = 4
-
-      this.$router.push({ path: 'secondCycle' })
-      console.log('4')
+      this.$router.push({ path: '/secondCycle' })
+    },
+    toNav5() {
+      this.currentIndex = 5
+      this.$router.push({ path: '/purchaseOrder' })
     },
   },
 }
