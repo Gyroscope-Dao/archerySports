@@ -43,7 +43,7 @@
       <div class="select">
         <div class="title">
           <h3>周期选择</h3>
-          <a-button type="primary" @click="searchQuery">确定</a-button>
+          <!-- <a-button type="primary" @click="searchQuery">确定</a-button> -->
         </div>
         <a-radio-group v-model="param" @change="onChange" value="value" class="radioGroup">
           <a-radio class="tip" value="采购提前期">采购提前期</a-radio>
@@ -67,6 +67,14 @@ export default {
   data() {
     return {
       model: {},
+      param: 0,
+      currentDataX: [],
+      currentDataY: [],
+      numDataY: [],
+      ADataY: [],
+      BDataY: [],
+      CDataY: [],
+      DDataY: [],
     }
   },
   computed: {
@@ -74,7 +82,7 @@ export default {
       return {
         xAxis: {
           type: 'category',
-          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          data: this.currentDataX,
           axisLine: {
             lineStyle: {
               width: 1,
@@ -91,7 +99,7 @@ export default {
         },
         series: [
           {
-            data: [150, 230, 224, 218, 135, 147, 260],
+            data: this.currentDataY,
             type: 'line',
             lineStyle: {
               // 设置线条的style等
@@ -113,12 +121,57 @@ export default {
   methods: {
     // 查询方法
     searchQuery() {
+      this.getdata(this.model)
       console.log(this.model)
     },
     // 重置方法
     searchReset() {
       this.model = {}
     },
+    onChange(e) {
+      if (e.target.value == '采购提前期') {
+        this.currentDataY = this.ADataY
+      }
+      if (e.target.value == '生成日期') {
+        this.currentDataY = this.BDataY
+      }
+      if (e.target.value == '军检时间') {
+        this.currentDataY = this.CDataY
+      }
+      if (e.target.value == '生产时间') {
+        this.currentDataY = this.DDataY
+      }
+    },
+    /*
+    startDate: '2022-12-01',
+        endDate: '2022-12-20',
+        supplyId: 'SS20221204211469',
+        productId: 'C20221206155094',
+    */
+    getdata(obj) {
+      var url = '/supplycycleanalysis/getSecondsupplycycleanalysis'
+      getAction(url, {
+        startDate: obj.startTime,
+        endDate: obj.endTime,
+        supplyId: obj.supplyId,
+        productId: obj.productId,
+      }).then((res) => {
+        console.log(res);
+        res.result.forEach((e) => {
+          this.currentDataX.push(e.componentName)
+          this.numDataY.push(e.dailyProductionCapacity)
+          this.ADataY.push(e.checkTimeA)
+          this.BDataY.push(e.checkTimeB)
+          this.CDataY.push(e.checkTimeC)
+          this.DDataY.push(e.checkTimeD)
+        })
+        this.currentDataY = this.numDataY
+        res.result.forEach((e) => {console.log(e);})
+      })
+    },
+  },
+  mounted() {
+    // this.getdata()
   },
 }
 </script>
