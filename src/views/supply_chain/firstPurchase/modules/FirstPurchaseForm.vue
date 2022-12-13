@@ -18,7 +18,8 @@
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="产品名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="productId">
-              <j-search-select-tag v-model="model.productId" dict="product_inf,product_name,product_id" />
+              <!-- <j-search-select-tag v-model="model.productId" dict="product_inf,product_name,product_id" /> -->
+              <j-search-select-tag v-model="model.productId" :dictOptions="dictOptions" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -88,6 +89,7 @@
 <script>
 import { httpAction, getAction } from '@/api/manage'
 import { validateDuplicateValue } from '@/utils/util'
+import { axios } from '@/utils/request'
 import {
   getFirstSupplierId,
   getTime,
@@ -145,7 +147,14 @@ export default {
         add: '/firstPurchase/firstPurchase/add',
         edit: '/firstPurchase/firstPurchase/edit',
         queryById: '/firstPurchase/firstPurchase/queryById'
-      }
+      },
+      dictOptions: []
+    }
+  },
+  watch: {
+    'model.firstSupplierId'(newvalue) {
+      console.log(newvalue + '  发起请求')
+      this.fetchSelectItem(newvalue)
     }
   },
   computed: {
@@ -158,6 +167,11 @@ export default {
     this.modelDefault = JSON.parse(JSON.stringify(this.model))
   },
   methods: {
+    async fetchSelectItem(id) {
+      let res = await axios('/firstPurchase/firstPurchase/products?firstSupplierId=' + id)
+      this.dictOptions = res.result
+      console.log(res.result)
+    },
     add() {
       this.edit(this.modelDefault)
       getPurchaseOrderId(this)
