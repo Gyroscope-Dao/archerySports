@@ -60,8 +60,11 @@
             :pagination="pagination"
             :loading="loading"
             @change="handleTableChange"
-            class="table"
+            class="table j-table-force-nowrap"
+            :scroll="{ x: true }"
+            bordered
           >
+            <!-- :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }" -->
           </a-table>
         </div>
       </div>
@@ -163,13 +166,20 @@ export default {
     },
     createTitles(obj) {
       let res = []
-      for (let i of Object.keys(obj)) {
+      for (let key in obj) {
         let item = {}
-        item['title'] = CHTableField.get(i) ? CHTableField.get(i) : i
-        item['dataIndex'] = i
-        item['key'] = i
+        item['title'] = CHTableField.get(key) ? CHTableField.get(key) : key
+        item['dataIndex'] = key
+        item['key'] = key
         res.push(item)
       }
+      res.sort((a, b) => {
+        if (a.key === 'id') return -1
+        if (b.key === 'id') return 1
+        if (a.key === 'create_time') return 1
+        if (b.key === 'create_time') return -1
+        return a.key.localeCompare(b.key)
+      })
       return res
     },
     async handleTableNameButton(table) {
@@ -182,6 +192,7 @@ export default {
 </script>
 
 <style scoped>
+@import '~@assets/less/common.less';
 .main {
   position: relative;
   display: flex;
@@ -220,9 +231,7 @@ export default {
   color: #1890ff;
 }
 .table {
-  width: 100%;
-  overflow-x: scroll;
+  /* width: 100%; */
+  /* overflow-x: scroll; */
 }
-
-
 </style>
