@@ -1,34 +1,17 @@
 <template>
   <div class="container">
-    <h2>供应商订单响应时长分析</h2>
+    <h2>采购订单评价分析</h2>
     <!-- 查询区域 -->
     <div class="table-page-search-wrapper">
       <!-- 搜索区域 -->
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
           <a-col :md="4" :sm="8">
-            <a-form-model-item :labelCol="{ span: 5 }" :wrapperCol="{ span: 10, offset: 1 }" prop="infUpdateTime">
-              <span>开始日期</span>
-              <j-date v-model="model.startTime" placeholder="请选择开始时间" style="width: 100%" />
-            </a-form-model-item>
-          </a-col>
-          <a-col :md="4" :sm="8">
-            <a-form-model-item :labelCol="{ span: 5 }" :wrapperCol="{ span: 10, offset: 1 }" prop="infUpdateTime">
-              结束日期
-              <j-date v-model="model.endTime" placeholder="请选择结束时间" style="width: 100%" />
-            </a-form-model-item>
-          </a-col>
-          <a-col :md="4" :sm="8">
             <a-form-item label="" :labelCol="{ span: 5 }" :wrapperCol="{ span: 10, offset: 1 }">
               供应商编号
-              <a-input v-model="model.supplyId" placeholder="请输入供应商编号"></a-input>
+              <a-input v-model="id" placeholder="请输入供应商编号"></a-input>
             </a-form-item>
           </a-col>
-          <a-col :md="4" :sm="8">
-            <a-form-item label="" :labelCol="{ span: 5 }" :wrapperCol="{ span: 10, offset: 1 }">
-              产品编号
-              <a-input v-model="model.productId" placeholder="请输入产品编号"></a-input> </a-form-item
-          ></a-col>
           <span style="overflow: hidden" class="table-page-search-submitButtons">
             <a-col :md="4" :sm="8">
               <a-button type="primary" @click="searchQuery" icon="search" style="margin: 30px 0 0 21px">查询</a-button>
@@ -43,7 +26,8 @@
       <a-table :columns="columns" :dataSource="dataSource" :pagination="pagination" />
       <!-- echarts图 -->
       <div class="echart">
-        <ECharts class="chart" :option="option"></ECharts>
+        <ECharts class="chart" :option="option1"></ECharts>
+        <ECharts class="chart" :option="option2"></ECharts>
       </div>
     </div>
   </div>
@@ -55,9 +39,7 @@ import { getAction } from '@/api/manage'
 export default {
   data() {
     return {
-      model: {},
-      dataX:[],
-      dataY:[],
+      id: 1,
       // 表格数据源
       dataSource: [],
       // 表格横轴
@@ -106,44 +88,60 @@ export default {
       pagination: {
         current: 1,
         pageSize: 3,
-        total: 100,
+        total: 6,
       },
+      //  第一个饼图的数据
+      data1: [],
+      data2: [],
     }
   },
   computed: {
-    option() {
+    option1() {
       return {
-        xAxis: {
-          type: 'category',
-          data: this.dataX,
-          axisLine: {
-            lineStyle: {
-              width: 1,
-            },
-          },
+        tooltip: {
+          trigger: 'item',
         },
-        yAxis: {
-          type: 'value',
-          axisLine: {
-            lineStyle: {
-              width: 1,
-            },
-          },
+        legend: {
+          orient: 'vertical',
+          bottom: 'bottom',
         },
         series: [
           {
-            data: this.dataY,
-            type: 'line',
-            lineStyle: {
-              // 设置线条的style等
-              normal: {
-                color: 'green', // 折线线条颜色:红色
+            name: 'Access From',
+            type: 'pie',
+            radius: '50%',
+            data: this.data1,
+            emphasis: {
+              itemStyle: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.5)',
               },
             },
-            itemStyle: {
-              // 设置线条上点的颜色（和图例的颜色）
-              normal: {
-                color: 'green',
+          },
+        ],
+      }
+    },
+    option2() {
+      return {
+        tooltip: {
+          trigger: 'item',
+        },
+        legend: {
+          orient: 'vertical',
+          bottom: 'bottom',
+        },
+        series: [
+          {
+            name: 'Access From',
+            type: 'pie',
+            radius: '50%',
+            data: this.data2,
+            emphasis: {
+              itemStyle: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.5)',
               },
             },
           },
@@ -154,26 +152,16 @@ export default {
   methods: {
     // 查询方法
     searchQuery() {
-      this.req(this.model)
+      this.getAllPurchaseOrders(id)
     },
     // 重置方法
     searchReset() {
       this.model = {}
     },
-    req(obj) {
-      /* 
-        startDate: '2022-12-01',
-        endDate: '2022-12-20',
-        supplyId: '1',
-        productId: 'P20221206122284',
-      */
-      var url = '/orderresponse/getOrderResponse'
-      getAction(url, {
-        startDate: obj.startTime,
-        endDate: obj.endTime,
-        supplyId: obj.supplyId,
-        productId: obj.productId,
-      }).then((res) => {
+    // 获取所有的订单的数量
+    getAllPurchaseOrders(id) {
+      var url = '/purchaseorder/getAllPurchaseOrders'
+      getAction(url, { supplyId: id }).then((res) => {
         res.result.forEach((e) => {
           this.dataSource.push({
             orderId: e.orderId,
@@ -186,16 +174,32 @@ export default {
             deliveryDate: e.deliveryDate,
           })
         })
-        res.result.forEach((e)=>{
-          this.dataX.push(e.productName)
-          this.dataY.push(e.purchaseQuantity)
+        console.log(this.dataSource);
+      })
+    },
+    // 获取已完成-未完成的订单第一个图：/getOrderIsFinish
+    getOrderIsFinish() {
+      var url = '/purchaseorder/getOrderIsFinish'
+      getAction(url, { supplyId: 1 }).then((res) => {
+        this.data1.push({ value: res.result.orderFinish, name: '已完成订单' })
+        this.data1.push({ value: res.result.orderNotFinish, name: '未完成订单' })
+      })
+    },
+    // 获取第二个图：/getSupplyProductRate
+    getSupplyProductRate() {
+      var url = '/purchaseorder/getSupplyProductRate'
+      getAction(url, { supplyId: 1 }).then((res) => {
+        res.result.forEach((e) => {
+          // console.log(e);
+          this.data2.push({ value: e.productRate, name: e.productName })
         })
       })
-        
     },
   },
   mounted() {
-    // this.req(this.start)
+    this.getAllPurchaseOrders(1)
+    this.getOrderIsFinish()
+    this.getSupplyProductRate()
   },
 }
 </script>
@@ -212,11 +216,11 @@ export default {
     .echart {
       position: absolute;
       bottom: -80%;
-      left: 25%;
+      left: 10%;
       display: flex;
       justify-content: center;
       .chart {
-        width: 600px;
+        width: 400px;
         height: 270px;
       }
     }

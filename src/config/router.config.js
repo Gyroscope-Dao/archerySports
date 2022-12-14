@@ -332,6 +332,11 @@ export const constantRouterMap = [
         name: 'secondCycle',
         component: () => import('@/views/evaluation/secondCycle.vue'),
       },
+      {
+        path: '/purchaseOrder',
+        name: 'purchaseOrder',
+        component: ()=> import('@/views/evaluation/purchaseOrder.vue')
+      }
     ]
   },
   // 画像路由
