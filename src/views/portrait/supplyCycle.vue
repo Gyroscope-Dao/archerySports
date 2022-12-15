@@ -22,7 +22,16 @@
         </ul>
         <div class="panel_footer"></div>
       </div>
-      <div class="panel panel_chart3">
+      <div class="mid">
+        <ECharts class="china" :option="option" ref="myEchart"></ECharts>
+        <!-- <Map></Map> -->
+        <div class="map">
+          <div class="map1"></div>
+          <div class="map2"></div>
+          <div class="map3"></div>
+        </div>
+      </div>
+      <div class="panel panel_chart">
         <h2>供货周期详情</h2>
         <ECharts class="chartOne" :option="optionOne"></ECharts>
         <div class="panel_footer"></div>
@@ -32,6 +41,8 @@
 </template>
 
 <script>
+import '@/assets/portrait/china.js'
+import * as echarts from 'echarts'
 import { getAction } from '@/api/manage'
 
 export default {
@@ -51,6 +62,9 @@ export default {
       },
       // 柱状图周期y轴的值
       dateImgY: [],
+      data: [
+        { name: '太原市', value: [112.46, 36.92, 4367] },
+      ],
     }
   },
   computed: {
@@ -112,6 +126,54 @@ export default {
         ],
       }
     },
+    option() {
+      return {
+        geo: {
+          map: 'china',
+          itemStyle: {
+            areaColor: '#0099ff',
+            borderColor: '#00ffff',
+            shadowColod: 'rgba(230,130,70, 0.1)',
+            shadowBlur: 30,
+          },
+        },
+        title: {
+          text: '供应商地图分布',
+          left: '45%',
+          textStyle: {
+            color: '#fff',
+            fontSize: 20,
+            textShadowBlur: 10,
+            textShadowColor: '#33ffff',
+          },
+        },
+        tooltip: {
+          trigger: 'item',
+        },
+        visualMap: {
+          type: 'continuous',
+          min: 100,
+          max: 5000,
+          calculable: true,
+          inRange: {
+            color: ['#50a3ba', '#eac736', '#d94e5d'],
+          },
+          textStyle: {
+            color: '#fff',
+          },
+        },
+        series: [
+          {
+            type: 'scatter',
+            itemStyle: {
+              color: 'red',
+            },
+            coordinateSystem: 'geo',
+            data: this.data,
+          },
+        ],
+      }
+    },
   },
   methods: {
     // 获取供货周期
@@ -151,6 +213,8 @@ export default {
     },
   },
   mounted() {
+    this.myChart = echarts.init(document.querySelector('.china')) //这里是为了获得容器所在位置
+    console.log(document.querySelector('.china'))
     this.query = this.$route.query
     console.log(this.query)
     this.getDateData()
@@ -182,24 +246,81 @@ export default {
     color: #fff;
     display: flex;
     justify-content: center;
-    .details {
-      margin-left: 90px;
-      margin-bottom: 5px;
-      .tip {
-        margin: 10px 0 0 10px;
-        font-size: 24px;
-        span {
-          color: #02a6b5;
+    .mid {
+      // background-color: aquamarine;
+      position: relative;
+      flex: 3;
+      height: 650px;
+      padding: 10px;
+      margin: 20px;
+      .china {
+        z-index: 999;
+        width: 100%;
+        height: 95%;
+      }
+      .map {
+        .map1 {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 430px;
+          height: 430px;
+          background: url('../../assets/portrait/map.png');
+          background-size: 100%;
+          opacity: 0.3;
         }
-        .component {
-          color: #fff;
-          margin-right: 10px;
+        .map2 {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 490px;
+          height: 490px;
+          background: url('../../assets/portrait/lbx.png');
+          background-size: 100%;
+          opacity: 0.6;
+          animation: rotate1 15s linear infinite;
+        }
+        .map3 {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 470px;
+          height: 470px;
+          background: url('../../assets/portrait/jt.png');
+          background-size: 100%;
+          opacity: 0.6;
+          animation: rotate2 10s linear infinite;
         }
       }
     }
-    .chartOne {
-      width: 500px;
-      height: 300px;
+    .actDesc {
+      flex: 2;
+      .details {
+        margin-left: 20px;
+        margin-bottom: 5px;
+        .tip {
+          margin: 10px 0 0 10px;
+          font-size: 24px;
+          span {
+            color: #02a6b5;
+          }
+          .component {
+            color: #fff;
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+
+    .panel_chart {
+      flex: 2;
+      .chartOne {
+        width: 500px;
+        height: 300px;
+      }
     }
   }
 }
@@ -208,8 +329,10 @@ export default {
   // height: 100px;
   border: 1px solid rgba(25, 186, 139, 0.17);
   padding: 20px;
+  margin-left: 20px;
   margin-right: 30px;
   margin-top: 150px;
+  margin-bottom: 100px;
   width: 500px;
   &::before {
     position: absolute;

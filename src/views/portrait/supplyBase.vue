@@ -16,6 +16,15 @@
 
         <div class="panel_footer"></div>
       </div>
+      <div class="mid">
+        <ECharts class="china" :option="option" ref="myEchart"></ECharts>
+        <!-- <Map></Map> -->
+        <div class="map">
+          <div class="map1"></div>
+          <div class="map2"></div>
+          <div class="map3"></div>
+        </div>
+      </div>
       <div class="panel basisDesc1">
         <ul class="details">
           <li class="tip"><span>是否民营企业：</span>是</li>
@@ -35,18 +44,90 @@
 </template>
 
 <script>
+import '@/assets/portrait/china.js'
+import * as echarts from 'echarts'
 import { getAction } from '@/api/manage'
 
 export default {
   data() {
     return {
       // 存放传递页面的参数
-      query: null,
+      query: {
+        FirstSupplier: 0
+      },
       // 基础信息
-      basisData: null,
+      basisData: {
+        supplierName: '暂时没有数据',
+        contact: '暂时没有数据',
+        contactNum: '暂时没有数据',
+        taxId: '暂时没有数据',
+        legalPerson: '暂时没有数据',
+        bankName: '暂时没有数据',
+        bankAccount: '暂时没有数据',
+        eptId: '暂时没有数据',
+        certification: '暂时没有数据',
+        supplierAddress: '暂时没有数据',
+      },
       //  组件数据
-      productData: null,
+      productData: {
+        productId: '暂时没有数据',
+        productStock: '暂时没有数据',
+        productionLot: '暂时没有数据',
+        dayProLot: '暂时没有数据',
+        maxDayProLot: '暂时没有数据',
+      },
+      data: [{ name: '太原市', value: [112.46, 36.92, 4367] }],
     }
+  },
+  computed: {
+    option() {
+      return {
+        geo: {
+          map: 'china',
+          itemStyle: {
+            areaColor: '#0099ff',
+            borderColor: '#00ffff',
+            shadowColod: 'rgba(230,130,70, 0.1)',
+            shadowBlur: 30,
+          },
+        },
+        title: {
+          text: '供应商地图分布',
+          left: '45%',
+          textStyle: {
+            color: '#fff',
+            fontSize: 20,
+            textShadowBlur: 10,
+            textShadowColor: '#33ffff',
+          },
+        },
+        tooltip: {
+          trigger: 'item',
+        },
+        visualMap: {
+          type: 'continuous',
+          min: 100,
+          max: 5000,
+          calculable: true,
+          inRange: {
+            color: ['#50a3ba', '#eac736', '#d94e5d'],
+          },
+          textStyle: {
+            color: '#fff',
+          },
+        },
+        series: [
+          {
+            type: 'scatter',
+            itemStyle: {
+              color: 'red',
+            },
+            coordinateSystem: 'geo',
+            data: this.data,
+          },
+        ],
+      }
+    },
   },
   methods: {
     // 获取基本信息
@@ -60,8 +141,8 @@ export default {
     },
   },
   mounted() {
-    
-    console.log(document.querySelector('.allPage'));
+    console.log(document.querySelector('.china'))
+    this.myChart = echarts.init(document.querySelector('.china')) //这里是为了获得容器所在位置
     this.query = this.$route.query
     // console.log(this.query)
     this.getBasis()
@@ -88,12 +169,13 @@ export default {
     font-size: 24px;
   }
   .Basis {
-    margin-top: 100px;
+    // margin-top: 100px;
     color: #fff;
     display: flex;
     justify-content: center;
     // align-items: center;
     .details {
+        flex: 2;
       margin-left: 20px;
       margin-bottom: 22px;
       .tip {
@@ -104,14 +186,66 @@ export default {
         }
       }
     }
+    .mid {
+      // background-color: aquamarine;
+      position: relative;
+      flex: 3;
+      height: 650px;
+      padding: 10px;
+      margin: 20px;
+      .china {
+        z-index: 999;
+        width: 100%;
+        height: 80%;
+      }
+      .map {
+        .map1 {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 430px;
+          height: 430px;
+          background: url('../../assets/portrait/map.png');
+          background-size: 100%;
+          opacity: 0.3;
+        }
+        .map2 {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 490px;
+          height: 490px;
+          background: url('../../assets/portrait/lbx.png');
+          background-size: 100%;
+          opacity: 0.6;
+          animation: rotate1 15s linear infinite;
+        }
+        .map3 {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 470px;
+          height: 470px;
+          background: url('../../assets/portrait/jt.png');
+          background-size: 100%;
+          opacity: 0.6;
+          animation: rotate2 10s linear infinite;
+        }
+      }
+    }
   }
 }
 .panel {
   position: relative;
-  // height: 100px;
   border: 1px solid rgba(25, 186, 139, 0.17);
   padding: 20px;
+  margin-left: 20px;
   margin-right: 30px;
+  margin-top: 80px;
+  width: 500px;
   &::before {
     position: absolute;
     top: 0;

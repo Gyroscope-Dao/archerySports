@@ -205,9 +205,10 @@ export default {
     .echart {
       display: flex;
       justify-content: center;
+      align-items: inherit;
       .chart {
-        width: 43.75rem;
-        height: 18.75rem;
+        width: 47.75rem;
+        height: 22.75rem;
       }
     }
   }
