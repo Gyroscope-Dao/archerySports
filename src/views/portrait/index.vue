@@ -1,7 +1,7 @@
 <template>
   <div class="allPage">
     <header>
-      <h1>大数据可视化平台</h1>
+      <h1>供应商画像管理平台</h1>
     </header>
     <div class="container">
       <!-- 主体左边 -->

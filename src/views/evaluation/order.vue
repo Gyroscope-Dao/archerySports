@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h2>供应商订单响应时长分析</h2>
+    <!-- <h2>供应商订单响应时长分析</h2> -->
     <!-- 查询区域 -->
     <div class="table-page-search-wrapper">
       <!-- 搜索区域 -->
@@ -211,13 +211,13 @@ export default {
     position: relative;
     .echart {
       position: absolute;
-      bottom: -80%;
+      bottom: -100%;
       left: 25%;
       display: flex;
       justify-content: center;
       .chart {
-        width: 600px;
-        height: 270px;
+        width: 800px;
+        height: 300px;
       }
     }
   }

@@ -15,6 +15,15 @@
             <div class="panel_footer"></div>
           </div>
         </div>
+        <div class="mid">
+          <ECharts class="china" :option="option" ref="myEchart"></ECharts>
+          <!-- <Map></Map> -->
+          <div class="map">
+            <div class="map1"></div>
+            <div class="map2"></div>
+            <div class="map3"></div>
+          </div>
+        </div>
         <div class="right2 right">
           <div class="panel panel_chart2">
             <h2>运输周期趋势</h2>
@@ -33,6 +42,8 @@
 </template>
 
 <script>
+import '@/assets/portrait/china.js'
+import * as echarts from 'echarts'
 import { getAction } from '@/api/manage'
 
 export default {
@@ -44,6 +55,7 @@ export default {
       dataInspectionCycle: [],
       // 柱状图数据
       dataDateBarChart: [],
+      data: [{ name: '太原市', value: [112.46, 36.92, 4367] }],
     }
   },
   computed: {
@@ -241,6 +253,54 @@ export default {
         ],
       }
     },
+    option() {
+      return {
+        geo: {
+          map: 'china',
+          itemStyle: {
+            areaColor: '#0099ff',
+            borderColor: '#00ffff',
+            shadowColod: 'rgba(230,130,70, 0.1)',
+            shadowBlur: 30,
+          },
+        },
+        title: {
+          text: '供应商地图分布',
+          left: '45%',
+          textStyle: {
+            color: '#fff',
+            fontSize: 20,
+            textShadowBlur: 10,
+            textShadowColor: '#33ffff',
+          },
+        },
+        tooltip: {
+          trigger: 'item',
+        },
+        visualMap: {
+          type: 'continuous',
+          min: 100,
+          max: 5000,
+          calculable: true,
+          inRange: {
+            color: ['#50a3ba', '#eac736', '#d94e5d'],
+          },
+          textStyle: {
+            color: '#fff',
+          },
+        },
+        series: [
+          {
+            type: 'scatter',
+            itemStyle: {
+              color: 'red',
+            },
+            coordinateSystem: 'geo',
+            data: this.data,
+          },
+        ],
+      }
+    },
   },
   methods: {
     // 检验周期--折线图
@@ -269,6 +329,8 @@ export default {
     },
   },
   mounted() {
+    this.myChart = echarts.init(document.querySelector('.china')) //这里是为了获得容器所在位置
+    console.log(document.querySelector('.china'))
     this.query = this.$route.query
     // console.log(this.query)
     this.getInspectionCycle()
@@ -304,10 +366,60 @@ export default {
     .rightbox {
       display: flex;
       .right1 {
-        flex: 1;
+        flex: 2;
+      }
+      .mid {
+        // background-color: aquamarine;
+        position: relative;
+        flex: 3;
+        height: 650px;
+        padding: 10px;
+        margin: 20px;
+        .china {
+          z-index: 999;
+          width: 100%;
+          height: 95%;
+        }
+        .map {
+          .map1 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 430px;
+            height: 430px;
+            background: url('../../assets/portrait/map.png');
+            background-size: 100%;
+            opacity: 0.3;
+          }
+          .map2 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 490px;
+            height: 490px;
+            background: url('../../assets/portrait/lbx.png');
+            background-size: 100%;
+            opacity: 0.6;
+            animation: rotate1 15s linear infinite;
+          }
+          .map3 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 470px;
+            height: 470px;
+            background: url('../../assets/portrait/jt.png');
+            background-size: 100%;
+            opacity: 0.6;
+            animation: rotate2 10s linear infinite;
+          }
+        }
       }
       .right2 {
-        flex: 1;
+        flex: 2;
       }
       .right {
         color: #fff;

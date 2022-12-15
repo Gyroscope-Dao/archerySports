@@ -5,7 +5,7 @@
     </header>
     <div class="container">
       <div class="left">
-        <h2 @click="toBasis">基本信息</h2>
+        <h2 @click="toBase">基本信息</h2>
         <div class="panel basisDesc">
           <ul class="details">
             <li class="tip"><span>供应商名称：</span>{{ basisData.supplierName }}</li>
@@ -198,6 +198,16 @@ export default {
     toBasis() {
       let routeData = this.$router.resolve({
         path: '/portrait/supplyBasis',
+        query: {
+          id: this.query.id,
+          FirstSupplier: this.query.FirstSupplier,
+        },
+      })
+      window.open(routeData.href, '_blank')
+    },
+    toBase() {
+      let routeData = this.$router.resolve({
+        path: '/portrait/supplyBase',
         query: {
           id: this.query.id,
           FirstSupplier: this.query.FirstSupplier,
