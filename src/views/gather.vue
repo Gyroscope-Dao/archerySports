@@ -21,13 +21,33 @@
     <div class="main">
       <div class="title">联动保供平台</div>
       <div class="content">
-        <div class="btn btn1" @click="toIndex">联动保供管理系统</div>
-        <div class="btn btn2" @click="toImage">供应商画像系统</div>
-        <div class="btn btn3" @click="toImage1">联动保供平台</div>
+        <div class="btn btn1" @click="showFirst">供应链数字孪生系统</div>
+        <div class="btn btn2" @click="showSecond">智能计划与调度系统</div>
+        <div class="btn btn3" @click="showThird">装箱线仿真系统</div>
       </div>
     </div>
 
-    <div class="bootom">
+    <div class="bootom" v-if="first">
+      <div class="item" @click="toIndex">
+        <img src="../assets/gather/icon/shafa.png" alt="" />
+        <span>供应商保供数据库管理系统</span>
+      </div>
+      <div class="item" @click="toImage">
+        <img src="../assets/gather/icon/bijiben.png" alt="" />
+        <span>供应商画像系统</span>
+      </div>
+      <div class="item" @click="toImage1">
+        <img src="../assets/gather/icon/xiangbao.png" alt="" />
+        <span>供应链仿真系统</span>
+      </div>
+    </div>
+    <div class="bootom" v-if="second">
+      <div class="item">
+        <img src="../assets/gather/icon/xiangbao.png" alt="" />
+        <span>装箱计划仿真</span>
+      </div>
+    </div>
+    <div class="bootom" v-if="third">
       <div class="item">
         <img src="../assets/gather/icon/shizhong.png" alt="" />
         <span>供应商保供数据库</span>
@@ -63,7 +83,31 @@ import { mapActions, mapGetters, mapState } from 'vuex'
 export default {
   name: 'integration',
   mixins: [mixinDevice],
+  data() {
+    return {
+      first: true,
+      second: false,
+      third: false
+    }
+  },
   methods: {
+    showFirst() {
+      this.first = true
+      this.second = false
+      this.third = false
+    },
+    showSecond() {
+      console.log(2);
+      this.first = false
+      this.second = true
+      this.third = false
+    },
+    showThird() {
+      console.log(3);
+      this.first = false
+      this.second = false
+      this.third = true
+    },
     toIndex() {
       this.$router.push({
         path: '/dashboard/analysis',
@@ -205,6 +249,7 @@ export default {
     align-items: center;
 
     .item {
+      cursor: pointer;
       display: flex;
       flex-direction: column;
       align-items: center;
