@@ -38,32 +38,16 @@
       </div>
       <div class="item" @click="toImage1">
         <img src="../assets/gather/icon/xiangbao.png" alt="" />
-        <span>供应链仿真系统</span>
+        <span>供应商评价系统</span>
       </div>
     </div>
     <div class="bootom" v-if="second">
       <div class="item">
         <img src="../assets/gather/icon/xiangbao.png" alt="" />
-        <span>装箱计划仿真</span>
+        <span>智能计划调度</span>
       </div>
     </div>
     <div class="bootom" v-if="third">
-      <div class="item">
-        <img src="../assets/gather/icon/shizhong.png" alt="" />
-        <span>供应商保供数据库</span>
-      </div>
-      <div class="item">
-        <img src="../assets/gather/icon/aixin.png" alt="" />
-        <span>供应链仿真</span>
-      </div>
-      <div class="item">
-        <img src="../assets/gather/icon/qiche.png" alt="" />
-        <span>智能计划管理</span>
-      </div>
-      <div class="item">
-        <img src="../assets/gather/icon/shafa.png" alt="" />
-        <span>智能调度管理</span>
-      </div>
       <div class="item">
         <img src="../assets/gather/icon/bijiben.png" alt="" />
         <span>装线箱实时监控</span>

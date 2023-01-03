@@ -68,8 +68,8 @@ export default {
     return {
       model: {},
       param: 0,
-      currentDataX: [],
-      currentDataY: [],
+      currentDataX: ['面包','火腿肠','方便面','干脆面'],
+      currentDataY: [200,300,600,500],
       numDataY: [],
       ADataY: [],
       BDataY: [],
@@ -157,6 +157,8 @@ export default {
         productId: obj.productId,
       }).then((res) => {
         console.log(res);
+        this.currentDataX = []
+        this.currentDataY = []
         res.result.forEach((e) => {
           this.currentDataX.push(e.componentName)
           this.numDataY.push(e.dailyProductionCapacity)

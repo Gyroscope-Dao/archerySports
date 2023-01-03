@@ -7,7 +7,7 @@
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
           <a-col :md="4" :sm="8">
-            <a-form-item label="" :labelCol="{ span: 5 }" :wrapperCol="{ span: 10, offset: 1 }">
+            <a-form-item class="item" label="" :labelCol="{ span: 5 }" :wrapperCol="{ span: 10, offset: 1 }">
               供应商编号
               <a-input v-model="id" placeholder="请输入供应商编号"></a-input>
             </a-form-item>
@@ -15,7 +15,7 @@
           <span style="overflow: hidden" class="table-page-search-submitButtons">
             <a-col :md="4" :sm="8">
               <a-button type="primary" @click="searchQuery" icon="search" style="margin: 30px 0 0 21px">查询</a-button>
-              <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
+              <!-- <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button> -->
             </a-col>
           </span>
         </a-row>
@@ -23,7 +23,7 @@
     </div>
     <div class="main">
       <!-- 表格区域 -->
-      <a-table :columns="columns" :dataSource="dataSource" :pagination="pagination" />
+      <a-table :columns="columns" :dataSource="dataSource" :pagination="pagination" @change="handleTableChange"/>
       <!-- echarts图 -->
       <div class="echart">
         <ECharts class="chart" :option="option1"></ECharts>
@@ -88,7 +88,7 @@ export default {
       pagination: {
         current: 1,
         pageSize: 3,
-        total: 6,
+        total: 1,
       },
       //  第一个饼图的数据
       data1: [],
@@ -158,6 +158,20 @@ export default {
     searchReset() {
       this.model = {}
     },
+    // 分页
+    handleTableChange(pagination, filters, sorter) {
+      console.log(pagination);
+      const pager = { ...this.pagination };
+      pager.current = pagination.current;
+      this.pagination = pager;
+      this.fetch({
+        results: pagination.pageSize,
+        page: pagination.current,
+        sortField: sorter.field,
+        sortOrder: sorter.order,
+        ...filters,
+      });
+    },
     // 获取所有的订单的数量
     getAllPurchaseOrders(id) {
       var url = '/purchaseorder/getAllPurchaseOrders'
@@ -175,6 +189,7 @@ export default {
           })
         })
         console.log(this.dataSource);
+        this.pagination.total = this.dataSource.length
       })
     },
     // 获取已完成-未完成的订单第一个图：/getOrderIsFinish
@@ -214,9 +229,9 @@ export default {
   .main {
     position: relative;
     .echart {
-      position: absolute;
-      bottom: -80%;
-      left: 10%;
+      position: fixed;
+      bottom: 5%;
+      left: 30%;
       display: flex;
       justify-content: center;
       .chart {
