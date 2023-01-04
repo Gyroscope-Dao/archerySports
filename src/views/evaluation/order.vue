@@ -40,7 +40,7 @@
     </div>
     <div class="main">
       <!-- 表格区域 -->
-      <a-table :columns="columns" :dataSource="dataSource" :pagination="pagination" />
+      <a-table :columns="columns" :dataSource="dataSource" :pagination="pagination"  @change="handleTableChange"/>
       <!-- echarts图 -->
       <div class="echart">
         <ECharts class="chart" :option="option"></ECharts>
@@ -56,8 +56,8 @@ export default {
   data() {
     return {
       model: {},
-      dataX:[],
-      dataY:[],
+      dataX:['面包','火腿肠','方便面','干脆面'],
+      dataY:[200,300,600,500],
       // 表格数据源
       dataSource: [],
       // 表格横轴
@@ -106,7 +106,7 @@ export default {
       pagination: {
         current: 1,
         pageSize: 3,
-        total: 100,
+        total: 1,
       },
     }
   },
@@ -160,6 +160,20 @@ export default {
     searchReset() {
       this.model = {}
     },
+    // 分页
+    handleTableChange(pagination, filters, sorter) {
+      console.log(pagination);
+      const pager = { ...this.pagination };
+      pager.current = pagination.current;
+      this.pagination = pager;
+      this.fetch({
+        results: pagination.pageSize,
+        page: pagination.current,
+        sortField: sorter.field,
+        sortOrder: sorter.order,
+        ...filters,
+      });
+    },
     req(obj) {
       /* 
         startDate: '2022-12-01',
@@ -174,6 +188,7 @@ export default {
         supplyId: obj.supplyId,
         productId: obj.productId,
       }).then((res) => {
+        console.log(res.result);
         res.result.forEach((e) => {
           this.dataSource.push({
             orderId: e.orderId,
@@ -187,6 +202,8 @@ export default {
           })
         })
         res.result.forEach((e)=>{
+          this.dataX = []
+          this.dataY = []
           this.dataX.push(e.productName)
           this.dataY.push(e.purchaseQuantity)
         })
@@ -210,9 +227,9 @@ export default {
   .main {
     position: relative;
     .echart {
-      position: absolute;
-      bottom: -100%;
-      left: 25%;
+      position: fixed;
+      bottom: 0%;
+      left: 30%;
       display: flex;
       justify-content: center;
       .chart {
