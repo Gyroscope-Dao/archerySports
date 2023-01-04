@@ -51,8 +51,9 @@
             {{ item }}
           </div> -->
         </div>
-        <div class="right">
-          <div style="font-size: 14px; height: 25px;">数据库数据数目： {{ activeTableCount }}</div>
+        <div class="right" style="padding: 10px; ">
+          <a-alert :message="'数据记录共' + activeTableCount + '条'" type="info" closable style="margin: 0 0 20px 0;" />
+          <!-- <div style="font-size: 14px; height: 25px;">数据库数据数目： {{ activeTableCount }}</div> -->
           <a-table
             :columns="columns"
             :row-key="record => record.id"

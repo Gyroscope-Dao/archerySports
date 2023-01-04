@@ -89,8 +89,8 @@ export default {
         { name: '上海', value: [121.48, 31.22, 8675], id: '1593837632480722946', FirstSupplier: true },
         { name: '深圳', value: [114.07, 22.62, 2461], id: '789123456' },
         { name: '西安', value: [108.45, 34, 3421], id: '23456789' },
-        { name: '广州', value: [113.23, 23.16, 187], id: '3456789' },
-      ],
+        { name: '广州', value: [113.23, 23.16, 187], id: '3456789' }
+      ]
     }
   },
   components: {
@@ -99,7 +99,7 @@ export default {
     item2,
     item3,
     item5,
-    mapItem,
+    mapItem
   },
   computed: {
     option() {
@@ -110,8 +110,8 @@ export default {
             areaColor: '#0099ff',
             borderColor: '#00ffff',
             shadowColod: 'rgba(230,130,70, 0.1)',
-            shadowBlur: 30,
-          },
+            shadowBlur: 30
+          }
         },
         title: {
           text: '供应商地图分布',
@@ -120,36 +120,36 @@ export default {
             color: '#fff',
             fontSize: 20,
             textShadowBlur: 10,
-            textShadowColor: '#33ffff',
-          },
+            textShadowColor: '#33ffff'
+          }
         },
         tooltip: {
-          trigger: 'item',
+          trigger: 'item'
         },
-        visualMap: {
-          type: 'continuous',
-          min: 100,
-          max: 5000,
-          calculable: true,
-          inRange: {
-            color: ['#50a3ba', '#eac736', '#d94e5d'],
-          },
-          textStyle: {
-            color: '#fff',
-          },
-        },
+        // visualMap: {
+        //   type: 'continuous',
+        //   min: 100,
+        //   max: 5000,
+        //   calculable: true,
+        //   inRange: {
+        //     color: ['#50a3ba', '#eac736', '#d94e5d']
+        //   },
+        //   textStyle: {
+        //     color: '#fff'
+        //   }
+        // },
         series: [
           {
             type: 'scatter',
             itemStyle: {
-              color: 'red',
+              color: 'red'
             },
             coordinateSystem: 'geo',
-            data: this.data,
-          },
-        ],
+            data: this.data
+          }
+        ]
       }
-    },
+    }
   },
   methods: {
     lookScore(id, isFirstSupply) {
@@ -157,8 +157,8 @@ export default {
         path: '/portrait/score',
         query: {
           id: id,
-          FirstSupplier: isFirstSupply,
-        },
+          FirstSupplier: isFirstSupply
+        }
       })
       window.open(routeData.href, '_blank')
     },
@@ -167,15 +167,15 @@ export default {
         path: '/portrait/supply',
         query: {
           id: id,
-          FirstSupplier: isFirstSupply,
-        },
+          FirstSupplier: isFirstSupply
+        }
       })
       window.open(routeData.href, '_blank')
     },
     // 获取一级供应商
     getFirstSupply(name) {
       var url = '/supply/getFirstSupply'
-      getAction(url, { supplierAddress: name }).then((res) => {
+      getAction(url, { supplierAddress: name }).then(res => {
         if (res.result.length != 0) {
           this.haveFirstList = true
           this.firstList = res.result
@@ -189,7 +189,7 @@ export default {
     // 获取二级供应商
     getSecondSupply(name) {
       var url = '/supply/getSecondSupply'
-      getAction(url, { supplierAddress: name }).then((res) => {
+      getAction(url, { supplierAddress: name }).then(res => {
         // console.log(this.secondList)
         if (res.result.length != 0) {
           this.haveSecondList = true
@@ -206,7 +206,7 @@ export default {
       _this.getFirstSupply('山西')
       _this.getSecondSupply('山西')
       // this.myChart.off('click')
-      this.myChart.on('click', function (res) {
+      this.myChart.on('click', function(res) {
         // console.log(res.name)
         _this.getFirstSupply(res.name)
         _this.getSecondSupply(res.name)
@@ -221,16 +221,16 @@ export default {
         //   window.open(routeData.href, '_blank')
         // }
       })
-    },
+    }
   },
   mounted() {
     this.myChart = echarts.init(document.querySelector('.china')) //这里是为了获得容器所在位置
     this.bindClick()
-  },
+  }
 }
 </script>
 
-<style lang='less' scoped>
+<style lang="less" scoped>
 @font-face {
   font-family: 'shuai';
   src: url('../../assets/fonts/DS-DIGIT.TTF');
