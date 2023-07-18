@@ -4,18 +4,18 @@
       <a-form-model ref="form" :model="model" :rules="validatorRules" slot="detail">
         <a-row>
           <a-col :span="24">
-            <a-form-model-item label="一级供应商名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="firstSupplierId">
+            <a-form-model-item label="一级AAA名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="firstSupplierId">
               <j-search-select-tag v-model="model.firstSupplierId" dict="first_supplier_inf,supplier_name,first_supplier_id"  />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="产品名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="productId">
+            <a-form-model-item label="物料名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="productId">
               <j-search-select-tag v-model="model.productId" dict="product_inf,product_name,product_id"  />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="产品库存" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="productStock">
-              <a-input-number v-model="model.productStock" placeholder="请输入产品库存" style="width: 100%" />
+            <a-form-model-item label="物料库存" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="productStock">
+              <a-input-number v-model="model.productStock" placeholder="请输入物料库存" style="width: 100%" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -64,16 +64,16 @@
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="运输周期（天）" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="transportTime">
-              <a-input-number v-model="model.transportTime" placeholder="请输入运输周期（天）" style="width: 100%" />
+            <a-form-model-item label="ys周期（天）" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="transportTime">
+              <a-input-number v-model="model.transportTime" placeholder="请输入ys周期（天）" style="width: 100%" />
             </a-form-model-item>
           </a-col>
-          <a-col :span="24">
+          <a-col :span="24" style="display: none;">
             <a-form-model-item label="录入时间" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="infUpdateTime">
               <a-input v-model="model.infUpdateTime" placeholder="请输入录入时间" disabled ></a-input>
             </a-form-model-item>
           </a-col>
-          <a-col :span="24">
+          <a-col :span="24" style="display: none;">
             <a-form-model-item label="人员编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="stuffId">
               <a-input v-model="model.stuffId" placeholder="请输入人员编号" disabled ></a-input>
             </a-form-model-item>
@@ -119,13 +119,13 @@
         confirmLoading: false,
         validatorRules: {
            firstSupplierId: [
-              { required: true, message: '请输入一级供应商名称!'},
+              { required: true, message: '请输入一级AAA名称!'},
            ],
            productId: [
-              { required: true, message: '请输入产品名称!'},
+              { required: true, message: '请输入物料名称!'},
            ],
            productStock: [
-              { required: true, message: '请输入产品库存!'},
+              { required: true, message: '请输入物料库存!'},
            ],
            productionLot: [
               { required: true, message: '请输入生产批量!'},
@@ -155,7 +155,7 @@
               { required: true, message: '请输入检验周期（天）逻辑 关系!'},
            ],
            transportTime: [
-              { required: true, message: '请输入运输周期（天）!'},
+              { required: true, message: '请输入ys周期（天）!'},
            ],
         },
         url: {

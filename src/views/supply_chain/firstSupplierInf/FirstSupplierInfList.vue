@@ -1,9 +1,25 @@
 <template>
   <a-card :bordered="false">
-    <!-- 查询区域 -->
-    <div class="table-page-search-wrapper">
+      <!-- 查询区域 -->
+   <div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
+          <a-col :xl="6" :lg="7" :md="8" :sm="24">
+            <a-form-item label="一级AAA编号">
+              <a-input placeholder="请输入AAA编号" v-model="queryParam.firstSupplierId"></a-input>
+            </a-form-item>
+          </a-col>
+          <a-col :xl="6" :lg="7" :md="8" :sm="24">
+            <a-form-item label="一级AAA名称">
+              <a-input placeholder="请输入AAA名称" v-model="queryParam.supplierName"></a-input>
+            </a-form-item>
+          </a-col>
+          <a-col :xl="6" :lg="7" :md="8" :sm="24">
+            <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
+              <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
+              <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
+            </span>
+          </a-col>
         </a-row>
       </a-form>
     </div>
@@ -12,7 +28,7 @@
     <!-- 操作按钮区域 -->
     <div class="table-operator">
       <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
-      <a-button type="primary" icon="download" @click="handleExportXls('一级供应商')">导出</a-button>
+      <a-button type="primary" icon="download" @click="handleExportXls('一级AAA')">导出</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
         <a-button type="primary" icon="import">导入</a-button>
       </a-upload>
@@ -109,7 +125,7 @@
     },
     data () {
       return {
-        description: '一级供应商管理页面',
+        description: '一级AAA管理页面',
         // 表头
         columns: [
           {
@@ -123,24 +139,29 @@
             }
           },
           {
-            title:'一级供应商编号',
+            title:'一级AAA编号',
             align:"center",
             dataIndex: 'firstSupplierId'
           },
           {
-            title:'供应商名称',
+            title:'AAA名称',
             align:"center",
             dataIndex: 'supplierName'
           },
           {
-            title:'供应商名称简称',
+            title:'AAA名称简称',
             align:"center",
             dataIndex: 'supplierSimpleName'
           },
           {
-            title:'供应商地址',
+            title:'AAA地址',
             align:"center",
             dataIndex: 'supplierAddress'
+          },
+          {
+            title:'地区',
+            align:"center",
+            dataIndex: 'region'
           },
           {
             title:'联系人',
@@ -163,12 +184,27 @@
             dataIndex: 'privateEnterprise_dictText'
           },
           {
-            title:'是否瓶颈供应商',
+            title:'是否瓶颈AAA',
             align:"center",
             dataIndex: 'battleneckSupplier_dictText'
           },
           {
-            title:'供应商资质',
+            title:'是否生产瓶颈AAA',
+            align:"center",
+            dataIndex: 'isProduct_dictText'
+          },
+          {
+            title:'是否生产瓶颈AAA',
+            align:"center",
+            dataIndex: 'isProduct_dictText'
+          },
+          {
+            title:'最小CCC批量',
+            align:"center",
+            dataIndex: 'miniPurchase'
+          },
+          {
+            title:'AAA资质',
             align:"center",
             dataIndex: 'certification'
           },
@@ -205,16 +241,7 @@
               return !text?"":(text.length>10?text.substr(0,10):text)
             }
           },
-          {
-            title:'是否生产瓶颈供应商',
-            align:"center",
-            dataIndex: 'isProduct_dictText'
-          },
-          {
-            title:'是否采购瓶颈供应商',
-            align:"center",
-            dataIndex: 'isPurchase_dictText'
-          },
+          
           {
             title:'成立年份',
             align:"center",
@@ -265,27 +292,29 @@
       },
       getSuperFieldList(){
         let fieldList=[];
-        fieldList.push({type:'string',value:'firstSupplierId',text:'一级供应商编号',dictCode:''})
-        fieldList.push({type:'string',value:'supplierName',text:'供应商名称',dictCode:''})
-        fieldList.push({type:'string',value:'supplierSimpleName',text:'供应商名称简称',dictCode:''})
-        fieldList.push({type:'string',value:'supplierAddress',text:'供应商地址',dictCode:''})
+        fieldList.push({type:'string',value:'firstSupplierId',text:'一级AAA编号',dictCode:''})
+        fieldList.push({type:'string',value:'supplierName',text:'AAA名称',dictCode:''})
+        fieldList.push({type:'string',value:'supplierSimpleName',text:'AAA名称简称',dictCode:''})
+        fieldList.push({type:'string',value:'supplierAddress',text:'AAA地址',dictCode:''})
         fieldList.push({type:'string',value:'contact',text:'联系人',dictCode:''})
         fieldList.push({type:'string',value:'contactNum',text:'联系电话',dictCode:''})
         fieldList.push({type:'string',value:'taxId',text:'税号',dictCode:''})
         fieldList.push({type:'int',value:'privateEnterprise',text:'是否民口企业',dictCode:'yn'})
-        fieldList.push({type:'int',value:'battleneckSupplier',text:'是否瓶颈供应商',dictCode:'yn'})
-        fieldList.push({type:'string',value:'certification',text:'供应商资质',dictCode:''})
+        fieldList.push({type:'int',value:'battleneckSupplier',text:'是否瓶颈AAA',dictCode:'yn'})
+        fieldList.push({type:'string',value:'certification',text:'AAA资质',dictCode:''})
         fieldList.push({type:'string',value:'legalPerson',text:'法定代表人',dictCode:''})
         fieldList.push({type:'string',value:'postCode',text:'邮编',dictCode:''})
         fieldList.push({type:'string',value:'bankName',text:'开户行名称',dictCode:''})
         fieldList.push({type:'string',value:'bankAccount',text:'开户账号',dictCode:''})
         fieldList.push({type:'sel_search',value:'eptId',text:'往来单位信息名称',dictTable:"enterprise_inf", dictText:'ept_name', dictCode:'etp_id'})
         fieldList.push({type:'date',value:'infUpdateTime',text:'录入时间'})
-        fieldList.push({type:'int',value:'isProduct',text:'是否生产瓶颈供应商',dictCode:'yn'})
-        fieldList.push({type:'int',value:'isPurchase',text:'是否采购瓶颈供应商',dictCode:'yn'})
+        fieldList.push({type:'int',value:'isProduct',text:'是否生产瓶颈AAA',dictCode:'yn'})
+        fieldList.push({type:'int',value:'isPurchase',text:'是否DDD瓶颈AAA',dictCode:'yn'})
         fieldList.push({type:'int',value:'estabYear',text:'成立年份',dictCode:''})
         fieldList.push({type:'string',value:'corporateCredit',text:'企业征信',dictCode:''})
         fieldList.push({type:'string',value:'stuffId',text:'人员编号',dictCode:''})
+        fieldList.push({type:'string',value:'region',text:'地域',dictCode:''})
+        fieldList.push({type:'string',value:'miniPurchase',text:'最小CCC批量',dictCode:''})
         this.superFieldList = fieldList
       }
     }

@@ -4,12 +4,12 @@
       <a-form-model ref="form" :model="model" :rules="validatorRules" slot="detail">
         <a-row>
           <a-col :span="24">
-            <a-form-model-item label="产品名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="productId">
+            <a-form-model-item label="物料名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="productId">
               <j-search-select-tag v-model="model.productId" dict="product_inf,product_name,product_id"  />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="一级供应商" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="firstSupplierId">
+            <a-form-model-item label="一级AAA" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="firstSupplierId">
               <j-search-select-tag v-model="model.firstSupplierId" dict="first_supplier_inf,supplier_name,first_supplier_id"  />
             </a-form-model-item>
           </a-col>
@@ -18,12 +18,12 @@
               <a-input v-model="model.keyprocess" placeholder="请输入瓶颈工序名称"  ></a-input>
             </a-form-model-item>
           </a-col>
-          <a-col :span="24">
+          <a-col :span="24" style="display: none;">
             <a-form-model-item label="录入时间" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="infUpdateTime">
               <j-date placeholder="请选择录入时间" v-model="model.infUpdateTime"  style="width: 100%" />
             </a-form-model-item>
           </a-col>
-          <a-col :span="24">
+          <a-col :span="24" style="display: none;">
             <a-form-model-item label="人员编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="stuffId">
               <a-input v-model="model.stuffId" placeholder="请输入人员编号" disabled ></a-input>
             </a-form-model-item>
@@ -68,10 +68,10 @@
         confirmLoading: false,
         validatorRules: {
            productId: [
-              { required: true, message: '请输入产品编码!'},
+              { required: true, message: '请输入物料编码!'},
            ],
            firstSupplierId: [
-              { required: true, message: '请输入一级供应商!'},
+              { required: true, message: '请输入一级AAA!'},
            ],
            keyprocess: [
               { required: true, message: '请输入瓶颈工序名称!'},

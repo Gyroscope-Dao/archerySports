@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h2>二级供应商周期趋势分析</h2>
+    <h2>二级AAA周期趋势分析</h2>
     <!-- 查询区域 -->
     <div class="table-page-search-wrapper">
       <!-- 搜索区域 -->
@@ -20,14 +20,14 @@
           </a-col>
           <a-col :md="4" :sm="8">
             <a-form-item label="" :labelCol="{ span: 5 }" :wrapperCol="{ span: 10, offset: 1 }">
-              供应商编号
-              <a-input v-model="model.supplyId" placeholder="请输入供应商编号"></a-input>
+              AAA编号
+              <a-input v-model="model.supplyId" placeholder="请输入AAA编号"></a-input>
             </a-form-item>
           </a-col>
           <a-col :md="4" :sm="8">
             <a-form-item label="" :labelCol="{ span: 5 }" :wrapperCol="{ span: 10, offset: 1 }">
-              产品编号
-              <a-input v-model="model.productId" placeholder="请输入产品编号"></a-input> </a-form-item
+              物料编号
+              <a-input v-model="model.productId" placeholder="请输入物料编号"></a-input> </a-form-item
           ></a-col>
           <span style="overflow: hidden" class="table-page-search-submitButtons">
             <a-col :md="4" :sm="8">
@@ -46,7 +46,7 @@
           <!-- <a-button type="primary" @click="searchQuery">确定</a-button> -->
         </div>
         <a-radio-group v-model="param" @change="onChange" value="value" class="radioGroup">
-          <a-radio class="tip" value="采购提前期">采购提前期</a-radio>
+          <a-radio class="tip" value="DDD提前期">DDD提前期</a-radio>
           <a-radio class="tip" value="生成日期">生成日期</a-radio>
           <a-radio class="tip" value="军检时间">军检时间</a-radio>
           <a-radio class="tip" value="生产时间">生产时间</a-radio>
@@ -129,7 +129,7 @@ export default {
       this.model = {}
     },
     onChange(e) {
-      if (e.target.value == '采购提前期') {
+      if (e.target.value == 'DDD提前期') {
         this.currentDataY = this.ADataY
       }
       if (e.target.value == '生成日期') {

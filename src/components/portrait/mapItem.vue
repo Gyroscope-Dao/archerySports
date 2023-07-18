@@ -77,7 +77,7 @@ export default {
     this.bindClick()
   },
   methods: {
-    // 获取供应商
+    // 获取AAA
     getFirstSupply(name) {
       var url = '/supply/getFirstSupply'
       getAction(url, { supplierAddress: name }).then((res) => {

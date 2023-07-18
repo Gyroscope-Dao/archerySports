@@ -1,20 +1,20 @@
 <template>
   <div class="allPage">
-    <h2>供应商供货周期</h2>
+    <h2>AAABBB周期</h2>
     <div class="Basis">
       <div class="panel actDesc">
         <ul class="details">
-          <li class="tip"><span>是否一般供应商：</span>{{ dateData.battleneckSupplier === 1 ? '是' : '否' }}</li>
-          <li class="tip"><span>是否生产瓶颈供应商：</span>{{ dateData.isProduct === 1 ? '是' : '否' }}</li>
-          <li class="tip"><span>是否采购瓶颈供应商：</span>{{ dateData.isPurchase === 1 ? '是' : '否' }}</li>
+          <li class="tip"><span>是否一般AAA：</span>{{ dateData.battleneckSupplier === 1 ? '是' : '否' }}</li>
+          <li class="tip"><span>是否生产瓶颈AAA：</span>{{ dateData.isProduct === 1 ? '是' : '否' }}</li>
+          <li class="tip"><span>是否DDD瓶颈AAA：</span>{{ dateData.isPurchase === 1 ? '是' : '否' }}</li>
           <li class="tip">
-            <span>重点部件名称：</span>
+            <span>重点EEE名称：</span>
             <span class="component" v-for="item in dateData.components" :key="item.componentName">{{
               item.componentName
             }}</span>
           </li>
           <li class="tip">
-            <span>重点部件现有量：</span>
+            <span>重点EEE现有量：</span>
             <span class="component" v-for="item in dateData.components" :key="item.componentName">{{
               item.stockQuantity
             }}</span>
@@ -32,7 +32,7 @@
         </div>
       </div>
       <div class="panel panel_chart">
-        <h2>供货周期详情</h2>
+        <h2>BBB周期详情</h2>
         <ECharts class="chartOne" :option="optionOne"></ECharts>
         <div class="panel_footer"></div>
       </div>
@@ -54,7 +54,7 @@ export default {
       basisData: null,
       //  组件数据
       productData: null,
-      // 供货周期
+      // BBB周期
       dateData: {
         battleneckSupplier: 0,
         isProduct: 0,
@@ -72,7 +72,7 @@ export default {
       return {
         xAxis: {
           type: 'category',
-          data: ['采购周期', '检验周期', '运输周期', '生产周期'],
+          data: ['DDD周期', '检验周期', 'ys周期', '生产周期'],
           axisLine: {
             lineStyle: {
               color: '#fff',
@@ -138,7 +138,7 @@ export default {
           },
         },
         title: {
-          text: '供应商地图分布',
+          text: 'AAA地图分布',
           left: '45%',
           textStyle: {
             color: '#fff',
@@ -176,7 +176,7 @@ export default {
     },
   },
   methods: {
-    // 获取供货周期
+    // 获取BBB周期
     getDateData() {
       var url = '/supplycycle/getDataOfSupplyCycle'
       getAction(url, { id: this.query.id, FirstSupplier: this.query.FirstSupplier }).then((res) => {
@@ -193,7 +193,7 @@ export default {
         // }
       })
     },
-    // 获取供货周期详情-柱状图
+    // 获取BBB周期详情-柱状图
     getDateImg() {
       var url = '/supplycycle/getDataOfSupplyCycleBarChart'
       getAction(url, { id: this.query.id, FirstSupplier: this.query.FirstSupplier }).then((res) => {

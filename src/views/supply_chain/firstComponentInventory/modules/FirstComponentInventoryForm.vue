@@ -4,12 +4,12 @@
       <a-form-model ref="form" :model="model" :rules="validatorRules" slot="detail">
         <a-row>
           <a-col :span="24">
-            <a-form-model-item label="核心部件名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="com1InfId">
+            <a-form-model-item label="核心EEE名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="com1InfId">
               <j-search-select-tag v-model="model.com1InfId" dict="component_inf,component_name,component_id"  />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="一级供应商名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="firstSupplierId">
+            <a-form-model-item label="一级AAA名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="firstSupplierId">
               <j-search-select-tag v-model="model.firstSupplierId" dict="first_supplier_inf,supplier_name,first_supplier_id"  />
             </a-form-model-item>
           </a-col>
@@ -19,16 +19,16 @@
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="采购周期 （天）" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="purchaseLeadTime">
-              <a-input-number v-model="model.purchaseLeadTime" placeholder="请输入采购周期 （天）" style="width: 100%" />
+            <a-form-model-item label="DDD周期 （天）" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="purchaseLeadTime">
+              <a-input-number v-model="model.purchaseLeadTime" placeholder="请输入DDD周期 （天）" style="width: 100%" />
             </a-form-model-item>
           </a-col>
-          <a-col :span="24">
+          <a-col :span="24" style="display: none;">
             <a-form-model-item label="录入时间" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="infUpdateTime">
               <j-date placeholder="请选择录入时间" v-model="model.infUpdateTime"  style="width: 100%" disabled/>
             </a-form-model-item>
           </a-col>
-          <a-col :span="24">
+          <a-col :span="24" style="display: none;">
             <a-form-model-item label="人员编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="stuffId">
               <a-input v-model="model.stuffId" placeholder="请输入人员编号" disabled ></a-input>
             </a-form-model-item>
@@ -74,16 +74,16 @@
         confirmLoading: false,
         validatorRules: {
            com1InfId: [
-              { required: true, message: '请输入核心部件名称!'},
+              { required: true, message: '请输入核心EEE名称!'},
            ],
            firstSupplierId: [
-              { required: true, message: '请输入一级供应商名称!'},
+              { required: true, message: '请输入一级AAA名称!'},
            ],
            stockQuantity: [
               { required: true, message: '请输入库存数量!'},
            ],
            purchaseLeadTime: [
-              { required: true, message: '请输入采购周期 （天）!'},
+              { required: true, message: '请输入DDD周期 （天）!'},
            ],
            infUpdateTime: [
               { required: true, message: '请输入录入时间!'},

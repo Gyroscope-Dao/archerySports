@@ -1,10 +1,10 @@
 <template>
   <div class="allPage">
-    <h2>供应商基本信息</h2>
+    <h2>AAA基本信息</h2>
     <div class="Basis">
       <div class="panel basisDesc">
         <ul class="details">
-          <li class="tip"><span>供应商名称：</span>{{ basisData.supplierName }}</li>
+          <li class="tip"><span>AAA名称：</span>{{ basisData.supplierName }}</li>
           <li class="tip"><span>联系人：</span>{{ basisData.contact }}</li>
           <li class="tip"><span>联系电话：</span>{{ basisData.contactNum }}</li>
           <li class="tip"><span>税号：</span>{{ basisData.taxId }}</li>
@@ -19,10 +19,10 @@
       <div class="panel basisDesc1">
         <ul class="details">
           <li class="tip"><span>是否民营企业：</span>是</li>
-          <li class="tip"><span>供应商的资质：</span>{{ basisData.certification }}</li>
-          <li class="tip"><span>供应商地址：</span>{{ basisData.supplierAddress }}</li>
-          <li class="tip"><span>供应的产品：</span>{{ productData.productId }}</li>
-          <li class="tip"><span>是否一级供应商：</span>{{ query.FirstSupplier === 1 ? '是' : '否' }}</li>
+          <li class="tip"><span>AAA的资质：</span>{{ basisData.certification }}</li>
+          <li class="tip"><span>AAA地址：</span>{{ basisData.supplierAddress }}</li>
+          <li class="tip"><span>CCC的物料：</span>{{ productData.productId }}</li>
+          <li class="tip"><span>是否一级AAA：</span>{{ query.FirstSupplier === 1 ? '是' : '否' }}</li>
           <li class="tip"><span>成品库存：</span>{{ productData.productStock }}</li>
           <li class="tip"><span>生成批量：</span>{{ productData.productionLot }}</li>
           <li class="tip"><span>日均产量：</span>{{ productData.dayProLot }}</li>

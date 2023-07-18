@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>供应商响应趋势分析</h2>
+    <h2>AAA响应趋势分析</h2>
     <!-- 图表的容器 -->
     <ECharts class="chart" :option="option"></ECharts>
   </div>

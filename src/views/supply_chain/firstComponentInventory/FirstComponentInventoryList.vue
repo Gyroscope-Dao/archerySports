@@ -1,9 +1,26 @@
 <template>
   <a-card :bordered="false">
-    <!-- 查询区域 -->
-    <div class="table-page-search-wrapper">
+   <!-- 查询区域 -->
+   <div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchQuery">
-        <a-row :gutter="24"> </a-row>
+        <a-row :gutter="24">
+          <a-col :xl="6" :lg="7" :md="8" :sm="24">
+            <a-form-item label="一级AAA编号">
+              <a-input placeholder="请输入AAA编号" v-model="queryParam.firstSupplierId"></a-input>
+            </a-form-item>
+          </a-col>
+          <a-col :xl="6" :lg="7" :md="8" :sm="24">
+            <a-form-item label="核心EEE编码">
+              <a-input placeholder="请输入核心EEE编码" v-model="queryParam.com1InfId"></a-input>
+            </a-form-item>
+          </a-col>
+          <a-col :xl="6" :lg="7" :md="8" :sm="24">
+            <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
+              <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
+              <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
+            </span>
+          </a-col>
+        </a-row>
       </a-form>
     </div>
     <!-- 查询区域-END -->
@@ -11,7 +28,7 @@
     <!-- 操作按钮区域 -->
     <div class="table-operator">
       <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
-      <a-button type="primary" icon="download" @click="handleExportXls('一级核心部件库存与采购能力')">导出</a-button>
+      <a-button type="primary" icon="download" @click="handleExportXls('一级核心EEE库存与DDD能力')">导出</a-button>
       <a-upload
         name="file"
         :showUploadList="false"
@@ -120,7 +137,7 @@ export default {
   },
   data() {
     return {
-      description: '一级核心部件库存与采购能力管理页面',
+      description: '一级核心EEE库存与DDD能力管理页面',
       // 表头
       columns: [
         {
@@ -134,12 +151,22 @@ export default {
           }
         },
         {
-          title: '核心部件名称',
+          title: '核心EEE编码',
+          align: 'center',
+          dataIndex: 'com1InfId'
+        },
+        {
+          title: '核心EEE名称',
           align: 'center',
           dataIndex: 'com1InfId_dictText'
         },
         {
-          title: '一级供应商名称',
+          title: '一级AAA编号',
+          align: 'center',
+          dataIndex: 'firstSupplierId'
+        },
+        {
+          title: '一级AAA名称',
           align: 'center',
           dataIndex: 'firstSupplierId_dictText'
         },
@@ -149,7 +176,7 @@ export default {
           dataIndex: 'stockQuantity'
         },
         {
-          title: '采购周期 （天）',
+          title: 'DDD周期 （天）',
           align: 'center',
           dataIndex: 'purchaseLeadTime'
         },
@@ -202,7 +229,7 @@ export default {
       fieldList.push({
         type: 'sel_search',
         value: 'com1InfId',
-        text: '核心部件名称',
+        text: '核心EEE名称',
         dictTable: 'component_inf',
         dictText: 'component_name',
         dictCode: 'component_id'
@@ -210,13 +237,13 @@ export default {
       fieldList.push({
         type: 'sel_search',
         value: 'firstSupplierId',
-        text: '一级供应商名称',
+        text: '一级AAA名称',
         dictTable: 'first_supplier_inf',
         dictText: 'supplier_name',
         dictCode: 'first_supplier_id'
       })
       fieldList.push({ type: 'int', value: 'stockQuantity', text: '库存数量', dictCode: '' })
-      fieldList.push({ type: 'int', value: 'purchaseLeadTime', text: '采购周期 （天）', dictCode: '' })
+      fieldList.push({ type: 'int', value: 'purchaseLeadTime', text: 'DDD周期 （天）', dictCode: '' })
       fieldList.push({ type: 'date', value: 'infUpdateTime', text: '录入时间' })
       fieldList.push({ type: 'string', value: 'stuffId', text: '人员编号', dictCode: '' })
       this.superFieldList = fieldList

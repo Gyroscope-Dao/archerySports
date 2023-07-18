@@ -1,275 +1,424 @@
 <template>
-  <div class="page-header-index-wide">
-    <!-- <a-row :gutter="24">
-      <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
-        <chart-card :loading="loading" title="总销售额" total="￥126,560">
-          <a-tooltip title="指标说明" slot="action">
-            <a-icon type="info-circle-o" />
-          </a-tooltip>
-          <div>
-            <trend flag="up" style="margin-right: 16px;">
-              <span slot="term">周同比</span>
-              12%
-            </trend>
-            <trend flag="down">
-              <span slot="term">日同比</span>
-              11%
-            </trend>
-          </div>
-          <template slot="footer">日均销售额<span>￥ 234.56</span></template>
-        </chart-card>
-      </a-col>
-      <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
-        <chart-card :loading="loading" title="订单量" :total="8846 | NumberFormat">
-          <a-tooltip title="指标说明" slot="action">
-            <a-icon type="info-circle-o" />
-          </a-tooltip>
-          <div>
-            <mini-area />
-          </div>
-          <template slot="footer">日订单量<span> {{ '1234' | NumberFormat }}</span></template>
-        </chart-card>
-      </a-col>
-      <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
-        <chart-card :loading="loading" title="支付笔数" :total="6560 | NumberFormat">
-          <a-tooltip title="指标说明" slot="action">
-            <a-icon type="info-circle-o" />
-          </a-tooltip>
-          <div>
-            <mini-bar :height="40" />
-          </div>
-          <template slot="footer">转化率 <span>60%</span></template>
-        </chart-card>
-      </a-col>
-      <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
-        <chart-card :loading="loading" title="运营活动效果" total="78%">
-          <a-tooltip title="指标说明" slot="action">
-            <a-icon type="info-circle-o" />
-          </a-tooltip>
-          <div>
-            <mini-progress color="rgb(19, 194, 194)" :target="80" :percentage="78" :height="8" />
-          </div>
-          <template slot="footer">
-            <trend flag="down" style="margin-right: 16px;">
-              <span slot="term">同周比</span>
-              12%
-            </trend>
-            <trend flag="up">
-              <span slot="term">日环比</span>
-              80%
-            </trend>
-          </template>
-        </chart-card>
-      </a-col>
-    </a-row>
-
-    <a-card :loading="loading" :bordered="false" :body-style="{padding: '0'}">
-      <div class="salesCard">
-        <a-tabs default-active-key="1" size="large" :tab-bar-style="{marginBottom: '24px', paddingLeft: '16px'}">
-          <div class="extra-wrapper" slot="tabBarExtraContent">
-            <div class="extra-item">
-              <a>今日</a>
-              <a>本周</a>
-              <a>本月</a>
-              <a>本年</a>
-            </div>
-            <a-range-picker :style="{width: '256px'}" />
-          </div>
-          <a-tab-pane loading="true" tab="销售额" key="1">
-            <a-row>
-              <a-col :xl="16" :lg="12" :md="12" :sm="24" :xs="24">
-                <bar title="销售额排行" :dataSource="barData"/>
-              </a-col>
-              <a-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
-                <rank-list title="门店销售排行榜" :list="rankList"/>
-              </a-col>
-            </a-row>
-          </a-tab-pane>
-          <a-tab-pane tab="销售趋势" key="2">
-            <a-row>
-              <a-col :xl="16" :lg="12" :md="12" :sm="24" :xs="24">
-                <bar title="销售额趋势" :dataSource="barData"/>
-              </a-col>
-              <a-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
-                <rank-list title="门店销售排行榜" :list="rankList"/>
-              </a-col>
-            </a-row>
-          </a-tab-pane>
-        </a-tabs>
-      </div>
-    </a-card>
-
-    <a-row>
-      <a-col :span="24">
-        <a-card :loading="loading" :bordered="false" title="最近一周访问量统计" :style="{ marginTop: '24px' }">
-          <a-row>
-            <a-col :span="6">
-              <head-info title="今日IP" :content="loginfo.todayIp"></head-info>
-            </a-col>
-            <a-col :span="2">
-              <a-spin class='circle-cust'>
-                <a-icon slot="indicator" type="environment" style="font-size: 24px"  />
-              </a-spin>
-            </a-col>
-            <a-col :span="6">
-              <head-info title="今日访问" :content="loginfo.todayVisitCount"></head-info>
-            </a-col>
-            <a-col :span="2">
-              <a-spin class='circle-cust'>
-                <a-icon slot="indicator" type="team" style="font-size: 24px"  />
-              </a-spin>
-            </a-col>
-            <a-col :span="6">
-              <head-info title="总访问量" :content="loginfo.totalVisitCount"></head-info>
-            </a-col>
-            <a-col :span="2">
-              <a-spin class='circle-cust'>
-                <a-icon slot="indicator" type="rise" style="font-size: 24px"  />
-              </a-spin>
-            </a-col>
-          </a-row>
-          <line-chart-multid :fields="visitFields" :dataSource="visitInfo"></line-chart-multid>
-        </a-card>
-      </a-col>
-    </a-row> -->
-  </div>
+  <!-- 操作按钮区域 --> <a-card>
+    <div class="table-operator">
+      <a-button @click="initDictConfig" type="primary" icon="plus">开始接收</a-button>
+      <a-button type="primary" icon="export" @click="initDictConfig">停止接收</a-button>
+    </div>
+    <a-table :columns="columns" :data-source="data" :pagination="pagination" :loading="loading" @change="handleTableChange" bordered :scroll="{ x: 1800 ,y:500}">
+      <template slot="name" slot-scope="name"> {{ name.first }} {{ name.last }} </template>
+    </a-table>
+  </a-card>
 </template>
-
 <script>
-  import ChartCard from '@/components/ChartCard'
-  import ACol from "ant-design-vue/es/grid/Col"
-  import ATooltip from "ant-design-vue/es/tooltip/Tooltip"
-  import MiniArea from '@/components/chart/MiniArea'
-  import MiniBar from '@/components/chart/MiniBar'
-  import MiniProgress from '@/components/chart/MiniProgress'
-  import RankList from '@/components/chart/RankList'
-  import Bar from '@/components/chart/Bar'
-  import LineChartMultid from '@/components/chart/LineChartMultid'
-  import HeadInfo from '@/components/tools/HeadInfo.vue'
+// import axios from 'axios';
 
-  import Trend from '@/components/Trend'
-  import { getLoginfo,getVisitInfo } from '@/api/api'
+// const queryData = params => {
+//   return axios.get('https://randomuser.me/api', { params: params });
+// };
+export default {
+  name: 'SportsInfList',
+  data () {
+    return {
+      description: '运动会管理页面',
+      // 表头
+      columns: [
+        {
+          title: '靶号',
+          dataIndex: 'target_number',
+          align: 'center',
+          sorter: true,
+          width: '100',
+          scopedSlots: { customRender: 'target_number' },
+          fixed: 'left'
+        },
+        {
+          title: '单位',
+          align: 'center',
+          dataIndex: 'city',
+          width: '100',
+          fixed: 'left'
+        },
+        {
+          title: '姓名',
+          align: 'center',
+          dataIndex: 'name',
+          width: '100',
+          fixed: 'left'
+        },
+        , {
+          title: '70米-组1',
+          width: '100',
+          children: [
 
-  const rankList = []
-  for (let i = 0; i < 7; i++) {
-    rankList.push({
-      name: '白鹭岛 ' + (i+1) + ' 号店',
-      total: 1234.56 - i * 100
-    })
-  }
-  const barData = []
-  for (let i = 0; i < 12; i += 1) {
-    barData.push({
-      x: `${i + 1}月`,
-      y: Math.floor(Math.random() * 1000) + 200
-    })
-  }
-  export default {
-    name: "IndexChart",
-    components: {
-      ATooltip,
-      ACol,
-      ChartCard,
-      MiniArea,
-      MiniBar,
-      MiniProgress,
-      RankList,
-      Bar,
-      Trend,
-      LineChartMultid,
-      HeadInfo
-    },
-    data() {
-      return {
-        loading: true,
-        center: null,
-        rankList,
-        barData,
-        loginfo:{},
-        visitFields:['ip','visit'],
-        visitInfo:[],
-        indicator: <a-icon type="loading" style="font-size: 24px" spin />
-      }
-    },
-    created() {
-      setTimeout(() => {
-        this.loading = !this.loading
-      }, 1000)
-      this.initLogInfo();
-    },
-    methods: {
-      initLogInfo () {
-        getLoginfo(null).then((res)=>{
-          if(res.success){
-            Object.keys(res.result).forEach(key=>{
-              res.result[key] =res.result[key]+""
-            })
-            this.loginfo = res.result;
-          }
-        })
-        getVisitInfo().then(res=>{
-          if(res.success){
-             this.visitInfo = res.result;
-           }
-         })
+            {
+              title: '1',
+              dataIndex: `performance[0][0]`,
+              width: 50,
+            },
+            {
+              title: '2',
+              dataIndex: `performance[0][1]`,
+              width: 50,
+            },
+            {
+              title: '3',
+              dataIndex: `performance[0][2]`,
+              width: 50,
+            },
+            {
+              title: '4',
+              dataIndex: `performance[0][3]`,
+              width: 50,
+            },
+            {
+              title: '5',
+              dataIndex: `performance[0][4]`,
+              width: 50,
+            },
+            {
+              title: '6',
+              dataIndex: `performance[0][5]`,
+              width: 50,
+            },
+          ]
+        },
+        {
+          title: '1',
+          dataIndex: `performance[0][0]`,
+          width: 50,
+          align: 'center'
+        },
+        {
+          title: '2',
+          dataIndex: `performance[0][1]`,
+          width: 50,
+          align: 'center'
+        },
+        {
+          title: '3',
+          dataIndex: `performance[0][2]`,
+          width: 50,
+          align: 'center'
+        },
+        {
+          title: '4',
+          dataIndex: `performance[0][3]`,
+          width: 50,
+          align: 'center'
+        },
+        {
+          title: '5',
+          dataIndex: `performance[0][4]`,
+          width: 50,
+          align: 'center'
+        },
+        {
+          title: '6',
+          dataIndex: `performance[0][5]`,
+          width: 50,
+          align: 'center'
+        },
+        {
+          title: '70米',
+          dataIndex: `performance[0][6]`,
+          width: 50,
+          className: 'dartstyle',
+          align: 'center'
+        },
+        {
+          title: '1',
+          dataIndex: `performance[1][0]`,
+          width: 50,
+          align: 'center'
+        },
+        {
+          title: '2',
+          dataIndex: `performance[1][1]`,
+          width: 50,
+          align: 'center'
+        },
+        {
+          title: '3',
+          dataIndex: `performance[1][2]`,
+          width: 50,
+          align: 'center'
+        },
+        {
+          title: '4',
+          dataIndex: `performance[1][3]`,
+          width: 50,
+          align: 'center'
+        },
+        {
+          title: '5',
+          dataIndex: `performance[1][4]`,
+          width: 50,
+          align: 'center'
+        },
+        {
+          title: '6',
+          dataIndex: `performance[1][5]`,
+          width: 50,
+          align: 'center'
+        },
+        {
+          title: '70米',
+          dataIndex: `performance[1][6]`,
+          width: 50,
+          align: 'center',
+          className: 'dartstyle',
+        },
+        {
+          title: '1',
+          dataIndex: `performance[2][0]`,
+          width: 50,
+          align: 'center'
+        },
+        {
+          title: '2',
+          dataIndex: `performance[2][1]`,
+          width: 50,
+          align: 'center'
+        },
+        {
+          title: '3',
+          dataIndex: `performance[2][2]`,
+          width: 50,
+          align: 'center'
+        },
+        {
+          title: '4',
+          dataIndex: `performance[2][3]`,
+          width: 50,
+          align: 'center'
+        },
+        {
+          title: '5',
+          dataIndex: `performance[2][4]`,
+          width: 50,
+          align: 'center'
+        },
+        {
+          title: '6',
+          dataIndex: `performance[2][5]`,
+          width: 50,
+          align: 'center'
+        },
+        {
+          title: '70米',
+          dataIndex: `performance[2][6]`,
+          width: 50,
+          align: 'center',
+          className: 'dartstyle',
+        },
+        {
+          title: '1',
+          dataIndex: `performance[3][0]`,
+          width: 50,
+          align: 'center'
+        },
+        {
+          title: '2',
+          dataIndex: `performance[3][1]`,
+          width: 50,
+          align: 'center'
+        },
+        {
+          title: '3',
+          dataIndex: `performance[3][2]`,
+          width: 50,
+          align: 'center'
+        },
+        {
+          title: '4',
+          dataIndex: `performance[3][3]`,
+          width: 50,
+          align: 'center'
+        },
+        {
+          title: '5',
+          dataIndex: `performance[3][4]`,
+          width: 50,
+          align: 'center'
+        },
+        {
+          title: '6',
+          dataIndex: `performance[3][5]`,
+          width: 50,
+          align: 'center'
+        },
+        {
+          title: '70米',
+          dataIndex: `performance[3][6]`,
+          width: 50,
+          className: 'dartstyle',
+          align: 'center'
+        },
+        {
+          title: '总成绩',
+          dataIndex: `performance[4][0]`,
+          width: 80,
+          align: 'center',
+          fixed: 'right'
+        },
+        {
+          title: '总十环数',
+          dataIndex: `performance[4][1]`,
+          width: 80,
+          align: 'center',
+          fixed: 'right'
+        },
+        {
+          title: '总X数',
+          dataIndex: `performance[4][2]`,
+          width: 80,
+          align: 'center',
+          fixed: 'right'
+        }
+      ],
+      // data: [
+      //   {
+      //     key: '1',
+      //     target_number: "37A",
+      //     city: "湖北",
+      //     name: '冯泽锴',
+      //     performance: [[56, 58, 56, 55, 55, 56, 333], [54, 58, 51, 51, 57, 56, 327], [55, 53, 56, 56, 54, 55, 329], [53, 56, 58, 56, 55, 55, 333], [1321, 51, 17]]
+      //   },
+      //   {
+      //     key: '2',
+      //     target_number: "37A",
+      //     city: "湖北",
+      //     name: '冯泽锴',
+      //     performance: [[56, 58, 56, 55, 55, 56, 333], [54, 58, 51, 51, 57, 56, 327], [55, 53, 56, 56, 54, 55, 329], [53, 56, 58, 56, 55, 55, 333], [1321, 51, 17]]
+      //   }, {
+      //     key: '3',
+      //     target_number: "37A",
+      //     city: "湖北",
+      //     name: '冯泽锴',
+      //     performance: [[56, 58, 56, 55, 55, 56, 333], [54, 58, 51, 51, 57, 56, 327], [55, 53, 56, 56, 54, 55, 329], [53, 56, 58, 56, 55, 55, 333], [1321, 51, 17]]
+      //   }, {
+      //     key: '4',
+      //     target_number: "37A",
+      //     city: "湖北",
+      //     name: '冯泽锴',
+      //     performance: [[56, 58, 56, 55, 55, 56, 333], [54, 58, 51, 51, 57, 56, 327], [55, 53, 56, 56, 54, 55, 329], [53, 56, 58, 56, 55, 55, 333], [1321, 51, 17]]
+      //   }, {
+      //     key: '5',
+      //     target_number: "37A",
+      //     city: "湖北",
+      //     name: '冯泽锴',
+      //     performance: [[56, 58, 56, 55, 55, 56, 333], [54, 58, 51, 51, 57, 56, 327], [55, 53, 56, 56, 54, 55, 329], [53, 56, 58, 56, 55, 55, 333], [1321, 51, 17]]
+      //   }, {
+      //     key: '6',
+      //     target_number: "37A",
+      //     city: "湖北",
+      //     name: '冯泽锴',
+      //     performance: [[56, 58, 56, 55, 55, 56, 333], [54, 58, 51, 51, 57, 56, 327], [55, 53, 56, 56, 54, 55, 329], [53, 56, 58, 56, 55, 55, 333], [1321, 51, 17]]
+      //   }, {
+      //     key: '7',
+      //     target_number: "37A",
+      //     city: "湖北",
+      //     name: '冯泽锴',
+      //     performance: [[56, 58, 56, 55, 55, 56, 333], [54, 58, 51, 51, 57, 56, 327], [55, 53, 56, 56, 54, 55, 329], [53, 56, 58, 56, 55, 55, 333], [1321, 51, 17]]
+      //   }, {
+      //     key: '8',
+      //     target_number: "37A",
+      //     city: "湖北",
+      //     name: '冯泽锴',
+      //     performance: [[56, 58, 56, 55, 55, 56, 333], [54, 58, 51, 51, 57, 56, 327], [55, 53, 56, 56, 54, 55, 329], [53, 56, 58, 56, 55, 55, 333], [1321, 51, 17]]
+      //   }, {
+      //     key: '9',
+      //     target_number: "37A",
+      //     city: "湖北",
+      //     name: '冯泽锴',
+      //     performance: [[56, 58, 56, 55, 55, 56, 333], [54, 58, 51, 51, 57, 56, 327], [55, 53, 56, 56, 54, 55, 329], [53, 56, 58, 56, 55, 55, 333], [1321, 51, 17]]
+      //   }, {
+      //     key: '10',
+      //     target_number: "37A",
+      //     city: "湖北",
+      //     name: '冯泽锴',
+      //     performance: [[56, 58, 56, 55, 55, 56, 333], [54, 58, 51, 51, 57, 56, 327], [55, 53, 56, 56, 54, 55, 329], [53, 56, 58, 56, 55, 55, 333], [1321, 51, 17]]
+      //   }, {
+      //     key: '11',
+      //     target_number: "37A",
+      //     city: "湖北",
+      //     name: '冯泽锴',
+      //     performance: [[56, 58, 56, 55, 55, 56, 333], [54, 58, 51, 51, 57, 56, 327], [55, 53, 56, 56, 54, 55, 329], [53, 56, 58, 56, 55, 55, 333], [1321, 51, 17]]
+      //   }, {
+      //     key: '12',
+      //     target_number: "37A",
+      //     city: "湖北",
+      //     name: '冯泽锴',
+      //     performance: [[56, 58, 56, 55, 55, 56, 333], [54, 58, 51, 51, 57, 56, 327], [55, 53, 56, 56, 54, 55, 329], [53, 56, 58, 56, 55, 55, 333], [1321, 51, 17]]
+      //   }, {
+      //     key: '13',
+      //     target_number: "37A",
+      //     city: "湖北",
+      //     name: '冯泽锴',
+      //     performance: [[56, 58, 56, 55, 55, 56, 333], [54, 58, 51, 51, 57, 56, 327], [55, 53, 56, 56, 54, 55, 329], [53, 56, 58, 56, 55, 55, 333], [1321, 51, 17]]
+      //   }
+      // ],
+      // 自定义选项
+      pagination: {
+        pageSizeOptions: ['10', '20', '30', '40'],
+        showSizeChanger: true
       },
-    }
-  }
-</script>
+      // 加载
+      loading: false,
+      url: {
+        list: "/sportsInf/sportsInf/list",
+        delete: "/sportsInf/sportsInf/delete",
+        deleteBatch: "/sportsInf/sportsInf/deleteBatch",
+        exportXlsUrl: "/sportsInf/sportsInf/exportXls",
+        importExcelUrl: "sportsInf/sportsInf/importExcel",
 
-<style lang="less" scoped>
-.page-header-index-wide {
-  height: 700px;
-  padding: 0;
-  margin: 0;
-  background: url("../../assets/bgc.jpeg") no-repeat;
-  background-size: 100% 100%;
+      },
+      dictOptions: {},
+      superFieldList: [],
+    }
+  },
+  methods: {
+    initDictConfig () {
+    },
+    // fetch (params = {}) {
+    //   this.loading = true;
+    //   queryData({
+    //     results: 10,
+    //     ...params,
+    //   }).then(({ data }) => {
+    //     const pagination = { ...this.pagination };
+    //     // Read total count from server
+    //     // pagination.total = data.totalCount;
+    //     pagination.total = 200;
+    //     this.loading = false;
+    //     this.data = data.results;
+    //     this.pagination = pagination;
+    //   });
+    // },
+    handleTableChange (pagination, filters, sorter) {
+      console.log(pagination);
+      const pager = { ...this.pagination };
+      pager.current = pagination.current;
+      this.pagination = pager;
+      this.fetch({
+        results: pagination.pageSize,
+        page: pagination.current,
+        sortField: sorter.field,
+        sortOrder: sorter.order,
+        ...filters,
+      });
+    },
+  },
+  mounted () {
+    // this.fetch();
+  },
 }
-  .circle-cust{
-    position: relative;
-    top: 28px;
-    left: -100%;
-  }
-  .extra-wrapper {
-    line-height: 55px;
-    padding-right: 24px;
-
-    .extra-item {
-      display: inline-block;
-      margin-right: 24px;
-
-      a {
-        margin-left: 24px;
-      }
-    }
-  }
-
-  /* 首页访问量统计 */
-  .head-info {
-    position: relative;
-    text-align: left;
-    padding: 0 32px 0 0;
-    min-width: 125px;
-
-    &.center {
-      text-align: center;
-      padding: 0 32px;
-    }
-
-    span {
-      color: rgba(0, 0, 0, .45);
-      display: inline-block;
-      font-size: .95rem;
-      line-height: 42px;
-      margin-bottom: 4px;
-    }
-    p {
-      line-height: 42px;
-      margin: 0;
-      a {
-        font-weight: 600;
-        font-size: 1rem;
-      }
-    }
-  }
+</script>
+<style lang="less" scoped>
+/deep/ .ant-table-tbody > tr > td {
+  padding: 0px !important;
+}
+/deep/.dartstyle {
+  border-right: 1px solid #999 !important;
+}
 </style>

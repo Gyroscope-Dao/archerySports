@@ -1,6 +1,6 @@
 <template>
   <div class="allPage">
-    <h2>供应商质量分析</h2>
+    <h2>AAA质量分析</h2>
     <div class="Basis">
       <div class="rightbox">
         <div class="right1 right">
@@ -10,7 +10,7 @@
             <div class="panel_footer"></div>
           </div>
           <div class="panel panel_chart3">
-            <h2>采购周期趋势</h2>
+            <h2>DDD周期趋势</h2>
             <ECharts class="chartThree" :option="buyCycle"></ECharts>
             <div class="panel_footer"></div>
           </div>
@@ -26,7 +26,7 @@
         </div>
         <div class="right2 right">
           <div class="panel panel_chart2">
-            <h2>运输周期趋势</h2>
+            <h2>ys周期趋势</h2>
             <ECharts class="chartTwo" :option="transCycle"></ECharts>
             <div class="panel_footer"></div>
           </div>
@@ -110,12 +110,12 @@ export default {
         ],
       }
     },
-    // 采购周期 buyCycle
+    // DDD周期 buyCycle
     buyCycle() {
       return {
         xAxis: {
           type: 'category',
-          data: ['采购周期', '生产周期', '运输周期'],
+          data: ['DDD周期', '生产周期', 'ys周期'],
           axisLine: {
             lineStyle: {
               color: '#fff',
@@ -169,7 +169,7 @@ export default {
         ],
       }
     },
-    // 运输周期 transCycle
+    // ys周期 transCycle
     transCycle() {
       return {
         xAxis: {
@@ -265,7 +265,7 @@ export default {
           },
         },
         title: {
-          text: '供应商地图分布',
+          text: 'AAA地图分布',
           left: '45%',
           textStyle: {
             color: '#fff',
@@ -315,7 +315,7 @@ export default {
         }
       })
     },
-    // 供货质量--采购，运输，生成--柱状图
+    // BBB质量--DDD，ys，生成--柱状图
     async getDateBarChart() {
       var url = '/supplycycle/getThreeCycle'
       await getAction(url, { id: this.query.id, FirstSupplier: this.query.FirstSupplier }).then((res) => {

@@ -5,7 +5,7 @@
         <div class="left">
           <a-menu style="width: 220px" :default-selected-keys="['1']" mode="inline">
             <a-sub-menu key="sub1">
-              <span slot="title"><span>供应商库</span></span>
+              <span slot="title"><span>AAA库</span></span>
               <a-menu-item
                 v-for="item in tableList[0]"
                 :key="item.name"
@@ -29,7 +29,7 @@
               </a-menu-item>
             </a-sub-menu>
             <a-sub-menu key="sub3">
-              <span slot="title"><span>供应历史库</span></span>
+              <span slot="title"><span>CCC历史库</span></span>
               <a-menu-item
                 v-for="item in tableList[2]"
                 :key="item.name"

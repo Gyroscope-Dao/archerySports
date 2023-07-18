@@ -4,39 +4,38 @@
       <a-form-model ref="form" :model="model" :rules="validatorRules" slot="detail">
         <a-row>
           <a-col :span="24">
-            <a-form-model-item label="产品编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="productId">
-              <a-input v-model="model.productId" placeholder="请输入产品编号" disabled></a-input>
+            <a-form-model-item label="物料编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="productId">
+              <a-input v-model="model.productId" placeholder="请输入物料编号"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="产品名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="productName">
-              <a-input v-model="model.productName" placeholder="请输入产品名称"></a-input>
+            <a-form-model-item label="物料名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="productName">
+              <a-input v-model="model.productName" placeholder="请输入物料名称"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="产品类别" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="productType">
-              <!-- <a-input v-model="model.productType" placeholder="请输入产品类别"  ></a-input> -->
-              <j-search-select-tag v-model="model.productType" :dictOptions="dictOptions" />
+            <a-form-model-item label="物料类别" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="productUnit">
+              <a-input v-model="model.productUnit" placeholder="请输入物料类别"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item
-              label="产品规格"
+              label="物料规格"
               :labelCol="labelCol"
               :wrapperCol="wrapperCol"
               prop="productSpecification"
             >
-              <a-input v-model="model.productSpecification" placeholder="请输入产品规格"></a-input>
+              <a-input v-model="model.productSpecification" placeholder="请输入物料规格"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="产品计量单位" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="productUnit">
-              <a-input v-model="model.productUnit" placeholder="请输入产品计量单位"></a-input>
+            <a-form-model-item label="计量单位" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="productUnit">
+              <a-input v-model="model.productUnit" placeholder="请输入计量单位"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="产品性质" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="productNature">
-              <a-input v-model="model.productNature" placeholder="请输入产品性质"></a-input>
+            <a-form-model-item label="物料性质" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="productNature">
+              <a-input v-model="model.productNature" placeholder="请输入物料性质"></a-input>
             </a-form-model-item>
           </a-col>
         </a-row>
@@ -106,13 +105,13 @@ export default {
       },
       confirmLoading: false,
       validatorRules: {
-        productId: [{ required: true, message: '请输入产品编号!' }],
-        productName: [{ required: true, message: '请输入产品名称!' }],
-        productType: [{ required: true, message: '请输入产品类别!' }],
-        productSpecification: [{ required: true, message: '请输入产品规格!' }],
-        productUnit: [{ required: true, message: '请输入产品计量单位!' }],
+        productId: [{ required: true, message: '请输入物料编号!' }],
+        productName: [{ required: true, message: '请输入物料名称!' }],
+        productType: [{ required: true, message: '请输入物料类别!' }],
+        productSpecification: [{ required: true, message: '请输入物料规格!' }],
+        productUnit: [{ required: true, message: '请输入计量单位!' }],
 
-        productNature: [{ required: true, message: '请输入产品性质!' }]
+        productNature: [{ required: true, message: '请输入物料性质!' }]
       },
       url: {
         add: '/productInf/productInf/add',
@@ -134,7 +133,6 @@ export default {
   methods: {
     add() {
       this.edit(this.modelDefault)
-      getProductId(this)
     },
     edit(record) {
       this.model = Object.assign({}, record)

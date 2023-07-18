@@ -5,32 +5,37 @@
         <a-row>
           <a-col :span="24">
             <a-form-model-item
-              label="一级供应商编号"
+              label="一级AAA编号"
               :labelCol="labelCol"
               :wrapperCol="wrapperCol"
               prop="firstSupplierId"
             >
-              <a-input v-model="model.firstSupplierId" placeholder="请输入一级供应商编号" disabled></a-input>
+              <a-input v-model="model.firstSupplierId" placeholder="请输入一级AAA编号"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="供应商名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="supplierName">
-              <a-input v-model="model.supplierName" placeholder="请输入供应商名称"></a-input>
+            <a-form-model-item label="AAA名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="supplierName">
+              <a-input v-model="model.supplierName" placeholder="请输入AAA名称"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item
-              label="供应商名称简称"
+              label="AAA名称简称"
               :labelCol="labelCol"
               :wrapperCol="wrapperCol"
               prop="supplierSimpleName"
             >
-              <a-input v-model="model.supplierSimpleName" placeholder="请输入供应商名称简称"></a-input>
+              <a-input v-model="model.supplierSimpleName" placeholder="请输入AAA名称简称"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="供应商地址" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="supplierAddress">
-              <a-input v-model="model.supplierAddress" placeholder="请输入供应商地址"></a-input>
+            <a-form-model-item label="AAA地址" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="supplierAddress">
+              <a-input v-model="model.supplierAddress" placeholder="请输入AAA地址"></a-input>
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-model-item label="地区" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="region">
+              <a-input v-model="model.region" placeholder="请输入AAA地区"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -65,7 +70,7 @@
           </a-col>
           <a-col :span="24">
             <a-form-model-item
-              label="是否瓶颈供应商"
+              label="是否瓶颈AAA"
               :labelCol="labelCol"
               :wrapperCol="wrapperCol"
               prop="battleneckSupplier"
@@ -74,13 +79,48 @@
                 type="list"
                 v-model="model.battleneckSupplier"
                 dictCode="yn"
-                placeholder="请选择是否瓶颈供应商"
+                placeholder="请选择是否瓶颈AAA"
               />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="供应商资质" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="certification">
-              <a-input v-model="model.certification" placeholder="请输入供应商资质"></a-input>
+            <a-form-model-item
+              label="是否生产瓶颈AAA"
+              :labelCol="labelCol"
+              :wrapperCol="wrapperCol"
+              prop="isProduct"
+            >
+              <j-dict-select-tag
+                type="list"
+                v-model="model.isProduct"
+                dictCode="yn"
+                placeholder="请选择是否生产瓶颈AAA"
+              />
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-model-item
+              label="是否DDD瓶颈AAA"
+              :labelCol="labelCol"
+              :wrapperCol="wrapperCol"
+              prop="isPurchase"
+            >
+              <j-dict-select-tag
+                type="list"
+                v-model="model.isPurchase"
+                dictCode="yn"
+                placeholder="请选择是否DDD瓶颈AAA"
+              />
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-model-item label="最小CCC批量" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="miniPurchase">
+              <a-input-number v-model="model.miniPurchase" placeholder="请输入最小CCC批量" style="width: 100%" />
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-model-item label="AAA资质" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="certification">
+              <a-input v-model="model.certification" placeholder="请输入AAA资质"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -108,39 +148,9 @@
               <j-search-select-tag v-model="model.eptId" dict="enterprise_inf,ept_name,etp_id" />
             </a-form-model-item>
           </a-col>
-          <a-col :span="24">
+          <a-col :span="24" style="display: none;">
             <a-form-model-item label="录入时间" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="infUpdateTime">
               <j-date placeholder="请选择录入时间" v-model="model.infUpdateTime" style="width: 100%" disabled />
-            </a-form-model-item>
-          </a-col>
-          <a-col :span="24">
-            <a-form-model-item
-              label="是否生产瓶颈供应商"
-              :labelCol="labelCol"
-              :wrapperCol="wrapperCol"
-              prop="isProduct"
-            >
-              <j-dict-select-tag
-                type="list"
-                v-model="model.isProduct"
-                dictCode="yn"
-                placeholder="请选择是否生产瓶颈供应商"
-              />
-            </a-form-model-item>
-          </a-col>
-          <a-col :span="24">
-            <a-form-model-item
-              label="是否采购瓶颈供应商"
-              :labelCol="labelCol"
-              :wrapperCol="wrapperCol"
-              prop="isPurchase"
-            >
-              <j-dict-select-tag
-                type="list"
-                v-model="model.isPurchase"
-                dictCode="yn"
-                placeholder="请选择是否采购瓶颈供应商"
-              />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -153,7 +163,7 @@
               <a-input v-model="model.corporateCredit" placeholder="请输入企业征信"></a-input>
             </a-form-model-item>
           </a-col>
-          <a-col :span="24">
+          <a-col :span="24" style="display: none;">
             <a-form-model-item label="人员编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="stuffId">
               <a-input v-model="model.stuffId" placeholder="请输入人员编号" disabled></a-input>
             </a-form-model-item>
@@ -210,10 +220,11 @@ export default {
       },
       confirmLoading: false,
       validatorRules: {
-        firstSupplierId: [{ required: true, message: '请输入一级供应商编号!' }],
-        supplierName: [{ required: true, message: '请输入供应商名称!' }],
-        supplierSimpleName: [{ required: true, message: '请输入供应商名称简称!' }],
-        supplierAddress: [{ required: true, message: '请输入供应商地址!' }],
+        firstSupplierId: [{ required: true, message: '请输入一级AAA编号!' }],
+        supplierName: [{ required: true, message: '请输入AAA名称!' }],
+        supplierSimpleName: [{ required: true, message: '请输入AAA名称简称!' }],
+        supplierAddress: [{ required: true, message: '请输入AAA地址!' }],
+        region: [{ required: true, message: '请输入AAA地区!' }],
         contact: [{ required: true, message: '请输入联系人!' }],
         // contactNum: [{ required: true, message: '请输入联系电话!' }, { validator: this.validatePhone }],
         contactNum: [
@@ -226,8 +237,8 @@ export default {
           { pattern: /^[A-Z0-9]{15}$|^[A-Z0-9]{18}$|^[A-Z0-9]{20}$/, message: '请输入正确的税号！' }
         ],
         privateEnterprise: [{ required: true, message: '请输入是否民口企业!' }],
-        battleneckSupplier: [{ required: true, message: '请输入是否瓶颈供应商!' }],
-        certification: [{ required: true, message: '请输入供应商资质!' }],
+        battleneckSupplier: [{ required: true, message: '请输入是否瓶颈AAA!' }],
+        certification: [{ required: true, message: '请输入AAA资质!' }],
         legalPerson: [{ required: true, message: '请输入法定代表人!' }],
         postCode: [
           { required: true, message: '请输入邮编!' },
@@ -237,8 +248,9 @@ export default {
         bankAccount: [{ required: true, message: '请输入开户账号!' }],
         eptId: [{ required: true, message: '请输入往来单位信息名称!' }],
         infUpdateTime: [{ required: true, message: '请输入录入时间!' }],
-        isProduct: [{ required: true, message: '请输入是否生产瓶颈供应商!' }],
-        isPurchase: [{ required: true, message: '请输入是否采购瓶颈供应商!' }],
+        isProduct: [{ required: true, message: '请输入是否生产瓶颈AAA!' }],
+        isPurchase: [{ required: true, message: '请输入是否DDD瓶颈AAA!' }],
+        miniPurchase: [{ required: true, message: '请输入最小CCC批量!' }],
         estabYear: [{ required: true, message: '请输入成立年份!' }],
         corporateCredit: [{ required: true, message: '请输入企业征信!' }],
         stuffId: [{ required: true, message: '请输入人员编号!' }]
@@ -265,7 +277,6 @@ export default {
   methods: {
     add() {
       this.edit(this.modelDefault)
-      getFirstSupplierId(this)
     },
     edit(record) {
       this.model = Object.assign({}, record)

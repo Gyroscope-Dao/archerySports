@@ -5,7 +5,7 @@
         <a-row>
           <a-col :span="24">
             <a-form-model-item label="订单编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="orderId">
-              <a-input v-model="model.orderId" placeholder="请输入订单编号" disabled></a-input>
+              <a-input v-model="model.orderId" placeholder="请输入订单编号"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -18,12 +18,12 @@
               <j-date placeholder="请选择实际交货期" v-model="model.realDeliveryDate" style="width: 100%" />
             </a-form-model-item>
           </a-col>
-          <a-col :span="24">
+          <a-col :span="24" style="display: none;">
             <a-form-model-item label="员工编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="stuffId">
               <a-input v-model="model.stuffId" placeholder="请输入员工编号" disabled></a-input>
             </a-form-model-item>
           </a-col>
-          <a-col :span="24">
+          <a-col :span="24" style="display: none;">
             <a-form-model-item label="录入时间" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="infUpdateTime">
               <j-date placeholder="请选择录入时间" v-model="model.infUpdateTime" style="width: 100%" disabled />
             </a-form-model-item>
@@ -105,7 +105,6 @@ export default {
   methods: {
     add() {
       this.edit(this.modelDefault)
-      getOrderId(this)
     },
     edit(record) {
       this.model = Object.assign({}, record)

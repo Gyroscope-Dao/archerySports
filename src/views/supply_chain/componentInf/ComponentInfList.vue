@@ -1,9 +1,25 @@
 <template>
   <a-card :bordered="false">
     <!-- 查询区域 -->
-    <div class="table-page-search-wrapper">
+   <div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
+          <a-col :xl="6" :lg="7" :md="8" :sm="24">
+            <a-form-item label="核心EEE编号">
+              <a-input placeholder="请输入核心EEE编号" v-model="queryParam.componentId"></a-input>
+            </a-form-item>
+          </a-col>
+          <a-col :xl="6" :lg="7" :md="8" :sm="24">
+            <a-form-item label="核心EEE名称">
+              <a-input placeholder="请输入核心EEE名称" v-model="queryParam.componentName"></a-input>
+            </a-form-item>
+          </a-col>
+          <a-col :xl="6" :lg="7" :md="8" :sm="24">
+            <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
+              <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
+              <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
+            </span>
+          </a-col>
         </a-row>
       </a-form>
     </div>
@@ -12,7 +28,7 @@
     <!-- 操作按钮区域 -->
     <div class="table-operator">
       <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
-      <a-button type="primary" icon="download" @click="handleExportXls('核心部件')">导出</a-button>
+      <a-button type="primary" icon="download" @click="handleExportXls('核心EEE')">导出</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
         <a-button type="primary" icon="import">导入</a-button>
       </a-upload>
@@ -108,7 +124,7 @@
     },
     data () {
       return {
-        description: '核心部件管理页面',
+        description: '核心EEE管理页面',
         // 表头
         columns: [
           {
@@ -121,40 +137,35 @@
               return parseInt(index)+1;
             }
           },
-          // {
-          //   title:'部件编号',
-          //   align:"center",
-          //   dataIndex: 'componentId'
-          // },
           {
-            title:'部件名称',
+            title:'核心EEE编号',
+            align:"center",
+            dataIndex: 'componentId'
+          },
+          {
+            title:'核心EEE名称',
             align:"center",
             dataIndex: 'componentName'
           },
           {
-            title:'部件类别',
+            title:'核心EEE类别',
             align:"center",
             dataIndex: 'componentType'
           },
           {
-            title:'部件规格',
+            title:'核心EEE规格',
             align:"center",
             dataIndex: 'componentSpecification'
           },
           {
-            title:'部件计量单位',
+            title:'计量单位',
             align:"center",
             dataIndex: 'componentUnit'
           },
           {
-            title:'部件性质',
+            title:'核心EEE性质',
             align:"center",
             dataIndex: 'componentNature'
-          },
-          {
-            title:'部件编号',
-            align:"center",
-            dataIndex: 'componentId'
           },
           {
             title: '操作',
@@ -191,12 +202,12 @@
       },
       getSuperFieldList(){
         let fieldList=[];
-        fieldList.push({type:'string',value:'componentId',text:'部件编号',dictCode:''})
-        fieldList.push({type:'string',value:'componentName',text:'部件名称',dictCode:''})
-        fieldList.push({type:'string',value:'componentType',text:'部件类别',dictCode:''})
-        fieldList.push({type:'string',value:'componentSpecification',text:'部件规格',dictCode:''})
-        fieldList.push({type:'string',value:'componentUnit',text:'部件计量单位',dictCode:''})
-        fieldList.push({type:'string',value:'componentNature',text:'部件性质',dictCode:''})
+        fieldList.push({type:'string',value:'componentId',text:'EEE编号',dictCode:''})
+        fieldList.push({type:'string',value:'componentName',text:'EEE名称',dictCode:''})
+        fieldList.push({type:'string',value:'componentType',text:'EEE类别',dictCode:''})
+        fieldList.push({type:'string',value:'componentSpecification',text:'EEE规格',dictCode:''})
+        fieldList.push({type:'string',value:'componentUnit',text:'计量单位',dictCode:''})
+        fieldList.push({type:'string',value:'componentNature',text:'EEE性质',dictCode:''})
         this.superFieldList = fieldList
       }
     }

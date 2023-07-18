@@ -1,61 +1,123 @@
 <template>
   <div class="integration">
-    <div class="nav">
+    <div class="main">
       <div class="left">
-        <img src="../assets/gather/logo.jpg" alt="" />
+        <!-- <img src="../assets/gather/logo1.png" alt="" style="width: 12vh; margin: 0 auto;transform: translateX(3px);display: left: 70px;;" /> -->
         <div class="logotitle">
-          <h2>联动保供</h2>
-          <h3>COMPANYNAME</h3>
+          <h2 style="color:#000;margin:0; font-weight: bolder;">XXXXXXXXXX平台</h2>
+          <h3 class="smallTitle">lalalalalallalalalalalalalalalalal</h3>
         </div>
       </div>
-      <div class="right">
-        <span class="action">
-          <a class="logout_title" href="javascript:;" @click="handleLogout">
-            <a-icon type="logout" />
-            <span v-if="isDesktop()">&nbsp;退出登录</span>
-          </a>
-        </span>
-      </div>
-    </div>
+      <span class="action">
+        <a class="user_control" href="javascript:;" @click="userControl">
+          <a-icon type="setting" style="color: #000" />
+          <span style="color:#000">&nbsp;用户管理&nbsp;&nbsp;</span>
+        </a>
+        <a class="logout_title" href="javascript:;" @click="handleLogout">
+          <a-icon type="logout" style="color: #000" />
+          <span v-if="isDesktop()" style="color:#000">&nbsp;退出登录</span>
+        </a>
+      </span>
+      <div class="secondRegion">
+        <div class="secondTitle">
+          <div style="padding: 2vh 5vh 5vh;border-radius: 3vh;" @mouseover="addActive_0($event)" @mouseout="removeActive_0($event)">
+            <div class="imgPosition" style="display: flex;flex-direction: row;">
+              <img src="../assets/gather/icon/icon_system_mind.png" alt="" style="position: relative;bottom: 1vh;">
+              <div class="" @click="showFirst" style="margin-left: 2vh;">XXX与XXX系统<br/><span>XXXXXXXXXXXXX PLANNING AND SCHEDULING SYSTEM</span></div>
+            </div>
+            <div style="display: flex; justify-content: center; margin-top: 10vh;">
+              <div class="item" @click="toPlan">
+                <img src="../assets/gather/icon/icon_plan_mind.png" alt=""/>
+                <span>XXX计划</span>
+              </div>
+              <div class="item" @click="toDiaodu">
+                <img src="../assets/gather/icon/icon_dispatch_mind.png" alt=""/>
+                <span>XXX调度</span>
+              </div>
+            </div>
+          </div>
 
-    <div class="main">
-      <div class="title">联动保供平台</div>
-      <div class="content">
-        <div class="btn btn1" @click="showFirst">供应链数字孪生系统</div>
-        <div class="btn btn2" @click="showSecond">智能计划与调度系统</div>
-        <div class="btn btn3" @click="showThird">装箱线仿真系统</div>
-      </div>
-    </div>
+          <div style="padding: 2vh 5vh 5vh; border-radius: 3vh; width: 35%;" @mouseover="addActive_1($event)" @mouseout="removeActive_1($event)">
+            <div class="imgPosition" style="display: flex;flex-direction: row; justify-content: center;">
+              <img src="../assets/gather/icon/icon_digit_supplier.png" alt="" style="position: relative;bottom: 1vh;">
+              <div class="" @click="showSecond" style="margin-left: 2vh;">XXXXXXXXXXXX仿真系统<br/><span>SUPPLY XXX DIGITAL TWIN SIMULATON SYSTEN</span></div>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-top: 10vh;">
+              <div class="item" @click="toIndex">
+                <img src="../assets/gather/icon/icon_database_supplier.png" alt=""/>
+                <span>射箭打靶<br/>数据库管理</span>
+              </div>
+              <div class="item" @click="toImage">
+                <img src="../assets/gather/icon/icon_portrait_supplier.png" alt=""/>
+                <span>XXX画像</span>
+              </div>
+              <div class="item" @click="toImage3">
+                <img src="../assets/gather/icon/icon_monitor_supplier.png" alt=""/>
+                <span>XXX过程<br/>监控</span>
+              </div>
+              <div class="item" @click="toImage2" style="top: 100px;">
+                <img src="../assets/gather/icon/icon_phantom_supplier.png" alt=""/>
+                <span>XXX链仿真</span>
+              </div>
+            </div>
+          </div>
 
-    <div class="bootom" v-if="first">
-      <div class="item" @click="toIndex">
-        <img src="../assets/gather/icon/shafa.png" alt="" />
-        <span>供应商保供数据库管理系统</span>
+          <div style="padding: 2vh 5vh 5vh; border-radius: 3vh;" @mouseover="addActive_2($event)" @mouseout="removeActive_2($event)">
+            <div class="imgPosition" style="display: flex;flex-direction: row;">
+                <img src="../assets/gather/icon/icon_monitor_packing_1.png" alt="" style="position: relative;bottom: 1vh;">
+                <div class="" @click="showThird" style="margin-left: 2vh;">XXXXXXXXX实时监控系统<br/><span>XXXXX TIME MONITORING SYSTEM FOR PACKING DIGITAL TWINS</span></div>
+            </div>
+            <div style="display: flex; justify-content: center; margin-top: 10vh;">
+              <div class="item" @click="toEmulate">
+                <img src="../assets/gather/icon/icon_control_packing_1.png" alt=""/>
+                <span>lllLLL实时监控</span>
+              </div>
+              <div class="item" @click="tomonitor">
+                <img src="../assets/gather/icon/icon_line_packing_1.png" alt=""/>
+                <span>LLLL线仿真</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="item" @click="toImage">
-        <img src="../assets/gather/icon/bijiben.png" alt="" />
-        <span>供应商画像系统</span>
-      </div>
-      <div class="item" @click="toImage1">
-        <img src="../assets/gather/icon/xiangbao.png" alt="" />
-        <span>供应商评价系统</span>
-      </div>
-    </div>
-    <div class="bootom" v-if="second">
-      <div class="item">
-        <img src="../assets/gather/icon/xiangbao.png" alt="" />
-        <span>智能计划调度</span>
-      </div>
-    </div>
-    <div class="bootom" v-if="third">
-      <div class="item">
-        <img src="../assets/gather/icon/bijiben.png" alt="" />
-        <span>装线箱实时监控</span>
-      </div>
-      <div class="item">
-        <img src="../assets/gather/icon/xiangbao.png" alt="" />
-        <span>装箱计划仿真</span>
-      </div>
+      <!-- <div class="thirdLineWord">强大安全稳定的产品及服务<br/><span>//强大安全稳定的产品及服务//</span></div> -->
+      <!-- <div class="modelFun footer">
+        <div class="item" @click="toPlan">
+          <img src="../assets/gather/icon/icon_plan_mind.png" alt=""/>
+          <span>智能计划</span>
+        </div>
+        <div class="item" @click="toDiaodu">
+          <img src="../assets/gather/icon/icon_dispatch_mind.png" alt=""/>
+          <span>智能调度</span>
+        </div>
+
+        <div class="item" @click="toIndex">
+          <img src="../assets/gather/icon/icon_database_supplier.png" alt=""/>
+          <span>AAA保供数<br/>据库管理</span>
+        </div>
+        <div class="item" @click="toImage">
+          <img src="../assets/gather/icon/icon_portrait_supplier.png" alt=""/>
+          <span>XXX画像</span>
+        </div>
+        <div class="item" @click="toImage3">
+          <img src="../assets/gather/icon/icon_monitor_supplier.png" alt=""/>
+          <span>CCC过程监控</span>
+        </div>
+        <div class="item" @click="toImage2" style="top: 100px;">
+          <img src="../assets/gather/icon/icon_phantom_supplier.png" alt=""/>
+          <span>CCC链仿真</span>
+        </div>
+
+        <div class="item" @click="toEmulate">
+          <img src="../assets/gather/icon/icon_control_packing_1.png" alt=""/>
+          <span>装线箱实时监控</span>
+        </div>
+        <div class="item" @click="tomonitor">
+          <img src="../assets/gather/icon/icon_line_packing_1.png" alt=""/>
+          <span>装箱线仿真</span>
+        </div>
+      </div> -->
+
     </div>
   </div>
 </template>
@@ -63,6 +125,7 @@
 <script>
 import { mixinDevice } from '@/utils/mixin.js'
 import { mapActions, mapGetters, mapState } from 'vuex'
+import {gongbaologin,huaxiangLogin,pingjiaLogin,zhinengjihuaLogin, diaoduLogin,jiankongLogin,fangzhenLogin} from '@/api/api'
 
 export default {
   name: 'integration',
@@ -81,34 +144,94 @@ export default {
       this.third = false
     },
     showSecond() {
-      console.log(2);
+      console.log(2)
       this.first = false
       this.second = true
       this.third = false
     },
     showThird() {
-      console.log(3);
+      console.log(3)
       this.first = false
       this.second = false
       this.third = true
     },
+    userControl() {
+      this.$router.push({
+        path: '/isystem/user'
+      })
+      
+    },
     toIndex() {
       this.$router.push({
-        path: '/dashboard/analysis',
+        path: '/dashboard/analysis'
       })
+      gongbaologin()
     },
     toImage() {
       let routeData = this.$router.resolve({
-        path: '/portrait/index',
+        path: '/portrait/index'
       })
       window.open(routeData.href, '_blank')
+      huaxiangLogin()
     },
     toImage1() {
       let routeData = this.$router.resolve({
-        path: '/evaluation',
+        path: '/evaluation'
       })
       window.open(routeData.href, '_blank')
+      pingjiaLogin()
     },
+    toImage2() {
+      let routeData = this.$router.resolve({
+        path: '/simulationInf/simulationInfList'
+      })
+      window.open(routeData.href, '_blank')
+      pingjiaLogin()
+    },
+
+    
+    toImage3() {
+      let routeData = this.$router.resolve({
+        path: '/firstKeyprocessInf/firstKeyprocessInfList'
+      })
+      window.open(routeData.href, '_blank')
+      pingjiaLogin()
+    },
+
+    // //飞书
+    // toPlan() {
+    //   let routeData = this.$router.resolve({
+    //     // path: '/evaluation'
+    //   })
+    //   window.open("SunloginClient://", '_blank')
+    //   // pingjiaLogin()
+    // },
+    // //百度
+    // toDiaodu() {
+    //   let routeData = this.$router.resolve({
+    //     // path: '/evaluation'
+    //   })
+    //   // window.open('https:\\www.baidu.com', '_blank')
+    //   window.location.href='http://baidu.com'
+    //   // pingjiaLogin()
+    // },
+    // //百度
+    // toEmulate() {
+    //   let routeData = this.$router.resolve({
+    //     // path: '/evaluation'
+    //   })
+    //   window.open('https:\\www.baidu.com', '_blank')
+    //   // pingjiaLogin()
+    // },
+    // //百度
+    // tomonitor() {
+    //   let routeData = this.$router.resolve({
+    //     // path: '/evaluation'
+    //   })
+    //   // window.open('https:\\www.baidu.com', '_blank')
+    //   window.location.href="http://10.132.10.32:3000"
+    //   // pingjiaLogin()
+    // },
     ...mapActions(['Logout']),
     ...mapGetters(['nickname', 'avatar', 'userInfo']),
     handleLogout() {
@@ -126,111 +249,155 @@ export default {
               window.location.reload()
               // update-end author:scott date:20211223 for:【JTC-198】退出登录体验不好
             })
-            .catch((err) => {
+            .catch(err => {
               that.$message.error({
                 title: '错误',
-                description: err.message,
+                description: err.message
               })
             })
         },
-        onCancel() {},
+        onCancel() {
+
+        }
       })
     },
+    addActive_0($event) {
+			$event.currentTarget.className = 'borderStyleNew_0'
+		},
+		removeActive_0($event) {
+			$event.currentTarget.className = ''
+		},
+    addActive_1($event) {
+			$event.currentTarget.className = 'borderStyleNew_1'
+		},
+		removeActive_1($event) {
+			$event.currentTarget.className = ''
+		},
+    addActive_2($event) {
+			$event.currentTarget.className = 'borderStyleNew_2'
+		},
+		removeActive_2($event) {
+			$event.currentTarget.className = ''
+		},
+
+
   },
+
 }
 </script>
 
 <style lang="less" scoped>
 .integration {
-  background-color: rgb(243, 243, 243);
-  position: relative;
-
-  .nav {
-    width: 100%;
-    height: 90px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: #fff;
-
-    .left {
-      display: flex;
-      align-items: center;
-      img {
-        width: 60px;
-        height: 60px;
-      }
-      .logotitle {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        h2 {
-          font-size: 28px;
-          font-weight: 800;
-          margin: 0;
-        }
-        h3 {
-          font-size: 18px;
-          letter-spacing: 3px;
-          margin: 0;
-        }
-      }
-    }
-    .right {
-      color: #1890ff;
-    }
-  }
+  background-color: #fff;
+  // text-align: center;
+  // position: relative;
 
   .main {
     width: 100%;
-    height: 550px;
-    background-image: url(../assets/gather/bgc.jpeg);
-    background-size: contain;
-
-    .title {
-      text-align: center;
-      padding-top: 100px;
-      font-size: 50px;
-      color: #20aee4;
+    height: 60%;
+    background: url(../assets/gather/banner.png) no-repeat;
+    background-size: 100%;
+    position: relative;
+    .left {
+      position: absolute;
+      left: 25%;
+      z-index: 3;
+      top: 12vh;
+      transform: translateX(-50%);
+      display: flex;
     }
-    .content {
+    .logotitle {
+      text-align: center;
+      font-size: 4.5vh;
+      color: #000000;
+      line-height: 11.5vh;
+      margin-left: 15vh;
+      .smallTitle{
+        color: #999;
+        font-size: 2vh;
+        line-height: 5vh;
+        margin-left: 26vh;
+        width: 69%;
+        text-align: left;
+        .imgPosition{
+          display: flex;
+          flex-direction: row;
+          img{
+            width: 10vh;
+            height: 10vh;
+          }
+          span{
+            color: #99ABB8;
+          }
+        }
+      }
+    }
+    .action {
+      color: #000000;
+      position: absolute;
+      right: 10px;
+      top: 8px;
+    }
+    .secondRegion{
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 9vh;
+      background-color:rgba(255,255,255,0.6);
+    }
+    .secondTitle{
+      height: auto;
+      color: #000;
       display: flex;
       justify-content: space-around;
-      align-items: center;
-      font-size: 30px;
-      color: #fff;
-      align-items: center;
-      padding-top: 100px;
-      .btn {
-        cursor: pointer;
-        width: 400px;
-        height: 100px;
-        line-height: 100px;
-        text-align: center;
-        background-size: contain;
-      }
-      .btn1 {
-        background: url('../assets/gather/btn3.jpeg') no-repeat;
-      }
-      .btn2 {
-        background: url('../assets/gather/btn2.jpeg') no-repeat;
-      }
-      .btn3 {
-        background: url('../assets/gather/btn3.jpeg') no-repeat;
+      // margin: 2vh 0;
+      font-size: 2vh;
+      font-weight: bolder;
+      span{
+        color: rgb(118, 114, 114);
+        font-size: 1vh;
       }
     }
-  }
-
-  .bootom {
-    position: absolute;
-    background-color: rgb(250, 250, 250);
-    height: 130px;
-    width: 86%;
-    bottom: 50px;
-    left: 110px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+    .borderStyleNew_0{
+      background: rgba(71, 235, 213, 0.2);
+      display: flex;
+      flex-direction: column;
+    }
+    .borderStyleNew_1{
+      // background: rgba(57, 131, 254, 0.2);
+      background: #b8e0f069;
+      display: flex;
+      flex-direction: column;
+    }.borderStyleNew_2{
+      background: rgba(254, 164, 78, 0.2);
+      display: flex;
+      flex-direction: column;
+    }
+    .thirdLineWord{
+      width: 100%;
+      height: auto;
+      text-align: center;
+      color: #000;
+      font-size: 3vh;
+      font-weight: bolder;
+      position: absolute;
+      bottom: -14vh;
+      span{
+        font-size: 2vh;
+        color:rgb(118, 114, 114)
+      }
+    }
+    .modelFun{
+      // width: 15%;
+      height: auto;
+      display: flex;
+      justify-content: space-around;
+      margin: 0 10%;
+    }
+    .footer{
+      position: absolute;
+      bottom: -35vh;
+    }
 
     .item {
       cursor: pointer;
@@ -238,18 +405,23 @@ export default {
       flex-direction: column;
       align-items: center;
       color: #553bb1;
-
+      // position: relative;
+      border-radius: 45px;
+      margin-right: 10px;
       img {
-        width: 45px;
+        width: 11vh;
+        padding: 2vh;
+        border-radius: 50%;
       }
-
       span {
         font-weight: 550;
-        font-size: 16px;
-        color: black;
+        font-size: 2vh;
+        color: #000000;
         margin-top: 10px;
+        display: flex;
+        text-align: center;
       }
     }
-  }
+    } 
 }
 </style>

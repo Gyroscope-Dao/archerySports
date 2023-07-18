@@ -1,9 +1,26 @@
 <template>
   <a-card :bordered="false">
-    <!-- 查询区域 -->
-    <div class="table-page-search-wrapper">
+     <!-- 查询区域 -->
+   <div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchQuery">
-        <a-row :gutter="24"> </a-row>
+        <a-row :gutter="24">
+          <a-col :xl="6" :lg="7" :md="8" :sm="24">
+            <a-form-item label="物料编码">
+              <a-input placeholder="请输入物料编码" v-model="queryParam.productId"></a-input>
+            </a-form-item>
+          </a-col>
+          <a-col :xl="6" :lg="7" :md="8" :sm="24">
+            <a-form-item label="物料名称">
+              <a-input placeholder="请输入物料名称" v-model="queryParam.productName"></a-input>
+            </a-form-item>
+          </a-col>
+          <a-col :xl="6" :lg="7" :md="8" :sm="24">
+            <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
+              <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
+              <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
+            </span>
+          </a-col>
+        </a-row>
       </a-form>
     </div>
     <!-- 查询区域-END -->
@@ -11,7 +28,7 @@
     <!-- 操作按钮区域 -->
     <div class="table-operator">
       <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
-      <a-button type="primary" icon="download" @click="handleExportXls('产品信息')">导出</a-button>
+      <a-button type="primary" icon="download" @click="handleExportXls('物料信息')">导出</a-button>
       <a-upload
         name="file"
         :showUploadList="false"
@@ -32,7 +49,7 @@
         <a-menu slot="overlay">
           <a-menu-item key="1" @click="batchDel"><a-icon type="delete" />删除</a-menu-item>
         </a-menu>
-        <a-button style="margin-left: 8px"> 批量操作 <a-icon type="down" /></a-button>
+        <a-button style="margin-left: 8px"> 批量操作 <a-icon type="down"/></a-button>
       </a-dropdown>
     </div>
 
@@ -85,7 +102,7 @@
 
           <a-divider type="vertical" />
           <a-dropdown>
-            <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>
+            <a class="ant-dropdown-link">更多 <a-icon type="down"/></a>
             <a-menu slot="overlay">
               <a-menu-item>
                 <a @click="handleDetail(record)">详情</a>
@@ -115,11 +132,11 @@ export default {
   name: 'ProductInfList',
   mixins: [JeecgListMixin, mixinDevice],
   components: {
-    ProductInfModal,
+    ProductInfModal
   },
   data() {
     return {
-      description: '产品信息管理页面',
+      description: '物料信息管理页面',
       // 表头
       columns: [
         {
@@ -128,86 +145,87 @@ export default {
           key: 'rowIndex',
           width: 60,
           align: 'center',
-          customRender: function (t, r, index) {
+          customRender: function(t, r, index) {
             return parseInt(index) + 1
-          },
+          }
+        },
+        {
+          title: '物料编码',
+          align: 'center',
+          dataIndex: 'productId'
         },
         // {
-        //   title:'产品编号',
+        //   title:'物料编号',
         //   align:"center",
         //   dataIndex: 'productId'
         // },
         {
-          title: '产品名称',
+          title: '物料名称',
           align: 'center',
-          dataIndex: 'productName',
+          dataIndex: 'productName'
         },
         {
-          title: '产品类别',
+          title: '物料类别',
           align: 'center',
-          dataIndex: 'productType',
+          dataIndex: 'productType'
         },
         {
-          title: '产品规格',
+          title: '物料规格',
           align: 'center',
-          dataIndex: 'productSpecification',
+          dataIndex: 'productSpecification'
         },
         {
-          title: '产品计量单位',
+          title: '计量单位',
           align: 'center',
-          dataIndex: 'productUnit',
+          dataIndex: 'productUnit'
         },
         {
-          title: '产品性质',
+          title: '物料性质',
           align: 'center',
-          dataIndex: 'productNature',
+          dataIndex: 'productNature'
         },
-        {
-          title: '产品编号',
-          align: 'center',
-          dataIndex: 'productId',
-        },
+
         {
           title: '操作',
           dataIndex: 'action',
           align: 'center',
           fixed: 'right',
           width: 147,
-          scopedSlots: { customRender: 'action' },
-        },
+          scopedSlots: { customRender: 'action' }
+        }
       ],
       url: {
         list: '/productInf/productInf/list',
         delete: '/productInf/productInf/delete',
         deleteBatch: '/productInf/productInf/deleteBatch',
         exportXlsUrl: '/productInf/productInf/exportXls',
-        importExcelUrl: 'productInf/productInf/importExcel',
+        importExcelUrl: 'productInf/productInf/importExcel'
       },
       dictOptions: {},
-      superFieldList: [],
+      superFieldList: []
     }
   },
   created() {
     this.getSuperFieldList()
   },
   computed: {
-    importExcelUrl: function () {
+    importExcelUrl: function() {
       return `${window._CONFIG['domianURL']}/${this.url.importExcelUrl}`
-    },
+    }
   },
   methods: {
     initDictConfig() {},
     getSuperFieldList() {
       let fieldList = []
-      fieldList.push({ type: 'string', value: 'productId', text: '产品编号', dictCode: '' })
-      fieldList.push({ type: 'string', value: 'productName', text: '产品名称', dictCode: '' })
-      fieldList.push({ type: 'string', value: 'productType', text: '产品类别', dictCode: '' })
-      fieldList.push({ type: 'string', value: 'productSpecification', text: '产品规格', dictCode: '' })
-      fieldList.push({ type: 'string', value: 'productUnit', text: '产品计量单位', dictCode: '' })
-      fieldList.push({ type: 'string', value: 'productNature', text: '产品性质', dictCode: '' })
+      fieldList.push({ type: 'string', value: 'productId', text: '物料编号', dictCode: '' })
+      fieldList.push({ type: 'string', value: 'productName', text: '物料名称', dictCode: '' })
+      fieldList.push({ type: 'string', value: 'productType', text: '物料类别', dictCode: '' })
+      fieldList.push({ type: 'string', value: 'productSpecification', text: '物料规格', dictCode: '' })
+      fieldList.push({ type: 'string', value: 'productUnit', text: '计量单位', dictCode: '' })
+      fieldList.push({ type: 'string', value: 'productNature', text: '物料性质', dictCode: '' })
       this.superFieldList = fieldList
-    },
-  },
+    }
+  }
 }
 </script>
 <style scoped>

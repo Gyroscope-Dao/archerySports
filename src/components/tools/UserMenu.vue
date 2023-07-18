@@ -23,7 +23,7 @@
         optionFilterProp="children"
         :filterOption="filterOption"
         :open="isMobile() ? true : null"
-        :getPopupContainer="(node) => node.parentNode"
+        :getPopupContainer="node => node.parentNode"
         :style="isMobile() ? { width: '100%', marginBottom: '50px' } : {}"
         @change="searchMethods"
         @blur="hiddenClick"
@@ -36,11 +36,11 @@
     <!-- update-end author:sunjianlei date:20200219 for: 菜单搜索改为动态组件，在手机端呈现出弹出框 -->
     <!-- update-end author:sunjianlei date:20191220 for: 解决全局样式冲突的问题 -->
     <!-- update_end  author:zhaoxin date:20191129 for: 做头部菜单栏导航 -->
-    <span class="action">
+    <!-- <span class="action">
       <a class="logout_title" target="_blank" href="http://doc.jeecg.com">
         <a-icon type="question-circle-o"></a-icon>
       </a>
-    </span>
+    </span> -->
     <header-notice class="action" />
     <a-dropdown>
       <span class="action action-full ant-dropdown-link user-dropdown-menu">
@@ -54,12 +54,12 @@
             <span>个人中心</span>
           </router-link>
         </a-menu-item>
-        <a-menu-item key="1">
+        <!-- <a-menu-item key="1">
           <router-link :to="{ name: 'account-settings-base' }">
             <a-icon type="setting" />
             <span>账户设置</span>
           </router-link>
-        </a-menu-item>
+        </a-menu-item> -->
         <a-menu-item key="3" @click="systemSetting">
           <a-icon type="tool" />
           <span>系统设置</span>
@@ -92,7 +92,7 @@
     <span class="action">
       <a class="logout_title" href="javascript:;" @click="handleLogout">
         <a-icon type="logout" />
-        <span v-if="isDesktop()">&nbsp;退出登录</span>
+        <span v-if="isDesktop()">&nbsp;返回主页面</span>
       </a>
     </span>
     <user-password ref="userPassword"></user-password>
@@ -120,7 +120,7 @@ export default {
       // update-begin author:sunjianlei date:20200219 for: 头部菜单搜索规范命名 --------------
       searchMenuOptions: [],
       searchMenuComp: 'span',
-      searchMenuVisible: false,
+      searchMenuVisible: false
       // update-begin author:sunjianlei date:20200219 for: 头部菜单搜索规范命名 --------------
     }
   },
@@ -128,14 +128,14 @@ export default {
     HeaderNotice,
     UserPassword,
     DepartSelect,
-    SettingDrawer,
+    SettingDrawer
   },
   props: {
     theme: {
       type: String,
       required: false,
-      default: 'dark',
-    },
+      default: 'dark'
+    }
   },
   /* update_begin author:zhaoxin date:20191129 for: 做头部菜单栏导航*/
   created() {
@@ -155,8 +155,8 @@ export default {
   computed: {
     ...mapState({
       // 后台菜单
-      permissionMenuList: (state) => state.user.permissionList,
-    }),
+      permissionMenuList: state => state.user.permissionList
+    })
   },
   /* update_end author:zhaoxin date:20191129 for: 做头部菜单栏导航*/
   watch: {
@@ -166,8 +166,8 @@ export default {
       handler() {
         this.searchMenuVisible = false
         this.searchMenuComp = this.isMobile() ? 'a-modal' : 'span'
-      },
-    },
+      }
+    }
     // update-end author:sunjianlei date:20200219 for: 菜单搜索改为动态组件，在手机端呈现出弹出框
   },
   methods: {
@@ -187,7 +187,7 @@ export default {
     handleLogout() {
       const that = this
       that.$router.push({
-        path: '/gather/gather',
+        path: '/gather/gather'
       })
 
       // this.$confirm({
@@ -240,7 +240,7 @@ export default {
     },
     // update_begin author:sunjianlei date:20191230 for: 解决外部链接打开失败的问题
     searchMethods(value) {
-      let route = this.searchMenuOptions.filter((item) => item.id === value)[0]
+      let route = this.searchMenuOptions.filter(item => item.id === value)[0]
       //update-begin-author:sunjianlei date:20220111 for: 【JTC-702】【菜单搜索】菜单搜索里点击跳转的菜单，无法将Token信息传递过去
       if (route.component.includes('layouts/IframePageView')) {
         this.$router.push(route)
@@ -255,10 +255,10 @@ export default {
     /*update_begin author:liushaoqian date:20200507 for: 刷新缓存*/
     clearCache() {
       getAction('sys/dict/refleshCache')
-        .then((res) => {
+        .then(res => {
           if (res.success) {
             //重新加载缓存
-            getAction('sys/dict/queryAllDictItems').then((res) => {
+            getAction('sys/dict/queryAllDictItems').then(res => {
               if (res.success) {
                 Vue.ls.remove(UI_CACHE_DB_DICT_DATA)
                 Vue.ls.set(UI_CACHE_DB_DICT_DATA, res.result, 7 * 24 * 60 * 60 * 1000)
@@ -267,13 +267,13 @@ export default {
             this.$message.success('刷新缓存完成！')
           }
         })
-        .catch((e) => {
+        .catch(e => {
           this.$message.warn('刷新缓存失败！')
           console.log('刷新失败', e)
         })
-    },
+    }
     /*update_end author:liushaoqian date:20200507 for: 刷新缓存*/
-  },
+  }
 }
 </script>
 

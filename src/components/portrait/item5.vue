@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>供应商订单分类指标评价</h2>
+    <h2>AAA订单分类指标评价</h2>
     <!-- 图表的容器 -->
     <ECharts class="chart" :option="option"></ECharts>
   </div>
@@ -34,7 +34,7 @@ export default {
     option() {
       return {
         legend: {
-          data: ['供应商A', '供应商B'],
+          data: ['AAAA', 'AAAB'],
           textStyle: {
             color: '#fff',
           },
@@ -58,7 +58,7 @@ export default {
         ],
         series: [
           {
-            name: '供应商A vs 供应商A',
+            name: 'AAAA vs AAAA',
             type: 'radar',
             // data: this.radarData,
             data: [

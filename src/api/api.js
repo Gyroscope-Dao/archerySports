@@ -73,6 +73,22 @@ function getDictItemsFromCache(dictCode) {
   }
 }
 
+//记录日志
+const gongbaologin = (params)=>getAction("/sys/gongbaologin",params);
+const huaxiangLogin = (params)=>getAction("/sys/huaxiangLogin",params);
+const pingjiaLogin = (params)=>getAction("/sys/pingjiaLogin",params);
+const zhinengjihuaLogin = (params)=>getAction("/sys/zhinengjihuaLogin",params);
+const diaoduLogin = (params)=>getAction("/sys/diaoduLogin",params);
+const jiankongLogin = (params)=>getAction("/sys/jiankongLogin",params);
+const fangzhenLogin = (params)=>getAction("/sys/fangzhenLogin",params);
+
+//获取后端模拟echars数据表
+const getDataList = (params)=>getAction("/batchInf/batchInf/moni",params)
+//后端真实数据echarts数据表  根据id查询
+const getDataListInfo = (params)=>postAction("/batchInf/batchInf/chaById?firstSupplierId=" + params)
+
+
+
 //系统通告
 const doReleaseData = (params)=>getAction("/sys/annountCement/doReleaseData",params);
 const doReovkeData = (params)=>getAction("/sys/annountCement/doReovkeData",params);
@@ -135,6 +151,18 @@ export {
   treeList,
   addDictItem,
   editDictItem,
+  
+  gongbaologin,
+  huaxiangLogin,
+  pingjiaLogin,
+  zhinengjihuaLogin,
+  diaoduLogin,
+  jiankongLogin,
+  fangzhenLogin,
+
+  getDataList,
+  getDataListInfo,
+
   doReleaseData,
   doReovkeData,
   getLoginfo,

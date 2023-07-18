@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h2>供应商关键指标趋势分析</h2>
+    <h2>AAA关键指标趋势分析</h2>
     <!-- 查询区域 -->
     <div class="table-page-search-wrapper">
       <!-- 搜索区域 -->
@@ -20,14 +20,14 @@
           </a-col>
           <a-col :md="4" :sm="8">
             <a-form-item label="" :labelCol="{ span: 5 }" :wrapperCol="{ span: 10, offset: 1 }">
-              供应商编号
-              <a-input v-model="model.supplyId" placeholder="请输入供应商编号"></a-input>
+              AAA编号
+              <a-input v-model="model.supplyId" placeholder="请输入AAA编号"></a-input>
             </a-form-item>
           </a-col>
           <a-col :md="4" :sm="8">
             <a-form-item label="" :labelCol="{ span: 5 }" :wrapperCol="{ span: 10, offset: 1 }">
-              产品编号
-              <a-input v-model="model.productId" placeholder="请输入产品编号"></a-input> </a-form-item
+              物料编号
+              <a-input v-model="model.productId" placeholder="请输入物料编号"></a-input> </a-form-item
           ></a-col>
           <span style="overflow: hidden" class="table-page-search-submitButtons">
             <a-col :md="4" :sm="8">
@@ -75,27 +75,27 @@ export default {
           key: 'name',
         },
         {
-          title: '供应商编号',
+          title: 'AAA编号',
           dataIndex: 'age',
           key: 'age',
         },
         {
-          title: '供应商名称',
+          title: 'AAA名称',
           dataIndex: 'address',
           key: 'address',
         },
         {
-          title: '供应商产品编号',
+          title: 'AAA物料编号',
           dataIndex: 'address',
           key: 'address',
         },
         {
-          title: '产品名称',
+          title: '物料名称',
           dataIndex: 'address',
           key: 'address',
         },
         {
-          title: '采购数量/件',
+          title: 'DDD数量/件',
           dataIndex: 'address',
           key: 'address',
         },

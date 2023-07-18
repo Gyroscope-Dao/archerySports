@@ -4,39 +4,39 @@
       <a-form-model ref="form" :model="model" :rules="validatorRules" slot="detail">
         <a-row>
           <a-col :span="24">
-            <a-form-model-item label="部件编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentId">
-              <a-input v-model="model.componentId" placeholder="请输入部件编号" disabled></a-input>
+            <a-form-model-item label="核心EEE编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentId">
+              <a-input v-model="model.componentId" placeholder="请输入核心EEE编号"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="部件名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentName">
-              <a-input v-model="model.componentName" placeholder="请输入部件名称"></a-input>
+            <a-form-model-item label="核心EEE名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentName">
+              <a-input v-model="model.componentName" placeholder="请输入核心EEE名称"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="部件类别" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentType">
-              <!-- <a-input v-model="model.componentType" placeholder="请输入部件类别"  ></a-input> -->
-              <j-search-select-tag v-model="model.componentType" :dictOptions="dictOptions" />
+            <a-form-model-item label="核心EEE类别" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentType">
+              <a-input v-model="model.componentType" placeholder="请输入EEE类别"  ></a-input>
+              <!-- <j-search-select-tag v-model="model.componentType" :dictOptions="dictOptions" /> -->
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item
-              label="部件规格"
+              label="核心EEE规格"
               :labelCol="labelCol"
               :wrapperCol="wrapperCol"
               prop="componentSpecification"
             >
-              <a-input v-model="model.componentSpecification" placeholder="请输入部件规格"></a-input>
+              <a-input v-model="model.componentSpecification" placeholder="请输入核心EEE规格"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="部件计量单位" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentUnit">
-              <a-input v-model="model.componentUnit" placeholder="请输入部件计量单位"></a-input>
+            <a-form-model-item label="计量单位" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentUnit">
+              <a-input v-model="model.componentUnit" placeholder="请输入计量单位"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="部件性质" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentNature">
-              <a-input v-model="model.componentNature" placeholder="请输入部件性质"></a-input>
+            <a-form-model-item label="核心EEE性质" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentNature">
+              <a-input v-model="model.componentNature" placeholder="请输入核心EEE性质"></a-input>
             </a-form-model-item>
           </a-col>
         </a-row>
@@ -107,12 +107,12 @@ export default {
       },
       confirmLoading: false,
       validatorRules: {
-        componentId: [{ required: true, message: '请输入部件编号!' }],
-        componentName: [{ required: true, message: '请输入部件名称!' }],
-        componentType: [{ required: true, message: '请输入部件类别!' }],
-        componentSpecification: [{ required: true, message: '请输入部件规格!' }],
-        componentUnit: [{ required: true, message: '请输入部件计量单位!' }],
-        componentNature: [{ required: true, message: '请输入部件性质!' }]
+        componentId: [{ required: true, message: '请输入EEE编号!' }],
+        componentName: [{ required: true, message: '请输入EEE名称!' }],
+        componentType: [{ required: true, message: '请输入EEE类别!' }],
+        componentSpecification: [{ required: true, message: '请输入EEE规格!' }],
+        componentUnit: [{ required: true, message: '请输入计量单位!' }],
+        componentNature: [{ required: true, message: '请输入EEE性质!' }]
       },
       url: {
         add: '/componentInf/componentInf/add',
@@ -133,7 +133,6 @@ export default {
   methods: {
     add() {
       this.edit(this.modelDefault)
-      getComponentId(this)
     },
     edit(record) {
       this.model = Object.assign({}, record)

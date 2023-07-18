@@ -5,32 +5,37 @@
         <a-row>
           <a-col :span="24">
             <a-form-model-item
-              label="二级供应商编号"
+              label="二级AAA编号"
               :labelCol="labelCol"
               :wrapperCol="wrapperCol"
               prop="secondSupplierId"
             >
-              <a-input v-model="model.secondSupplierId" placeholder="请输入二级供应商编号" disabled></a-input>
+              <a-input v-model="model.secondSupplierId" placeholder="请输入二级AAA编号"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="供应商名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="supplierName">
-              <a-input v-model="model.supplierName" placeholder="请输入供应商名称"></a-input>
+            <a-form-model-item label="AAA名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="supplierName">
+              <a-input v-model="model.supplierName" placeholder="请输入AAA名称"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item
-              label="供应商名称简称"
+              label="AAA名称简称"
               :labelCol="labelCol"
               :wrapperCol="wrapperCol"
               prop="supplierSimpleName"
             >
-              <a-input v-model="model.supplierSimpleName" placeholder="请输入供应商名称简称"></a-input>
+              <a-input v-model="model.supplierSimpleName" placeholder="请输入AAA名称简称"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="供应商地址" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="supplierAddress">
-              <a-input v-model="model.supplierAddress" placeholder="请输入供应商地址"></a-input>
+            <a-form-model-item label="AAA地址" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="supplierAddress">
+              <a-input v-model="model.supplierAddress" placeholder="请输入AAA地址"></a-input>
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-model-item label="地区" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="region">
+              <a-input v-model="model.region" placeholder="请输入AAA地区"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -69,11 +74,16 @@
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
+            <a-form-model-item label="最小CCC批量" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="miniPurchase">
+              <a-input-number v-model="model.miniPurchase" placeholder="请输入最小CCC批量" style="width: 100%" />
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24" style="display: none;">
             <a-form-model-item label="录入时间" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="infUpdateTime">
               <j-date placeholder="请选择录入时间" v-model="model.infUpdateTime" style="width: 100%" disabled />
             </a-form-model-item>
           </a-col>
-          <a-col :span="24">
+          <a-col :span="24" style="display: none;">
             <a-form-model-item label="员工编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="stuffId">
               <a-input v-model="model.stuffId" placeholder="请输入员工编号" disabled></a-input>
             </a-form-model-item>
@@ -128,11 +138,13 @@ export default {
       },
       confirmLoading: false,
       validatorRules: {
-        secondSupplierId: [{ required: true, message: '请输入二级供应商编号!' }],
-        supplierName: [{ required: true, message: '请输入供应商名称!' }],
-        supplierSimpleName: [{ required: true, message: '请输入供应商名称简称!' }],
-        supplierAddress: [{ required: true, message: '请输入供应商地址!' }],
+        secondSupplierId: [{ required: true, message: '请输入二级AAA编号!' }],
+        supplierName: [{ required: true, message: '请输入AAA名称!' }],
+        supplierSimpleName: [{ required: true, message: '请输入AAA名称简称!' }],
+        supplierAddress: [{ required: true, message: '请输入AAA地址!' }],
         contact: [{ required: true, message: '请输入联系人!' }],
+        miniPurchase: [{ required: true, message: '请输入最小CCC批量!' }],
+        supplierAddress: [{ required: true, message: '请输入AAA地址!' }],
         contactNum: [
           { required: true, message: '请输入联系电话!' },
           { pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/, message: '请输入正确的手机号！' }
@@ -159,7 +171,6 @@ export default {
   methods: {
     add() {
       this.edit(this.modelDefault)
-      getSecondSupplierId(this)
     },
     edit(record) {
       this.model = Object.assign({}, record)

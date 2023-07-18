@@ -1,11 +1,12 @@
-import {evaluation ,BasicLayout, UserLayout, TabLayout, RouteView, BlankLayout, PageView,TabGeter } from '@/components/layouts'
+import { evaluation, BasicLayout, UserLayout, TabLayout, RouteView, BlankLayout, PageView, TabGeter } from '@/components/layouts'
+import { component } from 'vuedraggable'
 
 /**
  * 走菜单，走权限控制
  * @type {[null,null]}
  */
 export const asyncRouterMap = [
-  
+
 
   {
     path: '/',
@@ -284,17 +285,30 @@ export const asyncRouterMap = [
       //   ]
       // }
     ]
+  }, {
+    path: '/receiveReport',
+    name: 'zhe',
+    component: TabLayout,
+    meta: { title: 'cheengji' },
+    redirect: '/receiveReport',
+    children: [
+      {
+        path: '/index',
+        name: 'index',
+        component: () => import('@/views/supply_chain/receiveReport/index.vue'),
+      },
+    ]
   },
   {
     path: '/AllMenu',
     name: 'AllMenu',
     component: () => import('../views/system/Allmenu.vue')
   },
-  
+
   {
     path: '*', redirect: '/404', hidden: true
   },
-  
+
 ]
 
 /**
@@ -335,7 +349,7 @@ export const constantRouterMap = [
       {
         path: '/purchaseOrder',
         name: 'purchaseOrder',
-        component: ()=> import('@/views/evaluation/purchaseOrder.vue')
+        component: () => import('@/views/evaluation/purchaseOrder.vue')
       }
     ]
   },
@@ -363,7 +377,7 @@ export const constantRouterMap = [
       {
         path: 'supplyBase',
         name: 'supplyBase',
-        component: ()=> import('@/views/portrait/supplyBase.vue')
+        component: () => import('@/views/portrait/supplyBase.vue')
       },
       {
         path: 'supplyBasis',
@@ -386,15 +400,28 @@ export const constantRouterMap = [
   {
     path: '/gather',
     name: 'gather',
-    component:TabGeter,
-   children:[
-    {
-      path: 'gather',
+    component: TabGeter,
+    children: [
+      {
+        path: 'gather',
         name: 'gatherItem',
         component: () => import('@/views/gather.vue'),
-    }
-   ]
+      }
+    ]
   },
+  // {
+  //   path: '/TotalScore',
+  //   name: 'TotalScore',
+  //   children: [
+  //     {
+  //       path: '/TotalScore',
+  //       name: 'TotalScore',
+  //       component: () => import('@views/supply_chain/TotalScore/index.vue'),
+  //     }
+
+  //   ]
+  //   // redirect:'TotalScore/index.vue'
+  // },
   {
     path: '/user',
     component: UserLayout,

@@ -5,7 +5,7 @@
         <a-row>
           <a-col :span="24">
             <a-form-model-item
-              label="一级供应商名称"
+              label="一级AAA名称"
               :labelCol="labelCol"
               :wrapperCol="wrapperCol"
               prop="firstSupplierId"
@@ -18,7 +18,7 @@
           </a-col>
           <a-col :span="24">
             <a-form-model-item
-              label="二级供应商名称"
+              label="二级AAA名称"
               :labelCol="labelCol"
               :wrapperCol="wrapperCol"
               prop="secondSupplierId"
@@ -30,24 +30,24 @@
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="核心部件名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentId">
+            <a-form-model-item label="核心EEE名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="componentId">
               <!-- <j-search-select-tag v-model="model.componentId" dict="component_inf,component_name,component_id" /> -->
               <j-search-select-tag v-model="model.componentId" :dictOptions="dictOptions" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="采购时间" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="purchaseTime">
-              <j-date placeholder="请选择采购时间" v-model="model.purchaseTime" style="width: 100%" />
+            <a-form-model-item label="DDD时间" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="purchaseTime">
+              <j-date placeholder="请选择DDD时间" v-model="model.purchaseTime" style="width: 100%" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="采购数量" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="purchaseNum">
-              <a-input-number v-model="model.purchaseNum" placeholder="请输入采购数量" style="width: 100%" />
+            <a-form-model-item label="DDD数量" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="purchaseNum">
+              <a-input-number v-model="model.purchaseNum" placeholder="请输入DDD数量" style="width: 100%" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="采购提前期（/天）" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="leadTime">
-              <a-input-number v-model="model.leadTime" placeholder="请输入采购提前期（/天）" style="width: 100%" />
+            <a-form-model-item label="DDD提前期（/天）" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="leadTime">
+              <a-input-number v-model="model.leadTime" placeholder="请输入DDD提前期（/天）" style="width: 100%" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -63,6 +63,16 @@
               prop="actualDeliveryTime"
             >
               <j-date placeholder="请选择实际交货日期" v-model="model.actualDeliveryTime" style="width: 100%" />
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-model-item label="状态" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="status">
+              <a-input-number placeholder="请输入状态" v-model="model.status" style="width: 100%" />
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-model-item label="计量单位" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="unit">
+              <a-input-number placeholder="请输入计量单位" v-model="model.unit" style="width: 100%" />
             </a-form-model-item>
           </a-col>
         </a-row>
@@ -100,9 +110,11 @@ export default {
       },
       confirmLoading: false,
       validatorRules: {
-        firstSupplierId: [{ required: true, message: '请输入一级供应商编号!' }],
-        secondSupplierId: [{ required: true, message: '请输入二级供应商编号!' }],
-        componentId: [{ required: true, message: '请输入核心部件名称!' }]
+        firstSupplierId: [{ required: true, message: '请输入一级AAA编号!' }],
+        secondSupplierId: [{ required: true, message: '请输入二级AAA编号!' }],
+        componentId: [{ required: true, message: '请输入核心EEE名称!' }],
+        status: [{required: true, message: '请输入状态!'}],
+        unit: [{required: true, message: '请输入计量单位!'}]
       },
       url: {
         add: '/firstPurchaseFromSecond/firstPurchaseFromSecond/add',

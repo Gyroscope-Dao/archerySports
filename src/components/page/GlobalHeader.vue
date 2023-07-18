@@ -17,7 +17,7 @@
         :type="collapsed ? 'menu-unfold' : 'menu-fold'"
         @click="toggle"/>
 
-      <span v-if="device === 'desktop'">欢迎进入联动保供平台</span>
+      <span v-if="device === 'desktop'">欢迎进入单兵装备智能联动保供平台</span>
       <span v-else>联动保供平台</span>  
 
       <user-menu :theme="theme"/>

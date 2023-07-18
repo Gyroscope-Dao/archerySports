@@ -3,7 +3,7 @@
 
     <detail-list slot="headerContent" size="small" :col="2" class="detail-layout">
       <detail-list-item term="创建人">曲丽丽</detail-list-item>
-      <detail-list-item term="订购产品">XX服务</detail-list-item>
+      <detail-list-item term="订购物料">XX服务</detail-list-item>
       <detail-list-item term="创建时间">2018-08-07</detail-list-item>
       <detail-list-item term="关联单据"><a>12421</a></detail-list-item>
       <detail-list-item term="生效日期">2018-08-07 ~ 2018-12-11</detail-list-item>

@@ -1,14 +1,16 @@
 <template>
   <div class="allPage" :class="{ mainOpacity: mainOpacity }">
     <header>
-      <h1>供应商画像系统</h1>
+      <h1>
+        
+      </h1>
     </header>
     <div class="container">
       <div class="left">
         <h2 @click="toBase">基本信息</h2>
         <div class="panel basisDesc">
           <ul class="details">
-            <li class="tip"><span>供应商名称：</span>{{ basisData.supplierName }}</li>
+            <li class="tip"><span>AAA名称：</span>{{ basisData.supplierName }}</li>
             <li class="tip"><span>联系人：</span>{{ basisData.contact }}</li>
             <li class="tip"><span>联系电话：</span>{{ basisData.contactNum }}</li>
             <li class="tip"><span>税号：</span>{{ basisData.taxId }}</li>
@@ -22,18 +24,18 @@
           <div class="panel_footer"></div>
         </div>
         <!-- <div class="panel panel_chart1">
-          <h2>供应商产品响应时长分析</h2>
+          <h2>AAA物料响应时长分析</h2>
           <ECharts class="chart1" :option="option1"></ECharts>
           <div class="panel_footer"></div>
         </div> -->
         <div class="panel basisDesc1">
           <ul class="details">
             <li class="tip"><span>是否民营企业：</span>是</li>
-            <li class="tip"><span>供应商的资质：</span>{{ basisData.certification }}</li>
-            <li class="tip"><span>供应商地址：</span>{{ basisData.supplierAddress }}</li>
-            <li class="tip"><span>供应的产品：</span>{{ productData.productId }}</li>
-            <li class="tip"><span>是否一级供应商：</span>{{ query.FirstSupplier === 1 ? '是' : '否' }}</li>
-            <!-- <li class="tip"><span>供货比例：</span>{{basisData}}</li> -->
+            <li class="tip"><span>AAA的资质：</span>{{ basisData.certification }}</li>
+            <li class="tip"><span>AAA地址：</span>{{ basisData.supplierAddress }}</li>
+            <li class="tip"><span>CCC的物料：</span>{{ productData.productId }}</li>
+            <li class="tip"><span>是否一级AAA：</span>{{ query.FirstSupplier === 1 ? '是' : '否' }}</li>
+            <!-- <li class="tip"><span>BBB比例：</span>{{basisData}}</li> -->
             <li class="tip"><span>成品库存：</span>{{ productData.productStock }}</li>
             <li class="tip"><span>生成批量：</span>{{ productData.productionLot }}</li>
             <li class="tip"><span>日均产量：</span>{{ productData.dayProLot }}</li>
@@ -43,20 +45,20 @@
         </div>
       </div>
       <div class="mid">
-        <h2 @click="toCycle">供货周期</h2>
+        <h2 @click="toCycle">BBB周期</h2>
         <div class="panel actDesc">
           <ul class="details">
-            <li class="tip"><span>是否一般供应商：</span>{{ dateData.battleneckSupplier === 1 ? '是' : '否' }}</li>
-            <li class="tip"><span>是否生产瓶颈供应商：</span>{{ dateData.isProduct === 1 ? '是' : '否' }}</li>
-            <li class="tip"><span>是否采购瓶颈供应商：</span>{{ dateData.isPurchase === 1 ? '是' : '否' }}</li>
+            <li class="tip"><span>是否一般AAA：</span>{{ dateData.battleneckSupplier === 1 ? '是' : '否' }}</li>
+            <li class="tip"><span>是否生产瓶颈AAA：</span>{{ dateData.isProduct === 1 ? '是' : '否' }}</li>
+            <li class="tip"><span>是否DDD瓶颈AAA：</span>{{ dateData.isPurchase === 1 ? '是' : '否' }}</li>
             <li class="tip">
-              <span>重点部件名称：</span>
+              <span>重点EEE名称：</span>
               <span class="component" v-for="item in dateData.components" :key="item.componentName">{{
                 item.componentName
               }}</span>
             </li>
             <li class="tip">
-              <span>重点部件现有量：</span>
+              <span>重点EEE现有量：</span>
               <span class="component" v-for="item in dateData.components" :key="item.componentName">{{
                 item.stockQuantity
               }}</span>
@@ -65,7 +67,7 @@
           <div class="panel_footer"></div>
         </div>
         <div class="panel panel_chart3">
-          <h2>供货周期详情</h2>
+          <h2>BBB周期详情</h2>
           <ECharts class="chartOne" :option="optionOne"></ECharts>
           <div class="panel_footer"></div>
         </div>
@@ -76,7 +78,7 @@
         </div>
       </div>
       <div class="end">
-        <h2 class="quality" @click="toQuality">供货质量</h2>
+        <h2 class="quality" @click="toQuality">BBB质量</h2>
         <div class="rightbox">
           <div class="right1 right">
             <div class="panel panel_chart2">
@@ -85,14 +87,14 @@
               <div class="panel_footer"></div>
             </div>
             <div class="panel panel_chart3">
-              <h2>采购周期趋势</h2>
+              <h2>DDD周期趋势</h2>
               <ECharts class="chartThree" :option="buyCycle"></ECharts>
               <div class="panel_footer"></div>
             </div>
           </div>
           <div class="right2 right">
             <div class="panel panel_chart2">
-              <h2>运输周期趋势</h2>
+              <h2>ys周期趋势</h2>
               <ECharts class="chartTwo" :option="transCycle"></ECharts>
               <div class="panel_footer"></div>
             </div>
@@ -112,7 +114,7 @@
         <div class="drawer-bootom-button" v-show="!disableSubmit">
           <div class="basis">
             <ul>
-              <li><input type="checkbox" />供应商名称</li>
+              <li><input type="checkbox" />AAA名称</li>
               <li><input type="checkbox" />联系人</li>
               <li><input type="checkbox" />联系电话</li>
               <li><input type="checkbox" />税号</li>
@@ -158,7 +160,7 @@ export default {
       },
       // 下边基本信息
       productData: {},
-      // 供货周期
+      // BBB周期
       dateData: {
         battleneckSupplier: 0,
         isProduct: 0,
@@ -224,7 +226,7 @@ export default {
         // console.log(res)
       })
     },
-    // 获取供货周期
+    // 获取BBB周期
     getDateData() {
       var url = '/supplycycle/getDataOfSupplyCycle'
       getAction(url, { id: this.query.id, FirstSupplier: this.query.FirstSupplier }).then((res) => {
@@ -241,7 +243,7 @@ export default {
         // }
       })
     },
-    // 获取供货周期详情-柱状图
+    // 获取BBB周期详情-柱状图
     getDateImg() {
       var url = '/supplycycle/getDataOfSupplyCycleBarChart'
       getAction(url, { id: this.query.id, FirstSupplier: this.query.FirstSupplier }).then((res) => {
@@ -270,7 +272,7 @@ export default {
         }
       })
     },
-    // 供货质量--采购，运输，生成--柱状图
+    // BBB质量--DDD，ys，生成--柱状图
     getDateBarChart() {
       var url = '/supplycycle/getThreeCycle'
       getAction(url, { id: this.query.id, FirstSupplier: this.query.FirstSupplier }).then((res) => {
@@ -297,7 +299,7 @@ export default {
       return {
         xAxis: {
           type: 'category',
-          data: ['采购周期', '检验周期', '运输周期', '生产周期'],
+          data: ['DDD周期', '检验周期', 'ys周期', '生产周期'],
           axisLine: {
             lineStyle: {
               color: '#fff',
@@ -531,12 +533,12 @@ export default {
         ],
       }
     },
-    // 采购周期 buyCycle
+    // DDD周期 buyCycle
     buyCycle() {
       return {
         xAxis: {
           type: 'category',
-          data: ['采购周期', '生产周期', '运输周期'],
+          data: ['DDD周期', '生产周期', 'ys周期'],
           axisLine: {
             lineStyle: {
               color: '#fff',
@@ -590,7 +592,7 @@ export default {
         ],
       }
     },
-    // 运输周期 transCycle
+    // ys周期 transCycle
     transCycle() {
       return {
         xAxis: {

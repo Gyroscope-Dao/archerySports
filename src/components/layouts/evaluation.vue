@@ -1,13 +1,13 @@
 <template>
   <div class="allpage">
-    <div class="topNav">供应商评价分析管理</div>
+    <div class="topNav">AAA评价分析管理</div>
     <div class="main">
       <div class="leftNav">
-        <div class="navItem" :class="{ currentItem: currentIndex == 1 }" @click="toNav1">供应商评价</div>
-        <div class="navItem" :class="{ currentItem: currentIndex == 2 }" @click="toNav2">供应商订单响应时长分析</div>
-        <div class="navItem" :class="{ currentItem: currentIndex == 3 }" @click="toNav3">一级供应商周期评价</div>
-        <div class="navItem" :class="{ currentItem: currentIndex == 4 }" @click="toNav4">二级供应商周期评价</div>
-        <div class="navItem" :class="{ currentItem: currentIndex == 5 }" @click="toNav5">根据采购订单评价分析</div>
+        <div class="navItem" :class="{ currentItem: currentIndex == 1 }" @click="toNav1">AAA评价</div>
+        <div class="navItem" :class="{ currentItem: currentIndex == 2 }" @click="toNav2">AAA订单响应时长分析</div>
+        <div class="navItem" :class="{ currentItem: currentIndex == 3 }" @click="toNav3">一级AAA周期评价</div>
+        <div class="navItem" :class="{ currentItem: currentIndex == 4 }" @click="toNav4">二级AAA周期评价</div>
+        <div class="navItem" :class="{ currentItem: currentIndex == 5 }" @click="toNav5">根据DDD订单评价分析</div>
       </div>
       <div class="content">
         <router-view />

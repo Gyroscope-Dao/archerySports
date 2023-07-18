@@ -1,7 +1,7 @@
 <template>
   <div class="allPage">
     <header>
-      <h1>供应商画像管理平台</h1>
+      <h1>XXX画像管理平台</h1>
     </header>
     <div class="container">
       <!-- 主体左边 -->
@@ -34,31 +34,31 @@
       </div> -->
       <div class="right">
         <div class="panel">
-          <h2 class="supplyShow">供应商列表展示</h2>
+          <h2 class="supplyShow">AAA列表展示</h2>
           <h3>一级</h3>
           <ul class="supplyList" v-if="haveFirstList">
             <li v-for="item in firstList" :key="item.id">
               <div class="top">
                 <span>{{ item.supplierName }}</span>
-                <button class="btn" @click="look(item.id, item.isFirstSupply)"><span>供应商画像</span></button>
+                <button class="btn" @click="look(item.id, item.isFirstSupply)"><span>XXX画像</span></button>
                 <button class="btn" @click="lookScore(item.id, item.isFirstSupply)"><span>评价</span></button>
               </div>
               <div class="bottom">{{ item.supplierAddress }}</div>
             </li>
           </ul>
-          <h2 class="noSupply" v-else>该地区没有一级供应商!</h2>
+          <h2 class="noSupply" v-else>该地区没有一级AAA!</h2>
           <h3>二级</h3>
           <ul class="supplyList" v-if="haveSecondList">
             <li v-for="item in secondList" :key="item.id">
               <div class="top">
                 <span>{{ item.supplierName }}</span>
-                <button class="btn" @click="look(item.id, item.isFirstSupply)"><span>供应商画像</span></button>
+                <button class="btn" @click="look(item.id, item.isFirstSupply)"><span>XXX画像</span></button>
                 <button class="btn" @click="lookScore(item.id, item.isFirstSupply)"><span>评价</span></button>
               </div>
               <div class="bottom">{{ item.supplierAddress }}</div>
             </li>
           </ul>
-          <h2 class="noSupply" v-else>该地区没有二级供应商!</h2>
+          <h2 class="noSupply" v-else>该地区没有二级AAA!</h2>
           <div class="panel_footer"></div>
         </div>
       </div>
@@ -114,7 +114,7 @@ export default {
           }
         },
         title: {
-          text: '供应商地图分布',
+          text: 'AAA地图分布',
           left: '45%',
           textStyle: {
             color: '#fff',
@@ -172,7 +172,7 @@ export default {
       })
       window.open(routeData.href, '_blank')
     },
-    // 获取一级供应商
+    // 获取一级AAA
     getFirstSupply(name) {
       var url = '/supply/getFirstSupply'
       getAction(url, { supplierAddress: name }).then(res => {
@@ -186,7 +186,7 @@ export default {
         // console.log(this.firstList);
       })
     },
-    // 获取二级供应商
+    // 获取二级AAA
     getSecondSupply(name) {
       var url = '/supply/getSecondSupply'
       getAction(url, { supplierAddress: name }).then(res => {
@@ -337,6 +337,11 @@ header {
       z-index: 999;
       width: 100%;
       height: 95%;
+      // animation: rotate2 1s linear infinite;
+      // position: absolute;
+      // top: 50%;
+      // left: 50%;
+
     }
     .map {
       .map1 {

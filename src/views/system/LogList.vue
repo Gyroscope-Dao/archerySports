@@ -100,7 +100,7 @@
         // 表头
         columns: [
           {
-            title: '#',
+            title: '序号',
             dataIndex: '',
             key:'rowIndex',
             align:"center",
@@ -130,12 +130,6 @@
           {
             title: 'IP',
             dataIndex: 'ip',
-            align:"center",
-            sorter: true
-          },
-          {
-            title: '耗时(毫秒)',
-            dataIndex: 'costTime',
             align:"center",
             sorter: true
           },

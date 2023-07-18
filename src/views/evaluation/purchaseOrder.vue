@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <!-- <h2>采购订单评价分析</h2> -->
+    <!-- <h2>DDD订单评价分析</h2> -->
     <!-- 查询区域 -->
     <div class="table-page-search-wrapper">
       <!-- 搜索区域 -->
@@ -8,8 +8,8 @@
         <a-row :gutter="24">
           <a-col :md="4" :sm="8">
             <a-form-item class="item" label="" :labelCol="{ span: 5 }" :wrapperCol="{ span: 10, offset: 1 }">
-              供应商编号
-              <a-input v-model="id" placeholder="请输入供应商编号"></a-input>
+              AAA编号
+              <a-input v-model="id" placeholder="请输入AAA编号"></a-input>
             </a-form-item>
           </a-col>
           <span style="overflow: hidden" class="table-page-search-submitButtons">
@@ -50,27 +50,27 @@ export default {
           key: 'orderId',
         },
         {
-          title: '供应商编号',
+          title: 'AAA编号',
           dataIndex: 'firstSupplierId',
           key: 'firstSupplierId',
         },
         {
-          title: '供应商名称',
+          title: 'AAA名称',
           dataIndex: 'supplierName',
           key: 'supplierName',
         },
         {
-          title: '供应商产品编号',
+          title: 'AAA物料编号',
           dataIndex: 'productId',
           key: 'productId',
         },
         {
-          title: '产品名称',
+          title: '物料名称',
           dataIndex: 'productName',
           key: 'productName',
         },
         {
-          title: '采购数量/件',
+          title: 'DDD数量/件',
           dataIndex: 'purchaseQuantity',
           key: 'purchaseQuantity',
         },

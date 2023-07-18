@@ -9,6 +9,7 @@ const url = {
     lotIdRule: ruleBaseURL + 'lotIdRule',
     productId_rule: ruleBaseURL + 'productId_rule',
     componentId_rule: ruleBaseURL + 'componentId_rule',
+    supplierId_rule:ruleBaseURL + 'supplierId_rule',
     local_date_rule: ruleBaseURL + 'local_date_rule',
     stuffId_rule: ruleBaseURL + 'stuffId_rule',
     second_supplierId_rule: ruleBaseURL + 'second_supplierId_rule',
@@ -86,6 +87,13 @@ export function getComponentId(obj) {
   putAction(url.rule.componentId_rule, obj.model).then(res => {
     if (res.success) {
       obj.model.componentId = res.result
+    }
+  })
+}
+export function getSupplierId(obj) {
+  putAction(url.rule.supplierId, obj.model).then(res => {
+    if (res.success) {
+      obj.model.supplierId = res.result
     }
   })
 }

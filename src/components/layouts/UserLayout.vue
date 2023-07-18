@@ -5,8 +5,8 @@
         <div class="top">
           <div class="header">
             <a href="/">
-              <!-- <img src="~@/assets/logo.jpg" class="logo" alt="logo"> -->
-              <span class="title">联动保供平台</span>
+              <!-- <img src="~@/aszhuangs联动保供平台ets/logo.jpg" class="logo" alt="logo"> -->
+              <span class="title"></span>
             </a>
           </div>
 

@@ -1,7 +1,7 @@
 <template>
   <div class="allPage" :class="{ mainOpacity: mainOpacity }">
     <header>
-      <h1>供应商评分系统</h1>
+      <h1>AAA评分系统</h1>
     </header>
     <div class="container">
       <div class="left">
@@ -18,7 +18,7 @@
       </div>
       <div class="mid">
         <div class="score">
-          <h2 class="score_title">供应商评价指数</h2>
+          <h2 class="score_title">AAA评价指数</h2>
           <h1 class="score_num">{{score}}</h1>
         </div>
         <div class="map">
@@ -47,7 +47,7 @@
         <div class="drawer-bootom-button" v-show="!disableSubmit">
           <div class="basis">
             <ul>
-              <li><input type="checkbox" />供应商名称</li>
+              <li><input type="checkbox" />AAA名称</li>
               <li><input type="checkbox" />联系人</li>
               <li><input type="checkbox" />联系电话</li>
               <li><input type="checkbox" />税号</li>
@@ -113,7 +113,7 @@ export default {
       return {
         xAxis: {
           type: 'category',
-          data: ['采购周期', '检验周期', '运输周期', '生产周期'],
+          data: ['DDD周期', '检验周期', 'ys周期', '生产周期'],
           axisLine: {
             lineStyle: {
               color: '#fff',
